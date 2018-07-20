@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { VaadinGrid, VaadinGridColumn } from './VaadinGrid.js';
 
@@ -20,10 +19,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">VaadinGrid</h1>
+          <p>
+            VaadinGrid is a data grid component that supports custom cell content, variable row height, millions of data rows...
+          </p>
         </header>
+
+        <h2>Columns and Headers</h2>
 
         <VaadinGrid items={this.state.items}>
 
