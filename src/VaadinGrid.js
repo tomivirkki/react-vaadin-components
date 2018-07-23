@@ -18,8 +18,9 @@ export class VaadinGrid extends Component {
         }
         g.heightByRows = this.props.heightByRows;
         g.items = this.props.items;
-        g.size = this.props.size;
+
         g.dataProvider = this.props.dataProvider;
+        g.size = this.props.size || g.size;
         g.expandedItems = this.props.expandedItems;
 
         // TODO: Switch to using a renderers once they're available.
