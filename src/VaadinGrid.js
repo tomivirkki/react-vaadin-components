@@ -8,7 +8,19 @@ const e = React.createElement;
 
 export class VaadinGrid extends Component {
 
+  constructor() {
+    super();
+    this.state = {};
+    // Needed for now to fix an issue with missing style scopes on FireFox
+    customElements.whenDefined('vaadin-grid').then(() => {
+      this.setState(Object.assign(this.state, {defined: true}));
+    });
+  }
+
   render() {
+    if (!this.state.defined) {
+      return null;
+    }
     return e('vaadin-grid', {
       theme: this.props.theme,
       class: this.props.className,
@@ -17,9 +29,13 @@ export class VaadinGrid extends Component {
           return;
         }
         g.heightByRows = this.props.heightByRows;
-        g.items = this.props.items;
 
-        g.dataProvider = this.props.dataProvider;
+        if (this.props.dataProvider) {
+          g.dataProvider = this.props.dataProvider;
+        } else if (this.props.items) {
+          g.items = this.props.items;
+        }
+
         g.size = this.props.size || g.size;
         g.expandedItems = this.props.expandedItems;
 
@@ -47,7 +63,6 @@ export class VaadinGrid extends Component {
 export class VaadinGridColumn extends Component {
   render() {
     const headerTemplate =  e('template', {className: 'header'});
-
     return e('vaadin-grid-column', {
       ref: c => c && Object.assign(c, this.props)
     }, this.props.header ? headerTemplate : '');

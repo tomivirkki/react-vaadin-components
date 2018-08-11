@@ -2,7 +2,8 @@
   "name": "react-vaadin",
   "version": "0.1.0",
   "dependencies": {
-    "@vaadin/vaadin-grid": "^5.1.0-alpha3",
+    "@vaadin/vaadin-grid": "^5.1.0-beta1",
+    "@webcomponents/webcomponentsjs": "^2.0.4",
     "react": "^16.4.1",
     "react-dom": "^16.4.1"
   }
