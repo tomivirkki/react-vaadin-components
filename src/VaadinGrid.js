@@ -15,6 +15,8 @@ export class VaadinGrid extends Component {
     customElements.whenDefined('vaadin-grid').then(() => {
       this.setState(Object.assign(this.state, {defined: true}));
     });
+
+    this._eventListeners = {};
   }
 
   render() {
@@ -30,7 +32,11 @@ export class VaadinGrid extends Component {
         }
         for (let prop in this.props) {
           if (/^on[A-Z]/.test(prop)) {
-            g.addEventListener(prop.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`).replace('on-', ''), this.props[prop].bind(this));
+            const eventName = prop.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`).replace('on-', '');
+
+            g.removeEventListener(eventName, this._eventListeners[eventName]);
+            this._eventListeners[eventName] = this.props[prop];
+            g.addEventListener(eventName, this._eventListeners[eventName]);
           }
         }
 
@@ -53,7 +59,7 @@ export class VaadinGrid extends Component {
             ui.call(g, row, item);
             Array.from(row.children).forEach((cell, index) => {
               ReactDOM.render(cell._column.renderer(item), cell._content);
-              cell._instance = cell._instance || {item: row._item, setProperties: () => {}};
+              cell._instance = {item: row._item, setProperties: () => {}};
               if (cell._column._headerCell && cell._column.header) {
                 // FIXME: Not the best place to do this as it's run quite often.
                 ReactDOM.render(cell._column.header, cell._column._headerCell._content);
