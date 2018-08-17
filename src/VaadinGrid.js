@@ -28,6 +28,12 @@ export class VaadinGrid extends Component {
         if (!g) {
           return;
         }
+        for (let prop in this.props) {
+          if (/^on[A-Z]/.test(prop)) {
+            g.addEventListener(prop.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`).replace('on-', ''), this.props[prop].bind(this));
+          }
+        }
+
         g.heightByRows = this.props.heightByRows;
 
         if (this.props.dataProvider) {
@@ -38,6 +44,7 @@ export class VaadinGrid extends Component {
 
         g.size = this.props.size || g.size;
         g.expandedItems = this.props.expandedItems;
+        g.selectedItems = this.props.selectedItems;
 
         // TODO: Switch to using a renderers once they're available.
         if (!g._monkeyPatched) {
@@ -46,6 +53,7 @@ export class VaadinGrid extends Component {
             ui.call(g, row, item);
             Array.from(row.children).forEach((cell, index) => {
               ReactDOM.render(cell._column.renderer(item), cell._content);
+              cell._instance = cell._instance || {item: row._item, setProperties: () => {}};
               if (cell._column._headerCell && cell._column.header) {
                 // FIXME: Not the best place to do this as it's run quite often.
                 ReactDOM.render(cell._column.header, cell._column._headerCell._content);
