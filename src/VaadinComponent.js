@@ -25,18 +25,26 @@ export default class VaadinComponent extends Component {
           'className'
         ];
 
+        const elementProps = {};
+
         for (let prop in this.props) {
           if (/^on[A-Z]/.test(prop)) {
-            // Add listener
+            // Remove existing event listener
             const eventName = prop.replace(/([A-Z])/g, name => `-${name[0].toLowerCase()}`).replace('on-', '');
-
             element.removeEventListener(eventName, this._eventListeners[eventName]);
             this._eventListeners[eventName] = this.props[prop];
-            element.addEventListener(eventName, this._eventListeners[eventName]);
           } else if (!propertyBlacklist.includes(prop)) {
-            // Assign the property value
-            element[prop] = this.props[prop];
+            // Collect properties to set
+            elementProps[prop] = this.props[prop];
           }
+        }
+
+        // Set new property values
+        element.setProperties(elementProps);
+
+        // Add new event listeners
+        for (let eventName in this._eventListeners) {
+          element.addEventListener(eventName, this._eventListeners[eventName]);
         }
 
         this._configRef && this._configRef(element);
