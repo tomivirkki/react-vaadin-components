@@ -23,11 +23,9 @@ export class VaadinGrid extends VaadinComponent {
 
     // TODO: Switch to using a renderers once they're available.
     if (!g._monkeyPatched) {
-      const ui = g._updateItem;
       g._updateItem = (row, item) => {
-        ui.call(g, row, item);
-        Array.from(row.children).forEach((cell, index) => {
-          ReactDOM.render(cell._column.renderer(item), cell._content);
+        Array.from(row.children).forEach(cell => {
+          ReactDOM.render(cell._column.renderer({item, index: row.index}), cell._content);
           cell._instance = {item: row._item, setProperties: () => {}};
           if (cell._column._headerCell && cell._column.header) {
             // FIXME: Not the best place to do this as it's run quite often.
