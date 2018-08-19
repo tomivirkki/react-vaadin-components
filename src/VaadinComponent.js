@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
 export default class VaadinComponent extends Component {
-
   constructor(tagName) {
     super();
     this.tagName = tagName;

@@ -6,7 +6,6 @@ import '@vaadin/vaadin-grid/vaadin-grid-column';
 import '@vaadin/vaadin-grid/vaadin-grid-tree-toggle';
 
 export class VaadinGrid extends VaadinComponent {
-
   constructor() {
     super('vaadin-grid');
   }
@@ -23,7 +22,9 @@ export class VaadinGrid extends VaadinComponent {
 
     // TODO: Switch to using a renderers once they're available.
     if (!g._monkeyPatched) {
+      const ui = g._updateItem;
       g._updateItem = (row, item) => {
+        ui.call(g, row, item);
         Array.from(row.children).forEach(cell => {
           ReactDOM.render(cell._column.renderer({item, index: row.index}), cell._content);
           cell._instance = {item: row._item, setProperties: () => {}};
@@ -39,7 +40,6 @@ export class VaadinGrid extends VaadinComponent {
 }
 
 export class VaadinGridColumn extends VaadinComponent {
-
   constructor() {
     super('vaadin-grid-column');
   }
@@ -48,13 +48,10 @@ export class VaadinGridColumn extends VaadinComponent {
     const headerTemplate =  React.createElement('template', {className: 'header'});
     return this.props.header ? headerTemplate : '';
   }
-
 }
 
 export class VaadinGridTreeToggle extends VaadinComponent {
-
   constructor() {
     super('vaadin-grid-tree-toggle');
   }
-
 }
