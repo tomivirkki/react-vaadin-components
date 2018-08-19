@@ -12,6 +12,15 @@ export class VaadinGrid extends VaadinComponent {
   }
 
   _configRef(g) {
+    // Something not working right with the scoping shim, use this patch for now
+    if (window.ShadyCSS && !this.__scopeObserver) {
+      this.__scopeObserver = new MutationObserver(() => {
+        Array.from(g.shadowRoot.querySelectorAll('tr:not(.style-scope), td:not(.style-scope), th:not(.style-scope)'))
+          .forEach(e => e.classList.add('style-scope', 'vaadin-grid'));
+      });
+      this.__scopeObserver.observe(g.$.scroller, {childList: true, subtree: true});
+    }
+
     // TODO: Switch to using a renderers once they're available.
     if (!g._monkeyPatched) {
       const ui = g._updateItem;

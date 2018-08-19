@@ -6,21 +6,11 @@ export default class VaadinComponent extends Component {
   constructor(tagName) {
     super();
     this.tagName = tagName;
-    this.state = {};
-
-    // Needed for now to fix an issue with missing style scopes (on FireFox)
-    customElements.whenDefined(tagName).then(() => {
-      requestAnimationFrame(() => this.setState({defined: true}));
-    });
 
     this._eventListeners = {};
   }
 
   render() {
-    if (!this.state.defined) {
-      return null;
-    }
-
     return React.createElement(this.tagName, {
       theme: this.props.theme,
       class: this.props.className,
