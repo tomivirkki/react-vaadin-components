@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import VaadinComponent from './VaadinComponent';
 import '@vaadin/vaadin-grid';
 import '@vaadin/vaadin-grid/vaadin-grid-column';
 import '@vaadin/vaadin-grid/vaadin-grid-tree-toggle';
-
-const e = React.createElement;
 
 export class VaadinGrid extends VaadinComponent {
 
@@ -14,18 +12,6 @@ export class VaadinGrid extends VaadinComponent {
   }
 
   _configRef(g) {
-    g.heightByRows = this.props.heightByRows;
-
-    if (this.props.dataProvider) {
-      g.dataProvider = this.props.dataProvider;
-    } else if (this.props.items) {
-      g.items = this.props.items;
-    }
-
-    g.size = this.props.size || g.size;
-    g.expandedItems = this.props.expandedItems;
-    g.selectedItems = this.props.selectedItems;
-
     // TODO: Switch to using a renderers once they're available.
     if (!g._monkeyPatched) {
       const ui = g._updateItem;
@@ -45,13 +31,17 @@ export class VaadinGrid extends VaadinComponent {
   }
 }
 
-export class VaadinGridColumn extends Component {
-  render() {
-    const headerTemplate =  e('template', {className: 'header'});
-    return e('vaadin-grid-column', {
-      ref: c => c && Object.assign(c, this.props)
-    }, this.props.header ? headerTemplate : '');
+export class VaadinGridColumn extends VaadinComponent {
+
+  constructor() {
+    super('vaadin-grid-column');
   }
+
+  _getChildren() {
+    const headerTemplate =  React.createElement('template', {className: 'header'});
+    return this.props.header ? headerTemplate : '';
+  }
+
 }
 
 export class VaadinGridTreeToggle extends VaadinComponent {
@@ -60,8 +50,4 @@ export class VaadinGridTreeToggle extends VaadinComponent {
     super('vaadin-grid-tree-toggle');
   }
 
-  _configRef(t) {
-    t.leaf = this.props.leaf;
-    t.expanded = this.props.expanded;
-  }
 }
