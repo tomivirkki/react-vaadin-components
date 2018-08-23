@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Menu.css';
 import demos from './demos.js';
-import { VaadinGrid, VaadinGridColumn, VaadinGridTreeToggle } from 'react-vaadin';
+import { VaadinGrid, VaadinGridColumn, VaadinGridTreeToggle } from 'react-vaadin-components';
 
 class Menu extends Component {
 

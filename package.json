@@ -1,5 +1,5 @@
 {
-  "name": "react-vaadin",
+  "name": "react-vaadin-components",
   "version": "0.1.0",
   "dependencies": {
     "@vaadin/vaadin-grid": "^5.1.0-beta1",

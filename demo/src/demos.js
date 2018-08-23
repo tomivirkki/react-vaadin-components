@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { VaadinGrid, VaadinGridColumn, VaadinButton, VaadinTextField, VaadinTextArea, VaadinPasswordField } from 'react-vaadin';
+import { VaadinGrid, VaadinGridColumn, VaadinButton, VaadinTextField, VaadinTextArea, VaadinPasswordField } from 'react-vaadin-components';
 import users from './users.js';
 
 const _commonScope = {React, ReactDOM, Component, users};
