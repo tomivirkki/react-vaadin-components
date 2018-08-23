@@ -1,0 +1,31 @@
+.menu {
+  padding: 0 20px;
+  box-sizing: border-box;
+  background-color: #f7f7f7;
+  border-left: 1px solid #ececec;
+  --lumo-base-color: transparent;
+}
+
+vaadin-grid {
+  margin-top: 50px;
+}
+
+vaadin-grid-tree-toggle {
+  cursor: pointer;
+  user-select: none;
+}
+
+vaadin-grid-tree-toggle a {
+  color: var(--lumo-body-text-color);
+  text-decoration: none;
+}
+
+vaadin-grid-tree-toggle:not([leaf]) {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 3;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  flex-direction: row-reverse;
+  color: #6d6d6d;
+}
