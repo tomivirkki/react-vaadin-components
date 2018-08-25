@@ -15,11 +15,6 @@ vaadin-grid-tree-toggle {
   user-select: none;
 }
 
-vaadin-grid-tree-toggle a {
-  color: var(--lumo-body-text-color);
-  text-decoration: none;
-}
-
 vaadin-grid-tree-toggle:not([leaf]) {
   font-size: 14px;
   font-weight: 700;

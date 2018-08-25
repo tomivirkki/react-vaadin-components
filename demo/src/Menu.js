@@ -45,20 +45,28 @@ class Menu extends Component {
     });
   }
 
+  _activeItemChanged(e) {
+    if (e.detail.value && e.detail.value.link) {
+      window.location.hash = '/' + e.detail.value.link;
+    }
+  }
+
   render() {
     return (
       <div className="menu">
-        <VaadinGrid theme="no-border no-row-borders" dataProvider={this._boundDataProvider} expandedItems={this.state.expandedItems} heightByRows={true}>
+        <VaadinGrid
+          theme="no-border no-row-borders"
+          dataProvider={this._boundDataProvider}
+          expandedItems={this.state.expandedItems}
+          heightByRows={true}
+          onActiveItemChanged={this._activeItemChanged.bind(this)}>
           <VaadinGridColumn
             renderer={({item}) => {
-
-              const title = item.pages ? item.title : <a href={`/#/${item.link}`}>{item.title}</a>;
-
               return <VaadinGridTreeToggle
                 expanded={this.state.expandedItems.includes(item)}
                 leaf={!item.pages}
                 onExpandedChanged={e => this.expandedChanged(item, e.detail.value)}>
-                  {title}
+                  {item.title}
               </VaadinGridTreeToggle>
             }}>
           </VaadinGridColumn>
