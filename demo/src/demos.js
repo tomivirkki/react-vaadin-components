@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { VaadinGrid, VaadinGridColumn, VaadinButton, VaadinTextField, VaadinTextArea, VaadinPasswordField } from 'react-vaadin-components';
+import {
+  VaadinGrid,
+  VaadinGridColumn,
+  VaadinButton,
+  VaadinTextField,
+  VaadinTextArea,
+  VaadinPasswordField,
+  VaadinCheckbox,
+  VaadinRadioButton,
+  VaadinRadioGroup
+} from 'react-vaadin-components';
 import users from './users.js';
 
 const _commonScope = {React, ReactDOM, Component, users};
@@ -175,6 +185,20 @@ const demos = [
     {title: 'Password Field', code: `
     <VaadinPasswordField label="Password"></VaadinPasswordField>
     `},
+  ]},
+  {title: 'Checkbox', scope: Object.assign({VaadinCheckbox}, _commonScope), pages: [
+    {title: 'Checkbox', code: `
+    <VaadinCheckbox>Subscribe</VaadinCheckbox>
+    `}
+  ]},
+  {title: 'Radio Button', scope: Object.assign({VaadinRadioButton, VaadinRadioGroup}, _commonScope), pages: [
+    {title: 'Radio Button Group', code: `
+    <VaadinRadioGroup>
+      <VaadinRadioButton>One</VaadinRadioButton>
+      <VaadinRadioButton>Two</VaadinRadioButton>
+      <VaadinRadioButton>Three</VaadinRadioButton>
+    </VaadinRadioGroup>
+    `}
   ]}
 ]
 

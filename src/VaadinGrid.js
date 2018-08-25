@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import VaadinComponent from './VaadinComponent';
 import '@vaadin/vaadin-grid';
