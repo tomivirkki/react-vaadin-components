@@ -19,23 +19,6 @@ export class VaadinGrid extends VaadinComponent {
       });
       this.__scopeObserver.observe(g.$.scroller, {childList: true, subtree: true});
     }
-
-    // TODO: Switch to using a renderers once they're available.
-    if (!g._monkeyPatched) {
-      const ui = g._updateItem;
-      g._updateItem = (row, item) => {
-        ui.call(g, row, item);
-        Array.from(row.children).forEach(cell => {
-          ReactDOM.render(cell._column.renderer({item, index: row.index}), cell._content);
-          cell._instance = {item: row._item, setProperties: () => {}};
-          if (cell._column._headerCell && cell._column.header) {
-            // FIXME: Not the best place to do this as it's run quite often.
-            ReactDOM.render(cell._column.header, cell._column._headerCell._content);
-          }
-        });
-      }
-      g._monkeyPatched = true;
-    }
   }
 }
 
@@ -44,9 +27,18 @@ export class VaadinGridColumn extends VaadinComponent {
     super('vaadin-grid-column');
   }
 
-  _getChildren() {
-    const headerTemplate =  React.createElement('template', {className: 'header'});
-    return this.props.header ? headerTemplate : '';
+  _configRef(column) {
+    if (this.props.renderer) {
+      column.renderer = column.renderer || ((root, grid, model) => {
+        ReactDOM.render(this.props.renderer(model), root);
+      });
+    }
+
+    if (this.props.header) {
+      column.headerRenderer = column.headerRenderer || ((root, grid) => {
+        ReactDOM.render(this.props.header, root);
+      });
+    }
   }
 }
 

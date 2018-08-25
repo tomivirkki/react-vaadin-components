@@ -20,7 +20,8 @@ export default class VaadinComponent extends Component {
         const propertyBlacklist = [
           'children',
           'theme',
-          'className'
+          'className',
+          'renderer'
         ];
 
         const elementProps = {};
@@ -47,6 +48,6 @@ export default class VaadinComponent extends Component {
 
         this._configRef && this._configRef(element);
       }
-    }, this._getChildren ? this._getChildren() : this.props.children);
+    }, this.props.children);
   }
 }
