@@ -7,7 +7,7 @@
     "component-playground": "^3.2.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-scripts": "2.0.0-next.3e165448"
+    "react-scripts": "2.0.0-next.a671462c"
   },
   "scripts": {
     "start": "react-scripts start",
