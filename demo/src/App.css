@@ -2,6 +2,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 .App-content {
@@ -15,6 +16,38 @@
   overflow: auto;
 }
 
-.App-content > .Menu{
+.App-content > .Menu {
   width: 270px;
+  height: 100%;
+  z-index: 2;
+}
+
+.App-menutoggle {
+  display: none;
+  position: absolute;
+  right: 0;
+  z-index: 3;
+  cursor: pointer;
+  font-size: 30px;
+  margin: 0 10px;
+}
+
+.App-menutoggle::before {
+  content: "☰";
+}
+
+@media (max-width: 800px) {
+  .App-menutoggle {
+    display: block;
+  }
+
+  .App-content .Menu {
+    position: absolute;
+    right: 0;
+    transition: transform 0.2s;
+  }
+
+  .App:not(.menuopen) .Menu {
+    transform: translateX(100%);
+  }
 }

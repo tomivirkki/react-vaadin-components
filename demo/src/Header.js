@@ -4,9 +4,9 @@ import './Header.css';
 class Header extends Component {
   render() {
     return (
-      <header className="header">
-        <a href="about:blank">React Vaadin</a>
-        <div>Docs</div>
+      <header className="Header">
+        <div>React Vaadin</div>
+        <a href="https://github.com/tomivirkki/react-vaadin-components">GitHub</a>
       </header>
     );
   }

@@ -1,6 +1,12 @@
-.header {
+.Header {
   display: flex;
+  justify-content: space-between;
   background-color: #20232a;
   color: #ffffff;
   line-height: 2;
+  padding: 5px 20px;
+}
+
+.Header a {
+  color: #fff;
 }

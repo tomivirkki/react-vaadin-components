@@ -10,15 +10,20 @@ class Demo extends Component {
     super();
     this.state = {};
 
-    window.addEventListener('hashchange', () => {
-      const {componentId, demoId} = this._parseHash();
-      const component = demos.find(component => component.id === componentId);
-      const demo = component.pages.find(demo => demo.id === demoId);
-      if (this.state.demo !== demo) {
-        this.setState({demo});
-      }
-      console.log(demo)
-    });
+    window.addEventListener('hashchange', this._updateState.bind(this));
+  }
+
+  componentDidMount() {
+    this._updateState();
+  }
+
+  _updateState() {
+    const {componentId, demoId} = this._parseHash();
+    const component = demos.find(component => component.id === componentId);
+    const demo = component.pages.find(demo => demo.id === demoId);
+    if (this.state.demo !== demo) {
+      this.setState({demo});
+    }
   }
 
   _parseHash() {
@@ -28,16 +33,14 @@ class Demo extends Component {
   }
 
   render() {
-    if (!this.state.demo) {
-      return null;
-    }
-
-    return (
-      <div className="Demo">
+    if (this.state.demo) {
+      return <div className="Demo">
         <h1>{this.state.demo.title}</h1>
         <Playground noRender={!this.state.demo.render} codeText={this.state.demo.code} scope={this.state.demo.scope}/>
       </div>
-    );
+    } else {
+      return <div className="Demo">Hello React</div>
+    }
   }
 }
 
