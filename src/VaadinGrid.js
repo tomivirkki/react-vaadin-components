@@ -2,7 +2,9 @@ import ReactDOM from 'react-dom';
 import VaadinComponent from './VaadinComponent';
 import '@vaadin/vaadin-grid';
 import '@vaadin/vaadin-grid/vaadin-grid-column';
+import '@vaadin/vaadin-grid/vaadin-grid-column-group';
 import '@vaadin/vaadin-grid/vaadin-grid-tree-toggle';
+import '@vaadin/vaadin-grid/vaadin-grid-selection-column';
 
 export class VaadinGrid extends VaadinComponent {
   constructor() {
@@ -33,6 +35,26 @@ export class VaadinGridColumn extends VaadinComponent {
       });
     }
 
+    if (this.props.header) {
+      column.headerRenderer = column.headerRenderer || ((root, grid) => {
+        ReactDOM.render(this.props.header, root);
+      });
+    }
+  }
+}
+
+export class VaadinGridSelectionColumn extends VaadinComponent {
+  constructor() {
+    super('vaadin-grid-selection-column');
+  }
+}
+
+export class VaadinGridColumnGroup extends VaadinComponent {
+  constructor() {
+    super('vaadin-grid-column-group');
+  }
+
+  _configRef(column) {
     if (this.props.header) {
       column.headerRenderer = column.headerRenderer || ((root, grid) => {
         ReactDOM.render(this.props.header, root);

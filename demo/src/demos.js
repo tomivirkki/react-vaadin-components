@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import {
   VaadinGrid,
   VaadinGridColumn,
+  VaadinGridColumnGroup,
+  VaadinGridSelectionColumn,
   VaadinButton,
   VaadinTextField,
   VaadinTextArea,
@@ -15,80 +17,99 @@ import users from './users.js';
 
 const _commonScope = {React, ReactDOM, Component, users};
 
+// Demo build helpers
+
+/*
+Grid:
+
+Theme variants
+footer
+reordering and resizing
+sorting and filtering
+
+row details
+Tree grid
+Active item
+*/
+
+const getIndent = spaces => Array.from(new Array(spaces)).map(_ => '').join(' ') + ' ';
+
+const defaultIndent = 6;
+
+const buildColumn = ({path, label, attributes, spaces} = {}) => {
+  attributes = attributes || [];
+  spaces = spaces || defaultIndent + 2;
+  const isIndexColumn = label == '#';
+
+  if (isIndexColumn) {
+    attributes.push(`header={<div>#</div>}`);
+    attributes.push(`renderer={({index}) => <div>{index}</div>}`);
+  } else {
+    // Replace once label and path are available for column
+    if (!label && path) {
+      label = path
+        .substr(path.lastIndexOf('.') + 1)
+        .replace(/([A-Z])/g, '-$1').toLowerCase()
+        .replace(/-/, ' ')
+        .replace(/\w\S*/g, str => str.charAt(0).toUpperCase() + str.substr(1));
+    }
+    if (label) {
+      attributes.push(`header={<div>${label}</div>}`);
+    }
+    if (path) {
+      attributes.push(`renderer={({item}) => <div>{item.${path}}</div>}`);
+    }
+  }
+
+  return `${getIndent(spaces)}<VaadinGridColumn ${attributes ? ('\n'+ getIndent(spaces + 2) + attributes.join('\n'+ getIndent(spaces + 2))) : ''}>${'\n' + getIndent(spaces)}</VaadinGridColumn>`;
+};
+
+const buildIndexColumn = ({spaces, attributes} = {}) => {
+  attributes = attributes || [];
+  return buildColumn({label: '#', attributes: ['width="50px"', 'flexGrow="0"'].concat(attributes), spaces})
+}
+
+const buildAddressColumn = ({spaces} = {}) => {
+  return buildColumn({attributes: [
+    "header={<div>Address</div>}",
+    "renderer={({item}) => <div style={{whiteSpace: 'normal'}}>{item.address.street}, {item.address.city}</div>}"
+  ], spaces});
+}
+
+const buildSelectionColumn = ({spaces, attributes} = {}) => {
+  attributes = attributes || [];
+  attributes.push('autoSelect="true"');
+  spaces = spaces || defaultIndent + 2;
+  return getIndent(spaces) + `<VaadinGridSelectionColumn ${attributes.join(' ')}></VaadinGridSelectionColumn>`;
+}
+
+const buildGrid = (attributes, content, spaces = defaultIndent) => {
+  return `${getIndent(spaces)}<VaadinGrid ${attributes}>${'\n' + content.join('\n\n') + '\n'}${getIndent(spaces)}</VaadinGrid>`;
+}
+
+const buildColumnGroup = (attributes, content, spaces = defaultIndent + 2) => {
+  return `${getIndent(spaces)}<VaadinGridColumnGroup ${attributes}>${'\n' + content.join('\n\n') + '\n'}${getIndent(spaces)}</VaadinGridColumnGroup>`;
+}
+
 const demos = [
-  {title: 'Grid', scope: {VaadinGrid, VaadinGridColumn, React, ReactDOM, Component, users}, pages: [
+  {title: 'Grid', scope: {VaadinGrid, VaadinGridColumn, VaadinGridColumnGroup, VaadinGridSelectionColumn, React, ReactDOM, Component, users}, pages: [
     {title: 'Items and Columns',
-    description: `The "items" property accepts an array of objects, each of which represent a row in the grid.
-    In this demo an item is a user object with properties such as {firstName: "Tomi", address: { city: "Turku" } ...}`,
-    code: `
-    <VaadinGrid items={users}>
-
-      <VaadinGridColumn
-        width="50px"
-        flexGrow="0"
-        header={<div>#</div>}
-        renderer={({index}) => <div>{index}</div>}>
-      </VaadinGridColumn>
-
-      <VaadinGridColumn
-        header={<div>First Name</div>}
-        renderer={({item}) => <div>{item.firstName}</div>}>
-      </VaadinGridColumn>
-
-      <VaadinGridColumn
-        header={<div>Last Name</div>}
-        renderer={({item}) => <div>{item.lastName}</div>}>
-      </VaadinGridColumn>
-
-      <VaadinGridColumn width="150px"
-        header={<div>Address</div>}
-        renderer={({item}) => <div style={{whiteSpace: 'normal'}}>{item.address.street}, {item.address.city}</div>}>
-      </VaadinGridColumn>
-
-    </VaadinGrid>
-    `},
-    {title: 'Data as Array', code: `
-    <VaadinGrid items={users} theme="row-stripes">
-
-      <VaadinGridColumn
-        header={<div>First Name</div>}
-        renderer={({item}) => <div>{item.firstName}</div>}>
-      </VaadinGridColumn>
-
-      <VaadinGridColumn
-        header={<div>Last Name</div>}
-        renderer={({item}) => <div>{item.lastName}</div>}>
-      </VaadinGridColumn>
-
-      <VaadinGridColumn width="150px"
-        header={<div>Address</div>}
-        renderer={({item}) => <div style={{whiteSpace: 'normal'}}>{item.address.street}, {item.address.city}</div>}>
-      </VaadinGridColumn>
-
-    </VaadinGrid>
-    `},
+    code: buildGrid('items={users}', [
+      buildIndexColumn(),
+      buildColumn({path: 'firstName'}),
+      buildColumn({path: 'lastName'}),
+      buildAddressColumn()
+      ])
+    },
     {title: 'Lazy Data Loading', render: true, code: `
       class ComponentExample extends Component {
         render() {
-          return (
-            <VaadinGrid dataProvider={this.dataProvider} size="200">
-
-              <VaadinGridColumn
-                header={<div>First Name</div>}
-                renderer={({item}) => <div>{item.firstName}</div>}>
-              </VaadinGridColumn>
-
-              <VaadinGridColumn
-                header={<div>Last Name</div>}
-                renderer={({item}) => <div>{item.lastName}</div>}>
-              </VaadinGridColumn>
-
-              <VaadinGridColumn width="150px"
-                header={<div>Address</div>}
-                renderer={({item}) => <div style={{whiteSpace: 'normal'}}>{item.address.street}, {item.address.city}</div>}>
-              </VaadinGridColumn>
-
-            </VaadinGrid>
+          return (${'\n' + buildGrid('dataProvider={this.dataProvider} size="200"', [
+            buildIndexColumn({spaces: defaultIndent + 8}),
+            buildColumn({path: 'firstName', spaces: defaultIndent + 8}),
+            buildColumn({path: 'lastName', spaces: defaultIndent + 8}),
+            buildAddressColumn({spaces: defaultIndent + 8})
+            ], defaultIndent + 6)}
           );
         }
 
@@ -104,10 +125,58 @@ const demos = [
 
       ReactDOM.render(<ComponentExample/>, mountNode);
     `},
-    {title: 'Selecting', code: `
-    <VaadinGrid items={users}
-      onActiveItemChanged={e => this.setState({selectedItem: e.detail.value})}
-      selectedItems={this.state ? [this.state.selectedItem] : []}>
+    {title: 'Selecting', code: buildGrid('items={users}', [
+      buildSelectionColumn(),
+      buildIndexColumn(),
+      buildColumn({path: 'firstName'}),
+      buildColumn({path: 'lastName'}),
+      buildAddressColumn()
+      ])
+    },
+    {title: 'Column Groups', code: buildGrid('items={users}', [
+      buildSelectionColumn(),
+      buildIndexColumn(),
+      buildColumnGroup('header={<div>Name</div>}', [
+        buildColumn({path: 'firstName', label: 'First', spaces: defaultIndent + 4}),
+        buildColumn({path: 'lastName', label: 'Last', spaces: defaultIndent + 4}),
+      ]),
+      buildColumnGroup('header={<div>Address</div>}', [
+        buildColumn({path: 'address.street', spaces: defaultIndent + 4}),
+        buildColumn({path: 'address.city', spaces: defaultIndent + 4}),
+        buildColumn({path: 'address.country', spaces: defaultIndent + 4})
+      ]),
+      ])
+    },
+    {title: 'Frozen Columns', code: buildGrid('items={users}', [
+      buildSelectionColumn({attributes: ['frozen']}),
+      buildIndexColumn({attributes: ['frozen']}),
+      buildColumnGroup('header={<div>Name</div>}', [
+        buildColumn({path: 'firstName', label: 'First', spaces: defaultIndent + 4}),
+        buildColumn({path: 'lastName', label: 'Last', spaces: defaultIndent + 4}),
+      ]),
+      buildColumnGroup('header={<div>Address</div>}', [
+        buildColumn({path: 'address.street', spaces: defaultIndent + 4}),
+        buildColumn({path: 'address.city', spaces: defaultIndent + 4}),
+        buildColumn({path: 'address.country', spaces: defaultIndent + 4})
+      ]),
+      ])
+    },
+    {title: 'Reordering and Resizing Columns', code: buildGrid('items={users} columnReorderingAllowed', [
+      buildSelectionColumn({attributes: ['frozen']}),
+      buildIndexColumn({attributes: ['frozen']}),
+      buildColumnGroup('header={<div>Name</div>} resizable', [
+        buildColumn({path: 'firstName', label: 'First', spaces: defaultIndent + 4}),
+        buildColumn({path: 'lastName', label: 'Last', spaces: defaultIndent + 4}),
+      ]),
+      buildColumnGroup('header={<div>Address</div>} resizable', [
+        buildColumn({path: 'address.street', spaces: defaultIndent + 4}),
+        buildColumn({path: 'address.city', spaces: defaultIndent + 4}),
+        buildColumn({path: 'address.country', spaces: defaultIndent + 4})
+      ]),
+      ])
+    },
+    {title: 'Sorting and Filtering', code: `
+    <VaadinGrid items={users}>
 
       <VaadinGridColumn
         header={<div>First Name</div>}
@@ -126,16 +195,18 @@ const demos = [
 
     </VaadinGrid>
     `},
-    {title: 'Sorting and Filtering', code: `
-    <VaadinGrid items={users}>
+    {title: 'Active Item', code: `
+    <VaadinGrid items={users}
+      onActiveItemChanged={e => this.setState({selectedItem: e.detail.value})}
+      selectedItems={this.state ? [this.state.selectedItem] : []}>
 
       <VaadinGridColumn
-        header={<div>First Name</div>}
+        header={<div>First</div>}
         renderer={({item}) => <div>{item.firstName}</div>}>
       </VaadinGridColumn>
 
       <VaadinGridColumn
-        header={<div>Last Name</div>}
+        header={<div>Last</div>}
         renderer={({item}) => <div>{item.lastName}</div>}>
       </VaadinGridColumn>
 
@@ -206,10 +277,11 @@ function getId(title) {
   return title.toLowerCase().replace(/ /g, '-');
 }
 
-function addDemoIds(demos) {
+function addDemoIds(demos, parent) {
   demos.forEach(demo => {
     demo.id = getId(demo.title);
-    demo.pages && addDemoIds(demo.pages);
+    demo.pages && addDemoIds(demo.pages, demo);
+    demo.parent = parent;
   });
 }
 

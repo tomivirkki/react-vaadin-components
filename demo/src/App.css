@@ -6,8 +6,9 @@
 }
 
 .App-content {
-  height: 100%;
   display: flex;
+  position: relative;
+  flex: 1;
 }
 
 .App .Demo {

@@ -35,7 +35,7 @@ class Demo extends Component {
   render() {
     if (this.state.demo) {
       return <div className="Demo">
-        <h1>{this.state.demo.title}</h1>
+        <h1>{this.state.demo.parent.title + ' – ' + this.state.demo.title}</h1>
         <Playground noRender={!this.state.demo.render} codeText={this.state.demo.code} scope={this.state.demo.scope}/>
       </div>
     } else {
