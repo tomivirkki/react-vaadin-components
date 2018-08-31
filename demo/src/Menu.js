@@ -53,8 +53,9 @@ class Menu extends Component {
 
   render() {
     return (
-      <div className="menu">
+      <div class="Menu">
         <VaadinGrid
+          className="Menu-grid"
           theme="no-border no-row-borders"
           dataProvider={this._boundDataProvider}
           expandedItems={this.state.expandedItems}

@@ -1,15 +1,10 @@
-.content {
+.playground {
   display: flex;
+  flex-direction: column-reverse;
 }
 
-.menu {
-  width: 270px;
-}
-
-.pagecontent {
-  flex: 1;
-  padding: 30px;
-  overflow: auto;
+.playgroundCode {
+  margin-top: 20px;
 }
 
 .playgroundCode::before {

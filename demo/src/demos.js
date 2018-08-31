@@ -215,4 +215,10 @@ function addDemoIds(demos) {
 
 addDemoIds(demos);
 
+demos.forEach(component => {
+  component.pages.forEach(page => {
+    page.scope = component.scope;
+  })
+});
+
 export default demos;

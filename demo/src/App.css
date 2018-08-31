@@ -4,31 +4,17 @@
   flex-direction: column;
 }
 
-.content {
+.App-content {
   height: 100%;
+  display: flex;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
+.App .Demo {
+  flex: 1;
   padding: 20px;
-  color: white;
+  overflow: auto;
 }
 
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.App-content > .Menu{
+  width: 270px;
 }

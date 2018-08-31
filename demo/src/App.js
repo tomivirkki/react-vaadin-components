@@ -2,15 +2,18 @@ import React, { Component } from 'react';
 import './App.css';
 
 import Header from './Header';
-import Content from './Content';
-
+import Menu from './Menu';
+import Demo from './Demo';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <Header></Header>
-        <Content></Content>
+        <div className="App-content">
+          <Demo></Demo>
+          <Menu></Menu>
+        </div>
       </div>
     );
   }
