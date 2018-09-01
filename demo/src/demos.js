@@ -95,13 +95,13 @@ const buildGroupedGridDemo = ({resizable, reorderable, frozenColumns} = {}) => {
   return buildGrid('items={users}'.concat(reorderable ? ' columnReorderingAllowed' : ''), [
     buildSelectionColumn({attributes: frozenColumns ? ['frozen'] : []}),
     buildIndexColumn({attributes: frozenColumns ? ['frozen'] : []}),
-    buildColumn({path: 'email', attributes: ['width="300px"', 'flexGrow="0"'].concat(resizable ? ['resizable'] : [])}),
+    buildColumn({path: 'email', attributes: ['width="calc(210px + 10%)"', 'flexGrow="0"'].concat(resizable ? ['resizable'] : [])}),
     buildColumnGroup('header={<div>Name</div>}'.concat(resizable ? ' resizable' : ''), [
-      buildColumn({path: 'firstName', label: 'First', attributes: ['width="100px"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
-      buildColumn({path: 'lastName', label: 'Last', attributes: ['width="100px"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
+      buildColumn({path: 'firstName', label: 'First', attributes: ['width="130px"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
+      buildColumn({path: 'lastName', label: 'Last', attributes: ['width="130px"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
     ]),
     buildColumnGroup('header={<div>Address</div>}'.concat(resizable ? ' resizable' : ''), [
-      buildColumn({path: 'address.street', attributes: ['width="20%"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
+      buildColumn({path: 'address.street', attributes: ['width="25%"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
       buildColumn({path: 'address.city', attributes: ['width="15%"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
       buildColumn({path: 'address.country', spaces: defaultIndent + 4})
     ]),
