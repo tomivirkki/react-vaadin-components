@@ -20,9 +20,11 @@ class Demo extends Component {
   _updateState() {
     const {componentId, demoId} = this._parseHash();
     const component = demos.find(component => component.id === componentId);
-    const demo = component.pages.find(demo => demo.id === demoId);
-    if (this.state.demo !== demo) {
-      this.setState({demo});
+    if (component) {
+      const demo = component.pages.find(demo => demo.id === demoId);
+      if (this.state.demo !== demo) {
+        this.setState({demo});
+      }
     }
   }
 

@@ -53,7 +53,7 @@ class Menu extends Component {
 
   render() {
     return (
-      <div class="Menu">
+      <div className="Menu">
         <VaadinGrid
           className="Menu-grid"
           theme="no-border no-row-borders"

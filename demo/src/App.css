@@ -9,6 +9,7 @@
   display: flex;
   position: relative;
   flex: 1;
+  overflow: hidden;
 }
 
 .App .Demo {

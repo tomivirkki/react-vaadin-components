@@ -32,14 +32,14 @@ Tree grid
 Active item
 */
 
-const getIndent = spaces => Array.from(new Array(spaces)).map(_ => '').join(' ') + ' ';
+const getIndent = spaces => ' '.repeat(spaces);
 
 const defaultIndent = 6;
 
 const buildColumn = ({path, label, attributes, spaces} = {}) => {
   attributes = attributes || [];
   spaces = spaces || defaultIndent + 2;
-  const isIndexColumn = label == '#';
+  const isIndexColumn = label === '#';
 
   if (isIndexColumn) {
     attributes.push(`header={<div>#</div>}`);
@@ -91,8 +91,25 @@ const buildColumnGroup = (attributes, content, spaces = defaultIndent + 2) => {
   return `${getIndent(spaces)}<VaadinGridColumnGroup ${attributes}>${'\n' + content.join('\n\n') + '\n'}${getIndent(spaces)}</VaadinGridColumnGroup>`;
 }
 
+const buildGroupedGridDemo = ({resizable, reorderable, frozenColumns} = {}) => {
+  return buildGrid('items={users}'.concat(reorderable ? ' columnReorderingAllowed' : ''), [
+    buildSelectionColumn({attributes: frozenColumns ? ['frozen'] : []}),
+    buildIndexColumn({attributes: frozenColumns ? ['frozen'] : []}),
+    buildColumn({path: 'email', attributes: ['width="300px"', 'flexGrow="0"'].concat(resizable ? ['resizable'] : [])}),
+    buildColumnGroup('header={<div>Name</div>}'.concat(resizable ? ' resizable' : ''), [
+      buildColumn({path: 'firstName', label: 'First', attributes: ['width="100px"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
+      buildColumn({path: 'lastName', label: 'Last', attributes: ['width="100px"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
+    ]),
+    buildColumnGroup('header={<div>Address</div>}'.concat(resizable ? ' resizable' : ''), [
+      buildColumn({path: 'address.street', attributes: ['width="20%"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
+      buildColumn({path: 'address.city', attributes: ['width="15%"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
+      buildColumn({path: 'address.country', spaces: defaultIndent + 4})
+    ]),
+    ])
+}
+
 const demos = [
-  {title: 'Grid', scope: {VaadinGrid, VaadinGridColumn, VaadinGridColumnGroup, VaadinGridSelectionColumn, React, ReactDOM, Component, users}, pages: [
+  {title: 'Data Grid', scope: {VaadinGrid, VaadinGridColumn, VaadinGridColumnGroup, VaadinGridSelectionColumn, React, ReactDOM, Component, users}, pages: [
     {title: 'Items and Columns',
     code: buildGrid('items={users}', [
       buildIndexColumn(),
@@ -101,7 +118,7 @@ const demos = [
       buildAddressColumn()
       ])
     },
-    {title: 'Lazy Data Loading', render: true, code: `
+    {title: 'Lazy Loading Data', render: true, code: `
       class ComponentExample extends Component {
         render() {
           return (${'\n' + buildGrid('dataProvider={this.dataProvider} size="200"', [
@@ -133,47 +150,17 @@ const demos = [
       buildAddressColumn()
       ])
     },
-    {title: 'Column Groups', code: buildGrid('items={users}', [
-      buildSelectionColumn(),
-      buildIndexColumn(),
-      buildColumnGroup('header={<div>Name</div>}', [
-        buildColumn({path: 'firstName', label: 'First', spaces: defaultIndent + 4}),
-        buildColumn({path: 'lastName', label: 'Last', spaces: defaultIndent + 4}),
-      ]),
-      buildColumnGroup('header={<div>Address</div>}', [
-        buildColumn({path: 'address.street', spaces: defaultIndent + 4}),
-        buildColumn({path: 'address.city', spaces: defaultIndent + 4}),
-        buildColumn({path: 'address.country', spaces: defaultIndent + 4})
-      ]),
-      ])
+    {title: 'Column Groups',
+      code: buildGroupedGridDemo()
     },
-    {title: 'Frozen Columns', code: buildGrid('items={users}', [
-      buildSelectionColumn({attributes: ['frozen']}),
-      buildIndexColumn({attributes: ['frozen']}),
-      buildColumnGroup('header={<div>Name</div>}', [
-        buildColumn({path: 'firstName', label: 'First', spaces: defaultIndent + 4}),
-        buildColumn({path: 'lastName', label: 'Last', spaces: defaultIndent + 4}),
-      ]),
-      buildColumnGroup('header={<div>Address</div>}', [
-        buildColumn({path: 'address.street', spaces: defaultIndent + 4}),
-        buildColumn({path: 'address.city', spaces: defaultIndent + 4}),
-        buildColumn({path: 'address.country', spaces: defaultIndent + 4})
-      ]),
-      ])
+    {title: 'Frozen Columns',
+      code: buildGroupedGridDemo({frozenColumns: true})
     },
-    {title: 'Reordering and Resizing Columns', code: buildGrid('items={users} columnReorderingAllowed', [
-      buildSelectionColumn({attributes: ['frozen']}),
-      buildIndexColumn({attributes: ['frozen']}),
-      buildColumnGroup('header={<div>Name</div>} resizable', [
-        buildColumn({path: 'firstName', label: 'First', spaces: defaultIndent + 4}),
-        buildColumn({path: 'lastName', label: 'Last', spaces: defaultIndent + 4}),
-      ]),
-      buildColumnGroup('header={<div>Address</div>} resizable', [
-        buildColumn({path: 'address.street', spaces: defaultIndent + 4}),
-        buildColumn({path: 'address.city', spaces: defaultIndent + 4}),
-        buildColumn({path: 'address.country', spaces: defaultIndent + 4})
-      ]),
-      ])
+    {title: 'Reordering Columns',
+      code: buildGroupedGridDemo({reorderable: true, frozenColumns: true})
+    },
+    {title: 'Resizing Columns',
+      code: buildGroupedGridDemo({resizable: true, frozenColumns: true})
     },
     {title: 'Sorting and Filtering', code: `
     <VaadinGrid items={users}>
