@@ -14,17 +14,8 @@ import { VaadinGrid, VaadinGridColumn } from react-vaadin-components;
 ...
 
 <VaadinGrid items={[this.state.items]}>
-
-  <VaadinGridColumn width="100px" flexGrow="0"
-    header={<div>Name</div>}
-    renderer={{item} => <div>{item.name}</div>}>
-  </VaadinGridColumn>
-
-  <VaadinGridColumn
-    header={<div>Item Index</div>}
-    renderer={{item} => <div>{item.itemIndex}</div>}>
-  </VaadinGridColumn>
-
+  <VaadinGridColumn width="100px" flexGrow="0" path="name"></VaadinGridColumn>
+  <VaadinGridColumn label="Index" path="itemIndex"></VaadinGridColumn>
 </VaadinGrid>
 ```
 

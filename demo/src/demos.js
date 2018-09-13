@@ -42,26 +42,23 @@ const buildColumn = ({path, label, attributes, spaces} = {}) => {
   const isIndexColumn = label === '#';
 
   if (isIndexColumn) {
-    attributes.push(`header={<div>#</div>}`);
+    attributes.push(`label="#"`);
     attributes.push(`renderer={({index}) => <div>{index}</div>}`);
   } else {
-    // Replace once label and path are available for column
-    if (!label && path) {
-      label = path
-        .substr(path.lastIndexOf('.') + 1)
-        .replace(/([A-Z])/g, '-$1').toLowerCase()
-        .replace(/-/, ' ')
-        .replace(/\w\S*/g, str => str.charAt(0).toUpperCase() + str.substr(1));
-    }
     if (label) {
-      attributes.push(`header={<div>${label}</div>}`);
+      attributes.push(`label="${label}"`);
     }
     if (path) {
-      attributes.push(`renderer={({item}) => <div>{item.${path}}</div>}`);
+      attributes.push(`path="${path}"`);
     }
   }
 
-  return `${getIndent(spaces)}<VaadinGridColumn ${attributes ? ('\n'+ getIndent(spaces + 2) + attributes.join('\n'+ getIndent(spaces + 2))) : ''}>${'\n' + getIndent(spaces)}</VaadinGridColumn>`;
+  if (attributes.find(a => a.includes('renderer'))) {
+    return `${getIndent(spaces)}<VaadinGridColumn ${attributes ? ('\n'+ getIndent(spaces + 2) + attributes.join('\n'+ getIndent(spaces + 2))) : ''}>${'\n' + getIndent(spaces)}</VaadinGridColumn>`;
+  } else {
+    return `${getIndent(spaces)}<VaadinGridColumn ${attributes ? (attributes.join(' ')) : ''}></VaadinGridColumn>`;
+  }
+
 };
 
 const buildIndexColumn = ({spaces, attributes} = {}) => {
@@ -71,8 +68,8 @@ const buildIndexColumn = ({spaces, attributes} = {}) => {
 
 const buildAddressColumn = ({spaces} = {}) => {
   return buildColumn({attributes: [
-    "header={<div>Address</div>}",
-    "renderer={({item}) => <div style={{whiteSpace: 'normal'}}>{item.address.street}, {item.address.city}</div>}"
+    "label=\"Address\"",
+    "renderer={({item}) => <div>{item.address.street}, {item.address.city}</div>}"
   ], spaces});
 }
 
@@ -88,7 +85,7 @@ const buildGrid = (attributes, content, spaces = defaultIndent) => {
 }
 
 const buildColumnGroup = (attributes, content, spaces = defaultIndent + 2) => {
-  return `${getIndent(spaces)}<VaadinGridColumnGroup ${attributes}>${'\n' + content.join('\n\n') + '\n'}${getIndent(spaces)}</VaadinGridColumnGroup>`;
+  return `${getIndent(spaces)}<VaadinGridColumnGroup ${attributes}>${'\n\n' + content.join('\n\n') + '\n\n'}${getIndent(spaces)}</VaadinGridColumnGroup>`;
 }
 
 const buildGroupedGridDemo = ({resizable, reorderable, frozenColumns} = {}) => {
@@ -177,7 +174,7 @@ const demos = [
 
       <VaadinGridColumn width="150px"
         header={<div>Address</div>}
-        renderer={({item}) => <div style={{whiteSpace: 'normal'}}>{item.address.street}, {item.address.city}</div>}>
+        renderer={({item}) => <div>{item.address.street}, {item.address.city}</div>}>
       </VaadinGridColumn>
 
     </VaadinGrid>
@@ -199,7 +196,7 @@ const demos = [
 
       <VaadinGridColumn width="150px"
         header={<div>Address</div>}
-        renderer={({item}) => <div style={{whiteSpace: 'normal'}}>{item.address.street}, {item.address.city}</div>}>
+        renderer={({item}) => <div>{item.address.street}, {item.address.city}</div>}>
       </VaadinGridColumn>
 
     </VaadinGrid>
