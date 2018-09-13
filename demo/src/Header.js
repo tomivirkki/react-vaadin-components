@@ -5,7 +5,7 @@ class Header extends Component {
   render() {
     return (
       <header className="Header">
-        <div>React Vaadin</div>
+        <div>React Vaadin Components</div>
         <a href="https://github.com/tomivirkki/react-vaadin-components">GitHub</a>
       </header>
     );
