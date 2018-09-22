@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './Demo.css';
-import demos from 'react-vaadin-components/demo/src/demos';
-
+import demos from './demos';
 import Playground from 'component-playground';
 
 class Demo extends Component {

@@ -146,58 +146,6 @@ const demos = [
     {title: 'Resizing Columns',
       code: buildGroupedGridDemo({resizable: true, frozenColumns: true})
     },
-    {title: 'Sorting and Filtering', code: `
-    <VaadinGrid items={users}>
-
-      <VaadinGridColumn
-        header={<div>First Name</div>}
-        renderer={({item}) => <div>{item.firstName}</div>}>
-      </VaadinGridColumn>
-
-      <VaadinGridColumn
-        header={<div>Last Name</div>}
-        renderer={({item}) => <div>{item.lastName}</div>}>
-      </VaadinGridColumn>
-
-      <VaadinGridColumn width="150px"
-        header={<div>Address</div>}
-        renderer={({item}) => <div>{item.address.street}, {item.address.city}</div>}>
-      </VaadinGridColumn>
-
-    </VaadinGrid>
-    `},
-    {title: 'Active Item', code: `
-    <VaadinGrid items={users}
-      onActiveItemChanged={e => this.setState({selectedItem: e.detail.value})}
-      selectedItems={this.state ? [this.state.selectedItem] : []}>
-
-      <VaadinGridColumn
-        header={<div>First</div>}
-        renderer={({item}) => <div>{item.firstName}</div>}>
-      </VaadinGridColumn>
-
-      <VaadinGridColumn
-        header={<div>Last</div>}
-        renderer={({item}) => <div>{item.lastName}</div>}>
-      </VaadinGridColumn>
-
-      <VaadinGridColumn width="150px"
-        header={<div>Address</div>}
-        renderer={({item}) => <div>{item.address.street}, {item.address.city}</div>}>
-      </VaadinGridColumn>
-
-    </VaadinGrid>
-    `},
-    {title: 'Row Details', code: `
-    <VaadinGrid items={[1,2,3,4]} heightByRows="true">
-
-      <VaadinGridColumn
-        header={<div>Index</div>}
-        renderer={({item}) => <div>{item}</div>}>
-      </VaadinGridColumn>
-
-    </VaadinGrid>
-    `},
   ]},
   {title: 'Button', scope, pages: [
     {title: 'Basic Button', code: `
