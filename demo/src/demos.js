@@ -1,21 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import {
-  VaadinGrid,
-  VaadinGridColumn,
-  VaadinGridColumnGroup,
-  VaadinGridSelectionColumn,
-  VaadinButton,
-  VaadinTextField,
-  VaadinTextArea,
-  VaadinPasswordField,
-  VaadinCheckbox,
-  VaadinRadioButton,
-  VaadinRadioGroup
-} from 'react-vaadin-components';
+import * as components from 'react-vaadin-components';
 import users from './users.js';
-
-const _commonScope = {React, ReactDOM, Component, users};
+const scope = {React, ReactDOM, Component, users, ...components};
 
 // Demo build helpers
 
@@ -106,7 +93,7 @@ const buildGroupedGridDemo = ({resizable, reorderable, frozenColumns} = {}) => {
 }
 
 const demos = [
-  {title: 'Data Grid', scope: {VaadinGrid, VaadinGridColumn, VaadinGridColumnGroup, VaadinGridSelectionColumn, React, ReactDOM, Component, users}, pages: [
+  {title: 'Data Grid', scope, pages: [
     {title: 'Items and Columns',
     code: buildGrid('items={users}', [
       buildIndexColumn(),
@@ -212,7 +199,7 @@ const demos = [
     </VaadinGrid>
     `},
   ]},
-  {title: 'Button', scope: Object.assign({VaadinButton}, _commonScope), pages: [
+  {title: 'Button', scope, pages: [
     {title: 'Basic Button', code: `
     <VaadinButton onClick={console.log}>Click Me</VaadinButton>
     `},
@@ -230,7 +217,7 @@ const demos = [
     </div>
     `}
   ]},
-  {title: 'Text Field', scope: Object.assign({VaadinTextField, VaadinTextArea, VaadinPasswordField}, _commonScope), pages: [
+  {title: 'Text Field', scope, pages: [
     {title: 'Text Field', code: `
     <VaadinTextField label="First Name"></VaadinTextField>
     `},
@@ -241,18 +228,33 @@ const demos = [
     <VaadinPasswordField label="Password"></VaadinPasswordField>
     `},
   ]},
-  {title: 'Checkbox', scope: Object.assign({VaadinCheckbox}, _commonScope), pages: [
+  {title: 'Checkbox', scope, pages: [
     {title: 'Checkbox', code: `
     <VaadinCheckbox>Subscribe</VaadinCheckbox>
     `}
   ]},
-  {title: 'Radio Button', scope: Object.assign({VaadinRadioButton, VaadinRadioGroup}, _commonScope), pages: [
+  {title: 'Radio Button', scope, pages: [
     {title: 'Radio Button Group', code: `
     <VaadinRadioGroup>
       <VaadinRadioButton>One</VaadinRadioButton>
       <VaadinRadioButton>Two</VaadinRadioButton>
       <VaadinRadioButton>Three</VaadinRadioButton>
     </VaadinRadioGroup>
+    `}
+  ]},
+  {title: 'Date Picker', scope, pages: [
+    {title: 'Date Picker', code: `
+    <VaadinDatePicker></VaadinDatePicker>
+    `}
+  ]},
+  {title: 'Combo Box', scope, pages: [
+    {title: 'Combo Box', code: `
+    <VaadinComboBox
+      items={users}
+      itemLabelPath="email"
+      itemValuePath="email"
+      style="width: 300px">
+    </VaadinComboBox>
     `}
   ]}
 ]

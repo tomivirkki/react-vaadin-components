@@ -5,6 +5,7 @@
 
 .playgroundCode {
   margin-top: 20px;
+  transform: translateZ(0);
 }
 
 .playgroundCode::before {
