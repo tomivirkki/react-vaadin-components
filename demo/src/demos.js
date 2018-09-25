@@ -23,17 +23,17 @@ const getIndent = spaces => ' '.repeat(spaces);
 
 const defaultIndent = 6;
 
-const buildColumn = ({path, label, attributes, spaces} = {}) => {
+const buildColumn = ({path, header, attributes, spaces} = {}) => {
   attributes = attributes || [];
   spaces = spaces || defaultIndent + 2;
-  const isIndexColumn = label === '#';
+  const isIndexColumn = header === '#';
 
   if (isIndexColumn) {
-    attributes.push(`label="#"`);
+    attributes.push(`header="#"`);
     attributes.push(`renderer={({index}) => <div>{index}</div>}`);
   } else {
-    if (label) {
-      attributes.push(`label="${label}"`);
+    if (header) {
+      attributes.push(`header="${header}"`);
     }
     if (path) {
       attributes.push(`path="${path}"`);
@@ -50,12 +50,12 @@ const buildColumn = ({path, label, attributes, spaces} = {}) => {
 
 const buildIndexColumn = ({spaces, attributes} = {}) => {
   attributes = attributes || [];
-  return buildColumn({label: '#', attributes: ['width="50px"', 'flexGrow="0"'].concat(attributes), spaces})
+  return buildColumn({header: '#', attributes: ['width="50px"', 'flexGrow="0"'].concat(attributes), spaces})
 }
 
 const buildAddressColumn = ({spaces} = {}) => {
   return buildColumn({attributes: [
-    "label=\"Address\"",
+    "header=\"Address\"",
     "renderer={({item}) => <div>{item.address.street}, {item.address.city}</div>}"
   ], spaces});
 }
@@ -80,11 +80,11 @@ const buildGroupedGridDemo = ({resizable, reorderable, frozenColumns} = {}) => {
     buildSelectionColumn({attributes: frozenColumns ? ['frozen'] : []}),
     buildIndexColumn({attributes: frozenColumns ? ['frozen'] : []}),
     buildColumn({path: 'email', attributes: ['width="calc(210px + 10%)"', 'flexGrow="0"'].concat(resizable ? ['resizable'] : [])}),
-    buildColumnGroup('header={<div>Name</div>}'.concat(resizable ? ' resizable' : ''), [
-      buildColumn({path: 'firstName', label: 'First', attributes: ['width="130px"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
-      buildColumn({path: 'lastName', label: 'Last', attributes: ['width="130px"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
+    buildColumnGroup('header="Name"'.concat(resizable ? ' resizable' : ''), [
+      buildColumn({path: 'firstName', header: 'First', attributes: ['width="130px"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
+      buildColumn({path: 'lastName', header: 'Last', attributes: ['width="130px"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
     ]),
-    buildColumnGroup('header={<div>Address</div>}'.concat(resizable ? ' resizable' : ''), [
+    buildColumnGroup('header="Address"'.concat(resizable ? ' resizable' : ''), [
       buildColumn({path: 'address.street', attributes: ['width="25%"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
       buildColumn({path: 'address.city', attributes: ['width="15%"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
       buildColumn({path: 'address.country', spaces: defaultIndent + 4})
