@@ -59,10 +59,6 @@ export class VaadinGridColumnGroup extends VaadinComponent {
       column.headerRenderer = column.headerRenderer || ((root, grid) => {
         ReactDOM.render(this.props.headerComponent, root);
       });
-    } else if (this.props.header) {
-      column.headerRenderer = column.headerRenderer || ((root, grid) => {
-        root.textContent = this.props.header;
-      });
     }
   }
 }
