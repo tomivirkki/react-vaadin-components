@@ -9,6 +9,7 @@ const scope = {React, ReactDOM, Component, users, ...components};
 /*
 Grid:
 
+Renderers
 Theme variants
 footer
 reordering and resizing
@@ -23,8 +24,9 @@ const getIndent = spaces => ' '.repeat(spaces);
 
 const defaultIndent = 6;
 
-const buildColumn = ({path, header, attributes, spaces} = {}) => {
+const buildColumn = ({path, header, textAlign, attributes, spaces} = {}) => {
   attributes = attributes || [];
+  textAlign && attributes.push(`textAlign="${textAlign}"`)
   spaces = spaces || defaultIndent + 2;
   const isIndexColumn = header === '#';
 
@@ -78,45 +80,49 @@ const buildColumnGroup = (attributes, content, spaces = defaultIndent + 2) => {
 const buildGroupedGridDemo = ({resizable, reorderable, frozenColumns} = {}) => {
   return buildGrid('items={users}'.concat(reorderable ? ' columnReorderingAllowed' : ''), [
     buildSelectionColumn({attributes: frozenColumns ? ['frozen'] : []}),
-    buildIndexColumn({attributes: frozenColumns ? ['frozen'] : []}),
+    buildColumn({path: 'username', attributes: ['width="170px"', 'flexGrow="0"'].concat(frozenColumns ? ['frozen'] : [])}),
     buildColumn({path: 'email', attributes: ['width="calc(210px + 10%)"', 'flexGrow="0"'].concat(resizable ? ['resizable'] : [])}),
     buildColumnGroup('header="Name"'.concat(resizable ? ' resizable' : ''), [
-      buildColumn({path: 'firstName', header: 'First', attributes: ['width="130px"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
-      buildColumn({path: 'lastName', header: 'Last', attributes: ['width="130px"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
+      buildColumn({path: 'name.first', attributes: ['width="130px"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
+      buildColumn({path: 'name.last', attributes: ['width="180px"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
     ]),
     buildColumnGroup('header="Address"'.concat(resizable ? ' resizable' : ''), [
-      buildColumn({path: 'address.street', attributes: ['width="25%"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
-      buildColumn({path: 'address.city', attributes: ['width="15%"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
-      buildColumn({path: 'address.country', spaces: defaultIndent + 4})
+      buildColumn({path: 'location.street', attributes: ['width="25%"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
+      buildColumn({path: 'location.city', attributes: ['width="15%"', 'flexGrow="0"'], spaces: defaultIndent + 4}),
+      buildColumn({path: 'location.state', spaces: defaultIndent + 4})
     ]),
     ])
 }
 
 const demos = [
-  {title: 'Data Grid', scope, pages: [
+  {title: 'Grid', scope, pages: [
     {title: 'Items and Columns',
     code: buildGrid('items={users}', [
-      buildIndexColumn(),
-      buildColumn({path: 'firstName'}),
-      buildColumn({path: 'lastName'}),
-      buildAddressColumn()
+      buildColumn({path: 'name.first', header: 'First Name'}),
+      buildColumn({path: 'name.last', header: 'Last Name'}),
+      buildColumn({path: 'location.city'}),
+      buildColumn({path: 'visitCount', textAlign: 'end', width: '100px', flexGrow: '0'})
       ])
     },
     {title: 'Lazy Loading Data', render: true, code: `
       class ComponentExample extends Component {
         render() {
-          return (${'\n' + buildGrid('dataProvider={this.dataProvider} size="200"', [
-            buildIndexColumn({spaces: defaultIndent + 8}),
+          return (${'\n' + buildGrid('dataProvider={this.dataProvider}', [
             buildColumn({path: 'firstName', spaces: defaultIndent + 8}),
             buildColumn({path: 'lastName', spaces: defaultIndent + 8}),
-            buildAddressColumn({spaces: defaultIndent + 8})
+            buildColumn({path: 'email', spaces: defaultIndent + 8}),
             ], defaultIndent + 6)}
           );
         }
 
         dataProvider(params, callback) {
+          const KNOWN_DATA_SIZE = 200;
           const xhr = new XMLHttpRequest();
-          xhr.onload = () => callback(JSON.parse(xhr.responseText).result);
+
+          xhr.onload = () => {
+            const result = JSON.parse(xhr.responseText).result;
+            callback(result, KNOWN_DATA_SIZE);
+          }
 
           const index = params.page * params.pageSize;
           xhr.open('GET', 'https://demo.vaadin.com/demo-data/1.0/people?index=' + index + '&count=' + params.pageSize, true);
@@ -128,10 +134,9 @@ const demos = [
     `},
     {title: 'Selecting', code: buildGrid('items={users}', [
       buildSelectionColumn(),
-      buildIndexColumn(),
-      buildColumn({path: 'firstName'}),
-      buildColumn({path: 'lastName'}),
-      buildAddressColumn()
+      buildColumn({path: 'name.first', header: 'First Name'}),
+      buildColumn({path: 'name.last', header: 'Last Name'}),
+      buildColumn({path: 'email'})
       ])
     },
     {title: 'Column Groups',
@@ -167,7 +172,7 @@ const demos = [
   ]},
   {title: 'Text Field', scope, pages: [
     {title: 'Text Field', code: `
-    <VaadinTextField label="First Name"></VaadinTextField>
+    <VaadinTextField label='First Name'></VaadinTextField>
     `},
     {title: 'Text Area', code: `
     <VaadinTextArea label="Description"></VaadinTextArea>
