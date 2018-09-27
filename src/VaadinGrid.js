@@ -1,10 +1,6 @@
 import ReactDOM from 'react-dom';
 import VaadinComponent from './VaadinComponent';
-import '@vaadin/vaadin-grid';
-import '@vaadin/vaadin-grid/vaadin-grid-column';
-import '@vaadin/vaadin-grid/vaadin-grid-column-group';
-import '@vaadin/vaadin-grid/vaadin-grid-tree-toggle';
-import '@vaadin/vaadin-grid/vaadin-grid-selection-column';
+import '@vaadin/vaadin-grid/all-imports';
 
 export class VaadinGrid extends VaadinComponent {
   constructor() {
@@ -46,6 +42,24 @@ export class VaadinGridColumn extends VaadinComponent {
 export class VaadinGridSelectionColumn extends VaadinComponent {
   constructor() {
     super('vaadin-grid-selection-column');
+  }
+}
+
+export class VaadinGridSortColumn extends VaadinComponent {
+  constructor() {
+    super('vaadin-grid-sort-column');
+  }
+}
+
+export class VaadinGridFilterColumn extends VaadinComponent {
+  constructor() {
+    super('vaadin-grid-filter-column');
+  }
+}
+
+export class VaadinGridTreeColumn extends VaadinComponent {
+  constructor() {
+    super('vaadin-grid-tree-column');
   }
 }
 
