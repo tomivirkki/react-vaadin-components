@@ -25,6 +25,8 @@ class Menu extends Component {
 
     if (params.parentItem) {
       pages.forEach(page => page.link = `${params.parentItem.id}/${page.id}`);
+    } else {
+      pages.unshift({title: "intro", link: ""});
     }
 
     callback(pages, pages.length);
@@ -46,7 +48,7 @@ class Menu extends Component {
   }
 
   _activeItemChanged(e) {
-    if (e.detail.value && e.detail.value.link) {
+    if (e.detail.value && e.detail.value.link !== undefined) {
       window.location.hash = '/' + e.detail.value.link;
     }
   }
@@ -62,8 +64,9 @@ class Menu extends Component {
           heightByRows={true}
           onActiveItemChanged={this._activeItemChanged.bind(this)}>
           <VaadinGridColumn
-            renderer={({item}) => {
+            renderer={({item, level}) => {
               return <VaadinGridTreeToggle
+                className={level === 0 ? 'toplevel' : ''}
                 expanded={this.state.expandedItems.includes(item)}
                 leaf={!item.pages}
                 onExpandedChanged={e => this.expandedChanged(item, e.detail.value)}>

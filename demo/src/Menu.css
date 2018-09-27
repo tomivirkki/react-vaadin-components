@@ -16,7 +16,7 @@
   user-select: none;
 }
 
-.Menu-grid vaadin-grid-tree-toggle:not([leaf]) {
+.Menu-grid vaadin-grid-tree-toggle.toplevel {
   font-size: 14px;
   font-weight: 700;
   line-height: 3;

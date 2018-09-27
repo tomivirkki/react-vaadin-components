@@ -23,8 +23,10 @@ class Demo extends Component {
       const demo = component.pages.find(demo => demo.id === demoId);
       if (this.state.demo !== demo) {
         this.setState({demo});
+        return;
       }
     }
+    this.setState({demo: null});
   }
 
   _parseHash() {
