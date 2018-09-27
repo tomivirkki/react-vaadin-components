@@ -9,6 +9,7 @@ const scope = {React, ReactDOM, Component, users, ...components};
 /*
 Grid:
 
+Other convenience columns
 Renderers
 Theme variants
 footer
@@ -67,6 +68,12 @@ const buildSelectionColumn = ({spaces, attributes} = {}) => {
   attributes.push('autoSelect="true"');
   spaces = spaces || defaultIndent + 2;
   return getIndent(spaces) + `<VaadinGridSelectionColumn ${attributes.join(' ')}></VaadinGridSelectionColumn>`;
+}
+
+const buildSortColumn = ({spaces, attributes} = {}) => {
+  attributes = attributes || [];
+  spaces = spaces || defaultIndent + 2;
+  return getIndent(spaces) + `<VaadinGridSortColumn ${attributes.join(' ')}></VaadinGridSortColumn>`;
 }
 
 const buildGrid = (attributes, content, spaces = defaultIndent) => {
@@ -136,6 +143,13 @@ const demos = [
       buildSelectionColumn(),
       buildColumn({path: 'name.first', header: 'First Name'}),
       buildColumn({path: 'name.last', header: 'Last Name'}),
+      buildColumn({path: 'email'})
+      ])
+    },
+    {title: 'Sorting', code: buildGrid('items={users}', [
+      buildSortColumn({attributes: ['path = "name.first"', 'header = "First Name"']}),
+      buildSortColumn({attributes: ['path = "name.last"', 'header = "Last Name"']}),
+      buildSortColumn({attributes: ['path = "location.city"']}),
       buildColumn({path: 'email'})
       ])
     },
