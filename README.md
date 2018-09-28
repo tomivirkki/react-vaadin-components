@@ -13,7 +13,7 @@ npm install --save react-vaadin-components
 ```
 
 ```js
-import { VaadinGrid, VaadinGridColumn, VaadinGridSortColumn } from react-vaadin-components;
+import { VaadinGrid, VaadinGridColumn, VaadinGridSortColumn, VaadinGridSelectionColumn } from react-vaadin-components;
 
 ...
 <VaadinGrid items={this.state.users}>
