@@ -5,12 +5,15 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "component-playground": "^3.2.0",
+    "gh-pages": "^2.0.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-markdown": "^3.6.0",
     "react-scripts": "2.0.0-next.2150693d"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
@@ -28,5 +31,6 @@
       "not op_mini all",
       "ie 11"
     ]
-  }
+  },
+  "homepage": "https://tomivirkki.github.io/react-vaadin-components"
 }
