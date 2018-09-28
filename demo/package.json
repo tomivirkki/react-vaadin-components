@@ -9,7 +9,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-markdown": "^3.6.0",
-    "react-scripts": "2.0.0-next.2150693d"
+    "react-scripts": "^2.0.0"
   },
   "scripts": {
     "predeploy": "npm run build",

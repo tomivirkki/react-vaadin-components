@@ -147,9 +147,9 @@ const demos = [
       ])
     },
     {title: 'Sorting', code: buildGrid('items={users}', [
-      buildSortColumn({attributes: ['path = "name.first"', 'header = "First Name"']}),
-      buildSortColumn({attributes: ['path = "name.last"', 'header = "Last Name"']}),
-      buildSortColumn({attributes: ['path = "location.city"']}),
+      buildSortColumn({attributes: ['path="name.first"', 'header="First Name"']}),
+      buildSortColumn({attributes: ['path="name.last"', 'header="Last Name"']}),
+      buildSortColumn({attributes: ['path="location.city"']}),
       buildColumn({path: 'email'})
       ])
     },
