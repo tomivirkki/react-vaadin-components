@@ -65,7 +65,7 @@ const buildAddressColumn = ({spaces} = {}) => {
 
 const buildSelectionColumn = ({spaces, attributes} = {}) => {
   attributes = attributes || [];
-  attributes.push('autoSelect="true"');
+  attributes.push('autoSelect');
   spaces = spaces || defaultIndent + 2;
   return getIndent(spaces) + `<VaadinGridSelectionColumn ${attributes.join(' ')}></VaadinGridSelectionColumn>`;
 }
@@ -77,11 +77,11 @@ const buildSortColumn = ({spaces, attributes} = {}) => {
 }
 
 const buildGrid = (attributes, content, spaces = defaultIndent) => {
-  return `${getIndent(spaces)}<VaadinGrid ${attributes}>${'\n' + content.join('\n\n') + '\n'}${getIndent(spaces)}</VaadinGrid>`;
+  return `${getIndent(spaces)}<VaadinGrid ${attributes}>${'\n' + content.join('\n') + '\n'}${getIndent(spaces)}</VaadinGrid>`;
 }
 
 const buildColumnGroup = (attributes, content, spaces = defaultIndent + 2) => {
-  return `${getIndent(spaces)}<VaadinGridColumnGroup ${attributes}>${'\n\n' + content.join('\n\n') + '\n\n'}${getIndent(spaces)}</VaadinGridColumnGroup>`;
+  return `\n${getIndent(spaces)}<VaadinGridColumnGroup ${attributes}>${'\n' + content.join('\n') + '\n'}${getIndent(spaces)}</VaadinGridColumnGroup>`;
 }
 
 const buildGroupedGridDemo = ({resizable, reorderable, frozenColumns} = {}) => {

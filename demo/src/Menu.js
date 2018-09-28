@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Menu.css';
 import demos from './demos.js';
-import { VaadinGrid, VaadinGridColumn, VaadinGridTreeToggle } from 'react-vaadin-components';
+import { VaadinGrid, VaadinGridTreeColumn } from 'react-vaadin-components';
 
 class Menu extends Component {
 
@@ -63,17 +63,8 @@ class Menu extends Component {
           expandedItems={this.state.expandedItems}
           heightByRows={true}
           onActiveItemChanged={this._activeItemChanged.bind(this)}>
-          <VaadinGridColumn
-            renderer={({item, level}) => {
-              return <VaadinGridTreeToggle
-                className={level === 0 ? 'toplevel' : ''}
-                expanded={this.state.expandedItems.includes(item)}
-                leaf={!item.pages}
-                onExpandedChanged={e => this.expandedChanged(item, e.detail.value)}>
-                  {item.title}
-              </VaadinGridTreeToggle>
-            }}>
-          </VaadinGridColumn>
+          <VaadinGridTreeColumn path="title" itemHasChildrenPath="pages" header=" ">
+          </VaadinGridTreeColumn>
         </VaadinGrid>
       </div>
     );

@@ -31,9 +31,23 @@ export class VaadinGridColumn extends VaadinComponent {
       });
     }
 
-    if (this.props.header) {
+    if (this.props.headerComponent) {
       column.headerRenderer = column.headerRenderer || ((root, grid) => {
-        ReactDOM.render(this.props.header, root);
+        ReactDOM.render(this.props.headerComponent, root);
+      });
+    }
+  }
+}
+
+export class VaadinGridColumnGroup extends VaadinComponent {
+  constructor() {
+    super('vaadin-grid-column-group');
+  }
+
+  _configRef(column) {
+    if (this.props.headerComponent) {
+      column.headerRenderer = column.headerRenderer || ((root, grid) => {
+        ReactDOM.render(this.props.headerComponent, root);
       });
     }
   }
@@ -60,25 +74,5 @@ export class VaadinGridFilterColumn extends VaadinComponent {
 export class VaadinGridTreeColumn extends VaadinComponent {
   constructor() {
     super('vaadin-grid-tree-column');
-  }
-}
-
-export class VaadinGridColumnGroup extends VaadinComponent {
-  constructor() {
-    super('vaadin-grid-column-group');
-  }
-
-  _configRef(column) {
-    if (this.props.headerComponent) {
-      column.headerRenderer = column.headerRenderer || ((root, grid) => {
-        ReactDOM.render(this.props.headerComponent, root);
-      });
-    }
-  }
-}
-
-export class VaadinGridTreeToggle extends VaadinComponent {
-  constructor() {
-    super('vaadin-grid-tree-toggle');
   }
 }

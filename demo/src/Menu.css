@@ -7,16 +7,12 @@
   overflow: auto;
 }
 
-.Menu-grid {
-  margin-top: 50px;
-}
-
 .Menu-grid vaadin-grid-tree-toggle {
   cursor: pointer;
   user-select: none;
 }
 
-.Menu-grid vaadin-grid-tree-toggle.toplevel {
+.Menu-grid vaadin-grid-tree-toggle[style="---level:0;"] {
   font-size: 14px;
   font-weight: 700;
   line-height: 3;
@@ -24,4 +20,8 @@
   letter-spacing: 0.08em;
   flex-direction: row-reverse;
   color: #6d6d6d;
+}
+
+.Menu-grid vaadin-grid-tree-toggle[style="---level:1;"] {
+  margin-left: -40px;
 }
