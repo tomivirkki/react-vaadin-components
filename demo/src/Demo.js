@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './Demo.css';
 import demos from './demos';
 import Playground from 'component-playground';
+import ReactMarkdown from 'react-markdown';
+import * as intro from 'react-vaadin-components/README.md';
 
 class Demo extends Component {
 
@@ -10,6 +12,16 @@ class Demo extends Component {
     this.state = {};
 
     window.addEventListener('hashchange', this._updateState.bind(this));
+
+    fetch(intro)
+      .then(response => {
+        return response.text()
+      })
+      .then(text => {
+        this.setState({
+          introText: text
+        })
+      })
   }
 
   componentDidMount() {
@@ -42,7 +54,9 @@ class Demo extends Component {
         <Playground noRender={!this.state.demo.render} codeText={this.state.demo.code} scope={this.state.demo.scope}/>
       </div>
     } else {
-      return <div className="Demo">Hello React</div>
+      return <div className="Demo">
+        <ReactMarkdown source={this.state.introText} />
+      </div>
     }
   }
 }
