@@ -12,5 +12,9 @@
     "@webcomponents/webcomponentsjs": "2.0.4",
     "react": "^16.4.1",
     "react-dom": "^16.4.1"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/tomivirkki/react-vaadin-components.git"
   }
 }
