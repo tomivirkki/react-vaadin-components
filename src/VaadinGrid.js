@@ -1,8 +1,8 @@
 import ReactDOM from 'react-dom';
-import VaadinComponent from './VaadinComponent';
+import WebComponent from './WebComponent';
 import '@vaadin/vaadin-grid/all-imports';
 
-export class VaadinGrid extends VaadinComponent {
+export class VaadinGrid extends WebComponent {
   constructor() {
     super('vaadin-grid');
   }
@@ -19,7 +19,7 @@ export class VaadinGrid extends VaadinComponent {
   }
 }
 
-export class VaadinGridColumn extends VaadinComponent {
+export class VaadinGridColumn extends WebComponent {
   constructor() {
     super('vaadin-grid-column');
   }
@@ -39,7 +39,7 @@ export class VaadinGridColumn extends VaadinComponent {
   }
 }
 
-export class VaadinGridColumnGroup extends VaadinComponent {
+export class VaadinGridColumnGroup extends WebComponent {
   constructor() {
     super('vaadin-grid-column-group');
   }
@@ -53,25 +53,25 @@ export class VaadinGridColumnGroup extends VaadinComponent {
   }
 }
 
-export class VaadinGridSelectionColumn extends VaadinComponent {
+export class VaadinGridSelectionColumn extends WebComponent {
   constructor() {
     super('vaadin-grid-selection-column');
   }
 }
 
-export class VaadinGridSortColumn extends VaadinComponent {
+export class VaadinGridSortColumn extends WebComponent {
   constructor() {
     super('vaadin-grid-sort-column');
   }
 }
 
-export class VaadinGridFilterColumn extends VaadinComponent {
+export class VaadinGridFilterColumn extends WebComponent {
   constructor() {
     super('vaadin-grid-filter-column');
   }
 }
 
-export class VaadinGridTreeColumn extends VaadinComponent {
+export class VaadinGridTreeColumn extends WebComponent {
   constructor() {
     super('vaadin-grid-tree-column');
   }

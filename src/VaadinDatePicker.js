@@ -1,7 +1,7 @@
-import VaadinComponent from './VaadinComponent';
+import WebComponent from './WebComponent';
 import '@vaadin/vaadin-date-picker';
 
-export class VaadinDatePicker extends VaadinComponent {
+export class VaadinDatePicker extends WebComponent {
   constructor() {
     super('vaadin-date-picker');
   }
