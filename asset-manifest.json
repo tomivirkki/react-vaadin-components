@@ -1,11 +1,14 @@
 {
-  "main.css": "/react-vaadin-components/static/css/main.eb2d50e1.chunk.css",
-  "main.js": "/react-vaadin-components/static/js/main.dedbdbd1.chunk.js",
-  "main.js.map": "/react-vaadin-components/static/js/main.dedbdbd1.chunk.js.map",
-  "static/js/1.ce9dafed.chunk.js": "/react-vaadin-components/static/js/1.ce9dafed.chunk.js",
-  "static/js/1.ce9dafed.chunk.js.map": "/react-vaadin-components/static/js/1.ce9dafed.chunk.js.map",
+  "main.css": "/react-vaadin-components/static/css/main.f5c45132.chunk.css",
+  "main.js": "/react-vaadin-components/static/js/main.3652070a.chunk.js",
+  "main.js.map": "/react-vaadin-components/static/js/main.3652070a.chunk.js.map",
+  "static/js/1.ced938f5.chunk.js": "/react-vaadin-components/static/js/1.ced938f5.chunk.js",
+  "static/js/1.ced938f5.chunk.js.map": "/react-vaadin-components/static/js/1.ced938f5.chunk.js.map",
   "runtime~main.js": "/react-vaadin-components/static/js/runtime~main.c21e6fbe.js",
   "runtime~main.js.map": "/react-vaadin-components/static/js/runtime~main.c21e6fbe.js.map",
-  "static/media/README.md": "/react-vaadin-components/static/media/README.7ba26fcb.md",
-  "index.html": "/react-vaadin-components/index.html"
+  "static/media/README.md": "/react-vaadin-components/static/media/README.6e94dfb7.md",
+  "static/css/main.f5c45132.chunk.css.map": "/react-vaadin-components/static/css/main.f5c45132.chunk.css.map",
+  "index.html": "/react-vaadin-components/index.html",
+  "precache-manifest.18660c1396bc9db549c98dc064a30c56.js": "/react-vaadin-components/precache-manifest.18660c1396bc9db549c98dc064a30c56.js",
+  "service-worker.js": "/react-vaadin-components/service-worker.js"
 }
