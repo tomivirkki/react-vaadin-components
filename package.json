@@ -4,17 +4,28 @@
   "dependencies": {
     "@vaadin/vaadin-button": "^2.1.0",
     "@vaadin/vaadin-checkbox": "^2.2.1",
+    "@vaadin/vaadin-combo-box": "^4.2.0-alpha3",
+    "@vaadin/vaadin-date-picker": "^3.3.0-alpha1",
     "@vaadin/vaadin-grid": "^5.2.0-alpha4",
     "@vaadin/vaadin-radio-button": "^1.1.0",
-    "@vaadin/vaadin-date-picker": "^3.3.0-alpha1",
-    "@vaadin/vaadin-combo-box": "^4.2.0-alpha3",
     "@vaadin/vaadin-text-field": "^2.1.0",
     "@webcomponents/webcomponentsjs": "2.0.4",
     "react": "^16.4.1",
     "react-dom": "^16.4.1"
   },
+  "scripts": {
+    "test": "jest"
+  },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/tomivirkki/react-vaadin-components.git"
+    "type": "git",
+    "url": "https://github.com/tomivirkki/react-vaadin-components.git"
+  },
+  "devDependencies": {
+    "babel-jest": "^23.6.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "*",
+    "jest": "^23.6.0"
   }
 }

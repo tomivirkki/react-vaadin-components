@@ -6,42 +6,51 @@ export default class WebComponent extends Component {
     this.tagName = tagName;
 
     this._eventListeners = {};
+    this.propertyBlacklist = [
+      'children',
+      'theme',
+      'className',
+      'renderer'
+    ];
   }
 
   render() {
+    const attributes = {};
+    if (this.props.theme) {
+      attributes.theme = this.props.theme;
+    }
+    if (this.props.className) {
+      attributes.class = this.props.className;
+    }
+
     return React.createElement(this.tagName, {
-      theme: this.props.theme,
-      class: this.props.className,
+      ...attributes,
       ref: element => {
         if (!element) {
           return;
         }
 
-        const propertyBlacklist = [
-          'children',
-          'theme',
-          'className',
-          'renderer'
-        ];
-
         const elementProps = {};
-
         for (let prop in this.props) {
           if (/^on[A-Z]/.test(prop)) {
             // Remove existing event listener
             const eventName = prop.replace(/([A-Z])/g, name => `-${name[0].toLowerCase()}`).replace('on-', '');
             element.removeEventListener(eventName, this._eventListeners[eventName]);
             this._eventListeners[eventName] = this.props[prop];
-          } else if (!propertyBlacklist.includes(prop)) {
+          } else if (!this.propertyBlacklist.includes(prop)) {
             // Collect properties to set
             elementProps[prop] = this.props[prop];
           }
         }
 
-        // Set new property values
-        element.setProperties(elementProps);
+        // Set the property values
+        if (element.setProperties) {
+          element.setProperties(elementProps);
+        } else {
+          Object.assign(element, elementProps);
+        }
 
-        // Add new event listeners
+        // Set the event listeners
         for (let eventName in this._eventListeners) {
           element.addEventListener(eventName, this._eventListeners[eventName]);
         }
