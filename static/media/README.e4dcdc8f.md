@@ -17,7 +17,7 @@ import { VaadinGrid, VaadinGridColumn, VaadinGridSortColumn, VaadinGridSelection
 
 ...
 <VaadinGrid items={this.state.users}>
-  <VaadinGridSelectionColumn header="First Name" path="name.first"></VaadinGridSelectionColumn>
+  <VaadinGridSelectionColumn autoSelect></VaadinGridSelectionColumn>
   <VaadinGridSortColumn header="First Name" path="name.first"></VaadinGridSortColumn>
   <VaadinGridSortColumn header="Last Name" path="name.last"></VaadinGridSortColumn>
   <VaadinGridColumn path="location.city"></VaadinGridColumn>
