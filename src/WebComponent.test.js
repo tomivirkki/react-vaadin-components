@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import WebComponent from './WebComponent';
 import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -12,6 +13,13 @@ class FooBar extends WebComponent {
 
   _configRef(e) {
     this.element = e;
+  }
+
+  invokeRenderer() {
+    // TODO: Ideally ReactDOM.render() should only be invoked once.
+    // Find out if the renderer APIs could work without having to call
+    // ReactDOM.render() multiple times.
+    ReactDOM.render(this.props.renderer(), this.element);
   }
 }
 
@@ -40,6 +48,20 @@ test('should have the class name', () => {
 test('should set the event listener', done => {
   const element = getElement({onFooBar: () => done()});
   element.dispatchEvent(new CustomEvent('foo-bar'));
+});
+
+test('should only have one event listener', () => {
+  let callCount = 0;
+  const component = mount(<FooBar
+      renderer={() => <FooBar onFooBar={() => callCount++} />}>
+    </FooBar>).instance();
+
+  component.invokeRenderer();
+  component.invokeRenderer();
+
+  component.element.firstElementChild.dispatchEvent(new CustomEvent('foo-bar'));
+
+  expect(callCount).toEqual(1);
 });
 
 test('should set the property', () => {
