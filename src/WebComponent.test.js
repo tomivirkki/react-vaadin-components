@@ -14,13 +14,6 @@ class FooBar extends WebComponent {
   _configRef(e) {
     this.element = e;
   }
-
-  invokeRenderer() {
-    // TODO: Ideally ReactDOM.render() should only be invoked once.
-    // Find out if the renderer APIs could work without having to call
-    // ReactDOM.render() multiple times.
-    ReactDOM.render(this.props.renderer(), this.element);
-  }
 }
 
 const getElement = (props) => {
@@ -52,15 +45,11 @@ test('should set the event listener', done => {
 
 test('should only have one event listener', () => {
   let callCount = 0;
-  const component = mount(<FooBar
-      renderer={() => <FooBar onFooBar={() => callCount++} />}>
-    </FooBar>).instance();
+  const root = document.createElement('div');
+  ReactDOM.render(<FooBar onFooBar={() => callCount++} />, root);
+  ReactDOM.render(<FooBar onFooBar={() => callCount++} />, root);
 
-  component.invokeRenderer();
-  component.invokeRenderer();
-
-  component.element.firstElementChild.dispatchEvent(new CustomEvent('foo-bar'));
-
+  root.firstElementChild.dispatchEvent(new CustomEvent('foo-bar'));
   expect(callCount).toEqual(1);
 });
 
