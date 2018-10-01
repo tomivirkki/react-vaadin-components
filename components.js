@@ -6,4 +6,3 @@ export * from './src/VaadinCheckbox';
 export * from './src/VaadinRadioButton';
 export * from './src/VaadinDatePicker';
 export * from './src/VaadinComboBox';
-export * from './src/VaadinComboBox';

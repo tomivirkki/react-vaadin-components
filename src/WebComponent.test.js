@@ -23,6 +23,12 @@ test('should have empty props', () => {
   expect(mount(<FooBar />).props()).toStrictEqual({});
 });
 
+test('should unmount without errors', () => {
+  expect(() => {
+    mount(<FooBar />).unmount();
+  }).not.toThrow();
+});
+
 test('should have the theme attribute', () => {
   expect(getElement({theme: 'foo'}).getAttribute('theme')).toEqual('foo');
 });

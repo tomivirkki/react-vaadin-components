@@ -16,12 +16,8 @@ export default class WebComponent extends Component {
 
   render() {
     const attributes = {};
-    if (this.props.theme) {
-      attributes.theme = this.props.theme;
-    }
-    if (this.props.className) {
-      attributes.class = this.props.className;
-    }
+    this.props.theme && (attributes.theme = this.props.theme);
+    this.props.className && (attributes.class = this.props.className);
 
     return React.createElement(this.tagName, {
       ...attributes,
@@ -44,11 +40,7 @@ export default class WebComponent extends Component {
         }
 
         // Set the property values
-        if (element.setProperties) {
-          element.setProperties(elementProps);
-        } else {
-          Object.assign(element, elementProps);
-        }
+        Object.assign(element, elementProps);
 
         // Set the event listeners
         for (let eventName in this._eventListeners) {
