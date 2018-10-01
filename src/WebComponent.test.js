@@ -13,6 +13,11 @@ class FooBar extends WebComponent {
 
   _configRef(e) {
     this.element = e;
+
+    Object.defineProperty(e, 'bar', {
+      set: value => e.dispatchEvent(new CustomEvent('bar-changed', {bubbles: true})),
+      configurable: true
+    });
   }
 }
 
@@ -51,6 +56,15 @@ test('should only have one event listener', () => {
 
   root.firstElementChild.dispatchEvent(new CustomEvent('foo-bar'));
   expect(callCount).toEqual(1);
+});
+
+test('should not invoke change listeners on property change', () => {
+  let callCount = 0;
+  const root = document.createElement('div');
+  ReactDOM.render(<FooBar bar="1" onBarChanged={() => callCount++} />, root);
+  ReactDOM.render(<FooBar bar="2" onBarChanged={() => callCount++} />, root);
+
+  expect(callCount).toEqual(0);
 });
 
 test('should set the property', () => {

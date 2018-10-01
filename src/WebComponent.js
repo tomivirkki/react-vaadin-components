@@ -40,7 +40,6 @@ export default class WebComponent extends Component {
         }
 
         // Set the property values
-        // TODO: Add a test to validate this
         Object.assign(element, elementProps);
 
         // Set the event listeners
