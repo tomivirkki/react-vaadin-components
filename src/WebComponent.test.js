@@ -15,7 +15,7 @@ class FooBar extends WebComponent {
     this.element = e;
 
     Object.defineProperty(e, 'bar', {
-      set: value => e.dispatchEvent(new CustomEvent('bar-changed', {bubbles: true})),
+      set: value => e.dispatchEvent(new CustomEvent('bar-changed')),
       configurable: true
     });
   }
@@ -30,9 +30,11 @@ test('should have empty props', () => {
 });
 
 test('should unmount without errors', () => {
-  expect(() => {
-    mount(<FooBar />).unmount();
-  }).not.toThrow();
+  expect(() => mount(<FooBar />).unmount()).not.toThrow();
+});
+
+test('should have the expected tag name', () => {
+  expect(getElement().localName).toEqual('foo-bar');
 });
 
 test('should have the theme attribute', () => {
@@ -74,4 +76,9 @@ test('should set the property', () => {
 test('should not set the attribute', () => {
   expect(getElement({foo: 'bar'}).hasAttribute('foo')).toBe(false);
 });
+
+test('should have a child', () => {
+  expect(mount(<FooBar><FooBar /></FooBar>).find('foo-bar foo-bar').length).toBe(1);
+});
+
 
