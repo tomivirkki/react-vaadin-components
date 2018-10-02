@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import WebComponent from './WebComponent';
+import { WebComponent } from './WebComponent';
 import '@vaadin/vaadin-grid/all-imports';
 
 export class VaadinGrid extends WebComponent {

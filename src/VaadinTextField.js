@@ -1,4 +1,4 @@
-import WebComponent from './WebComponent';
+import { WebComponent } from './WebComponent';
 import '@vaadin/vaadin-text-field';
 import '@vaadin/vaadin-text-field/vaadin-text-area';
 import '@vaadin/vaadin-text-field/vaadin-password-field';

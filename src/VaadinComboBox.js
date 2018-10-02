@@ -1,4 +1,4 @@
-import WebComponent from './WebComponent';
+import { WebComponent } from './WebComponent';
 import '@vaadin/vaadin-combo-box';
 
 export class VaadinComboBox extends WebComponent {

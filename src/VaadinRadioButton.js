@@ -1,4 +1,4 @@
-import WebComponent from './WebComponent';
+import { WebComponent } from './WebComponent';
 import '@vaadin/vaadin-radio-button';
 import '@vaadin/vaadin-radio-button/vaadin-radio-group';
 

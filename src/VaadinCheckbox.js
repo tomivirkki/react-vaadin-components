@@ -1,4 +1,4 @@
-import WebComponent from './WebComponent';
+import { WebComponent } from './WebComponent';
 import '@vaadin/vaadin-checkbox';
 
 export class VaadinCheckbox extends WebComponent {

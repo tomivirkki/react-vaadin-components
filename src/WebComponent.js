@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class WebComponent extends Component {
+export class WebComponent extends Component {
   constructor(tagName) {
     super();
     this.tagName = tagName;
