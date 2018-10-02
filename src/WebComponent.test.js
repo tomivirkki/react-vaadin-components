@@ -41,6 +41,10 @@ test('should have the theme attribute', () => {
   expect(getElement({theme: 'foo'}).getAttribute('theme')).toEqual('foo');
 });
 
+test('should not set theme property', () => {
+  expect(getElement({theme: 'foo'}).theme).toBe(undefined);
+});
+
 test('should have the class name', () => {
   expect(getElement({className: 'foo'}).classList.contains('foo')).toBe(true);
 });

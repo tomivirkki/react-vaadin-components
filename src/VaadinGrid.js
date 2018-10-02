@@ -5,6 +5,7 @@ import '@vaadin/vaadin-grid/all-imports';
 export class VaadinGrid extends WebComponent {
   constructor() {
     super('vaadin-grid');
+    this.propertyBlacklist.push('renderer', 'headerRenderer', 'footerRenderer');
   }
 
   _configRef(g) {

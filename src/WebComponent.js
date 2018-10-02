@@ -6,27 +6,18 @@ export default class WebComponent extends Component {
     this.tagName = tagName;
 
     this._eventListeners = {};
-    this.propertyBlacklist = [
-      'children',
-      'theme',
-      'className',
-      'renderer'
-    ];
+    this._properties = {};
+    this.propertyBlacklist = ['children', 'theme'];
   }
 
   render() {
-    const attributes = {};
-    this.props.theme && (attributes.theme = this.props.theme);
-    this.props.className && (attributes.class = this.props.className);
-
     return React.createElement(this.tagName, {
-      ...attributes,
+      theme: this.props.theme,
       ref: element => {
         if (!element) {
           return;
         }
 
-        const elementProps = {};
         for (let prop in this.props) {
           if (/^on[A-Z]/.test(prop)) {
             // Remove existing event listener
@@ -35,12 +26,12 @@ export default class WebComponent extends Component {
             this._eventListeners[eventName] = this.props[prop];
           } else if (!this.propertyBlacklist.includes(prop)) {
             // Collect properties to set
-            elementProps[prop] = this.props[prop];
+            this._properties[prop] = this.props[prop];
           }
         }
 
         // Set the property values
-        Object.assign(element, elementProps);
+        Object.assign(element, this._properties);
 
         // Set the event listeners
         for (let eventName in this._eventListeners) {
