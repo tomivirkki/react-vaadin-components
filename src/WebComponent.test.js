@@ -64,11 +64,31 @@ test('should only have one event listener', () => {
   expect(callCount).toEqual(1);
 });
 
+test('should only have one type of event listener', () => {
+  let callCount = 0;
+  const root = document.createElement('div');
+  ReactDOM.render(<FooBar onFooBar={() => callCount++} />, root);
+  ReactDOM.render(<FooBar onBarBaz={() => callCount++} />, root);
+
+  root.firstElementChild.dispatchEvent(new CustomEvent('foo-bar'));
+  root.firstElementChild.dispatchEvent(new CustomEvent('bar-baz'));
+  expect(callCount).toEqual(1);
+});
+
 test('should not invoke change listeners on property change', () => {
   let callCount = 0;
   const root = document.createElement('div');
   ReactDOM.render(<FooBar bar="1" onBarChanged={() => callCount++} />, root);
   ReactDOM.render(<FooBar bar="2" onBarChanged={() => callCount++} />, root);
+
+  expect(callCount).toEqual(0);
+});
+
+test('should not invoke change listeners on property change 2', () => {
+  let callCount = 0;
+  const root = document.createElement('div');
+  ReactDOM.render(<FooBar onBarChanged={() => callCount++} bar="1" />, root);
+  ReactDOM.render(<FooBar onBarChanged={() => callCount++} bar="2" />, root);
 
   expect(callCount).toEqual(0);
 });
