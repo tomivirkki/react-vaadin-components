@@ -5,13 +5,13 @@ import '@vaadin/vaadin-grid/all-imports';
 export class VaadinGrid extends WebComponent {
   constructor() {
     super('vaadin-grid');
-    this.propertyBlacklist.push('renderer', 'headerRenderer', 'footerRenderer');
   }
 }
 
 export class VaadinGridColumn extends WebComponent {
   constructor() {
     super('vaadin-grid-column');
+    this.propertyBlacklist.push('renderer');
   }
 
   _configRef(column) {
@@ -22,7 +22,7 @@ export class VaadinGridColumn extends WebComponent {
     }
 
     if (this.props.headerComponent) {
-      column.headerRenderer = column.headerRenderer || ((root, grid) => {
+      column.headerRenderer = column.headerRenderer || ((root) => {
         ReactDOM.render(this.props.headerComponent, root);
       });
     }
@@ -31,38 +31,35 @@ export class VaadinGridColumn extends WebComponent {
 
 export class VaadinGridColumnGroup extends WebComponent {
   constructor() {
-    super('vaadin-grid-column-group');
-  }
-
-  _configRef(column) {
-    if (this.props.headerComponent) {
-      column.headerRenderer = column.headerRenderer || ((root, grid) => {
-        ReactDOM.render(this.props.headerComponent, root);
-      });
-    }
+    super();
+    this.tagName = 'vaadin-grid-column-group';
   }
 }
 
-export class VaadinGridSelectionColumn extends WebComponent {
+export class VaadinGridSelectionColumn extends VaadinGridColumn {
   constructor() {
-    super('vaadin-grid-selection-column');
+    super();
+    this.tagName = 'vaadin-grid-selection-column';
   }
 }
 
-export class VaadinGridSortColumn extends WebComponent {
+export class VaadinGridSortColumn extends VaadinGridColumn {
   constructor() {
-    super('vaadin-grid-sort-column');
+    super();
+    this.tagName = 'vaadin-grid-sort-column';
   }
 }
 
-export class VaadinGridFilterColumn extends WebComponent {
+export class VaadinGridFilterColumn extends VaadinGridColumn {
   constructor() {
-    super('vaadin-grid-filter-column');
+    super();
+    this.tagName = 'vaadin-grid-filter-column';
   }
 }
 
-export class VaadinGridTreeColumn extends WebComponent {
+export class VaadinGridTreeColumn extends VaadinGridColumn {
   constructor() {
-    super('vaadin-grid-tree-column');
+    super();
+    this.tagName = 'vaadin-grid-tree-column';
   }
 }

@@ -4,8 +4,6 @@ export class WebComponent extends Component {
   constructor(tagName) {
     super();
     this.tagName = tagName;
-
-
     this.propertyBlacklist = ['children', 'theme'];
   }
 

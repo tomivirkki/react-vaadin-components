@@ -33,6 +33,9 @@
     "pre-push": "^0.1.1"
   },
   "jest": {
+    "moduleNameMapper": {
+      ".*@vaadin/.*": "<rootDir>/src/WebComponent.js"
+    },
     "collectCoverage": true,
     "coverageThreshold": {
       "global": {
