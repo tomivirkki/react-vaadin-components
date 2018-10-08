@@ -4,12 +4,17 @@ export class WebComponent extends Component {
   constructor(tagName) {
     super();
     this.tagName = tagName;
-    this.propertyBlacklist = ['children', 'theme'];
+    this.propertyBlacklist = ['children'];
   }
 
   render() {
+    const attributes = {};
+    Object.keys(this.props)
+      .filter(key => key.startsWith('aria-') || key === 'theme')
+      .forEach(key => attributes[key] = this.props[key]);
+
     return React.createElement(this.tagName, {
-      theme: this.props.theme,
+      ...attributes,
       ref: element => {
         if (this._element) {
           // Remove existing event listeners
@@ -28,7 +33,7 @@ export class WebComponent extends Component {
           if (/^on[A-Z]/.test(prop)) {
             const eventName = prop.replace(/([A-Z])/g, name => `-${name[0].toLowerCase()}`).replace('on-', '');
             this._eventListeners[eventName] = this.props[prop];
-          } else if (!this.propertyBlacklist.includes(prop)) {
+          } else if (this.propertyBlacklist.indexOf(prop) === -1 && !attributes.hasOwnProperty(prop)) {
             element[prop] = this.props[prop];
           }
         }

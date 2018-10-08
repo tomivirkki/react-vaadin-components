@@ -105,4 +105,9 @@ test('should have a child', () => {
   expect(mount(<FooBar><FooBar /></FooBar>).find('foo-bar foo-bar').length).toBe(1);
 });
 
+test('should apply aria attributes', () => {
+  const element = mount(<FooBar aria-label="foo" />).instance().element;
+  expect(element.getAttribute('aria-label')).toBe('foo');
+});
+
 
