@@ -8,20 +8,27 @@ The project is still experimental.
 
 ## Quick start
 
-```console
-npm install --save react-vaadin-components
+```sh
+yarn add react-vaadin-components
 ```
 
 ```js
-import { VaadinGrid, VaadinGridColumn, VaadinGridSortColumn, VaadinGridSelectionColumn } from react-vaadin-components;
+import { VaadinGrid, VaadinGridColumn, VaadinGridSortColumn, VaadinGridSelectionColumn } from 'react-vaadin-components';
+
+...
+
+fetch('https://demo.vaadin.com/demo-data/1.0/people?count=200')
+  .then(res => res.json())
+  .then(json => this.setState({
+    users: json.result
+  }));
 
 ...
 <VaadinGrid items={this.state.users}>
   <VaadinGridSelectionColumn autoSelect></VaadinGridSelectionColumn>
-  <VaadinGridSortColumn header="First Name" path="name.first"></VaadinGridSortColumn>
-  <VaadinGridSortColumn header="Last Name" path="name.last"></VaadinGridSortColumn>
-  <VaadinGridColumn path="location.city"></VaadinGridColumn>
-  <VaadinGridColumn textAlign="end" path="visitCount"></VaadinGridColumn>
+  <VaadinGridSortColumn path="firstName"></VaadinGridSortColumn>
+  <VaadinGridSortColumn path="firstName"></VaadinGridSortColumn>
+  <VaadinGridColumn path="address.city"></VaadinGridColumn>
 </VaadinGrid>
 ```
 
