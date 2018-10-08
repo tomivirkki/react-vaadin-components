@@ -15,7 +15,7 @@ importScripts("/react-vaadin-components/workbox-v3.6.2/workbox-sw.js");
 workbox.setConfig({modulePathPrefix: "/react-vaadin-components/workbox-v3.6.2"});
 
 importScripts(
-  "/react-vaadin-components/precache-manifest.2cc32cbec1fded10ee411992651e1773.js"
+  "/react-vaadin-components/precache-manifest.3b0513730b439270d2ae890be7a135fc.js"
 );
 
 workbox.clientsClaim();
