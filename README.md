@@ -13,7 +13,12 @@ yarn add react-vaadin-components
 ```
 
 ```js
-import { VaadinGrid, VaadinGridColumn, VaadinGridSortColumn, VaadinGridSelectionColumn } from 'react-vaadin-components';
+import {
+  VaadinGrid,
+  VaadinGridColumn,
+  VaadinGridSortColumn,
+  VaadinGridSelectionColumn
+} from 'react-vaadin-components';
 
 ...
 
@@ -24,6 +29,7 @@ fetch('https://demo.vaadin.com/demo-data/1.0/people?count=200')
   }));
 
 ...
+
 <VaadinGrid items={this.state.users}>
   <VaadinGridSelectionColumn autoSelect></VaadinGridSelectionColumn>
   <VaadinGridSortColumn path="firstName"></VaadinGridSortColumn>
