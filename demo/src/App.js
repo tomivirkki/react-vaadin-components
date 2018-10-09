@@ -10,6 +10,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {menuOpen: false};
+
+    window.addEventListener('hashchange', () => {this.setState({menuOpen: false})});
   }
 
   render() {
