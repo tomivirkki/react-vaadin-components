@@ -5,6 +5,15 @@ import '@vaadin/vaadin-grid/all-imports';
 export class VaadinGrid extends WebComponent {
   constructor() {
     super('vaadin-grid');
+    this.propertyBlacklist.push('rowDetailsRenderer');
+  }
+
+  _configRef(grid) {
+    if (this.props.rowDetailsRenderer) {
+      grid.rowDetailsRenderer = grid.rowDetailsRenderer || ((root, grid, model) => {
+        ReactDOM.render(this.props.rowDetailsRenderer(model), root);
+      });
+    }
   }
 }
 
