@@ -1,29 +1,30 @@
 import React, { Component } from 'react';
-import './App.css';
+import { Components } from './Components';
 
-import Header from './Header';
-import Menu from './Menu';
-import Demo from './Demo';
+import {
+  VaadinAppLayout,
+  VaadinTabs,
+  VaadinTab
+} from 'react-vaadin-components';
 
 class App extends Component {
-
-  constructor() {
-    super();
-    this.state = {menuOpen: false};
-
-    window.addEventListener('hashchange', () => {this.setState({menuOpen: false})});
-  }
-
+  
   render() {
     return (
-      <div className={"App" + (this.state.menuOpen ? ' menuopen' : '')}>
-        <Header></Header>
-        <div className="App-content">
-          <Demo></Demo>
-          <Menu></Menu>
-          <div className="App-menutoggle" onClick={() => this.setState({menuOpen: !this.state.menuOpen})}></div>
+      <VaadinAppLayout>
+        <h3 slot="branding">Branding</h3>
+
+        <VaadinTabs slot="menu">
+          <VaadinTab>Intro</VaadinTab>
+          <VaadinTab>Tutorial</VaadinTab>
+          <VaadinTab>Components</VaadinTab>
+        </VaadinTabs>
+
+        <div style={{height: '100%', width: '100%', position: 'absolute'}}>
+          <Components></Components>
         </div>
-      </div>
+
+      </VaadinAppLayout>
     );
   }
 }

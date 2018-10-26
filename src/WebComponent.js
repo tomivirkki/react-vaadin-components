@@ -10,7 +10,7 @@ export class WebComponent extends Component {
   render() {
     const attributes = {};
     Object.keys(this.props)
-      .filter(key => key.startsWith('aria-') || key === 'theme')
+      .filter(key => key.startsWith('aria-') || key === 'theme' || key === 'style')
       .forEach(key => attributes[key] = this.props[key]);
 
     return React.createElement(this.tagName, {

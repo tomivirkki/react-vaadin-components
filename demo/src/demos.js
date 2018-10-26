@@ -51,18 +51,6 @@ const buildColumn = ({path, header, textAlign, attributes, spaces} = {}) => {
 
 };
 
-const buildIndexColumn = ({spaces, attributes} = {}) => {
-  attributes = attributes || [];
-  return buildColumn({header: '#', attributes: ['width="50px"', 'flexGrow="0"'].concat(attributes), spaces})
-}
-
-const buildAddressColumn = ({spaces} = {}) => {
-  return buildColumn({attributes: [
-    "header=\"Address\"",
-    "renderer={({item}) => <div>{item.address.street}, {item.address.city}</div>}"
-  ], spaces});
-}
-
 const buildSelectionColumn = ({spaces, attributes} = {}) => {
   attributes = attributes || [];
   attributes.push('autoSelect');
@@ -102,7 +90,7 @@ const buildGroupedGridDemo = ({resizable, reorderable, frozenColumns} = {}) => {
 }
 
 const demos = [
-  {title: 'Grid', scope, pages: [
+  {title: 'Grid', scope, children: [
     {title: 'Items and Columns',
     code: buildGrid('items={users}', [
       buildColumn({path: 'name.first', header: 'First Name'}),
@@ -131,8 +119,8 @@ const demos = [
             callback(result, KNOWN_DATA_SIZE);
           }
 
-          const index = params.page * params.pageSize;
-          xhr.open('GET', 'https://demo.vaadin.com/demo-data/1.0/people?index=' + index + '&count=' + params.pageSize, true);
+          const index = params.page * params.childrenize;
+          xhr.open('GET', 'https://demo.vaadin.com/demo-data/1.0/people?index=' + index + '&count=' + params.childrenize, true);
           xhr.send();
         }
       }
@@ -166,7 +154,7 @@ const demos = [
       code: buildGroupedGridDemo({resizable: true, frozenColumns: true})
     },
   ]},
-  {title: 'Button', scope, pages: [
+  {title: 'Button', scope, children: [
     {title: 'Basic Button', code: `
     <VaadinButton onClick={console.log}>Click Me</VaadinButton>
     `},
@@ -184,7 +172,7 @@ const demos = [
     </div>
     `}
   ]},
-  {title: 'Text Field', scope, pages: [
+  {title: 'Text Field', scope, children: [
     {title: 'Text Field', code: `
     <VaadinTextField label='First Name'></VaadinTextField>
     `},
@@ -195,12 +183,12 @@ const demos = [
     <VaadinPasswordField label="Password"></VaadinPasswordField>
     `},
   ]},
-  {title: 'Checkbox', scope, pages: [
+  {title: 'Checkbox', scope, children: [
     {title: 'Checkbox', code: `
     <VaadinCheckbox>Subscribe</VaadinCheckbox>
     `}
   ]},
-  {title: 'Radio Button', scope, pages: [
+  {title: 'Radio Button', scope, children: [
     {title: 'Radio Button Group', code: `
     <VaadinRadioGroup>
       <VaadinRadioButton>One</VaadinRadioButton>
@@ -209,12 +197,12 @@ const demos = [
     </VaadinRadioGroup>
     `}
   ]},
-  {title: 'Date Picker', scope, pages: [
+  {title: 'Date Picker', scope, children: [
     {title: 'Date Picker', code: `
     <VaadinDatePicker></VaadinDatePicker>
     `}
   ]},
-  {title: 'Combo Box', scope, pages: [
+  {title: 'Combo Box', scope, children: [
     {title: 'Combo Box', code: `
     <VaadinComboBox
       items={users}
@@ -233,7 +221,7 @@ function getId(title) {
 function addDemoIds(demos, parent) {
   demos.forEach(demo => {
     demo.id = getId(demo.title);
-    demo.pages && addDemoIds(demo.pages, demo);
+    demo.children && addDemoIds(demo.children, demo);
     demo.parent = parent;
   });
 }
@@ -241,7 +229,7 @@ function addDemoIds(demos, parent) {
 addDemoIds(demos);
 
 demos.forEach(component => {
-  component.pages.forEach(page => {
+  component.children.forEach(page => {
     page.scope = component.scope;
   })
 });
