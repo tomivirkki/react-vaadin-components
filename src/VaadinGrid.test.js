@@ -9,18 +9,30 @@ const getElement = (props) => {
   return mount(<grid.VaadinGridColumn {...props} />).instance()._element;
 }
 
-test('should renderer the body cell content', () => {
+test('should render the body cell content', () => {
   const column = getElement({renderer: () => <div>foo</div>});
   const root = document.createElement('div');
   column.renderer(root);
   expect(root.textContent).toBe('foo');
 });
 
-test('should renderer the header cell content', () => {
+test('should render the header cell content', () => {
   const column = getElement({headerComponent: <div>foo</div>});
   const root = document.createElement('div');
   column.headerRenderer(root);
   expect(root.textContent).toBe('foo');
+});
+
+test('should render the details cell content', () => {
+  const vaadinGrid = mount(<grid.VaadinGrid rowDetailsRenderer={() => <div>foo</div>} />).instance()._element;
+  const root = document.createElement('div');
+  vaadinGrid.rowDetailsRenderer(root);
+  expect(root.textContent).toBe('foo');
+});
+
+test('should not have a details renderer', () => {
+  const vaadinGrid = mount(<grid.VaadinGrid />).instance()._element;
+  expect(vaadinGrid.rowDetailsRenderer).toBe(undefined);
 });
 
 test('should have the expected tag name', () => {
@@ -31,3 +43,4 @@ test('should have the expected tag name', () => {
     expect(component.instance().tagName).toBe(tagName);
   }
 });
+
