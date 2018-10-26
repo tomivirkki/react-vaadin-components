@@ -1,6 +1,7 @@
 {
   "name": "react-vaadin-components",
   "version": "0.2.0",
+  "license": "MIT",
   "dependencies": {
     "@vaadin/vaadin-button": "^2.1.0",
     "@vaadin/vaadin-checkbox": "^2.2.1",
