@@ -39,11 +39,11 @@ export class Components extends Component {
   render() {
     const demo = this.state.demo || {parent: {}};
     return <div style={{display: 'flex', height: '100%'}}>
-      <div style={{flex: 1}}>
+      <div style={{flex: 1, padding: 'var(--lumo-space-m)'}}>
         <h1>{demo.parent.title + ' – ' + demo.title}</h1>
-        <Playground noRender={!demo.render} codeText={demo.code || ''} scope={demo.scope || {}}/>      
+        <Playground noRender={!demo.render} codeText={demo.code || ''} scope={demo.scope || {}}/>
       </div>
-      
+
       <div style={{
         overflow: 'auto',
         height: '100%',
@@ -65,6 +65,6 @@ export class Components extends Component {
     if (parentItem) {
       window.location.hash = `/${parentItem.id}/${item.id}`;
     }
-    
+
   }
 }
