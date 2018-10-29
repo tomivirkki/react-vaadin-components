@@ -206,9 +206,8 @@ const demos = [
     {title: 'Combo Box', code: `
     <VaadinComboBox
       items={users}
-      itemLabelPath="email"
-      itemValuePath="email"
-      style="width: 300px">
+      itemLabelPath="username"
+      itemValuePath="username">
     </VaadinComboBox>
     `}
   ]}

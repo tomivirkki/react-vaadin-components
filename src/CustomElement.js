@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 
-export class WebComponent extends Component {
-  constructor(tagName) {
+export class CustomElement extends Component {
+  constructor() {
     super();
-    this.tagName = tagName;
-    this.propertyBlacklist = ['children'];
+    this.propertyBlacklist = ['children', 'tagName'];
   }
 
   render() {
@@ -13,7 +12,7 @@ export class WebComponent extends Component {
       .filter(key => key.startsWith('aria-') || key === 'theme' || key === 'style')
       .forEach(key => attributes[key] = this.props[key]);
 
-    return React.createElement(this.tagName, {
+    return React.createElement(this.tagName || this.props.tagName, {
       ...attributes,
       ref: element => {
         if (this._element) {
@@ -46,5 +45,12 @@ export class WebComponent extends Component {
         this._configRef && this._configRef(element);
       }
     }, this.props.children);
+  }
+}
+
+export const CustomElementIs = tagName => class Clazz extends CustomElement {
+  constructor() {
+    super();
+    this.tagName = tagName;
   }
 }

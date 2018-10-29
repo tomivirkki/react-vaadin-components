@@ -1,8 +1,4 @@
-import { WebComponent } from './WebComponent';
+import { CustomElementIs } from './CustomElement';
 import '@vaadin/vaadin-button';
 
-export class VaadinButton extends WebComponent {
-  constructor() {
-    super('vaadin-button');
-  }
-}
+export class VaadinButton extends CustomElementIs('vaadin-button') {}

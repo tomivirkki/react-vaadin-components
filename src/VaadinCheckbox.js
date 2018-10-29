@@ -1,8 +1,4 @@
-import { WebComponent } from './WebComponent';
+import { CustomElementIs } from './CustomElement';
 import '@vaadin/vaadin-checkbox';
 
-export class VaadinCheckbox extends WebComponent {
-  constructor() {
-    super('vaadin-checkbox');
-  }
-}
+export class VaadinCheckbox extends CustomElementIs('vaadin-checkbox') {}

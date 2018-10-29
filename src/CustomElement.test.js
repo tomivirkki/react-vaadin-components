@@ -1,16 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { WebComponent } from './WebComponent';
+import { CustomElementIs, CustomElement } from './CustomElement';
 import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({adapter: new Adapter()});
 
-class FooBar extends WebComponent {
-  constructor() {
-    super('foo-bar');
-  }
-
+class FooBar extends CustomElementIs('foo-bar') {
   _configRef(e) {
     this.element = e;
 
@@ -108,6 +104,11 @@ test('should have a child', () => {
 test('should apply aria attributes', () => {
   const element = mount(<FooBar aria-label="foo" />).instance().element;
   expect(element.getAttribute('aria-label')).toBe('foo');
+});
+
+test('should wrap a custom element', () => {
+  const element = mount(<CustomElement tagName='custom-element' />).instance()._element;
+  expect(element.localName).toBe('custom-element');
 });
 
 

@@ -1,10 +1,7 @@
-import { WebComponent } from './WebComponent';
+import { CustomElementIs } from './CustomElement';
 import '@vaadin/vaadin-app-layout';
 
-export class VaadinAppLayout extends WebComponent {
-  constructor() {
-    super('vaadin-app-layout');
-  }
+export class VaadinAppLayout extends CustomElementIs('vaadin-app-layout') {
 
   _configRef(al) {
     // TODO: test

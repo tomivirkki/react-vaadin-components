@@ -1,10 +1,10 @@
 import ReactDOM from 'react-dom';
-import { WebComponent } from './WebComponent';
+import { CustomElementIs } from './CustomElement';
 import '@vaadin/vaadin-grid/all-imports';
 
-export class VaadinGrid extends WebComponent {
+export class VaadinGrid extends CustomElementIs('vaadin-grid') {
   constructor() {
-    super('vaadin-grid');
+    super();
     this.propertyBlacklist.push('rowDetailsRenderer');
   }
 
@@ -17,9 +17,9 @@ export class VaadinGrid extends WebComponent {
   }
 }
 
-export class VaadinGridColumn extends WebComponent {
+export class VaadinGridColumn extends CustomElementIs('vaadin-grid-column') {
   constructor() {
-    super('vaadin-grid-column');
+    super();
     this.propertyBlacklist.push('renderer');
   }
 
@@ -38,12 +38,7 @@ export class VaadinGridColumn extends WebComponent {
   }
 }
 
-export class VaadinGridColumnGroup extends WebComponent {
-  constructor() {
-    super();
-    this.tagName = 'vaadin-grid-column-group';
-  }
-}
+export class VaadinGridColumnGroup extends CustomElementIs('vaadin-grid-column-group') {}
 
 export class VaadinGridSelectionColumn extends VaadinGridColumn {
   constructor() {

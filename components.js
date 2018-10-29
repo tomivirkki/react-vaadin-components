@@ -1,4 +1,4 @@
-export * from './src/WebComponent';
+export * from './src/CustomElement';
 export * from './src/VaadinGrid';
 export * from './src/VaadinButton';
 export * from './src/VaadinTextField';

@@ -38,7 +38,7 @@
   },
   "jest": {
     "moduleNameMapper": {
-      ".*@vaadin/.*": "<rootDir>/src/WebComponent.js"
+      ".*@vaadin/.*": "<rootDir>/src/CustomElement.js"
     },
     "collectCoverage": true,
     "coverageThreshold": {

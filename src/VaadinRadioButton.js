@@ -1,15 +1,7 @@
-import { WebComponent } from './WebComponent';
+import { CustomElementIs } from './CustomElement';
 import '@vaadin/vaadin-radio-button';
 import '@vaadin/vaadin-radio-button/vaadin-radio-group';
 
-export class VaadinRadioButton extends WebComponent {
-  constructor() {
-    super('vaadin-radio-button');
-  }
-}
+export class VaadinRadioButton extends CustomElementIs('vaadin-radio-button') {}
 
-export class VaadinRadioGroup extends WebComponent {
-  constructor() {
-    super('vaadin-radio-group');
-  }
-}
+export class VaadinRadioGroup extends CustomElementIs('vaadin-radio-group') {}

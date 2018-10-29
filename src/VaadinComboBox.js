@@ -1,8 +1,4 @@
-import { WebComponent } from './WebComponent';
+import { CustomElementIs } from './CustomElement';
 import '@vaadin/vaadin-combo-box';
 
-export class VaadinComboBox extends WebComponent {
-  constructor() {
-    super('vaadin-combo-box');
-  }
-}
+export class VaadinComboBox extends CustomElementIs('vaadin-combo-box') {}
