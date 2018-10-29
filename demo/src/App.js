@@ -8,7 +8,7 @@ import {
 } from 'react-vaadin-components';
 
 class App extends Component {
-  
+
   render() {
     return (
       <VaadinAppLayout>
@@ -20,7 +20,7 @@ class App extends Component {
           <VaadinTab>Components</VaadinTab>
         </VaadinTabs>
 
-        <div style={{height: '100%', width: '100%', position: 'absolute'}}>
+        <div style={{height: '100%'}}>
           <Components></Components>
         </div>
 
