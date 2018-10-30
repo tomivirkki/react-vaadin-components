@@ -1,6 +1,8 @@
 .playground {
   display: flex;
   flex-direction: column-reverse;
+  flex-shrink: 0;
+  width: 100%;
 }
 
 .playgroundCode {
@@ -43,9 +45,6 @@
   overflow: auto;
   background-color: var(--lumo-base-color);
   background-image: linear-gradient(var(--lumo-shade-5pct), var(--lumo-shade-5pct));
-  padding: var(--lumo-space-s);
-  flex: 0 1 auto;
-  box-sizing: border-box;
 }
 
 .Menubar.open {

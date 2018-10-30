@@ -12,7 +12,7 @@ class App extends Component {
   render() {
     return (
       <VaadinAppLayout>
-        <h3 slot="branding">Branding</h3>
+        <h3 slot="branding">React Vaadin Components</h3>
 
         <VaadinTabs slot="menu">
           <VaadinTab>Intro</VaadinTab>

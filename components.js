@@ -9,3 +9,4 @@ export * from './src/VaadinComboBox';
 export * from './src/VaadinTabs';
 export * from './src/VaadinDialog';
 export * from './src/VaadinAppLayout';
+export * from './src/VaadinOrderedLayout';

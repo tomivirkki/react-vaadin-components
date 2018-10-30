@@ -3,6 +3,10 @@ import './Components.css';
 import demos from './demos';
 import Playground from 'component-playground';
 import { Tree } from './Tree';
+import {
+  VaadinHorizontalLayout,
+  VaadinVerticalLayout
+} from 'react-vaadin-components';
 
 export class Components extends Component {
 
@@ -38,18 +42,18 @@ export class Components extends Component {
 
   render() {
     const demo = this.state.demo || {parent: {}};
-    return <div style={{display: 'flex', height: '100%', position: 'relative'}}>
-      <div style={{flex: 1, padding: 'var(--lumo-space-m)', overflow: 'auto'}}>
+    return <VaadinHorizontalLayout style={{height: '100%', position: 'relative'}}>
+      <VaadinVerticalLayout style={{flex: 1, overflow: 'auto'}} theme="padding">
         <h2>{demo.parent.title + ' – ' + demo.title}</h2>
         <Playground noRender={!demo.render} codeText={demo.code || ''} scope={demo.scope || {}}/>
-      </div>
+      </VaadinVerticalLayout>
+
+      <VaadinVerticalLayout className={`Menubar${this.state.menuOpen ? ' open' : ''}`} theme="padding">
+        <Tree items={demos} onItemSelected={this._itemSelected} />
+      </VaadinVerticalLayout>
 
       <div className="Menutoggle" onClick={() => this.setState({menuOpen: !this.state.menuOpen})}></div>
-
-      <div className={`Menubar${this.state.menuOpen ? ' open' : ''}`}>
-        <Tree items={demos} onItemSelected={this._itemSelected} style={{height: '100%'}} />
-      </div>
-    </div>;
+    </VaadinHorizontalLayout>;
   }
 
   _itemSelected = item => {
