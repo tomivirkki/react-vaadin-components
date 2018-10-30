@@ -27,10 +27,10 @@ export class Tree extends Component {
 
   _gridKeydown = e => {
     const item = e.detail.rowData.item;
-    const key = e.detail.originalEvent.key;
-    if (key === 'ArrowRight') {
+    const keyCode = e.detail.originalEvent.keyCode;
+    if (keyCode === 39) {
       item.children && this.expandedChanged(item, true);
-    } else if (key === 'ArrowLeft') {
+    } else if (keyCode === 37) {
       // The following is hacky as it accessess grid's internals
       const parentToggleCell = Array.from(e.target.querySelectorAll('vaadin-grid-tree-toggle'))
         .map(toggle => toggle.parentNode.assignedSlot.parentNode)

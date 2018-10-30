@@ -40,7 +40,7 @@ export class Components extends Component {
     const demo = this.state.demo || {parent: {}};
     return <div style={{display: 'flex', height: '100%', position: 'relative'}}>
       <div style={{flex: 1, padding: 'var(--lumo-space-m)', overflow: 'auto'}}>
-        <h1>{demo.parent.title + ' – ' + demo.title}</h1>
+        <h2>{demo.parent.title + ' – ' + demo.title}</h2>
         <Playground noRender={!demo.render} codeText={demo.code || ''} scope={demo.scope || {}}/>
       </div>
 
