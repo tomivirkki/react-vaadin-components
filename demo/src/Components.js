@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Demo.css';
+import './Components.css';
 import demos from './demos';
 import Playground from 'component-playground';
 import { Tree } from './Tree';
@@ -23,11 +23,11 @@ export class Components extends Component {
     if (component) {
       const demo = component.children.find(demo => demo.id === demoId);
       if (this.state.demo !== demo) {
-        this.setState({demo});
+        this.setState({demo, menuOpen: false});
         return;
       }
     }
-    this.setState({demo: null});
+    this.setState({demo: null, menuOpen: false});
   }
 
   _parseHash() {
@@ -38,23 +38,15 @@ export class Components extends Component {
 
   render() {
     const demo = this.state.demo || {parent: {}};
-    return <div style={{display: 'flex', height: '100%'}}>
+    return <div style={{display: 'flex', height: '100%', position: 'relative'}}>
       <div style={{flex: 1, padding: 'var(--lumo-space-m)', overflow: 'auto'}}>
         <h1>{demo.parent.title + ' – ' + demo.title}</h1>
         <Playground noRender={!demo.render} codeText={demo.code || ''} scope={demo.scope || {}}/>
       </div>
 
-      <div style={{
-        overflow: 'auto',
-        height: '100%',
-        background: 'var(--lumo-contrast-10pct)',
-        padding: 'var(--lumo-space-s)',
-        flex: '0 1 auto',
-        width: '300px',
-        maxWidth: '100%',
-        boxSizing: 'border-box'
+      <div className="Menutoggle" onClick={() => this.setState({menuOpen: !this.state.menuOpen})}></div>
 
-        }}>
+      <div className={`Menubar${this.state.menuOpen ? ' open' : ''}`}>
         <Tree items={demos} onItemSelected={this._itemSelected} style={{height: '100%'}} />
       </div>
     </div>;
