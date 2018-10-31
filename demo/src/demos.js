@@ -110,18 +110,13 @@ const demos = [
           );
         }
 
-        dataProvider(params, callback) {
+        dataProvider = (params, callback) => {
           const KNOWN_DATA_SIZE = 200;
-          const xhr = new XMLHttpRequest();
+          const index = params.page * params.pageSize;
 
-          xhr.onload = () => {
-            const result = JSON.parse(xhr.responseText).result;
-            callback(result, KNOWN_DATA_SIZE);
-          }
-
-          const index = params.page * params.childrenize;
-          xhr.open('GET', 'https://demo.vaadin.com/demo-data/1.0/people?index=' + index + '&count=' + params.childrenize, true);
-          xhr.send();
+          fetch('https://demo.vaadin.com/demo-data/1.0/people?index=' + index + '&count=' + params.pageSize)
+            .then(res => res.json())
+            .then(json => callback(json.result, KNOWN_DATA_SIZE));
         }
       }
 
