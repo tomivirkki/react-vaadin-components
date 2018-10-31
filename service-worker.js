@@ -11,11 +11,10 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts("/react-vaadin-components/workbox-v3.6.2/workbox-sw.js");
-workbox.setConfig({modulePathPrefix: "/react-vaadin-components/workbox-v3.6.2"});
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/react-vaadin-components/precache-manifest.3b0513730b439270d2ae890be7a135fc.js"
+  "/react-vaadin-components/precache-manifest.3f358e025e84ad6203471882564ff57c.js"
 );
 
 workbox.clientsClaim();
