@@ -21,7 +21,9 @@ export class Tree extends Component {
   }
 
   _activeItemChanged = e => {
-    this.props.onItemSelected && this.props.onItemSelected(e.detail.value);
+    if (!e.detail.value.children) {
+      this.props.onItemSelected && this.props.onItemSelected(e.detail.value);
+    }
     this.setState({activeItem: null});
   }
 
