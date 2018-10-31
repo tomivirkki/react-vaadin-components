@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Components } from './Components';
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { HashRouter, Route, Redirect } from 'react-router-dom';
 
 import {
   VaadinAppLayout,
@@ -27,7 +27,7 @@ class App extends Component {
     const shouldRedirect = !window.location.href.includes(rootPath);
 
     return (
-      <BrowserRouter>
+      <HashRouter>
         <VaadinAppLayout>
           <h3 slot="branding">React Vaadin Components</h3>
 
@@ -42,7 +42,7 @@ class App extends Component {
           </div>
 
         </VaadinAppLayout>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 
