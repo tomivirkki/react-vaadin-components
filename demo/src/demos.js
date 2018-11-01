@@ -21,7 +21,7 @@ Tree grid
 Active item
 */
 
-const getIndent = spaces => ' '.repeat(spaces);
+const getIndent = spaces =>  Array(spaces).join(' ');
 
 const defaultIndent = 6;
 
@@ -43,7 +43,7 @@ const buildColumn = ({path, header, textAlign, attributes, spaces} = {}) => {
     }
   }
 
-  if (attributes.find(a => a.includes('renderer'))) {
+  if (attributes.filter(a => a.indexOf('renderer') > -1)[0]) {
     return `${getIndent(spaces)}<VaadinGridColumn ${attributes ? ('\n'+ getIndent(spaces + 2) + attributes.join('\n'+ getIndent(spaces + 2))) : ''}>${'\n' + getIndent(spaces)}</VaadinGridColumn>`;
   } else {
     return `${getIndent(spaces)}<VaadinGridColumn ${attributes ? (attributes.join(' ')) : ''}></VaadinGridColumn>`;

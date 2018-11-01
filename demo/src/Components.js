@@ -26,8 +26,8 @@ export class Components extends Component {
 
   render() {
     const params = this.props.match.params;
-    const component = demos.find(component => component.id === params.component) || demos[0];
-    const demo = component.children.find(demo => demo.id === params.demo) || component.children[0];
+    const component = demos.filter(component => component.id === params.component)[0] || demos[0];
+    const demo = component.children.filter(demo => demo.id === params.demo)[0] || component.children[0];
 
     return <VaadinHorizontalLayout style={{height: '100%', position: 'relative'}}>
       <VaadinVerticalLayout style={{flex: 1, overflow: 'auto'}} theme="padding">

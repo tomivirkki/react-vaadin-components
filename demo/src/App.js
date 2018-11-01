@@ -20,11 +20,11 @@ class App extends Component {
 
   onTabChanged = e => this.setState({activePage: this.pages[e.detail.value]})
 
-  state = { activePage: this.pages.find(p => window.location.href.includes(this.getRootPath(p))) || this.pages[0] }
+  state = { activePage: this.pages.filter(p => window.location.href.indexOf(this.getRootPath(p)) > -1)[0] || this.pages[0] }
 
   render() {
     const rootPath = this.getRootPath(this.state.activePage);
-    const shouldRedirect = !window.location.href.includes(rootPath);
+    const shouldRedirect = !window.location.href.indexOf(rootPath) > -1;
 
     return (
       <HashRouter>

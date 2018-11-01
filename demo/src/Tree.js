@@ -36,10 +36,10 @@ export class Tree extends Component {
       // The following is hacky as it accessess grid's internals
       const parentToggleCell = Array.from(e.target.querySelectorAll('vaadin-grid-tree-toggle'))
         .map(toggle => toggle.parentNode.assignedSlot.parentNode)
-        .find(cell => {
+        .filter(cell => {
           const parentItem = cell._instance.item;
-          return parentItem && parentItem.children && parentItem.children.includes(item);
-        });
+          return parentItem && parentItem.children && parentItem.children.indexOf(item) > -1;
+        })[0];
 
       if (parentToggleCell) {
         parentToggleCell.focus();
