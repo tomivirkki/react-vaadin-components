@@ -1,0 +1,25 @@
+[
+  {
+    "title": "Text Field",
+    "children": [
+      {
+        "title": "Text Field",
+        "codeSource": "vaadin-text-field/text-field-basic-demos"
+      },
+      {
+        "title": "Prefix and Suffix",
+        "codeSource": "vaadin-text-field/text-field-prefix-suffix-demos",
+        "replacements": [
+          {
+            "from": "\"width: 6em;\"",
+            "to": "{{width: '6em'}}"
+          }
+        ]
+      },
+      {
+        "title": "Test",
+        "code": "<VaadinTextArea label=\"Description\"></VaadinTextArea>"
+      }
+    ]
+  }
+]
