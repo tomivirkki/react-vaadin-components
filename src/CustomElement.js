@@ -12,8 +12,7 @@ export class CustomElement extends Component {
       .filter(key => key.indexOf('aria-') === 0 || key === 'theme' || key === 'style')
       .forEach(key => attributes[key] = this.props[key]);
 
-    return React.createElement(this.tagName || this.props.tagName, {
-      ...attributes,
+    return React.createElement(this.tagName || this.props.tagName, Object.assign(attributes, {
       ref: element => {
         if (this._element) {
           // Remove existing event listeners
@@ -44,7 +43,7 @@ export class CustomElement extends Component {
 
         this._configRef && this._configRef(element);
       }
-    }, this.props.children);
+    }), this.props.children);
   }
 }
 
