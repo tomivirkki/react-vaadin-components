@@ -28,8 +28,8 @@ export class Tree extends Component {
   }
 
   _gridKeydown = e => {
-    const item = e.detail.rowData.item;
-    const keyCode = e.detail.originalEvent.keyCode;
+    const item = e.target.getEventContext(e).item;
+    const keyCode = e.keyCode;
     if (keyCode === 39) {
       item.children && this.expandedChanged(item, true);
     } else if (keyCode === 37) {
@@ -54,8 +54,7 @@ export class Tree extends Component {
       <VaadinGrid
         style={{'--lumo-base-color': 'transparent'}}
         theme="no-border no-row-borders"
-        detailedEvents={['keydown']}
-        onDetailedKeydown={this._gridKeydown}
+        onKeydown={this._gridKeydown}
         dataProvider={this._dataProvider}
         expandedItems={this.state.expandedItems}
         onActiveItemChanged={this._activeItemChanged}
