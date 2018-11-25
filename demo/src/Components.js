@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Components.css';
-import demos, { loadCode } from './demos.js';
+import demos, { loadDemos, scope } from './demos.js';
 import Playground from 'component-playground';
 import { Tree } from './Tree';
 import { Redirect } from 'react-router-dom';
@@ -27,25 +27,27 @@ export class Components extends Component {
   componentWillReceiveProps = props => {
     const params = props.match.params;
     const component = demos.filter(component => component.id === params.component)[0] || demos[0];
-    const demo = component.children.filter(demo => demo.id === params.demo)[0] || component.children[0];
+    const page = component.children.filter(page => page.id === params.page)[0] || component.children[0];
 
-    if (demo.code) {
-      this.setState({demo});
+    if (page.demos) {
+      this.setState({page});
     } else {
-      loadCode(demo).then(() => this.setState({demo}));
+      loadDemos(page).then(page => this.setState({page}));
     }
   }
 
-
   render() {
-    const demo = this.state.demo;
+    const page = this.state.page;
 
-    return demo ? <VaadinHorizontalLayout style={{height: '100%', position: 'relative'}}>
+    const pageDemos = page && page.demos && page.demos.map(demo => <div key={demo.title} style={{width: '100%'}}>
+      <h3>{demo.title}</h3>
+      <Playground noRender={!demo.render} codeText={demo.code || ''} scope={scope}/>
+    </div>);
+
+    return page ? <VaadinHorizontalLayout style={{height: '100%', position: 'relative'}}>
       <VaadinVerticalLayout style={{flex: 1, overflow: 'auto'}} theme="padding">
-        <h2>{demo.parent.title + ' – ' + demo.title}</h2>
-        <Playground noRender={!demo.render} codeText={demo.code || ''} scope={demo.scope}/>
+        {pageDemos}
       </VaadinVerticalLayout>
-
       <VaadinVerticalLayout className={`Menubar${this.state.menuOpen ? ' open' : ''}`} theme="padding">
         <Tree items={demos} onItemSelected={this.itemSelected} />
       </VaadinVerticalLayout>

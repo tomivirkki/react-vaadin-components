@@ -13,7 +13,7 @@
 .playgroundCode::before {
   display: block;
   content: "Editable Source";
-  background-color: #b7b4b3;
+  background-color: var(--lumo-contrast-10pct);
   color: #242121;
   font-size: 14px;
   letter-spacing: .15em;

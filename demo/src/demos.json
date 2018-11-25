@@ -3,12 +3,15 @@
     "title": "Text Field",
     "children": [
       {
-        "title": "Text Field",
-        "codeSource": "vaadin-text-field/text-field-basic-demos"
+        "title": "Basic",
+        "demoSource": "vaadin-text-field/text-field-basic-demos"
       },
       {
         "title": "Prefix and Suffix",
-        "codeSource": "vaadin-text-field/text-field-prefix-suffix-demos",
+        "demoSource": "vaadin-text-field/text-field-prefix-suffix-demos",
+        "excludedTitles": [
+          "Icons"
+        ],
         "replacements": [
           {
             "from": "\"width: 6em;\"",
@@ -18,7 +21,13 @@
       },
       {
         "title": "Test",
-        "code": "<VaadinTextArea label=\"Description\"></VaadinTextArea>"
+        "demos": [
+          {
+            "title": "Testing",
+            "description": "Foo bar baz",
+            "code": "<VaadinTextArea label=\"Description\"></VaadinTextArea>"
+          }
+        ]
       }
     ]
   }
