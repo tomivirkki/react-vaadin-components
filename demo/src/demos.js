@@ -24,50 +24,55 @@ export default demos;
 
 export const loadDemos = async page => {
   return new Promise((resolve, reject) => {
-    import('./demos/' + page.demoSource)
-      .then(res => res.default)
-      .then(fetch)
-      .then(res => res.text())
-      .then(html => {
-        const dom = document.createElement('div');
-        dom.innerHTML = html;
-        const mainTemplate = dom.querySelector('template');
-        const demoTitles = mainTemplate.content.querySelectorAll('h3');
+    if (page.demos) {
+      resolve(page);
+    } else {
+      import('./demos/' + page.demoSource)
+        .then(res => res.default)
+        .then(fetch)
+        .then(res => res.text())
+        .then(html => {
+          const dom = document.createElement('div');
+          dom.innerHTML = html;
+          const mainTemplate = dom.querySelector('template');
+          const demoTitles = mainTemplate.content.querySelectorAll('h3');
 
-        page.demos = Array.from(demoTitles)
-        .filter(title => !page.excludedTitles || !page.excludedTitles.includes(title.textContent))
-        .map(title => {
-          const demo = {};
-          demo.title = title.textContent;
-          demo.description = [];
-          let demoSnippet = title.nextSibling;
-          while (demoSnippet.localName !== 'vaadin-demo-snippet') {
-            if (demoSnippet.localName === 'p') {
-              demo.description.push(<p key={demoSnippet.textContent}>{demoSnippet.textContent}</p>);
+          page.demos = Array.from(demoTitles)
+          .filter(title => !page.excludedTitles || !page.excludedTitles.includes(title.textContent))
+          .filter(title => !page.includedTitles || page.includedTitles.includes(title.textContent))
+          .map(title => {
+            const demo = {};
+            demo.title = title.textContent;
+            demo.description = [];
+            let demoSnippet = title.nextSibling;
+            while (demoSnippet.localName !== 'vaadin-demo-snippet') {
+              if (demoSnippet.localName === 'p') {
+                demo.description.push(<p key={demoSnippet.textContent}>{demoSnippet.textContent}</p>);
+              }
+              demoSnippet = demoSnippet.nextSibling;
             }
-            demoSnippet = demoSnippet.nextSibling;
-          }
 
-          const demoContent = demoSnippet.querySelector('template').content;
-          const wrapper = document.createElement('div');
-          wrapper.appendChild(demoContent);
-          const demoScript = wrapper.querySelector('script');
-          demoScript && wrapper.removeChild(demoScript);
+            const demoContent = demoSnippet.querySelector('template').content;
+            const wrapper = document.createElement('div');
+            wrapper.appendChild(demoContent);
+            const demoScript = wrapper.querySelector('script');
+            demoScript && wrapper.removeChild(demoScript);
 
-          demo.code = wrapper.children.length === 1 ? wrapper.innerHTML : `<div>${wrapper.innerHTML}</div>`;
+            demo.code = wrapper.children.length === 1 ? wrapper.innerHTML : `<div>${wrapper.innerHTML}</div>`;
 
-          demo.code = demo.code
-            .replace(/vaadin/g, 'Vaadin')
-            .replace(/-[a-z]/g, match => match.substr(1).toUpperCase())
-            .replace(/=""/g, '');
+            demo.code = demo.code
+              .replace(/vaadin/g, 'Vaadin')
+              .replace(/-[a-z]/g, match => match.substr(1).toUpperCase())
+              .replace(/=""/g, '');
 
-          page.replacements && page.replacements.forEach(r => {
-            demo.code = demo.code.replace(new RegExp(r.from, 'g'), r.to);
+            page.replacements && page.replacements.forEach(r => {
+              demo.code = demo.code.replace(new RegExp(r.from, 'g'), r.to);
+            });
+            return demo;
           });
-          return demo;
-        });
 
-        resolve(page);
-      });
+          resolve(page);
+        });
+      }
     });
 }

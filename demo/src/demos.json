@@ -1,9 +1,41 @@
 [
   {
+    "title": "Grid",
+    "children": [
+      {
+        "title": "Basics",
+        "demoSource": "vaadin-grid/grid-basic-demos",
+        "replacements": [
+          {
+            "from": "<VaadinGrid>",
+            "to": "<VaadinGrid items={users}>"
+          }
+        ],
+        "excludedTitles": [
+          "Defining Content with Renderer Functions",
+          "Defining Content with Polymer Templates"
+        ]
+      },
+      {
+        "title": "Selecting",
+        "demoSource": "vaadin-grid/grid-selection-demos",
+        "replacements": [
+          {
+            "from": "<VaadinGrid ",
+            "to": "<VaadinGrid items={users} "
+          }
+        ],
+        "includedTitles": [
+          "Selecting Items"
+        ]
+      }
+    ]
+  },
+  {
     "title": "Text Field",
     "children": [
       {
-        "title": "Basic",
+        "title": "Basics",
         "demoSource": "vaadin-text-field/text-field-basic-demos"
       },
       {
@@ -54,6 +86,24 @@
           {
             "from": "alignRight",
             "to": "align-right"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Checkbox",
+    "children": [
+      {
+        "title": "Basics",
+        "demoSource": "vaadin-checkbox/checkbox-basic-demos",
+        "excludedTitles": [
+          "Custom Label"
+        ],
+        "replacements": [
+          {
+            "from": "<br>",
+            "to": "<br/>"
           }
         ]
       }
