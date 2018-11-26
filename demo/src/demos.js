@@ -58,9 +58,8 @@ export const loadDemos = async page => {
 
           demo.code = demo.code
             .replace(/vaadin/g, 'Vaadin')
-            .replace(/-[a-z]/g, match => match.toUpperCase())
-            .replace(/-/g, '')
-            .replace(/=""/, '');
+            .replace(/-[a-z]/g, match => match.substr(1).toUpperCase())
+            .replace(/=""/g, '');
 
           page.replacements && page.replacements.forEach(r => {
             demo.code = demo.code.replace(new RegExp(r.from, 'g'), r.to);

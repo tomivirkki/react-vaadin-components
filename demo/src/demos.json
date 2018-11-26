@@ -7,6 +7,18 @@
         "demoSource": "vaadin-text-field/text-field-basic-demos"
       },
       {
+        "title": "Password Field",
+        "demoSource": "vaadin-text-field/password-field-demos"
+      },
+      {
+        "title": "Text Area",
+        "demoSource": "vaadin-text-field/text-area-demos",
+        "excludedTitles": [
+          "Maximum Height",
+          "Minimum Height"
+        ]
+      },
+      {
         "title": "Prefix and Suffix",
         "demoSource": "vaadin-text-field/text-field-prefix-suffix-demos",
         "excludedTitles": [
@@ -20,12 +32,28 @@
         ]
       },
       {
-        "title": "Test",
-        "demos": [
+        "title": "Validation",
+        "demoSource": "vaadin-text-field/text-field-validators-demos",
+        "excludedTitles": [
+          "Synchronous Custom Validator",
+          "Asynchronous Custom Validator"
+        ]
+      },
+      {
+        "title": "RTL",
+        "demoSource": "vaadin-text-field/text-field-rtl-demos"
+      },
+      {
+        "title": "Theme Variants",
+        "demoSource": "vaadin-text-field/text-field-theme-demos",
+        "replacements": [
           {
-            "title": "Testing",
-            "description": "Foo bar baz",
-            "code": "<VaadinTextArea label=\"Description\"></VaadinTextArea>"
+            "from": "alignCenter",
+            "to": "align-center"
+          },
+          {
+            "from": "alignRight",
+            "to": "align-right"
           }
         ]
       }
