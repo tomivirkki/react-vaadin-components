@@ -4,12 +4,12 @@ import ReactMarkdown from 'react-markdown';
 import stripIndent from 'strip-indent';
 import Snippet from './Snippet';
 import { scope } from './demos';
-import { VaadinVerticalLayout } from 'react-vaadin-components';
+import { VerticalLayout } from 'react-vaadin-components';
 
 export class Intro extends Component {
 
   render() {
-    return <VaadinVerticalLayout theme="margin">
+    return <VerticalLayout theme="margin">
       <ReactMarkdown source={stripIndent(`
         # React Vaadin Components
 
@@ -28,30 +28,30 @@ export class Intro extends Component {
         Once installed, import the components you intend to use
         \`\`\`js
         import {
-          VaadinVerticalLayout,
-          VaadinTextField,
-          VaadinButton
+          VerticalLayout,
+          TextField,
+          Button
         } from 'react-vaadin-components';
         \`\`\`
 
         Use the components in your JSX`)} />
 
       <Snippet codeText={`
-        <VaadinVerticalLayout>
-          <VaadinTextField
+        <VerticalLayout>
+          <TextField
             label="Name"
             clearButtonVisible
             onValueChanged={e => this.setState({name: e.detail.value})}>
-          </VaadinTextField>
+          </TextField>
 
-          <VaadinButton
+          <Button
             theme="primary"
             onClick={e => this.state && alert('Hello ' + this.state.name)}>
             Say Hello
-          </VaadinButton>
-        </VaadinVerticalLayout>
+          </Button>
+        </VerticalLayout>
       `}></Snippet>
-    </VaadinVerticalLayout>
+    </VerticalLayout>
   }
 
 }

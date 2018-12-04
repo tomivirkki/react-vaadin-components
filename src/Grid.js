@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 import { CustomElementIs } from './CustomElement';
 import '@vaadin/vaadin-grid/all-imports';
 
-export class VaadinGrid extends CustomElementIs('vaadin-grid') {
+export class Grid extends CustomElementIs('vaadin-grid') {
   constructor() {
     super();
     this.propertyBlacklist.push('rowDetailsRenderer');
@@ -17,7 +17,7 @@ export class VaadinGrid extends CustomElementIs('vaadin-grid') {
   }
 }
 
-export class VaadinGridColumn extends CustomElementIs('vaadin-grid-column') {
+export class GridColumn extends CustomElementIs('vaadin-grid-column') {
   constructor() {
     super();
     this.propertyBlacklist.push('renderer');
@@ -38,30 +38,30 @@ export class VaadinGridColumn extends CustomElementIs('vaadin-grid-column') {
   }
 }
 
-export class VaadinGridColumnGroup extends CustomElementIs('vaadin-grid-column-group') {}
+export class GridColumnGroup extends CustomElementIs('vaadin-grid-column-group') {}
 
-export class VaadinGridSelectionColumn extends VaadinGridColumn {
+export class GridSelectionColumn extends GridColumn {
   constructor() {
     super();
     this.tagName = 'vaadin-grid-selection-column';
   }
 }
 
-export class VaadinGridSortColumn extends VaadinGridColumn {
+export class GridSortColumn extends GridColumn {
   constructor() {
     super();
     this.tagName = 'vaadin-grid-sort-column';
   }
 }
 
-export class VaadinGridFilterColumn extends VaadinGridColumn {
+export class GridFilterColumn extends GridColumn {
   constructor() {
     super();
     this.tagName = 'vaadin-grid-filter-column';
   }
 }
 
-export class VaadinGridTreeColumn extends VaadinGridColumn {
+export class GridTreeColumn extends GridColumn {
   constructor() {
     super();
     this.tagName = 'vaadin-grid-tree-column';

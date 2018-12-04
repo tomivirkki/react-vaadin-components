@@ -5,9 +5,9 @@ import { Components } from './Components';
 import { HashRouter, Route, Redirect } from 'react-router-dom';
 
 import {
-  VaadinAppLayout,
-  VaadinTabs,
-  VaadinTab
+  AppLayout,
+  Tabs,
+  Tab
 } from 'react-vaadin-components';
 
 class App extends Component {
@@ -30,12 +30,12 @@ class App extends Component {
 
     return (
       <HashRouter>
-        <VaadinAppLayout>
+        <AppLayout>
           <h3 slot="branding">React Vaadin Components</h3>
 
-          <VaadinTabs slot="menu" onSelectedChanged={this.onTabChanged} selected={this.pages.indexOf(this.state.activePage)}>
-            {this.pages.map(page => <VaadinTab key={page.path}>{page.title}</VaadinTab> )}
-          </VaadinTabs>
+          <Tabs slot="menu" onSelectedChanged={this.onTabChanged} selected={this.pages.indexOf(this.state.activePage)}>
+            {this.pages.map(page => <Tab key={page.path}>{page.title}</Tab> )}
+          </Tabs>
 
           <div style={{height: '100%'}}>
             {this.pages.map(page => <Route key={page.path} path={page.path} component={page.component} /> )}
@@ -43,7 +43,7 @@ class App extends Component {
             {shouldRedirect && <Redirect to={rootPath} push />}
           </div>
 
-        </VaadinAppLayout>
+        </AppLayout>
       </HashRouter>
     );
   }

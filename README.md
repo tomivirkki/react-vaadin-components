@@ -14,10 +14,10 @@ yarn add react-vaadin-components
 
 ```js
 import {
-  VaadinGrid,
-  VaadinGridColumn,
-  VaadinGridSortColumn,
-  VaadinGridSelectionColumn
+  Grid,
+  GridColumn,
+  GridSortColumn,
+  GridSelectionColumn
 } from 'react-vaadin-components';
 
 ...
@@ -30,11 +30,11 @@ fetch('https://demo.vaadin.com/demo-data/1.0/people?count=200')
 
 ...
 
-<VaadinGrid items={this.state.users}>
-  <VaadinGridSelectionColumn autoSelect></VaadinGridSelectionColumn>
-  <VaadinGridSortColumn path="firstName"></VaadinGridSortColumn>
-  <VaadinGridSortColumn path="firstName"></VaadinGridSortColumn>
-  <VaadinGridColumn path="address.city"></VaadinGridColumn>
-</VaadinGrid>
+<Grid items={this.state.users}>
+  <GridSelectionColumn autoSelect></GridSelectionColumn>
+  <GridSortColumn path="firstName"></GridSortColumn>
+  <GridSortColumn path="firstName"></GridSortColumn>
+  <GridColumn path="address.city"></GridColumn>
+</Grid>
 ```
 

@@ -5,8 +5,8 @@ import Snippet from './Snippet';
 import { Tree } from './Tree';
 import { Redirect } from 'react-router-dom';
 import {
-  VaadinHorizontalLayout,
-  VaadinVerticalLayout
+  HorizontalLayout,
+  VerticalLayout
 } from 'react-vaadin-components';
 
 export class Components extends Component {
@@ -29,19 +29,19 @@ export class Components extends Component {
     const component = demos.filter(component => component.id === params.component)[0] || demos[0];
     const demo = component.children.filter(demo => demo.id === params.demo)[0] || component.children[0];
 
-    return <VaadinHorizontalLayout style={{height: '100%', position: 'relative'}}>
-      <VaadinVerticalLayout style={{flex: 1, overflow: 'auto'}} theme="padding">
+    return <HorizontalLayout style={{height: '100%', position: 'relative'}}>
+      <VerticalLayout style={{flex: 1, overflow: 'auto'}} theme="padding">
         <h2>{demo.parent.title + ' – ' + demo.title}</h2>
         <Snippet noRender={!demo.render} codeText={demo.code || ''} />
-      </VaadinVerticalLayout>
+      </VerticalLayout>
 
-      <VaadinVerticalLayout className={`Menubar${this.state.menuOpen ? ' open' : ''}`} theme="padding">
+      <VerticalLayout className={`Menubar${this.state.menuOpen ? ' open' : ''}`} theme="padding">
         <Tree items={demos} onItemSelected={this.itemSelected} />
-      </VaadinVerticalLayout>
+      </VerticalLayout>
 
       <div className="Menutoggle" onClick={() => this.setState({menuOpen: !this.state.menuOpen})}></div>
       {this.state.redirectTo && <Redirect to={this.state.redirectTo} push />}
-    </VaadinHorizontalLayout>;
+    </HorizontalLayout>;
   }
 
 }

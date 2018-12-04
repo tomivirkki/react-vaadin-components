@@ -1,12 +1,12 @@
 import React from 'react';
-import * as grid from './VaadinGrid';
+import * as grid from './Grid';
 import Enzyme, {mount, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({adapter: new Adapter()});
 
 const getElement = (props) => {
-  return mount(<grid.VaadinGridColumn {...props} />).instance()._element;
+  return mount(<grid.GridColumn {...props} />).instance()._element;
 }
 
 test('should render the body cell content', () => {
@@ -24,21 +24,21 @@ test('should render the header cell content', () => {
 });
 
 test('should render the details cell content', () => {
-  const vaadinGrid = mount(<grid.VaadinGrid rowDetailsRenderer={() => <div>foo</div>} />).instance()._element;
+  const Grid = mount(<grid.Grid rowDetailsRenderer={() => <div>foo</div>} />).instance()._element;
   const root = document.createElement('div');
-  vaadinGrid.rowDetailsRenderer(root);
+  Grid.rowDetailsRenderer(root);
   expect(root.textContent).toBe('foo');
 });
 
 test('should not have a details renderer', () => {
-  const vaadinGrid = mount(<grid.VaadinGrid />).instance()._element;
-  expect(vaadinGrid.rowDetailsRenderer).toBe(undefined);
+  const Grid = mount(<grid.Grid />).instance()._element;
+  expect(Grid.rowDetailsRenderer).toBe(undefined);
 });
 
 test('should have the expected tag name', () => {
   for (let componentName in grid) {
     const GridComponent = grid[componentName];
-    const tagName = componentName.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`).substr(1);
+    const tagName = 'vaadin-' + componentName.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`).substr(1);
     const component = shallow(<GridComponent />);
     expect(component.instance().tagName).toBe(tagName);
   }

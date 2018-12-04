@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
-  VaadinGrid,
-  VaadinGridTreeColumn
+  Grid,
+  GridTreeColumn
 } from 'react-vaadin-components';
 
 export class Tree extends Component {
@@ -51,7 +51,7 @@ export class Tree extends Component {
 
   render() {
     return (
-      <VaadinGrid
+      <Grid
         style={{'--lumo-base-color': 'transparent'}}
         theme="no-border no-row-borders"
         onKeydown={this._gridKeydown}
@@ -61,8 +61,8 @@ export class Tree extends Component {
         activeItem={this.state.activeItem}
         heightByRows
         ref={g => g && (g._element.$.header.hidden = true) /* hide the header */}>
-        <VaadinGridTreeColumn path="title"></VaadinGridTreeColumn>
-      </VaadinGrid>
+        <GridTreeColumn path="title"></GridTreeColumn>
+      </Grid>
     );
   }
 }

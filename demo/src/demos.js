@@ -4,6 +4,7 @@ import * as components from 'react-vaadin-components';
 import users from './users.js';
 export const scope = {React, ReactDOM, Component, users, ...components};
 
+
 // Demo build helpers
 
 /*
@@ -44,9 +45,9 @@ const buildColumn = ({path, header, textAlign, attributes, spaces} = {}) => {
   }
 
   if (attributes.filter(a => a.indexOf('renderer') > -1)[0]) {
-    return `${getIndent(spaces)}<VaadinGridColumn ${attributes ? ('\n'+ getIndent(spaces + 2) + attributes.join('\n'+ getIndent(spaces + 2))) : ''}>${'\n' + getIndent(spaces)}</VaadinGridColumn>`;
+    return `${getIndent(spaces)}<GridColumn ${attributes ? ('\n'+ getIndent(spaces + 2) + attributes.join('\n'+ getIndent(spaces + 2))) : ''}>${'\n' + getIndent(spaces)}</GridColumn>`;
   } else {
-    return `${getIndent(spaces)}<VaadinGridColumn ${attributes ? (attributes.join(' ')) : ''}></VaadinGridColumn>`;
+    return `${getIndent(spaces)}<GridColumn ${attributes ? (attributes.join(' ')) : ''}></GridColumn>`;
   }
 
 };
@@ -55,21 +56,21 @@ const buildSelectionColumn = ({spaces, attributes} = {}) => {
   attributes = attributes || [];
   attributes.push('autoSelect');
   spaces = spaces || defaultIndent + 2;
-  return getIndent(spaces) + `<VaadinGridSelectionColumn ${attributes.join(' ')}></VaadinGridSelectionColumn>`;
+  return getIndent(spaces) + `<GridSelectionColumn ${attributes.join(' ')}></GridSelectionColumn>`;
 }
 
 const buildSortColumn = ({spaces, attributes} = {}) => {
   attributes = attributes || [];
   spaces = spaces || defaultIndent + 2;
-  return getIndent(spaces) + `<VaadinGridSortColumn ${attributes.join(' ')}></VaadinGridSortColumn>`;
+  return getIndent(spaces) + `<GridSortColumn ${attributes.join(' ')}></GridSortColumn>`;
 }
 
 const buildGrid = (attributes, content, spaces = defaultIndent) => {
-  return `${getIndent(spaces)}<VaadinGrid ${attributes}>${'\n' + content.join('\n') + '\n'}${getIndent(spaces)}</VaadinGrid>`;
+  return `${getIndent(spaces)}<Grid ${attributes}>${'\n' + content.join('\n') + '\n'}${getIndent(spaces)}</Grid>`;
 }
 
 const buildColumnGroup = (attributes, content, spaces = defaultIndent + 2) => {
-  return `\n${getIndent(spaces)}<VaadinGridColumnGroup ${attributes}>${'\n' + content.join('\n') + '\n'}${getIndent(spaces)}</VaadinGridColumnGroup>`;
+  return `\n${getIndent(spaces)}<GridColumnGroup ${attributes}>${'\n' + content.join('\n') + '\n'}${getIndent(spaces)}</GridColumnGroup>`;
 }
 
 const buildGroupedGridDemo = ({resizable, reorderable, frozenColumns} = {}) => {
@@ -151,59 +152,59 @@ const demos = [
   ]},
   {title: 'Button', scope, children: [
     {title: 'Basic Button', code: `
-    <VaadinButton onClick={console.log}>Click Me</VaadinButton>
+    <Button onClick={console.log}>Click Me</Button>
     `},
     {title: 'Theme Variants', code: `
     <div>
-      <VaadinButton onClick={console.log}>Click Me</VaadinButton>
+      <Button onClick={console.log}>Click Me</Button>
 
-      <VaadinButton onClick={console.log} theme="primary">Click Me</VaadinButton>
+      <Button onClick={console.log} theme="primary">Click Me</Button>
 
-      <VaadinButton onClick={console.log} theme="error">Click Me</VaadinButton>
+      <Button onClick={console.log} theme="error">Click Me</Button>
 
-      <VaadinButton onClick={console.log} theme="success">Click Me</VaadinButton>
+      <Button onClick={console.log} theme="success">Click Me</Button>
 
-      <VaadinButton onClick={console.log} theme="small">Click Me</VaadinButton>
+      <Button onClick={console.log} theme="small">Click Me</Button>
     </div>
     `}
   ]},
   {title: 'Text Field', scope, children: [
     {title: 'Text Field', code: `
-    <VaadinTextField label='First Name'></VaadinTextField>
+    <TextField label='First Name'></TextField>
     `},
     {title: 'Text Area', code: `
-    <VaadinTextArea label="Description"></VaadinTextArea>
+    <TextArea label="Description"></TextArea>
     `},
     {title: 'Password Field', code: `
-    <VaadinPasswordField label="Password"></VaadinPasswordField>
+    <PasswordField label="Password"></PasswordField>
     `},
   ]},
   {title: 'Checkbox', scope, children: [
     {title: 'Checkbox', code: `
-    <VaadinCheckbox>Subscribe</VaadinCheckbox>
+    <CheckBox>Subscribe</CheckBox>
     `}
   ]},
   {title: 'Radio Button', scope, children: [
     {title: 'Radio Button Group', code: `
-    <VaadinRadioGroup>
-      <VaadinRadioButton>One</VaadinRadioButton>
-      <VaadinRadioButton>Two</VaadinRadioButton>
-      <VaadinRadioButton>Three</VaadinRadioButton>
-    </VaadinRadioGroup>
+    <RadioGroup>
+      <RadioButton>One</RadioButton>
+      <RadioButton>Two</RadioButton>
+      <RadioButton>Three</RadioButton>
+    </RadioGroup>
     `}
   ]},
   {title: 'Date Picker', scope, children: [
     {title: 'Date Picker', code: `
-    <VaadinDatePicker></VaadinDatePicker>
+    <DatePicker></DatePicker>
     `}
   ]},
   {title: 'Combo Box', scope, children: [
     {title: 'Combo Box', code: `
-    <VaadinComboBox
+    <ComboBox
       items={users}
       itemLabelPath="username"
       itemValuePath="username">
-    </VaadinComboBox>
+    </ComboBox>
     `}
   ]}
 ]
