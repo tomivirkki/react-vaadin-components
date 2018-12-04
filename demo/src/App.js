@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Intro } from './Intro';
+import { Tutorial } from './Tutorial';
 import { Components } from './Components';
 import { HashRouter, Route, Redirect } from 'react-router-dom';
 
@@ -11,8 +13,8 @@ import {
 class App extends Component {
 
   pages = [
-    {title: 'Intro', path: "/intro", component: null},
-    {title: 'Tutorial', path: "/tutorial", component: null},
+    {title: 'Intro', path: "/intro", component: Intro},
+    {title: 'Tutorial', path: "/tutorial", component: Tutorial},
     {title: 'Components', path: "/components/:component?/:demo?", component: Components},
   ]
 

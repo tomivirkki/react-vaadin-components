@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Components.css';
 import demos from './demos';
-import Playground from 'component-playground';
+import Snippet from './Snippet';
 import { Tree } from './Tree';
 import { Redirect } from 'react-router-dom';
 import {
@@ -32,7 +32,7 @@ export class Components extends Component {
     return <VaadinHorizontalLayout style={{height: '100%', position: 'relative'}}>
       <VaadinVerticalLayout style={{flex: 1, overflow: 'auto'}} theme="padding">
         <h2>{demo.parent.title + ' – ' + demo.title}</h2>
-        <Playground noRender={!demo.render} codeText={demo.code || ''} scope={demo.scope || {}}/>
+        <Snippet noRender={!demo.render} codeText={demo.code || ''} />
       </VaadinVerticalLayout>
 
       <VaadinVerticalLayout className={`Menubar${this.state.menuOpen ? ' open' : ''}`} theme="padding">

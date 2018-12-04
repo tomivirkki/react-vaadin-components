@@ -1,0 +1,16 @@
+code {
+  background-color: transparent !important;
+}
+
+.playground {
+  width: 100%;
+}
+
+pre:not(.CodeMirror-line),
+.CodeMirror {
+  background-color: var(--lumo-contrast-5pct) !important;
+  border-radius: var(--lumo-border-radius);
+  padding: var(--lumo-space-xs);
+  height: auto;
+  margin-bottom: var(--lumo-space-m);
+}

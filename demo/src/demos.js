@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import * as components from 'react-vaadin-components';
 import users from './users.js';
-const scope = {React, ReactDOM, Component, users, ...components};
+export const scope = {React, ReactDOM, Component, users, ...components};
 
 // Demo build helpers
 
