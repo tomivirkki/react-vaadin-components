@@ -1,42 +1,63 @@
 import React, { Component } from 'react';
+import ReactMarkdown from 'react-markdown';
+import stripIndent from 'strip-indent';
 import './Components.css';
-import demos from './demos';
+import components from './demos';
 import Snippet from './Snippet';
-import { Tree } from './Tree';
 import { Redirect } from 'react-router-dom';
 import {
   HorizontalLayout,
-  VerticalLayout
+  VerticalLayout,
+  ListBox,
+  Item
 } from 'react-vaadin-components';
 
 export class Components extends Component {
 
   state = {}
 
-  itemSelected = item => {
-    if (!item.parent) {
-      debugger;
-    }
-
+  itemSelected = e => {
+    const component = components[e.detail.value];
     this.setState({
-    redirectTo: `${this.props.match.path.split('/:')[0]}/${item.parent.id}/${item.id}`,
-    menuOpen: false
-  })
-}
+      redirectTo: `${this.props.match.path.split('/:')[0]}/${component.id}`,
+      menuOpen: false
+    })
+  }
 
   render() {
     const params = this.props.match.params;
-    const component = demos.filter(component => component.id === params.component)[0] || demos[0];
-    const demo = component.children.filter(demo => demo.id === params.demo)[0] || component.children[0];
+    const component = components.filter(component => component.id === params.component)[0] || components[0];
+    const webComponentName = `vaadin-${component.id}`;
 
     return <HorizontalLayout style={{height: '100%', position: 'relative'}}>
       <VerticalLayout style={{flex: 1, overflow: 'auto'}} theme="padding">
-        <h2>{demo.parent.title + ' – ' + demo.title}</h2>
-        <Snippet noRender={!demo.render} codeText={demo.code || ''} />
+        <ReactMarkdown source={stripIndent(`
+          # ${component.name}
+
+          ${component.description}
+        `).trim()}/>
+        <ReactMarkdown source={stripIndent(`
+          Live Demo *(with editable source)*:
+        `).trim()}/>
+        <Snippet noRender={true} codeText={component.demo} />
+        <ReactMarkdown source={stripIndent(`
+          ## Features
+
+          ${component.featuresDescription}
+        `).trim()} />
+        <Snippet noRender={false} codeText={component.featuresDemo} />
+        <ReactMarkdown source={stripIndent(`
+          ## References
+
+          - [API](https://vaadin.com/components/${webComponentName}/html-api) (Web Component)
+          - [Examples](https://vaadin.com/components/${webComponentName}/html-examples) (Web Component)
+        `).trim()} />
       </VerticalLayout>
 
       <VerticalLayout className={`Menubar${this.state.menuOpen ? ' open' : ''}`} theme="padding">
-        <Tree items={demos} onItemSelected={this.itemSelected} />
+        <ListBox style={{width: '100%'}} selected={components.indexOf(component)} onSelectedChanged={this.itemSelected}>
+          {components.map(component => <Item>{component.name.replace(/([A-Z])/g, m => ' ' + m).trim()}</Item>)}
+        </ListBox>
       </VerticalLayout>
 
       <div className="Menutoggle" onClick={() => this.setState({menuOpen: !this.state.menuOpen})}></div>

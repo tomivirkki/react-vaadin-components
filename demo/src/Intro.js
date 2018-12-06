@@ -1,9 +1,7 @@
-import readmeFile from 'react-vaadin-components/README.md';
 import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
 import stripIndent from 'strip-indent';
 import Snippet from './Snippet';
-import { scope } from './demos';
 import { VerticalLayout } from 'react-vaadin-components';
 
 export class Intro extends Component {
@@ -34,9 +32,9 @@ export class Intro extends Component {
         } from 'react-vaadin-components';
         \`\`\`
 
-        Use the components in your JSX`)} />
+        Use the components in your React app.`)} />
 
-      <Snippet codeText={`
+      <Snippet noRender={true} codeText={`
         <VerticalLayout>
           <TextField
             label="Name"
@@ -50,7 +48,7 @@ export class Intro extends Component {
             Say Hello
           </Button>
         </VerticalLayout>
-      `}></Snippet>
+      `} />
     </VerticalLayout>
   }
 

@@ -15,7 +15,7 @@ class App extends Component {
   pages = [
     {title: 'Intro', path: "/intro", component: Intro},
     {title: 'Tutorial', path: "/tutorial", component: Tutorial},
-    {title: 'Components', path: "/components/:component?/:demo?", component: Components},
+    {title: 'Components', path: "/components/:component?", component: Components},
   ]
 
   getRootPath = page => page.path.split('/:')[0]
