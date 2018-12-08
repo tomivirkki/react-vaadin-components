@@ -10,9 +10,8 @@ export default class Snippet extends Component {
     const playground = <Playground
       theme="neo"
       noRender={this.props.noRender}
-      state={{foo: 'bar'}}
       scope={Object.assign(scope)}
-      codeText={this.props.noRender ?stripIndent(this.props.codeText).trim() : stripIndent(`
+      codeText={(this.props.noRender || this.props.codeText.indexOf('ReactDOM') > -1) ? stripIndent(this.props.codeText).trim() : stripIndent(`
   class ComponentExample extends Component {
     state = {}
 

@@ -56,7 +56,7 @@ export class Components extends Component {
 
       <VerticalLayout className={`Menubar${this.state.menuOpen ? ' open' : ''}`} theme="padding">
         <ListBox style={{width: '100%'}} selected={components.indexOf(component)} onSelectedChanged={this.itemSelected}>
-          {components.map(component => <Item>{component.name.replace(/([A-Z])/g, m => ' ' + m).trim()}</Item>)}
+          {components.map(component => <Item key={component.id}>{component.name.replace(/([A-Z])/g, m => ' ' + m).trim()}</Item>)}
         </ListBox>
       </VerticalLayout>
 

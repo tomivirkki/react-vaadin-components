@@ -47,6 +47,104 @@ const components = [
         <PasswordField label="Password"></PasswordField>
         <TextArea label="Description"></TextArea>
       </VerticalLayout>`
+  },
+  {
+    name: 'Grid',
+    category: 'visualization & interaction',
+    description: `Grid is a free, high quality data grid / data table component`,
+    demo: `
+      <Grid items={users}>
+        <GridSelectionColumn autoSelect></GridSelectionColumn>
+        <GridSortColumn path="name.first"></GridSortColumn>
+        <GridSortColumn path="name.last"></GridSortColumn>
+        <GridColumn path="location.city"></GridColumn>
+        <GridColumn path="visitCount" textAlign="end"></GridColumn>
+      </Grid>
+    `,
+    featuresDescription: `
+      Grid features description
+    `,
+    featuresDemo: `
+      class ComponentExample extends Component {
+
+        state = {
+          users: users.slice(0),
+          detailsOpenedItems: [],
+          selectedItems: []
+        }
+
+        render() {
+          return <VerticalLayout theme="spacing">
+            <Grid
+              theme="wrap-cell-content"
+              onClick={this.onGridClick}
+              selectedItems={this.state.selectedItems}
+              onSelectedItemsChanged={e => this.setState({selectedItems: e.target.selectedItems}) }
+              items={this.state.users}
+              columnReorderingAllowed
+              multiSort
+              detailsOpenedItems={this.state.detailsOpenedItems}
+              rowDetailsRenderer={this.rowDetailsRenderer}>
+
+              <GridSelectionColumn frozen></GridSelectionColumn>
+
+              <GridColumnGroup header="Name" resizable>
+                <GridSortColumn path="name.first"></GridSortColumn>
+                <GridSortColumn path="name.last"></GridSortColumn>
+              </GridColumnGroup>
+
+              <GridColumn header="Address" renderer={this.locationRenderer} width="200px" resizable></GridColumn>
+              <GridColumn path="visitCount" textAlign="end"></GridColumn>
+            </Grid>
+
+            <Button
+              theme="primary"
+              disabled={!this.state.selectedItems.length}
+              onClick={this.removeSelected}>
+              Remove selected
+            </Button>
+          </VerticalLayout>;
+        }
+
+        locationRenderer = ({item}) => <span>{\`$\{item.location.street}, $\{item.location.city}\`}</span>
+
+        rowDetailsRenderer = ({item}) => {
+          return <HorizontalLayout style={{display: 'flex'}} theme="padding spacing">
+            <img src={item.picture.thumbnail} style={{height: '48px'}} />
+            <VerticalLayout>
+              <span><b>Email:</b> {item.email}</span>
+              <span><b>Username:</b> {item.username}</span>
+              <span><b>Password:</b> {item.password}</span>
+            </VerticalLayout>
+          </HorizontalLayout>;
+        }
+
+        onGridClick = e => {
+          if (e.target.checked !== undefined) {
+            // Let's ignore selection column clicks
+            return;
+          }
+          let grid = e.target;
+          while (!grid.getEventContext) grid = grid.parentNode;
+          const {item} = grid.getEventContext(e);
+
+          this.setState({detailsOpenedItems:
+            this.state.detailsOpenedItems.includes(item) ?
+            this.state.detailsOpenedItems.filter(i => i !== item) :
+            this.state.detailsOpenedItems.concat(item)
+          });
+        }
+
+        removeSelected = () => {
+          this.setState({
+            users: this.state.users.filter(u => !this.state.selectedItems.includes(u)),
+            selectedItems: []
+          })
+        }
+      }
+
+      ReactDOM.render(<ComponentExample/>, mountNode);
+    `
   }
 ].map(component => {
   component.id = component.name
