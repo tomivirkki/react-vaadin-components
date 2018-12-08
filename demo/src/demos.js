@@ -101,7 +101,7 @@ const components = [
               theme="primary"
               disabled={!this.state.selectedItems.length}
               onClick={this.removeSelected}>
-              Remove selected
+              Remove selected ({this.state.selectedItems.length})
             </Button>
           </VerticalLayout>;
         }
@@ -110,7 +110,7 @@ const components = [
 
         rowDetailsRenderer = ({item}) => {
           return <HorizontalLayout style={{display: 'flex'}} theme="padding spacing">
-            <img src={item.picture.thumbnail} style={{height: '48px'}} />
+            <img src={item.picture.thumbnail} style={{height: '48px', width: '48px'}} />
             <VerticalLayout>
               <span><b>Email:</b> {item.email}</span>
               <span><b>Username:</b> {item.username}</span>
