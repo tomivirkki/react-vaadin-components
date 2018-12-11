@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@github/details-menu-element": "^0.6.5",
     "babel-polyfill": "^6.26.0",
     "component-playground": "^3.2.0",
     "gh-pages": "^2.0.0",

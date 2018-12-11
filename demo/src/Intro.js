@@ -16,6 +16,9 @@ export class Intro extends Component {
         configurable built-in themes, have responsive mobile-first UI
         controls, they're accessible and well tested.
 
+        This project wraps them as React components making it convenient
+        to use them in React applications.
+
         ## Quick Start
 
         Install the component set
