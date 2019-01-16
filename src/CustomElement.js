@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 export class CustomElement extends Component {
   constructor() {
     super();
+    this.state = {portals: []};
     this.propertyBlacklist = ['children', 'tagName'];
   }
 
@@ -43,7 +44,7 @@ export class CustomElement extends Component {
 
         this._configRef && this._configRef(element);
       }
-    }), this.props.children);
+    }), this.state.portals.concat(this.props.children));
   }
 }
 
