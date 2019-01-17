@@ -1,6 +1,14 @@
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { CustomElementIs } from './CustomElement';
 import '@vaadin/vaadin-grid/all-imports';
+
+class GridCellRendererComponent extends Component {
+  render() {
+    this.props.proxy.setModel = model => this.setState({model});
+    return this.state ? this.props.render(this.state.model) : null;
+  }
+}
 
 export class Grid extends CustomElementIs('vaadin-grid') {
   constructor() {
@@ -11,7 +19,16 @@ export class Grid extends CustomElementIs('vaadin-grid') {
   _configRef(grid) {
     if (this.props.rowDetailsRenderer) {
       grid.rowDetailsRenderer = grid.rowDetailsRenderer || ((root, grid, model) => {
-        ReactDOM.render(this.props.rowDetailsRenderer(model), root);
+        if (!root._rendererComponent) {
+          root._rendererComponent = React.createElement(GridCellRendererComponent, {
+            proxy: root._rendererProxy = {},
+            render: this.props.rowDetailsRenderer
+          });
+          const portal = ReactDOM.createPortal(root._rendererComponent, root);
+          this.setState({portals: this.state.portals.concat(portal)});
+        }
+
+        root._rendererProxy.setModel(model);
       });
     }
   }
@@ -26,13 +43,25 @@ export class GridColumn extends CustomElementIs('vaadin-grid-column') {
   _configRef(column) {
     if (this.props.renderer) {
       column.renderer = column.renderer || ((root, grid, model) => {
-        ReactDOM.render(this.props.renderer(model), root);
+        if (!root._rendererComponent) {
+          root._rendererComponent = React.createElement(GridCellRendererComponent, {
+            proxy: root._rendererProxy = {},
+            render: this.props.renderer
+          });
+          const portal = ReactDOM.createPortal(root._rendererComponent, root);
+          this.setState({portals: this.state.portals.concat(portal)});
+        }
+
+        root._rendererProxy.setModel(model);
       });
     }
 
     if (this.props.headerComponent) {
-      column.headerRenderer = column.headerRenderer || ((root) => {
-        ReactDOM.render(this.props.headerComponent, root);
+      column.headerRenderer = column.headerRenderer || (root => {
+        if (!root._portal) {
+          root._portal = ReactDOM.createPortal(this.props.headerComponent, root);
+          this.setState({portals: this.state.portals.concat(root._portal)});
+        }
       });
     }
   }

@@ -44,3 +44,56 @@ test('should have the expected tag name', () => {
   }
 });
 
+test('renderer should inherit context', () => {
+  const AppContext = React.createContext();
+  const Consumer = AppContext.Consumer;
+
+  const column = mount(<AppContext.Provider value={{foo: 'bar'}}>
+      <grid.GridColumn renderer={() => <Consumer>{
+        ({foo}) => <div>{foo}</div>
+      }</Consumer>} />
+  </AppContext.Provider>).instance()._element;
+
+  const root = document.createElement('div');
+  column.renderer(root);
+  column.renderer(root);
+
+  expect(root.textContent).toBe('bar');
+});
+
+test('details renderer should inherit context', () => {
+  const AppContext = React.createContext();
+  const Consumer = AppContext.Consumer;
+
+  const _grid = mount(<AppContext.Provider value={{foo: 'bar'}}>
+      <grid.Grid rowDetailsRenderer={() => <Consumer>{
+        ({foo}) => <div>{foo}</div>
+      }</Consumer>} />
+  </AppContext.Provider>).instance()._element;
+
+  const root = document.createElement('div');
+  _grid.rowDetailsRenderer(root, _grid);
+  _grid.rowDetailsRenderer(root, _grid);
+
+  expect(root.textContent).toBe('bar');
+});
+
+test('headerComponent should inherit context', () => {
+  const AppContext = React.createContext();
+  const Consumer = AppContext.Consumer;
+
+  const column = mount(<AppContext.Provider value={{foo: 'bar'}}>
+      <grid.GridColumn headerComponent={<Consumer>{
+        ({foo}) => <div>{foo}</div>
+      }</Consumer>} />
+  </AppContext.Provider>).instance()._element;
+
+  const root = document.createElement('div');
+  column.headerRenderer(root);
+  column.headerRenderer(root);
+
+  expect(root.textContent).toBe('bar');
+});
+
+
+
