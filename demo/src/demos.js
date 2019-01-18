@@ -6,38 +6,6 @@ export const scope = {React, ReactDOM, Component, users, ...vaadinComponents};
 
 const components = [
   {
-    name: 'Dialog',
-    category: '',
-    description: `Dialog description`,
-    demo: `
-      <div>
-        <Dialog opened={this.state && this.state.dialogOpened}>
-          Dialog content
-        </Dialog>
-
-        <Button onClick={e => this.setState({dialogOpened: true})}>Open dialog</Button>
-      </div>`,
-    featuresDescription: `
-      Dialog description
-    `,
-    featuresDemo: `
-      <div>
-        <Dialog noCloseOnEsc noCloseOnOutsideClick opened={this.state.dialogOpened}>
-          <VerticalLayout theme="padding">
-            <h2>Login</h2>
-            <TextField required label="Username or email"></TextField>
-            <PasswordField required label="Password"></PasswordField>
-          </VerticalLayout>
-          <HorizontalLayout theme="spacing padding">
-            <Button theme="primary" onClick={e => this.setState({dialogOpened: false})}>Login</Button>
-            <Button onClick={e => this.setState({dialogOpened: false})}>Cancel</Button>
-          </HorizontalLayout>
-        </Dialog>
-        <Button onClick={e => this.setState({dialogOpened: true})}>Login</Button>
-      </div>
-      `
-  },
-  {
     name: 'Button',
     category: 'visualization & interaction',
     description: `Button is a typical UI control for communicating a user action.`,
@@ -65,21 +33,42 @@ const components = [
       </VerticalLayout>
       `
   },
+
   {
-    name: 'TextField',
-    category: 'form inputs',
-    description: `TextField specifies a text input control typically used in forms.`,
-    demo: '<TextField label="First Name"></TextField>',
+    name: 'Dialog',
+    category: '',
+    description: `Dialog description`,
+    demo: `
+      <div>
+        <Dialog opened={this.state && this.state.dialogOpened}>
+          Dialog content
+        </Dialog>
+
+        <Button onClick={e => this.setState({dialogOpened: true})}>Open dialog</Button>
+      </div>`,
     featuresDescription: `
-      TextField description
+      Dialog description
     `,
     featuresDemo: `
-      <VerticalLayout>
-        <TextField label="User name"></TextField>
-        <PasswordField label="Password"></PasswordField>
-        <TextArea label="Description"></TextArea>
-      </VerticalLayout>`
+      <div>
+        <Dialog noCloseOnEsc noCloseOnOutsideClick opened={this.state.dialogOpened}>
+          <VerticalLayout theme="padding">
+            <h2>Login</h2>
+            <TextField required label="Username or email"></TextField>
+            <PasswordField required label="Password"></PasswordField>
+          </VerticalLayout>
+
+          <HorizontalLayout theme="spacing padding">
+            <Button theme="primary" onClick={e => this.setState({dialogOpened: false})}>Login</Button>
+            <Button onClick={e => this.setState({dialogOpened: false})}>Cancel</Button>
+          </HorizontalLayout>
+        </Dialog>
+
+        <Button onClick={e => this.setState({dialogOpened: true})}>Login</Button>
+      </div>
+      `
   },
+
   {
     name: 'Grid',
     category: 'visualization & interaction',
@@ -177,6 +166,22 @@ const components = [
 
       ReactDOM.render(<ComponentExample/>, mountNode);
     `
+  },
+
+  {
+    name: 'TextField',
+    category: 'form inputs',
+    description: `TextField specifies a text input control typically used in forms.`,
+    demo: '<TextField label="First Name"></TextField>',
+    featuresDescription: `
+      TextField description
+    `,
+    featuresDemo: `
+      <VerticalLayout>
+        <TextField label="User name"></TextField>
+        <PasswordField label="Password"></PasswordField>
+        <TextArea label="Description"></TextArea>
+      </VerticalLayout>`
   },
 
 ].map(component => {
