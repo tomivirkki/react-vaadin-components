@@ -30,3 +30,19 @@ test('should retain the content on property change', () => {
   wrapper.setProps({'foo': false});
   expect(root.textContent).toBe('foo');
 });
+
+test('should inherit the context', () => {
+  const AppContext = React.createContext();
+  const Consumer = AppContext.Consumer;
+
+  const dialog = mount(<AppContext.Provider value={{foo: 'bar'}}>
+      <Dialog><Consumer>{
+        ({foo}) => <div>{foo}</div>
+      }</Consumer></Dialog>
+  </AppContext.Provider>).instance()._element;
+
+  const root = document.createElement('div');
+  dialog.renderer(root, dialog);
+
+  expect(root.textContent).toBe('bar');
+});
