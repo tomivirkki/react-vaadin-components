@@ -26,7 +26,7 @@ class App extends Component {
 
   render() {
     const rootPath = this.getRootPath(this.state.activePage);
-    const shouldRedirect = !window.location.href.indexOf(rootPath) > -1;
+    const shouldRedirect = !(window.location.href.indexOf(rootPath) > -1);
 
     return (
       <HashRouter>
