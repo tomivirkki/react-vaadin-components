@@ -200,6 +200,37 @@ const components = [
   },
 
   {
+    name: 'PasswordField',
+    description: `Description`,
+    demo: '<PasswordField label="First Name"></PasswordField>',
+    featuresDescription: `
+      Features description
+    `,
+    featuresDemo: `
+      <VerticalLayout>
+        <PasswordField label="Secret"></PasswordField>
+        <PasswordField label="Super secret" revealButtonHidden></PasswordField>
+      </VerticalLayout>
+    `
+  },
+
+  {
+    name: 'TextArea',
+    category: 'form inputs',
+    description: `Description`,
+    demo: '<TextArea label="Description"></TextArea>',
+    featuresDescription: `
+      TextArea description
+    `,
+    featuresDemo: `
+      <TextArea
+        label="Dietary notes"
+        style={{minHeight: "100px", maxHeight: "200px"}}>
+      </TextArea>
+      `
+  },
+
+  {
     name: 'TextField',
     category: 'form inputs',
     description: `TextField specifies a text input control typically used in forms.`,
@@ -208,11 +239,15 @@ const components = [
       TextField description
     `,
     featuresDemo: `
-      <VerticalLayout>
-        <TextField label="User name"></TextField>
-        <PasswordField label="Password"></PasswordField>
-        <TextArea label="Description"></TextArea>
-      </VerticalLayout>`
+      <TextField
+        label="Date of birth"
+        required
+        maxlength="10"
+        errorMessage="Type date of birth in correct format (DD-MM-YYYY)"
+        pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}"
+        placeholder="DD-MM-YYYY">
+      </TextField>
+      `
   },
 
 ].map(component => {
