@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/react-vaadin-components/precache-manifest.9a0751681cfbbc88ade88208d2e20f99.js"
+  "/react-vaadin-components/precache-manifest.2deac22199d87f882587f3a993df3d18.js"
 );
 
 workbox.clientsClaim();
