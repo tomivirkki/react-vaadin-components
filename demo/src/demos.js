@@ -202,7 +202,7 @@ const components = [
   {
     name: 'PasswordField',
     description: `Description`,
-    demo: '<PasswordField label="First Name"></PasswordField>',
+    demo: '<PasswordField label="Password"></PasswordField>',
     featuresDescription: `
       Features description
     `,
