@@ -35,6 +35,37 @@ const components = [
   },
 
   {
+    name: 'Checkbox',
+    description: `Description.`,
+    demo: '<Checkbox>Checkbox</Checkbox>',
+    featuresDescription: `
+      Features description
+    `,
+    featuresDemo: `
+      <div>
+        <Checkbox
+          onChange={e => this.setState({one: e.target.checked, two: e.target.checked})}
+          indeterminate={this.state.one !== this.state.two}
+          checked={this.state.one && this.state.two}>
+          Select All
+        </Checkbox>
+
+        <Checkbox
+          onChange={e => this.setState({one: e.target.checked})}
+          checked={this.state.one}>
+          Option one
+        </Checkbox>
+
+        <Checkbox
+          onChange={e => this.setState({two: e.target.checked})}
+          checked={this.state.two}>
+          Option two
+        </Checkbox>
+      </div>
+      `
+  },
+
+  {
     name: 'Dialog',
     category: '',
     description: `Dialog description`,
