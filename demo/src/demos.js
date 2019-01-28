@@ -66,6 +66,52 @@ const components = [
   },
 
   {
+    name: 'ComboBox',
+    description: `Description.`,
+    demo: '<ComboBox label="User" items={users} itemLabelPath="username" itemValuePath="username"></ComboBox>',
+    featuresDescription: `
+      Features description
+    `,
+    featuresDemo: `
+      class ComponentExample extends Component {
+
+        state = {}
+
+        render() {
+          return <ComboBox
+            label="Country"
+            onValueChanged={this.onValueChanged}
+            dataProvider={this.dataProvider}></ComboBox>;
+        }
+
+        dataProvider = ({pageSize, page, filter}, callback) => {
+          const url = \`https://demo.vaadin.com/demo-data/1.0/filtered-countries?index=$\{page * pageSize}&count=$\{pageSize}&filter=$\{filter}\`;
+
+          fetch(url)
+            .then(res => res.json())
+            .then(({result, size}) => callback(result, size));
+        }
+
+        onValueChanged = e => console.log(\`Selected country: $\{e.detail.value}\`)
+
+      }
+
+      ReactDOM.render(<ComponentExample/>, mountNode);
+      `
+  },
+
+  {
+    name: 'DatePicker',
+    description: `Description.`,
+    demo: '<DatePicker label="Date"></DatePicker>',
+    featuresDescription: `
+      Features description
+    `,
+    featuresDemo: `
+      `
+  },
+
+  {
     name: 'Dialog',
     category: '',
     description: `Dialog description`,
