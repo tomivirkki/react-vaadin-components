@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import * as vaadinComponents from 'react-vaadin-components';
 import users from './users.js';
-export const scope = {React, ReactDOM, Component, users, ...vaadinComponents};
+import moment from 'moment'
+export const scope = {React, ReactDOM, Component, moment, users, ...vaadinComponents};
 
 const components = [
   {
@@ -108,6 +109,46 @@ const components = [
       Features description
     `,
     featuresDemo: `
+      class ComponentExample extends Component {
+
+        state = {}
+
+        dateFormat = 'DD.MM.YYYY'
+
+        i18n = {
+          week: 'viikko',
+          calendar: 'kalenteri',
+          clear: 'tyhjennä',
+          today: 'tänään',
+          cancel: 'peruuta',
+          firstDayOfWeek: 1,
+          monthNames:
+            'tammikuu_helmikuu_maaliskuu_huhtikuu_toukokuu_kesäkuu_heinäkuu_elokuu_syyskuu_lokakuu_marraskuu_joulukuu'.split('_'),
+          weekdays: 'sunnuntai_maanantai_tiistai_keskiviikko_torstai_perjantai_lauantai'.split('_'),
+          weekdaysShort: 'su_ma_ti_ke_to_pe_la'.split('_'),
+          formatTitle: (monthName, fullYear) => \`$\{monthName} $\{fullYear}\`,
+          formatDate: date => moment(date).format(this.dateFormat),
+          parseDate: dateString => {
+            const parsed = moment(dateString, this.dateFormat);
+            return {
+              day: parsed.get('date'),
+              month: parsed.get('month'),
+              year: parsed.get('year')
+            };
+          }
+        };
+
+        render() {
+          return <DatePicker
+          label="Birthday"
+          value="1980-08-14"
+          initialPosition="1980-01-01"
+          i18n={this.i18n}></DatePicker>
+        }
+
+      }
+
+      ReactDOM.render(<ComponentExample/>, mountNode);
       `
   },
 

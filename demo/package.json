@@ -7,6 +7,7 @@
     "babel-polyfill": "^6.26.0",
     "component-playground": "^3.2.1",
     "gh-pages": "^2.0.0",
+    "moment": "^2.24.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-markdown": "^4.0.6",
