@@ -287,6 +287,31 @@ const components = [
   },
 
   {
+    name: 'ListBox',
+    description: `Description`,
+    demo: `
+      <ListBox>
+        <b>Register to a Run Event</b>
+        <Item>5k</Item>
+        <Item disabled>10k (sold out)</Item>
+        <hr></hr>
+        <Item>Half marathon</Item>
+        <Item>Marathon</Item>
+      </ListBox>
+    `,
+    featuresDescription: `
+      Features description
+    `,
+    featuresDemo: `
+      <ListBox
+        onSelectedChanged={e => console.log(\`Selected index: $\{e.detail.value}\`)}>
+        <b>Select a User</b>
+        {users.slice(0, 5).map(user => <Item key={user.email}>{user.email}</Item>)}
+      </ListBox>
+    `
+  },
+
+  {
     name: 'PasswordField',
     description: `Description`,
     demo: '<PasswordField label="Password"></PasswordField>',
