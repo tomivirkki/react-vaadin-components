@@ -287,6 +287,42 @@ const components = [
   },
 
   {
+    name: 'HorizontalLayout',
+    description: `Description`,
+    demo: `
+      <HorizontalLayout>
+        <div>Item 1</div>
+        <div>Item 2</div>
+      </HorizontalLayout>
+    `,
+    featuresDescription: `
+      HorizontalLayout description
+    `,
+    featuresDemo: `
+      <div style={{border: "1px solid grey"}}>
+        <HorizontalLayout style={{border: "1px dashed grey"}} theme={
+          this.state && \`$\{this.state.spacing && 'spacing'} $\{this.state.padding && 'padding'} $\{this.state.margin && 'margin'}\`}>
+          <Checkbox
+            onChange={e => this.setState({spacing: e.target.checked})}
+            checked={this.state.spacing}>
+            Spacing
+          </Checkbox>
+          <Checkbox
+            onChange={e => this.setState({padding: e.target.checked})}
+            checked={this.state.padding}>
+            Padding
+          </Checkbox>
+          <Checkbox
+            onChange={e => this.setState({margin: e.target.checked})}
+            checked={this.state.margin}>
+            Margin
+          </Checkbox>
+        </HorizontalLayout>
+      </div>
+    `
+  },
+
+  {
     name: 'ListBox',
     description: `Description`,
     demo: `
@@ -360,6 +396,42 @@ const components = [
         placeholder="DD-MM-YYYY">
       </TextField>
       `
+  },
+
+  {
+    name: 'VerticalLayout',
+    description: `Description`,
+    demo: `
+      <VerticalLayout>
+        <div>Item 1</div>
+        <div>Item 2</div>
+      </VerticalLayout>
+    `,
+    featuresDescription: `
+      VerticalLayout description
+    `,
+    featuresDemo: `
+      <div style={{border: "1px solid grey"}}>
+        <VerticalLayout style={{border: "1px dashed grey"}} theme={
+          this.state && \`$\{this.state.spacing && 'spacing'} $\{this.state.padding && 'padding'} $\{this.state.margin && 'margin'}\`}>
+          <Checkbox
+            onChange={e => this.setState({spacing: e.target.checked})}
+            checked={this.state.spacing}>
+            Spacing
+          </Checkbox>
+          <Checkbox
+            onChange={e => this.setState({padding: e.target.checked})}
+            checked={this.state.padding}>
+            Padding
+          </Checkbox>
+          <Checkbox
+            onChange={e => this.setState({margin: e.target.checked})}
+            checked={this.state.margin}>
+            Margin
+          </Checkbox>
+        </VerticalLayout>
+      </div>
+    `
   },
 
 ].map(component => {
