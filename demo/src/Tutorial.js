@@ -20,8 +20,7 @@ export class Tutorial extends Component {
         ## Binding Events and Properties
 
         In order to get notified of component property changes, the events can be listened with
-        \`on{PropertyName}Changed\` binding. This works under the assumption that the property is marked
-        with \`notify\` in the component's API docs.
+        \`on{PropertyName}Changed\` binding. This works for properties that are marked with \`notify\` in the component's API docs.
       `)} />
       <Snippet noRender={true} codeText={`
         <TextField
@@ -65,13 +64,13 @@ export class Tutorial extends Component {
       <Snippet noRender={true} codeText={`
         <details>
           <summary>Preferred robot: <span data-menu-button>None</span></summary>
-          <details-menu>
+          <CustomElement tagName="details-menu">
             <ul>
               <li><button type="button" role="menuitem" data-menu-button-text="">Hubot</button></li>
               <li><button type="button" role="menuitem" data-menu-button-text="">Bender</button></li>
               <li><button type="button" role="menuitem" data-menu-button-text="">BB-8</button></li>
             </ul>
-          </details-menu>
+          </CustomElement>
         </details>
       `} />
 
