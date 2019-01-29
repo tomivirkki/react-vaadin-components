@@ -431,6 +431,43 @@ const components = [
   },
 
   {
+    name: 'Tabs',
+    description: `Description`,
+    demo: `
+      <Tabs>
+        <Tab>Tab one</Tab>
+        <Tab>Tab two</Tab>
+        <Tab>Tab three</Tab>
+      </Tabs>`,
+    featuresDescription: `
+      Description
+    `,
+    featuresDemo: `
+      <VerticalLayout>
+        <Tabs style={{width: "100%"}}>
+          <Tab>Tab one</Tab>
+          <Tab>Tab two</Tab>
+          <Tab disabled>Disabled tab</Tab>
+          <Tab>Tab three</Tab>
+          <Tab>Tab four</Tab>
+          <Tab>Tab five</Tab>
+          <Tab>Tab six</Tab>
+        </Tabs>
+
+        <Tabs orientation="vertical">
+          <Tab>Tab one</Tab>
+          <Tab>Tab two</Tab>
+          <Tab disabled>Disabled tab</Tab>
+          <Tab>Tab three</Tab>
+          <Tab>Tab four</Tab>
+          <Tab>Tab five</Tab>
+          <Tab>Tab six</Tab>
+        </Tabs>
+      </VerticalLayout>
+    `
+  },
+
+  {
     name: 'TextField',
     category: 'form inputs',
     description: `TextField specifies a text input control typically used in forms.`,
@@ -491,6 +528,6 @@ const components = [
     .replace(/([A-Z])/g, m => '-' + m.toLowerCase())
     .substr(1);
   return component;
-});
+}).sort((a, b) => a.name > b.name ? 1 : -1);
 
 export default components;
