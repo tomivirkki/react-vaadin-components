@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import ReactMarkdown from 'react-markdown';
 import stripIndent from 'strip-indent';
 import './Components.css';
@@ -30,7 +31,8 @@ export class Components extends Component {
     const webComponentName = `vaadin-${component.id}`;
 
     return <HorizontalLayout style={{height: '100%', position: 'relative'}}>
-      <VerticalLayout style={{flex: 1, overflow: 'auto'}} theme="padding">
+      <VerticalLayout style={{flex: 1, overflow: 'auto'}} theme="padding"
+        ref={vl => vl && this._redirected !== (this._redirected = this.state.redirectTo) && (ReactDOM.findDOMNode(vl).scrollTop = 0)}>
         <ReactMarkdown source={stripIndent(`
           # ${component.name}
 
