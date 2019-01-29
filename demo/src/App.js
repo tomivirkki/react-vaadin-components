@@ -38,7 +38,7 @@ class App extends Component {
             {this.pages.map(page => <Tab key={page.path}>{page.title}</Tab> )}
           </Tabs>
 
-          <div style={{height: '100%'}}>
+          <div style={{height: '100%', overflowX: 'hidden'}}>
             {this.pages.map(page => <Route key={page.path} path={page.path} component={page.component} /> )}
 
             {shouldRedirect && <Redirect to={rootPath} push />}
