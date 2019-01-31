@@ -495,6 +495,42 @@ const components = [
   },
 
   {
+    name: 'Select',
+    description: `Description`,
+    demo: `
+      <Select label="Risk level">
+        <ListBox>
+          <Item>Item1</Item>
+          <Item>Item2</Item>
+          <Item>Item3</Item>
+        </ListBox>
+      </Select>
+    `,
+    featuresDescription: `
+      Features description
+    `,
+    featuresDemo: `
+      class ComponentExample extends Component {
+        state = {complexity: 2}
+
+        render() {
+          return <RadioGroup
+            value={this.state.complexity}
+            label={\`Complexity level: $\{this.state.complexity}\`}
+            onValueChanged={e => this.setState({complexity: e.detail.value})}>
+            <RadioButton value="1">1</RadioButton>
+            <RadioButton value="2">2</RadioButton>
+            <RadioButton value="3">3</RadioButton>
+            <RadioButton value="4">4</RadioButton>
+          </RadioGroup>;
+        }
+      }
+
+      ReactDOM.render(<ComponentExample/>, mountNode);
+    `
+  },
+
+  {
     name: 'TextArea',
     category: 'form inputs',
     description: `Description`,
