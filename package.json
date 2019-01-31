@@ -1,6 +1,6 @@
 {
   "name": "react-vaadin-components",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "license": "MIT",
   "dependencies": {
     "@vaadin/vaadin-app-layout": "^1.0.0",
