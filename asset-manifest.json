@@ -1,13 +1,13 @@
 {
-  "main.css": "/react-vaadin-components/static/css/main.2d852910.chunk.css",
-  "main.js": "/react-vaadin-components/static/js/main.69ca1bc0.chunk.js",
-  "main.js.map": "/react-vaadin-components/static/js/main.69ca1bc0.chunk.js.map",
-  "static/js/1.855f622c.chunk.js": "/react-vaadin-components/static/js/1.855f622c.chunk.js",
-  "static/js/1.855f622c.chunk.js.map": "/react-vaadin-components/static/js/1.855f622c.chunk.js.map",
+  "main.css": "/react-vaadin-components/static/css/main.82fd7e6e.chunk.css",
+  "main.js": "/react-vaadin-components/static/js/main.fd97def0.chunk.js",
+  "main.js.map": "/react-vaadin-components/static/js/main.fd97def0.chunk.js.map",
+  "static/js/1.8e696d7c.chunk.js": "/react-vaadin-components/static/js/1.8e696d7c.chunk.js",
+  "static/js/1.8e696d7c.chunk.js.map": "/react-vaadin-components/static/js/1.8e696d7c.chunk.js.map",
   "runtime~main.js": "/react-vaadin-components/static/js/runtime~main.c21e6fbe.js",
   "runtime~main.js.map": "/react-vaadin-components/static/js/runtime~main.c21e6fbe.js.map",
-  "static/css/main.2d852910.chunk.css.map": "/react-vaadin-components/static/css/main.2d852910.chunk.css.map",
+  "static/css/main.82fd7e6e.chunk.css.map": "/react-vaadin-components/static/css/main.82fd7e6e.chunk.css.map",
   "index.html": "/react-vaadin-components/index.html",
-  "precache-manifest.3a25d4abb9a3ff37c5737d1506d127f8.js": "/react-vaadin-components/precache-manifest.3a25d4abb9a3ff37c5737d1506d127f8.js",
+  "precache-manifest.ce99d083fbe93726f50950f259fa9e01.js": "/react-vaadin-components/precache-manifest.ce99d083fbe93726f50950f259fa9e01.js",
   "service-worker.js": "/react-vaadin-components/service-worker.js"
 }
