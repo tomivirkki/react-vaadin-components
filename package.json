@@ -12,6 +12,7 @@
     "@vaadin/vaadin-grid": "^5.3.0-beta1",
     "@vaadin/vaadin-item": "^2.1.0",
     "@vaadin/vaadin-list-box": "^1.1.0",
+    "@vaadin/vaadin-notification": "^1.2.1",
     "@vaadin/vaadin-ordered-layout": "^1.1.0",
     "@vaadin/vaadin-radio-button": "^1.1.0",
     "@vaadin/vaadin-tabs": "^2.1.1",

@@ -348,6 +348,86 @@ const components = [
   },
 
   {
+    name: 'Notification',
+    category: '',
+    description: `Notification description`,
+    demo: `
+      <div>
+        <Notification opened={this.state && this.state.open}>
+          <div>
+            <b>Notice</b><br />
+            This is the notification content
+          </div>
+        </Notification>
+
+        <Button onClick={e => this.setState({open: true})}>Show notification</Button>
+      </div>`,
+    featuresDescription: `
+      Description
+    `,
+    featuresDemo: `
+      class ComponentExample extends Component {
+        state = {
+          notifications: [],
+          message: 'Hello World!',
+          position: 'bottom-start',
+          duration: 3000
+        }
+
+        removeOnClose = e => {
+          if (!e.target.opened) {
+            this.setState({notifications: this.state.notifications.filter(n => n !== e.target)});
+          }
+        }
+
+        render() {
+          return <VerticalLayout>
+            <RadioGroup
+              label="Position"
+              value={this.state.position}
+              onValueChanged={e => this.setState({position: e.detail.value})}>
+              {['top-stretch', 'top-start', 'top-center', 'top-end', 'middle', 'bottom-start', 'bottom-center', 'bottom-end', 'bottom-stretch']
+                .map(position => <RadioButton key={position} value={position}>{position}</RadioButton>)}
+            </RadioGroup>
+
+            <RadioGroup
+              label="Duration"
+              value={this.state.duration}
+              onValueChanged={e => this.setState({duration: e.detail.value})}>
+              {[500, 3000, 10000]
+                .map(duration => <RadioButton key={duration} value={duration}>{duration}ms</RadioButton>)}
+            </RadioGroup>
+
+            <TextField
+              label="Message"
+              value={this.state.message}
+              onValueChanged={e => this.setState({message: e.detail.value})}>
+            </TextField>
+
+            <Button onClick={() => this.setState({
+              notifications: this.state.notifications.concat(this.createNotification())
+            })}>Show notification</Button>
+
+            <div>{this.state.notifications}</div>
+          </VerticalLayout>;
+        }
+
+        createNotification() {
+          return <Notification
+            key={Date.now()}
+            opened
+            duration={this.state.duration}
+            position={this.state.position}
+            onOpenedChanged={this.removeOnClose}>
+            {this.state.message}</Notification>;
+        }
+      }
+
+      ReactDOM.render(<ComponentExample/>, mountNode);
+    `
+  },
+
+  {
     name: 'PasswordField',
     description: `Description`,
     demo: '<PasswordField label="Password"></PasswordField>',

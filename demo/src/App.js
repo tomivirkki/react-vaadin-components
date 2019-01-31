@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { Intro } from './Intro';
 import { Tutorial } from './Tutorial';
 import { Components } from './Components';

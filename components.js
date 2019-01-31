@@ -12,3 +12,4 @@ export * from './src/AppLayout';
 export * from './src/OrderedLayout';
 export * from './src/ListBox';
 export * from './src/Item';
+export * from './src/Notification';
