@@ -499,11 +499,9 @@ const components = [
     description: `Description`,
     demo: `
       <Select label="Risk level">
-        <ListBox>
-          <Item>Item1</Item>
-          <Item>Item2</Item>
-          <Item>Item3</Item>
-        </ListBox>
+        <Item>Item1</Item>
+        <Item>Item2</Item>
+        <Item>Item3</Item>
       </Select>
     `,
     featuresDescription: `

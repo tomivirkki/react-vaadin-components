@@ -5,7 +5,7 @@ export default superClass => class Overlaid extends superClass {
   _configRef(element) {
     element.renderer = root => {
       if (!this.state.portals.length) {
-        this._overlayContentContainer = document.createElement('div');
+        this._overlayContentContainer = element._overlayContentContainer || document.createElement('div');
         const portal = ReactDOM.createPortal(this.props.children, this._overlayContentContainer);
         this.setState({portals: [portal]});
       }
