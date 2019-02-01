@@ -4,6 +4,9 @@
   border: 1px dashed var(--lumo-contrast-50pct);
   padding: var(--lumo-space-m);
   border-radius: var(--lumo-space-xs);
+  display: flex;
+  flex-direction: column-reverse;
+  flex-shrink: 0;
 }
 
 body pre,
@@ -13,8 +16,13 @@ body code,
   border-radius: var(--lumo-border-radius);
   padding: var(--lumo-space-xs);
   height: auto;
-  margin-bottom: var(--lumo-space-m);
   color: var(--lumo-secondary-text-color);
+}
+
+body pre,
+body code,
+.playgroundPreview {
+  margin-bottom: var(--lumo-space-m);
 }
 
 pre code,
