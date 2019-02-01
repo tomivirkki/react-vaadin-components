@@ -2,10 +2,14 @@ import ReactDOM from 'react-dom';
 
 export default superClass => class Overlaid extends superClass {
 
+  _createOverlayContentContainer() {
+    return document.createElement('div');
+  }
+
   _configRef(element) {
     element.renderer = root => {
       if (!this.state.portals.length) {
-        this._overlayContentContainer = element._overlayContentContainer || document.createElement('div');
+        this._overlayContentContainer = this._createOverlayContentContainer();
         const portal = ReactDOM.createPortal(this.props.children, this._overlayContentContainer);
         this.setState({portals: [portal]});
       }
