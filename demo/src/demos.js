@@ -67,6 +67,58 @@ const components = [
   },
 
   {
+    name: 'CheckboxGroup',
+    description: `Description.`,
+    demo: `
+      <CheckboxGroup>
+        <Checkbox value="1">
+          Option 1
+        </Checkbox>
+        <Checkbox value="2">
+          Option 2
+        </Checkbox>
+        <Checkbox value="3">
+          Option 3
+        </Checkbox>
+      </CheckboxGroup>
+      `,
+    featuresDescription: `
+      Features description
+    `,
+    featuresDemo: `
+      class ComponentExample extends Component {
+
+        state = {
+          languages: []
+        }
+
+        render() {
+          return <div>
+            <CheckboxGroup
+              label="Preferred language of contact"
+              value={this.state.languages}
+              onValueChanged={e => this.setState({languages: e.detail.value})}>
+              <Checkbox value="en">
+                English
+              </Checkbox>
+              <Checkbox value="fr">
+                Français
+              </Checkbox>
+              <Checkbox value="de">
+                Deutsch
+              </Checkbox>
+            </CheckboxGroup>
+
+            <div>Selected value: {this.state.languages.join(',')}</div>
+          </div>;
+        }
+      }
+
+      ReactDOM.render(<ComponentExample/>, mountNode);
+    `
+  },
+
+  {
     name: 'ComboBox',
     description: `Description.`,
     demo: '<ComboBox label="User" items={users} itemLabelPath="username" itemValuePath="username"></ComboBox>',
