@@ -222,13 +222,13 @@ const components = [
     featuresDemo: `
       <div>
         <Dialog noCloseOnEsc noCloseOnOutsideClick opened={this.state.dialogOpened}>
-          <VerticalLayout theme="padding">
+          <VerticalLayout>
             <h2>Login</h2>
             <TextField required label="Username or email"></TextField>
             <PasswordField required label="Password"></PasswordField>
           </VerticalLayout>
-
-          <HorizontalLayout theme="spacing padding">
+          <br />
+          <HorizontalLayout theme="spacing">
             <Button theme="primary" onClick={e => this.setState({dialogOpened: false})}>Login</Button>
             <Button onClick={e => this.setState({dialogOpened: false})}>Cancel</Button>
           </HorizontalLayout>
