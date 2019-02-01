@@ -382,13 +382,19 @@ const components = [
 
         render() {
           return <VerticalLayout>
-            <RadioGroup
+            <TextField
+              label="Message"
+              value={this.state.message}
+              onValueChanged={e => this.setState({message: e.detail.value})}>
+            </TextField>
+
+            <Select
               label="Position"
               value={this.state.position}
               onValueChanged={e => this.setState({position: e.detail.value})}>
               {['top-stretch', 'top-start', 'top-center', 'top-end', 'middle', 'bottom-start', 'bottom-center', 'bottom-end', 'bottom-stretch']
-                .map(position => <RadioButton key={position} value={position}>{position}</RadioButton>)}
-            </RadioGroup>
+                .map(position => <Item key={position} value={position}>{position}</Item>)}
+            </Select>
 
             <RadioGroup
               label="Duration"
@@ -397,12 +403,6 @@ const components = [
               {[500, 3000, 10000]
                 .map(duration => <RadioButton key={duration} value={duration}>{duration}ms</RadioButton>)}
             </RadioGroup>
-
-            <TextField
-              label="Message"
-              value={this.state.message}
-              onValueChanged={e => this.setState({message: e.detail.value})}>
-            </TextField>
 
             <Button onClick={() => this.setState({
               notifications: this.state.notifications.concat(this.createNotification())
@@ -487,6 +487,50 @@ const components = [
             <RadioButton value="3">3</RadioButton>
             <RadioButton value="4">4</RadioButton>
           </RadioGroup>;
+        }
+      }
+
+      ReactDOM.render(<ComponentExample/>, mountNode);
+    `
+  },
+
+  {
+    name: 'Select',
+    description: `Description`,
+    demo: `
+      <Select label="Select">
+        <Item>Item1</Item>
+        <Item>Item2</Item>
+        <Item>Item3</Item>
+      </Select>
+    `,
+    featuresDescription: `
+      Features description
+    `,
+    featuresDemo: `
+      class ComponentExample extends Component {
+        state = {
+          users: [
+            {portrait: 'women/43.jpg', name: 'Gabriella', id: 1},
+            {portrait: 'men/77.jpg', name: 'Rudi', id: 2},
+            {portrait: 'men/35.jpg', name: 'Hamsa', id: 3},
+            {portrait: 'men/76.jpg', name: 'Jacob', id: 4}
+          ],
+          selected: 2
+        }
+
+        render() {
+          return <Select
+            label="User"
+            onValueChanged={e => this.setState({selected: e.detail.value})}
+            value={this.state.selected}>
+            {this.state.users.map(user => {
+              return <Item key={user.id} value={user.id}>
+                <img style={{width: '21px', verticalAlign: 'bottom'}} src={\`https://randomuser.me/api/portraits/$\{user.portrait}\`} />
+                <span>&nbsp;{user.name}</span>
+              </Item>
+            })}
+          </Select>;
         }
       }
 
