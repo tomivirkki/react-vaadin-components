@@ -648,11 +648,18 @@ const components = [
     name: 'Select',
     description: `Description`,
     demo: `
-      <Select label="Select">
-        <Item>Item1</Item>
-        <Item>Item2</Item>
-        <Item>Item3</Item>
-      </Select>
+    class ComponentExample extends Component {
+
+      render() {
+        return <Select label="Select">
+          <Item>Item1</Item>
+          <Item>Item2</Item>
+          <Item>Item3</Item>
+        </Select>
+      }
+    }
+
+    ReactDOM.render(<ComponentExample/>, mountNode);
     `,
     featuresDescription: `
       Features description
