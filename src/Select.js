@@ -4,7 +4,7 @@ import '@vaadin/vaadin-select';
 
 export class Select extends Rendered(CustomElementIs('vaadin-select')) {
 
-  _createOverlayContentContainer() {
+  _createRenderContainer() {
     return document.createElement('vaadin-list-box');
   }
 
