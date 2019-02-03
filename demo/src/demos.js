@@ -154,6 +154,89 @@ const components = [
   },
 
   {
+    name: 'ContextMenu',
+    description: `Description.`,
+    demo: `
+      <ContextMenu items={
+        [
+          {text: 'Item 1'},
+          {text: 'Item 2'},
+          {text: 'Item 3'}
+        ]
+      }>
+        <p>This paragraph has a context menu. Open with right mouse button or a long touch on mobile devices.</p>
+      </ContextMenu>
+    `,
+    featuresDescription: `
+      Features description
+    `,
+    featuresDemo: `
+      class ComponentExample extends Component {
+
+        state = {
+          notifications: [],
+          items: [
+            {text: 'Open'},
+            {text: 'Open with...', children:
+              [
+                {text: 'Preview'},
+                {text: 'Adobe Acrobat'},
+                {text: 'Other...', children:
+                  [
+                    {text: 'Select an app'},
+                    {text: 'Search for an app'}
+                  ]
+                }
+              ]
+            },
+            {component: 'hr'},
+            {text: 'Delete', disabled: true},
+            {component: 'hr'},
+            {text: 'Tags', children:
+              [
+                {text: 'Important', checkable: true},
+                {text: 'School', checkable: true},
+                {text: 'Work', checkable: true}
+              ]
+            }
+          ]
+        }
+
+        render() {
+          return <div>
+
+            <ContextMenu
+              onItemSelected={this.itemSelected}
+              items={this.state.items}>
+              <b>masters-thesis.pdf</b>
+            </ContextMenu>
+
+            {this.state.notifications}
+          </div>
+        }
+
+        itemSelected = (e) => {
+          const item = e.detail.value;
+          if (item.checkable) {
+            item.checked = !item.checked;
+          }
+
+          this.setState({notifications: this.state.notifications.concat(
+            <Notification opened key={Date.now()}>
+              <VerticalLayout>
+                <div>Action:</div>
+                <i>{item.text}</i>
+              </VerticalLayout>
+            </Notification>
+          )});
+        }
+      }
+
+      ReactDOM.render(<ComponentExample/>, mountNode);
+      `
+  },
+
+  {
     name: 'DatePicker',
     description: `Description.`,
     demo: '<DatePicker label="Date"></DatePicker>',

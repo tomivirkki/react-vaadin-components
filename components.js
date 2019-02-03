@@ -14,3 +14,4 @@ export * from './src/ListBox';
 export * from './src/Item';
 export * from './src/Notification';
 export * from './src/Select';
+export * from './src/ContextMenu';
