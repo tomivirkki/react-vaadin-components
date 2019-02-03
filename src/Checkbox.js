@@ -1,6 +1,6 @@
 import { CustomElementIs } from './CustomElement';
-import '@vaadin/vaadin-checkbox';
-import '@vaadin/vaadin-checkbox/vaadin-checkbox-group';
+import('@vaadin/vaadin-checkbox');
+import('@vaadin/vaadin-checkbox/vaadin-checkbox-group');
 
 export class Checkbox extends CustomElementIs('vaadin-checkbox') {}
 

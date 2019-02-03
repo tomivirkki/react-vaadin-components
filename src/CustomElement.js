@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import './custom-elements-es5-adapter';
+if (!window.customElements) {
+  import('@webcomponents/webcomponentsjs');
+}
 
 export class CustomElement extends Component {
   constructor() {
@@ -25,6 +29,12 @@ export class CustomElement extends Component {
 
         if (!element) {
           return;
+        }
+
+        if (window.customElements && !window.customElements.get(element.localName)) {
+          // Avoid a FOUC caused by dynamic element import
+          element.hidden = true;
+          window.customElements.whenDefined(element.localName).then(() => element.hidden = false);
         }
 
         this._eventListeners = {};

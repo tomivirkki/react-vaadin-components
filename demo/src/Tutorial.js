@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import Snippet from './Snippet';
 import stripIndent from 'strip-indent';
 import { VerticalLayout } from 'react-vaadin-components';
-import '@github/details-menu-element';
+import('@github/details-menu-element');
 
 export class Tutorial extends Component {
 
@@ -78,9 +78,11 @@ export class Tutorial extends Component {
         Note that this will only create the wrapper and an element instance with the given tag name,
         but the custom element still needs to be explicilty imported with...
 
-        \`import '@github/details-menu-element'\`
+        \`import('@github/details-menu-element');\`
 
-        ...in order to get the element upgraded to a functioning Custom Element.
+        ...in order to get the element upgraded to a functioning Custom Element. Make sure to
+        use dynamic import for the custom element (as above) so that \`CustomElement\` has time to finish
+        importing the Web Components polyfills in case they're required.
 
         Most of the components in this library are merely shorthands for what's described above.
       `)} />

@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import { CustomElementIs } from './CustomElement';
-import '@vaadin/vaadin-grid/all-imports';
+import('@vaadin/vaadin-grid/all-imports');
 
 export class Grid extends CustomElementIs('vaadin-grid') {
   constructor() {
