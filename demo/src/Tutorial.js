@@ -26,7 +26,7 @@ export class Tutorial extends Component {
         <TextField
           maxlength="10"
           clearButtonVisible
-          label={\`\${this.state && this.state.valueLength || 0}/10 characters\`}
+          label={\`\${this.state.valueLength || 0}/10 characters\`}
           onValueChanged={e => this.setState({valueLength: e.detail.value.length})} />
       `} />
       <ReactMarkdown source={stripIndent(`

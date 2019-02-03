@@ -7,11 +7,18 @@ import './Snippet.css';
 export default class Snippet extends Component {
 
   render() {
+
+    const codeText = this.props.codeText;
+    const usesState = codeText.indexOf('this.state') > -1;
+    const isWrapped = codeText.indexOf('ReactDOM') > -1;
+
+    const showFullSource = isWrapped || usesState || !this.props.noRender;
+
     const playground = <Playground
       theme="neo"
-      noRender={this.props.noRender}
+      noRender={!showFullSource}
       scope={Object.assign(scope)}
-      codeText={(this.props.noRender || this.props.codeText.indexOf('ReactDOM') > -1) ? stripIndent(this.props.codeText).trim() : stripIndent(`
+      codeText={!showFullSource || isWrapped ? stripIndent(this.props.codeText).trim() : stripIndent(`
   class ComponentExample extends Component {
     state = {}
 

@@ -209,13 +209,28 @@ const components = [
     category: '',
     description: `Dialog description`,
     demo: `
-      <div>
-        <Dialog opened={this.state && this.state.dialogOpened}>
-          Dialog content
-        </Dialog>
+      class ComponentExample extends Component {
 
-        <Button onClick={e => this.setState({dialogOpened: true})}>Open dialog</Button>
-      </div>`,
+        state = {}
+
+        render() {
+          return <div>
+            <Dialog
+              opened={this.state.dialogOpened}
+              onOpenedChanged={e => this.setState({dialogOpened: e.detail.value})}>
+              <div>This is the dialog content</div>
+            </Dialog>
+
+            <Button onClick={e => this.setState({dialogOpened: true})}>
+              Open dialog
+            </Button>
+          </div>
+        }
+
+      }
+
+      ReactDOM.render(<ComponentExample/>, mountNode);
+      `,
     featuresDescription: `
       Dialog description
     `,
@@ -353,7 +368,7 @@ const components = [
     featuresDemo: `
       <div style={{border: "1px solid grey"}}>
         <HorizontalLayout style={{border: "1px dashed grey"}} theme={
-          this.state && \`$\{this.state.spacing && 'spacing'} $\{this.state.padding && 'padding'} $\{this.state.margin && 'margin'}\`}>
+          \`$\{this.state.spacing && 'spacing'} $\{this.state.padding && 'padding'} $\{this.state.margin && 'margin'}\`}>
           <Checkbox
             onChange={e => this.setState({spacing: e.target.checked})}
             checked={this.state.spacing}>
@@ -405,7 +420,7 @@ const components = [
     description: `Notification description`,
     demo: `
       <div>
-        <Notification opened={this.state && this.state.open}>
+        <Notification opened={this.state.open}>
           <div>
             <b>Notice</b><br />
             This is the notification content
@@ -678,7 +693,7 @@ const components = [
     featuresDemo: `
       <div style={{border: "1px solid grey"}}>
         <VerticalLayout style={{border: "1px dashed grey"}} theme={
-          this.state && \`$\{this.state.spacing && 'spacing'} $\{this.state.padding && 'padding'} $\{this.state.margin && 'margin'}\`}>
+          \`$\{this.state.spacing && 'spacing'} $\{this.state.padding && 'padding'} $\{this.state.margin && 'margin'}\`}>
           <Checkbox
             onChange={e => this.setState({spacing: e.target.checked})}
             checked={this.state.spacing}>

@@ -47,7 +47,8 @@ export class Intro extends Component {
 
           <Button
             theme="primary"
-            onClick={e => this.state && alert('Hello ' + this.state.name)}>
+            disabled={!this.state.name}
+            onClick={e => alert('Hello ' + this.state.name)}>
             Say Hello
           </Button>
         </VerticalLayout>
