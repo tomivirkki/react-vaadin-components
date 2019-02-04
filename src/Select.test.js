@@ -11,5 +11,5 @@ test('should render a list box container for items', () => {
   const component = wrapper.instance()._element;
   const root = document.createElement('div');
   component.renderer(root);
-  expect(root.innerHTML).toBe('<vaadin-list-box><vaadin-item>foo</vaadin-item></vaadin-list-box>');
+  expect(root.innerHTML).toBe('<vaadin-list-box><vaadin-item style=\"visibility: hidden;\">foo</vaadin-item></vaadin-list-box>');
 });

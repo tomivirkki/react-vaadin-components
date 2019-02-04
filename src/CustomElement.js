@@ -6,6 +6,11 @@ export class CustomElement extends Component {
     super();
     this.state = {};
     this.propertyBlacklist = ['children', 'tagName'];
+    this._forceUpdate = this._forceUpdate.bind(this);
+  }
+
+  _forceUpdate() {
+    this.forceUpdate();
   }
 
   render() {
@@ -28,10 +33,15 @@ export class CustomElement extends Component {
           return;
         }
 
-        if (window.customElements && !window.customElements.get(element.localName)) {
-          // Avoid a FOUC caused by dynamic element import
-          element.hidden = true;
-          window.customElements.whenDefined(element.localName).then(() => element.hidden = false);
+        // Hide the element if the custom element is still loading to avoid FOUC
+        if (!window.customElements) {
+          window.addEventListener('WebComponentsReady', this._forceUpdate);
+          element.style.visibility = 'hidden';
+        } else if (!window.customElements.get(element.localName)) {
+          window.customElements.whenDefined(element.localName).then(this._forceUpdate);
+          element.style.visibility = 'hidden';
+        } else {
+          element.style.visibility = '';
         }
 
         this._eventListeners = {};

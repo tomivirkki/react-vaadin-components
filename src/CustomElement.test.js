@@ -112,18 +112,27 @@ test('should wrap a custom element', () => {
 });
 
 test('should unhide the component once defined', () => {
-  let defined;
-  window.customElements = {
-    get: () => false,
-    whenDefined: () => {return {then: cb => {defined = cb}}}
-  };
-
   const element = mount(<CustomElement tagName='custom-element' />).instance()._element;
-  delete window.customElements;
 
-  expect(element.hidden).toBe(true);
-  defined();
-  expect(element.hidden).toBe(false);
+  // Before customElements are available
+  expect(element.style.visibility).toBe('hidden');
+
+  let definedCallback;
+  window.customElements = {
+    elementDefined: false,
+    get: () => window.customElements.elementDefined,
+    whenDefined: () => {return {then: cb => {definedCallback = cb}}}
+  };
+  window.dispatchEvent(new CustomEvent('WebComponentsReady'));
+
+  // After customElements are available but the custom element isn't registered
+  expect(element.style.visibility).toBe('hidden');
+
+  window.customElements.elementDefined = true;
+  definedCallback();
+
+  // The component is ready
+  expect(element.style.visibility).toBe('');
 });
 
 
