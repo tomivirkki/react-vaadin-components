@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import './custom-elements-es5-adapter';
-if (!window.customElements) {
-  import('@webcomponents/webcomponentsjs');
-}
+import './custom-elements-polyfills';
 
 export class CustomElement extends Component {
   constructor() {

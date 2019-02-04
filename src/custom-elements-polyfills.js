@@ -1,3 +1,10 @@
+/* istanbul ignore file */
+
+if (!window.customElements) {
+  import('@webcomponents/webcomponentsjs');
+}
+
+// custom-elements-es5-adapter
 const includeAdapter = () => {
   const script = document.createElement('script');
   script.innerText = `

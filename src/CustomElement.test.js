@@ -111,4 +111,19 @@ test('should wrap a custom element', () => {
   expect(element.localName).toBe('custom-element');
 });
 
+test('should unhide the component once defined', () => {
+  let defined;
+  window.customElements = {
+    get: () => false,
+    whenDefined: () => {return {then: cb => {defined = cb}}}
+  };
+
+  const element = mount(<CustomElement tagName='custom-element' />).instance()._element;
+  delete window.customElements;
+
+  expect(element.hidden).toBe(true);
+  defined();
+  expect(element.hidden).toBe(false);
+});
+
 
