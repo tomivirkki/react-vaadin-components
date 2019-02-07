@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 const includeAdapter = () => {
   const script = document.createElement('script');
   script.innerText = `

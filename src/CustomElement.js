@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './custom-elements-es5-adapter';
 
 export class CustomElement extends Component {
   constructor() {
