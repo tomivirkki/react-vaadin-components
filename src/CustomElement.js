@@ -6,12 +6,13 @@ export class CustomElement extends Component {
     super();
     this.state = {};
     this.propertyBlacklist = ['children', 'tagName'];
+    this.attributeWhitelist = ['theme', 'style'];
   }
 
   render() {
     const attributes = {};
     Object.keys(this.props)
-      .filter(key => key.indexOf('aria-') === 0 || key === 'theme' || key === 'style')
+      .filter(key => key.indexOf('aria-') === 0 || this.attributeWhitelist.includes(key))
       .forEach(key => attributes[key] = this.props[key]);
 
     return React.createElement(this.tagName || this.props.tagName, Object.assign(attributes, {

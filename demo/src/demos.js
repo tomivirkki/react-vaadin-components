@@ -338,6 +338,55 @@ const components = [
   },
 
   {
+    name: 'FormLayout',
+    category: '',
+    description: `Description`,
+    demo: `
+      <FormLayout>
+        <TextField label="First Name" value="Jane"></TextField>
+        <TextField label="Last Name" value="Doe"></TextField>
+        <TextField label="Email" value="jane.doe@example.com"></TextField>
+      </FormLayout>
+      `,
+    featuresDescription: `
+      Dialog description
+    `,
+    featuresDemo: `
+      <FormLayout responsiveSteps = {[
+        {"minWidth": 0, "columns": 1, "labelsPosition": "top"},
+        {"minWidth": "25em", "columns": 1},
+        {"minWidth": "40em", "columns": 2}
+        ]}>
+
+        <FormItem>
+          <label slot="label">First Name</label>
+          <TextField value="Jane" style={{width: '100%'}}></TextField>
+        </FormItem>
+
+        <FormItem>
+          <label slot="label">Last Name</label>
+          <TextField value="Doe" style={{width: '100%'}}></TextField>
+        </FormItem>
+
+        <FormItem>
+          <label slot="label">Email</label>
+          <TextField value="jane.doe@example.com" style={{width: '100%'}}></TextField>
+        </FormItem>
+
+        <FormItem>
+          <label slot="label">Birthday</label>
+          <DatePicker value="1993-06-23" style={{width: '100%'}}></DatePicker>
+        </FormItem>
+
+        <FormItem colspan="2">
+          <label slot="label">Bio</label>
+          <TextArea value="My name is Jane." style={{width: '100%'}}></TextArea>
+        </FormItem>
+      </FormLayout>
+      `
+  },
+
+  {
     name: 'Grid',
     category: 'visualization & interaction',
     description: `Grid is a free, high quality data grid / data table component`,

@@ -16,4 +16,5 @@ export * from './src/Item';
 export * from './src/Notification';
 export * from './src/Select';
 export * from './src/ContextMenu';
+export * from './src/FormLayout';
 
