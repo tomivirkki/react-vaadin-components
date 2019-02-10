@@ -3,6 +3,7 @@
   "version": "0.7.0",
   "license": "MIT",
   "dependencies": {
+    "@vaadin/vaadin-accordion": "^1.0.0",
     "@vaadin/vaadin-app-layout": "^1.0.0",
     "@vaadin/vaadin-button": "^2.1.0",
     "@vaadin/vaadin-checkbox": "^2.2.1",

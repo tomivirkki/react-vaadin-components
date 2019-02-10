@@ -1,6 +1,6 @@
 import { CustomElementIs } from './CustomElement';
 import '@vaadin/vaadin-form-layout';
-import '@vaadin/vaadin-form-layout/vaadin-form-item.js';
+import '@vaadin/vaadin-form-layout/vaadin-form-item';
 
 export class FormLayout extends CustomElementIs('vaadin-form-layout') {}
 

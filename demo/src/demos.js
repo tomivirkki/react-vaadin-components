@@ -7,6 +7,42 @@ export const scope = {React, ReactDOM, Component, moment, users, ...vaadinCompon
 
 const components = [
   {
+    name: 'Accordion',
+    description: `description`,
+    demo: `
+      <Accordion>
+        <AccordionPanel>
+          <div slot="summary">Panel 1</div>
+          <div>This panel is opened by default</div>
+        </AccordionPanel>
+        <AccordionPanel>
+          <div slot="summary">Panel 2</div>
+          <div>This panel is opened by clicking the summary.</div>
+        </AccordionPanel>
+      </Accordion>
+    `,
+    featuresDescription: `
+      Features description
+    `,
+    featuresDemo: `
+      <Accordion>
+        <AccordionPanel theme="filled">
+          <div slot="summary">Panel 1</div>
+          <div>Panel content</div>
+        </AccordionPanel>
+        <AccordionPanel theme="filled">
+          <div slot="summary">Panel 2</div>
+          <div>Panel content</div>
+        </AccordionPanel>
+        <AccordionPanel theme="filled" disabled>
+          <div slot="summary">Panel 3</div>
+          <div>Panel content</div>
+        </AccordionPanel>
+      </Accordion>
+      `
+  },
+
+  {
     name: 'Button',
     category: 'visualization & interaction',
     description: `Button is a typical UI control for communicating a user action.`,
