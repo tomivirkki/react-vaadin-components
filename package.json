@@ -16,6 +16,7 @@
     "@vaadin/vaadin-list-box": "^1.1.0",
     "@vaadin/vaadin-notification": "^1.2.1",
     "@vaadin/vaadin-ordered-layout": "^1.1.0",
+    "@vaadin/vaadin-progress-bar": "^1.1.0",
     "@vaadin/vaadin-radio-button": "^1.1.0",
     "@vaadin/vaadin-select": "^2.0.2",
     "@vaadin/vaadin-tabs": "^2.1.1",

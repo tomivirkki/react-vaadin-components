@@ -642,6 +642,44 @@ const components = [
   },
 
   {
+    name: 'ProgressBar',
+    description: `Description`,
+    demo: `
+      <ProgressBar value="0.3"></ProgressBar>
+    `,
+    featuresDescription: `
+      Features description
+    `,
+    featuresDemo: `
+      class ComponentExample extends Component {
+        state = {step: 1}
+
+        render() {
+          return <div>
+            <div>Step: <span>{this.state.step}</span> / 5</div>
+            <ProgressBar min="0" max="5" value={this.state.step}></ProgressBar>
+
+            <HorizontalLayout theme="spacing">
+              <Button
+                disabled={this.state.step === 0}
+                onClick={() => this.setState({step: this.state.step - 1})}>
+                Prev
+              </Button>
+              <Button
+                disabled={this.state.step === 5}
+                onClick={() => this.setState({step: this.state.step + 1})}>
+                Next
+              </Button>
+            </HorizontalLayout>
+          </div>
+        }
+      }
+
+      ReactDOM.render(<ComponentExample/>, mountNode);
+    `
+  },
+
+  {
     name: 'RadioButton',
     description: `Description`,
     demo: `

@@ -17,4 +17,5 @@ export * from './src/Notification';
 export * from './src/Select';
 export * from './src/ContextMenu';
 export * from './src/FormLayout';
+export * from './src/ProgressBar';
 
