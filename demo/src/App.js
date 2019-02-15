@@ -22,11 +22,22 @@ class App extends Component {
 
   onTabChanged = e => this.setState({activePage: this.pages[e.detail.value]})
 
-  state = { activePage: this.pages.filter(p => window.location.href.indexOf(this.getRootPath(p)) > -1)[0] || this.pages[0] }
+  onHashChange = () => this.setState({activePage: this.pages.filter(p => window.location.href.indexOf(this.getRootPath(p)) > -1)[0] || this.pages[0] })
+
+  state = {}
+
+  componentWillMount() {
+    this.onHashChange()
+  }
+
+  constructor() {
+    super();
+    window.addEventListener('hashchange', this.onHashChange);
+  }
 
   render() {
     const rootPath = this.getRootPath(this.state.activePage);
-    const shouldRedirect = !(window.location.href.indexOf(rootPath) > -1);
+    const shouldRedirect = window.location.href.indexOf(rootPath) === -1;
 
     return (
       <HashRouter>
