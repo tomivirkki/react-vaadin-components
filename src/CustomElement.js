@@ -12,7 +12,7 @@ export class CustomElement extends Component {
   render() {
     const attributes = {};
     Object.keys(this.props)
-      .filter(key => key.indexOf('aria-') === 0 || this.attributeWhitelist.includes(key))
+      .filter(key => key.indexOf('aria-') === 0 || this.attributeWhitelist.indexOf(key) !== -1)
       .forEach(key => attributes[key] = this.props[key]);
 
     return React.createElement(this.tagName || this.props.tagName, Object.assign(attributes, {
