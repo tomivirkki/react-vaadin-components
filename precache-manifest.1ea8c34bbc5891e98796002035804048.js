@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "e53d3c10ed5555a4d672",
+    "revision": "3bd0508d78c257bd4e96",
     "url": "/react-vaadin-components/static/css/main.48ffee39.chunk.css"
   },
   {
-    "revision": "e53d3c10ed5555a4d672",
-    "url": "/react-vaadin-components/static/js/main.e53d3c10.chunk.js"
+    "revision": "3bd0508d78c257bd4e96",
+    "url": "/react-vaadin-components/static/js/main.3bd0508d.chunk.js"
   },
   {
     "revision": "d1fab683277b262870a6",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/react-vaadin-components/static/js/2.8d2c3a9a.chunk.js"
   },
   {
-    "revision": "a4f39f34b5def8e66379eb3e81ec2cab",
+    "revision": "e61758bd93c5b7d8026afd7288fd072a",
     "url": "/react-vaadin-components/index.html"
   }
 ];
