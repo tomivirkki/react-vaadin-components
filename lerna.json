@@ -1,0 +1,7 @@
+{
+  "packages": [
+    ".",
+    "demo"
+  ],
+  "version": "independent"
+}
