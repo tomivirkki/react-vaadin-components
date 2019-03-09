@@ -53,8 +53,8 @@ export class Components extends Component {
         <ReactMarkdown source={stripIndent(`
           ## References
 
-          - [API](https://vaadin.com/components/${webComponentName}/html-api) (Web Component)
-          - [Examples](https://vaadin.com/components/${webComponentName}/html-examples) (Web Component)
+          - [API](https://vaadin.com/components/${component.hostName || webComponentName}/html-api) (Web Component)
+          - [Examples](https://vaadin.com/components/${component.hostName || webComponentName}/html-examples/${component.demoPath || ''}) (Web Component)
         `).trim()} />
       </VerticalLayout>
 

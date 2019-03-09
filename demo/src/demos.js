@@ -108,6 +108,8 @@ const components = [
   {
     name: 'CheckboxGroup',
     category: 0,
+    hostName: 'vaadin-checkbox',
+    demoPath: 'checkbox-group-demos',
     description: `Description.`,
     demo: `
       <CheckboxGroup>
@@ -531,6 +533,7 @@ const components = [
   {
     name: 'HorizontalLayout',
     category: 2,
+    hostName: 'vaadin-ordered-layout',
     description: `Description`,
     demo: `
       <HorizontalLayout>
@@ -674,6 +677,8 @@ const components = [
   {
     name: 'PasswordField',
     category: 0,
+    hostName: 'vaadin-text-field',
+    demoPath: 'password-field-demos',
     description: `Description`,
     demo: '<PasswordField label="Password"></PasswordField>',
     featuresDescription: `
@@ -748,6 +753,8 @@ const components = [
   {
     name: 'RadioGroup',
     category: 0,
+    hostName: 'vaadin-radio-button',
+    demoPath: 'radio-group-demos',
     description: `Description`,
     demo: `
       <RadioGroup label="Risk level">
@@ -835,6 +842,8 @@ const components = [
   {
     name: 'TextArea',
     category: 0,
+    hostName: 'vaadin-text-field',
+    demoPath: 'text-area-demos',
     description: `Description`,
     demo: '<TextArea label="Description"></TextArea>',
     featuresDescription: `
@@ -909,6 +918,7 @@ const components = [
   {
     name: 'VerticalLayout',
     category: 2,
+    hostName: 'vaadin-ordered-layout',
     description: `Description`,
     demo: `
       <VerticalLayout>
