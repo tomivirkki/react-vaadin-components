@@ -4,10 +4,12 @@ import * as vaadinComponents from 'react-vaadin-components';
 import users from './users.js';
 import moment from 'moment'
 export const scope = {React, ReactDOM, Component, moment, users, ...vaadinComponents};
+export const componentCategories = ['Form inputs', 'Visualization', 'Layouts'];
 
 const components = [
   {
     name: 'Accordion',
+    category: 1,
     description: `description`,
     demo: `
       <Accordion>
@@ -44,7 +46,7 @@ const components = [
 
   {
     name: 'Button',
-    category: 'visualization & interaction',
+    category: 1,
     description: `Button is a typical UI control for communicating a user action.`,
     demo: '<Button>Button</Button>',
     featuresDescription: `
@@ -73,6 +75,7 @@ const components = [
 
   {
     name: 'Checkbox',
+    category: 0,
     description: `Description.`,
     demo: '<Checkbox>Checkbox</Checkbox>',
     featuresDescription: `
@@ -104,6 +107,7 @@ const components = [
 
   {
     name: 'CheckboxGroup',
+    category: 0,
     description: `Description.`,
     demo: `
       <CheckboxGroup>
@@ -156,6 +160,7 @@ const components = [
 
   {
     name: 'ComboBox',
+    category: 0,
     description: `Description.`,
     demo: '<ComboBox label="User" items={users} itemLabelPath="username" itemValuePath="username"></ComboBox>',
     featuresDescription: `
@@ -191,6 +196,7 @@ const components = [
 
   {
     name: 'ContextMenu',
+    category: 1,
     description: `Description.`,
     demo: `
       <ContextMenu items={
@@ -274,6 +280,7 @@ const components = [
 
   {
     name: 'DatePicker',
+    category: 0,
     description: `Description.`,
     demo: '<DatePicker label="Date"></DatePicker>',
     featuresDescription: `
@@ -325,7 +332,7 @@ const components = [
 
   {
     name: 'Dialog',
-    category: '',
+    category: 1,
     description: `Dialog description`,
     demo: `
       class ComponentExample extends Component {
@@ -375,7 +382,7 @@ const components = [
 
   {
     name: 'FormLayout',
-    category: '',
+    category: 2,
     description: `Description`,
     demo: `
       <FormLayout>
@@ -424,7 +431,7 @@ const components = [
 
   {
     name: 'Grid',
-    category: 'visualization & interaction',
+    category: 1,
     description: `Grid is a free, high quality data grid / data table component`,
     demo: `
       <Grid items={users}>
@@ -523,6 +530,7 @@ const components = [
 
   {
     name: 'HorizontalLayout',
+    category: 2,
     description: `Description`,
     demo: `
       <HorizontalLayout>
@@ -559,6 +567,7 @@ const components = [
 
   {
     name: 'ListBox',
+    category: 0,
     description: `Description`,
     demo: `
       <ListBox>
@@ -584,7 +593,7 @@ const components = [
 
   {
     name: 'Notification',
-    category: '',
+    category: 1,
     description: `Notification description`,
     demo: `
       <div>
@@ -664,6 +673,7 @@ const components = [
 
   {
     name: 'PasswordField',
+    category: 0,
     description: `Description`,
     demo: '<PasswordField label="Password"></PasswordField>',
     featuresDescription: `
@@ -679,6 +689,7 @@ const components = [
 
   {
     name: 'ProgressBar',
+    category: 1,
     description: `Description`,
     demo: `
       <ProgressBar value="0.3"></ProgressBar>
@@ -717,6 +728,7 @@ const components = [
 
   {
     name: 'RadioButton',
+    category: 0,
     description: `Description`,
     demo: `
       <RadioButton>Radio</RadioButton>
@@ -735,6 +747,7 @@ const components = [
 
   {
     name: 'RadioGroup',
+    category: 0,
     description: `Description`,
     demo: `
       <RadioGroup label="Risk level">
@@ -769,6 +782,7 @@ const components = [
 
   {
     name: 'Select',
+    category: 0,
     description: `Description`,
     demo: `
     class ComponentExample extends Component {
@@ -820,7 +834,7 @@ const components = [
 
   {
     name: 'TextArea',
-    category: 'form inputs',
+    category: 0,
     description: `Description`,
     demo: '<TextArea label="Description"></TextArea>',
     featuresDescription: `
@@ -836,6 +850,7 @@ const components = [
 
   {
     name: 'Tabs',
+    category: 1,
     description: `Description`,
     demo: `
       <Tabs>
@@ -873,7 +888,7 @@ const components = [
 
   {
     name: 'TextField',
-    category: 'form inputs',
+    category: 0,
     description: `TextField specifies a text input control typically used in forms.`,
     demo: '<TextField label="First Name"></TextField>',
     featuresDescription: `
@@ -893,6 +908,7 @@ const components = [
 
   {
     name: 'VerticalLayout',
+    category: 2,
     description: `Description`,
     demo: `
       <VerticalLayout>

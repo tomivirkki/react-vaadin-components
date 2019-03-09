@@ -3,19 +3,21 @@ import ReactDOM from 'react-dom';
 import ReactMarkdown from 'react-markdown';
 import stripIndent from 'strip-indent';
 import './Components.css';
-import components from './demos';
+import components, { componentCategories } from './demos';
 import Snippet from './Snippet';
 import { Redirect } from 'react-router-dom';
 import {
   HorizontalLayout,
   VerticalLayout,
   ListBox,
-  Item
+  Item,
+  Tabs,
+  Tab
 } from 'react-vaadin-components';
 
 export class Components extends Component {
 
-  state = {}
+  state = {category: 0}
 
   itemSelected = e => {
     const component = components[e.detail.value];
@@ -58,8 +60,17 @@ export class Components extends Component {
 
       <VerticalLayout className={`Menubar${this.state.menuOpen ? ' open' : ''}`} theme="padding">
         <h2>Components</h2>
+        <Tabs style={{width: '100%'}} theme="small" onSelectedChanged={e => this.setState({category: e.detail.value})}>
+          {['All components', ...componentCategories].map(cat => <Tab key={cat}>{cat}</Tab>)}
+        </Tabs>
         <ListBox style={{width: '100%', overflow: 'auto'}} selected={components.indexOf(component)} onSelectedChanged={this.itemSelected}>
-          {components.map(component => <Item key={component.id}>{component.name.replace(/([A-Z])/g, m => ' ' + m).trim()}</Item>)}
+          {components
+            .map(component =>
+              <Item
+                key={component.id}
+                hidden={this.state.category && component.category + 1 !== this.state.category}>
+                {component.name.replace(/([A-Z])/g, m => ' ' + m).trim()}
+              </Item>)}
         </ListBox>
       </VerticalLayout>
 
