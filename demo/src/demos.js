@@ -453,7 +453,8 @@ const components = [
         state = {
           users: users.slice(0),
           detailsOpenedItems: [],
-          selectedItems: []
+          selectedItems: [],
+          activeSorting: []
         }
 
         render() {
@@ -466,6 +467,12 @@ const components = [
               items={this.state.users}
               columnReorderingAllowed
               multiSort
+              rowsDraggable
+              dropMode={this.state.dropMode}
+              onGridDragstart={this.onGridDragstart}
+              onGridDragend={this.onGridDragend}
+              onGridDrop={this.onGridDrop}
+              onSorterChanged={this.onGridSort}
               detailsOpenedItems={this.state.detailsOpenedItems}
               rowDetailsRenderer={this.rowDetailsRenderer}>
 
@@ -523,6 +530,52 @@ const components = [
             users: this.state.users.filter(u => !this.state.selectedItems.includes(u)),
             selectedItems: []
           })
+        }
+
+        onGridDragstart = e => {
+          if (this.state.activeSorting.length) {
+            // TODO
+          } else {
+            this.setState({dropMode: 'between'});
+            this.draggedItems = e.detail.draggedItems;
+          }
+        }
+
+        onGridDrop = e => {
+          const dropTargetItem = e.detail.dropTargetItem;
+          if (this.draggedItems.indexOf(dropTargetItem) === -1) {
+            const filteredUsers = this.state.users
+              .filter(i => this.draggedItems.indexOf(i) === -1);
+
+            let index = filteredUsers.length;
+            if (dropTargetItem) {
+              index = filteredUsers.indexOf(dropTargetItem)
+                + (e.detail.dropLocation === 'below' ? 1 : 0);
+            }
+
+            const users = []
+              .concat(filteredUsers.slice(0, index))
+              .concat(this.draggedItems)
+              .concat(filteredUsers.slice(index));
+
+            this.setState({
+              selectedItems: [],
+              users
+            });
+          }
+
+        }
+
+        onGridDragend = () => {
+          this.setState({dropMode: null});
+        }
+
+        onGridSort = e => {
+          const sorterComponent = e.target;
+          const activeSorting = this.state.activeSorting
+            .filter(sorting => sorterComponent.path !== sorting)
+            .concat(sorterComponent.direction ? sorterComponent.path : []);
+          this.setState({activeSorting});
         }
       }
 
