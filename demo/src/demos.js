@@ -265,14 +265,14 @@ const components = [
             item.checked = !item.checked;
           }
 
-          this.setState({notifications: this.state.notifications.concat(
+          this.setState((state) => ({notifications: state.notifications.concat(
             <Notification opened key={Date.now()}>
               <VerticalLayout>
                 <div>Action:</div>
                 <i>{item.text}</i>
               </VerticalLayout>
             </Notification>
-          )});
+          )}));
         }
       }
 
@@ -518,18 +518,18 @@ const components = [
           while (!grid.getEventContext) grid = grid.parentNode;
           const {item} = grid.getEventContext(e);
 
-          this.setState({detailsOpenedItems:
-            this.state.detailsOpenedItems.includes(item) ?
-            this.state.detailsOpenedItems.filter(i => i !== item) :
-            this.state.detailsOpenedItems.concat(item)
-          });
+          this.setState((state) => ({detailsOpenedItems:
+            state.detailsOpenedItems.includes(item) ?
+            state.detailsOpenedItems.filter(i => i !== item) :
+            state.detailsOpenedItems.concat(item)
+          }));
         }
 
         removeSelected = () => {
-          this.setState({
-            users: this.state.users.filter(u => !this.state.selectedItems.includes(u)),
+          this.setState((state) => ({
+            users: state.users.filter(u => !state.selectedItems.includes(u)),
             selectedItems: []
-          })
+          }));
         }
 
         onGridDragstart = e => {
@@ -676,7 +676,7 @@ const components = [
 
         removeOnClose = e => {
           if (!e.target.opened) {
-            this.setState({notifications: this.state.notifications.filter(n => n !== e.target)});
+            this.setState((state) => ({notifications: state.notifications.filter(n => n !== e.target)}));
           }
         }
 
@@ -704,9 +704,9 @@ const components = [
                 .map(duration => <RadioButton key={duration} value={duration}>{duration}ms</RadioButton>)}
             </RadioGroup>
 
-            <Button onClick={() => this.setState({
-              notifications: this.state.notifications.concat(this.createNotification())
-            })}>Show notification</Button>
+            <Button onClick={() => this.setState((state) => ({
+              notifications: state.notifications.concat(this.createNotification())
+            }))}>Show notification</Button>
 
             <div>{this.state.notifications}</div>
           </VerticalLayout>;
@@ -767,12 +767,12 @@ const components = [
             <HorizontalLayout theme="spacing">
               <Button
                 disabled={this.state.step === 0}
-                onClick={() => this.setState({step: this.state.step - 1})}>
+                onClick={() => this.setState((state) => ({step: state.step - 1}))}>
                 Prev
               </Button>
               <Button
                 disabled={this.state.step === 5}
-                onClick={() => this.setState({step: this.state.step + 1})}>
+                onClick={() => this.setState((state) => ({step: state.step + 1}))}>
                 Next
               </Button>
             </HorizontalLayout>
