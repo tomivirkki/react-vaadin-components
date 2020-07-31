@@ -6,6 +6,7 @@ import { HashRouter, Route, Redirect } from 'react-router-dom';
 
 import {
   AppLayout,
+  DrawerToggle,
   Tabs,
   Tab
 } from 'react-vaadin-components';
@@ -41,11 +42,18 @@ class App extends Component {
 
     return (
       <HashRouter>
-        <AppLayout ref={al => al && shouldRedirect && (al._element.shadowRoot.querySelector('[part="content"]').scrollTop = 0)}>
-          <h3 slot="branding">React Vaadin Components</h3>
-
-          <Tabs slot="menu" onSelectedChanged={this.onTabChanged} selected={this.pages.indexOf(this.state.activePage)}>
-            {this.pages.map(page => <Tab key={page.path}>{page.title}</Tab> )}
+        <AppLayout>
+          <DrawerToggle slot="navbar touch-optimized" />
+          <h3 slot="navbar touch-optimized">React Vaadin Components</h3>
+          <Tabs
+            orientation="vertical"
+            slot="drawer"
+            onSelectedChanged={this.onTabChanged}
+            selected={this.pages.indexOf(this.state.activePage)}
+          >
+            {this.pages.map((page) => (
+              <Tab key={page.path}>{page.title}</Tab>
+            ))}
           </Tabs>
 
           <div style={{height: '100%', overflowX: 'hidden'}}>
