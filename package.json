@@ -1,54 +1,48 @@
 {
   "name": "react-vaadin-components",
-  "version": "0.8.4",
+  "version": "2.0.0-alpha.1",
   "license": "MIT",
   "dependencies": {
-    "@vaadin/vaadin-accordion": "^1.0.0",
-    "@vaadin/vaadin-app-layout": "^2.1.0",
-    "@vaadin/vaadin-button": "^2.3.0",
-    "@vaadin/vaadin-checkbox": "^2.2.1",
-    "@vaadin/vaadin-combo-box": "^4.2.0",
-    "@vaadin/vaadin-context-menu": "^4.3.0",
-    "@vaadin/vaadin-date-picker": "^3.3.0",
-    "@vaadin/vaadin-dialog": "^2.2.0",
-    "@vaadin/vaadin-form-layout": "^2.1.1",
-    "@vaadin/vaadin-grid": "^5.3.0",
-    "@vaadin/vaadin-item": "^2.1.0",
-    "@vaadin/vaadin-list-box": "^1.1.0",
-    "@vaadin/vaadin-notification": "^1.2.1",
-    "@vaadin/vaadin-ordered-layout": "^1.1.0",
-    "@vaadin/vaadin-progress-bar": "^1.1.0",
-    "@vaadin/vaadin-radio-button": "^1.1.0",
-    "@vaadin/vaadin-select": "^2.0.2",
-    "@vaadin/vaadin-tabs": "^2.1.1",
-    "@vaadin/vaadin-text-field": "^2.1.0",
-    "@webcomponents/webcomponentsjs": "^2.1.3",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "@lit-labs/react": "^1.0.5",
+    "@vaadin/vaadin-core": "^23.0.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
   },
-  "pre-push": [
-    "test"
+  "devDependencies": {
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
+    "@babel/preset-typescript": "^7.17.12",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "global-jsdom": "^8.4.0",
+    "jest": "^28.1.0",
+    "jest-environment-jsdom": "^28.1.0",
+    "jsdom": "^19.0.0",
+    "web-component-analyzer": "^2.0.0-next.4"
+  },
+  "files": [
+    "/dist"
   ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "test": "jest"
+    "generate": "node scripts/generate.js",
+    "build": "tsc",
+    "prepare": "npm run build",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "watch": "tsc --watch"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/tomivirkki/react-vaadin-components.git"
   },
-  "devDependencies": {
-    "babel-jest": "^23.6.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "enzyme": "^3.6.0",
-    "enzyme-adapter-react-16": "*",
-    "jest": "^23.6.0",
-    "pre-push": "^0.1.1"
-  },
   "jest": {
-    "moduleNameMapper": {
-      ".*@vaadin/.*": "<rootDir>/src/CustomElement.js"
-    },
+    "testEnvironment": "jest-environment-jsdom",
+    "extensionsToTreatAsEsm": [
+      ".tsx",
+      ".ts"
+    ],
     "collectCoverage": true,
     "coverageThreshold": {
       "global": {
