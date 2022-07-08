@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type {
@@ -12,12 +13,12 @@ const DetailsEvents = {
 };
 
 const DetailsProperties = {
-  opened: "boolean",
-  autofocus: "boolean",
-  focusElement: "HTMLElement | null | undefined",
-  disabled: "boolean",
-  tabindex: "number | null | undefined",
-  version: "string",
+  opened: "",
+  autofocus: "",
+  focusElement: "",
+  disabled: "",
+  tabindex: "",
+  version: "",
 };
 
 export const Details = createPolymerComponent<

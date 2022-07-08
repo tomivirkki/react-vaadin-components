@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type {
@@ -13,14 +14,14 @@ const ContextMenuEvents = {
 };
 
 const ContextMenuProperties = {
-  selector: "string | null | undefined",
-  opened: "boolean",
-  openOn: "string",
-  listenOn: "HTMLElement",
-  closeOn: "string",
-  renderer: "ContextMenuRenderer | null | undefined",
-  version: "string",
-  items: "ContextMenuItem[] | undefined",
+  selector: "",
+  opened: "",
+  openOn: "",
+  listenOn: "",
+  closeOn: "",
+  renderer: "",
+  version: "",
+  items: "",
 };
 
 export const ContextMenu = createPolymerComponent<

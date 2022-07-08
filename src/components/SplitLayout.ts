@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type {
@@ -12,8 +13,8 @@ const SplitLayoutEvents = {
 };
 
 const SplitLayoutProperties = {
-  orientation: '"horizontal" | "vertical"',
-  version: "string",
+  orientation: "",
+  version: "",
 };
 
 export const SplitLayout = createPolymerComponent<

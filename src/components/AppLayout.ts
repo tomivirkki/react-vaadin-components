@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type {
@@ -16,12 +17,12 @@ const AppLayoutEvents = {
 };
 
 const AppLayoutProperties = {
-  i18n: "AppLayoutI18n",
-  primarySection: "navbar|drawer",
-  drawerOpened: "boolean",
-  overlay: "boolean",
-  closeDrawerOn: "string",
-  version: "string",
+  i18n: "",
+  primarySection: "",
+  drawerOpened: "",
+  overlay: "",
+  closeDrawerOn: "",
+  version: "",
 };
 
 export const AppLayout = createPolymerComponent<
@@ -38,10 +39,10 @@ export const AppLayout = createPolymerComponent<
 const DrawerToggleEvents = {};
 
 const DrawerToggleProperties = {
-  ariaLabel: "string",
-  disabled: "boolean",
-  tabindex: "number | null | undefined",
-  version: "string",
+  ariaLabel: "",
+  disabled: "",
+  tabindex: "",
+  version: "",
 };
 
 export const DrawerToggle = createPolymerComponent<

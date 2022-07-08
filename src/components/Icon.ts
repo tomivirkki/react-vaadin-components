@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type { Icon as IconClass } from "@vaadin/icon/vaadin-icon";
@@ -8,10 +9,10 @@ import type { Iconset as IconsetClass } from "@vaadin/icon/vaadin-iconset";
 const IconEvents = {};
 
 const IconProperties = {
-  icon: "string | null",
-  svg: "IconSvgLiteral | null",
-  size: "number",
-  version: "string",
+  icon: "",
+  svg: "",
+  size: "",
+  version: "",
 };
 
 export const Icon = createPolymerComponent<IconClass, typeof IconEvents>(
@@ -25,9 +26,9 @@ export const Icon = createPolymerComponent<IconClass, typeof IconEvents>(
 const IconsetEvents = {};
 
 const IconsetProperties = {
-  name: "string",
-  size: "number",
-  version: "string",
+  name: "",
+  size: "",
+  version: "",
 };
 
 export const Iconset = createPolymerComponent<

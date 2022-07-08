@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type {
@@ -10,18 +11,19 @@ const CheckboxGroupEventMapper = eventMapper<CheckboxGroupEventMap>();
 const CheckboxGroupEvents = {
   ...CheckboxGroupEventMapper("onInvalidChanged", "invalid-changed"),
   ...CheckboxGroupEventMapper("onValueChanged", "value-changed"),
+  ...CheckboxGroupEventMapper("onValidated", "validated"),
 };
 
 const CheckboxGroupProperties = {
-  value: "string[]",
-  ariaTarget: "HTMLElement",
-  helperText: "string",
-  errorMessage: "string",
-  label: "string | null | undefined",
-  invalid: "boolean",
-  required: "boolean",
-  disabled: "boolean",
-  version: "string",
+  value: "",
+  ariaTarget: "",
+  helperText: "",
+  errorMessage: "",
+  label: "",
+  invalid: "",
+  required: "",
+  disabled: "",
+  version: "",
 };
 
 export const CheckboxGroup = createPolymerComponent<

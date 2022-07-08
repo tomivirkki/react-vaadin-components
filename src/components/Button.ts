@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type { Button as ButtonClass } from "@vaadin/button/vaadin-button";
@@ -6,9 +7,9 @@ import type { Button as ButtonClass } from "@vaadin/button/vaadin-button";
 const ButtonEvents = {};
 
 const ButtonProperties = {
-  disabled: "boolean",
-  tabindex: "number | null | undefined",
-  version: "string",
+  disabled: "",
+  tabindex: "",
+  version: "",
 };
 
 export const Button = createPolymerComponent<ButtonClass, typeof ButtonEvents>(

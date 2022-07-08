@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type { FormItem as FormItemClass } from "@vaadin/form-layout/vaadin-form-item";
@@ -23,8 +24,8 @@ export const FormItem = createPolymerComponent<
 const FormLayoutEvents = {};
 
 const FormLayoutProperties = {
-  responsiveSteps: "FormLayoutResponsiveStep[]",
-  version: "string",
+  responsiveSteps: "",
+  version: "",
 };
 
 export const FormLayout = createPolymerComponent<

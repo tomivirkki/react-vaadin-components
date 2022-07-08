@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type { AvatarGroup as AvatarGroupClass } from "@vaadin/avatar-group/vaadin-avatar-group";
@@ -6,10 +7,10 @@ import type { AvatarGroup as AvatarGroupClass } from "@vaadin/avatar-group/vaadi
 const AvatarGroupEvents = {};
 
 const AvatarGroupProperties = {
-  items: "AvatarGroupItem[] | undefined",
-  maxItemsVisible: "number | null | undefined",
-  i18n: "AvatarGroupI18n",
-  version: "string",
+  items: "",
+  maxItemsVisible: "",
+  i18n: "",
+  version: "",
 };
 
 export const AvatarGroup = createPolymerComponent<

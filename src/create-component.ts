@@ -1,5 +1,6 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { createComponent, EventName } from "@lit-labs/react";
 
 export const context = {
@@ -7,11 +8,9 @@ export const context = {
 };
 
 function suppressLitDevModeWarning() {
-  const window = globalThis as any;
-  window.litIssuedWarnings = window.litIssuedWarnings || new Set();
-  window.litIssuedWarnings.add(
-    "Lit is in dev mode. Not recommended for production! See https://lit.dev/msg/dev-mode for more information."
-  );
+  (globalThis as any).litIssuedWarnings ||= new Set([
+    "Lit is in dev mode. Not recommended for production! See https://lit.dev/msg/dev-mode for more information.",
+  ]);
 }
 
 type Events = Record<string, EventName | string>;
@@ -19,14 +18,21 @@ type Constructor<T> = {
   new (): T;
 };
 
+export type RenderersConfig = {
+  childRenderer?: string;
+  components?: Record<string, string>;
+  componentRenderers?: Record<string, string>;
+};
+
+// TODO: Rename to createVaadinComponent
 export function createPolymerComponent<I extends HTMLElement, E extends Events>(
   tagName: string,
   properties: { [key: string]: any },
   events: E,
   importFunc: Function,
-  importName: string
+  importName: string,
+  renderers?: RenderersConfig
 ) {
-
   if (context.isBrowser) {
     suppressLitDevModeWarning();
   }
@@ -51,27 +57,76 @@ export function createPolymerComponent<I extends HTMLElement, E extends Events>(
 
   const originalRenderFunc = (component as any).render;
   (component as any).render = (props: any, ...rest: any) => {
-    if (context.isBrowser && !('__called' in importFunc)) { 
+    props = { ...props };
+
+    // TODO: SSR support
+
+    // Run dynamic import for the component
+    if (context.isBrowser && !("__called" in importFunc)) {
       (importFunc as any).__called = true;
       importFunc();
     }
 
-    // TODO: Explicilty mark the components that support a renderer. Remove "renderer" from the type.
-    if (context.isBrowser && props.renderer) {
-      const renderRoot = document.createElement('div')
-      const portal = ReactDOM.createPortal(props.children, renderRoot);
+    // A function which appends the childContainer inside the renderer's root element and the child container.
+    const [childrenRendererFunction, childContainer] = React.useMemo(() => {
+      const container = context.isBrowser
+        ? document.createElement("div")
+        : null;
 
+      const rendererFunction = (root: HTMLElement) => {
+        if (container && container.parentElement !== root) {
+          root.appendChild(container);
+        }
+      };
+
+      return [rendererFunction, container];
+    }, []);
+
+    // Create a Portal for the component's children if they're being rendered into a separate element.
+    if (renderers?.childRenderer && childContainer) {
       props = {
         ...props,
-        ref: (el: any) => {
-          if (el?._element) {
-            // TODO: Handle different types of renderer
-            el._element.renderer = (root: HTMLElement) => root.appendChild(renderRoot);
-          }
-        },
-        children: portal,
+        children: ReactDOM.createPortal(props.children, childContainer),
+        [renderers.childRenderer]: childrenRendererFunction,
       };
     }
+
+    // Components
+    const componentToRendererMap = React.useMemo(() => new Map(), []);
+    Object.entries(renderers?.components || {})
+      .filter(([api]) => api in props)
+      .forEach(([api, renderer]) => {
+        // TODO: Use portal for compoenents?
+        if (!componentToRendererMap.has(api)) {
+          componentToRendererMap.set(api, (root: any) => {
+            if (!root.__reactRoot) {
+              root.__reactRoot = createRoot(root);
+            }
+            root.__reactRoot.render(props[api]);
+          });
+        }
+        props[renderer] = componentToRendererMap.get(api);
+      });
+
+    // Component renderers
+    const componentRendererToRendererMap = React.useMemo(() => new Map(), []);
+    Object.entries(renderers?.componentRenderers || {})
+      .filter(([api]) => api in props)
+      .forEach(([api, renderer]) => {
+        if (!componentRendererToRendererMap.has(api)) {
+          componentRendererToRendererMap.set(
+            api,
+            (root: any, _: any, model: any) => {
+              if (!root.__reactRoot) {
+                root.__reactRoot = createRoot(root);
+              }
+              root.__reactRoot.render(props[api](model));
+            }
+          );
+        }
+
+        props[renderer] = componentRendererToRendererMap.get(api);
+      });
 
     return originalRenderFunc(props, ...rest);
   };

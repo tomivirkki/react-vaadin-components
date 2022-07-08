@@ -1,10 +1,11 @@
-import { createPolymerComponent, eventMapper } from "../src/create-component";
+import { createPolymerComponent, eventMapper, RenderersConfig } from "../src/create-component";
+
+// TODO: Genrerate the test component also
 
 export type TestComponentType = HTMLElement & {
-  /**
-   * Value of the component
-   */
   value: string;
+
+  itemRenderer: Function;
 };
 
 const TestComponentClass = class extends HTMLElement {} as TestComponentType &
@@ -12,6 +13,8 @@ const TestComponentClass = class extends HTMLElement {} as TestComponentType &
 
 const testComponentProperties = {
   value: "string",
+  renderer: "Function",
+  childRenderer: "Function",
 };
 
 type TestComponentEventMap = {
@@ -23,7 +26,10 @@ const testComponentEvents = {
   ...testComponentEventMapper("onChange", "change"),
 };
 
-export const createTestComponent = (importFunc?: Function) => {
+export const createTestComponent = (
+  importFunc?: Function,
+  renderers?: RenderersConfig
+) => {
   if (!importFunc) {
     importFunc = () => {
       customElements.define("test-component", TestComponentClass);
@@ -39,6 +45,7 @@ export const createTestComponent = (importFunc?: Function) => {
     testComponentProperties,
     testComponentEvents,
     importFunc,
-    "TestComponent"
+    "TestComponent",
+    renderers
   );
 };

@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type {
@@ -12,20 +13,21 @@ const CustomFieldEvents = {
   ...CustomFieldEventMapper("onInternalTab", "internal-tab"),
   ...CustomFieldEventMapper("onInvalidChanged", "invalid-changed"),
   ...CustomFieldEventMapper("onValueChanged", "value-changed"),
+  ...CustomFieldEventMapper("onValidated", "validated"),
 };
 
 const CustomFieldProperties = {
-  inputs: "HTMLElement[] | undefined",
-  i18n: "CustomFieldI18n",
-  name: "string | null | undefined",
-  value: "string | null | undefined",
-  ariaTarget: "HTMLElement",
-  helperText: "string",
-  errorMessage: "string",
-  label: "string | null | undefined",
-  invalid: "boolean",
-  required: "boolean",
-  version: "string",
+  inputs: "",
+  i18n: "",
+  name: "",
+  value: "",
+  ariaTarget: "",
+  helperText: "",
+  errorMessage: "",
+  label: "",
+  invalid: "",
+  required: "",
+  version: "",
 };
 
 export const CustomField = createPolymerComponent<

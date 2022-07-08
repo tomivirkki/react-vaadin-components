@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type {
@@ -13,24 +14,44 @@ const DialogEvents = {
 };
 
 const DialogProperties = {
-  opened: "boolean",
-  noCloseOnOutsideClick: "boolean",
-  noCloseOnEsc: "boolean",
-  ariaLabel: "string",
-  renderer: "DialogRenderer | null | undefined",
-  headerTitle: "string",
-  headerRenderer: "DialogRenderer | null | undefined",
-  footerRenderer: "DialogRenderer | null | undefined",
-  modeless: "boolean",
-  version: "string",
-  draggable: "boolean",
-  resizable: "boolean",
+  opened: "",
+  noCloseOnOutsideClick: "",
+  noCloseOnEsc: "",
+  ariaLabel: "",
+  renderer: "",
+  headerTitle: "",
+  headerRenderer: "",
+  footerRenderer: "",
+  modeless: "",
+  version: "",
+  draggable: "",
+  resizable: "",
+  headerComponent: "",
+  footerComponent: "",
 };
 
-export const Dialog = createPolymerComponent<DialogClass, typeof DialogEvents>(
+type DialogClassExtended = Omit<
+  DialogClass,
+  "renderer" | "headerRenderer" | "footerRenderer"
+> & {
+  headerComponent: React.ReactNode;
+  footerComponent: React.ReactNode;
+};
+
+export const Dialog = createPolymerComponent<
+  DialogClassExtended,
+  typeof DialogEvents
+>(
   "vaadin-dialog",
   DialogProperties,
   DialogEvents,
   () => import("@vaadin/dialog/vaadin-dialog"),
-  "Dialog"
+  "Dialog",
+  {
+    childRenderer: "renderer",
+    components: {
+      headerComponent: "headerRenderer",
+      footerComponent: "footerRenderer",
+    },
+  }
 );

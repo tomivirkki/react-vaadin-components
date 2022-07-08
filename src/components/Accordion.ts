@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type { AccordionPanel as AccordionPanelClass } from "@vaadin/accordion/vaadin-accordion-panel";
@@ -15,12 +16,12 @@ const AccordionPanelEvents = {
 };
 
 const AccordionPanelProperties = {
-  opened: "boolean",
-  autofocus: "boolean",
-  focusElement: "HTMLElement | null | undefined",
-  disabled: "boolean",
-  tabindex: "number | null | undefined",
-  version: "string",
+  opened: "",
+  autofocus: "",
+  focusElement: "",
+  disabled: "",
+  tabindex: "",
+  version: "",
 };
 
 export const AccordionPanel = createPolymerComponent<
@@ -41,9 +42,9 @@ const AccordionEvents = {
 };
 
 const AccordionProperties = {
-  opened: "number | null",
-  items: "AccordionPanel[]",
-  version: "string",
+  opened: "",
+  items: "",
+  version: "",
 };
 
 export const Accordion = createPolymerComponent<

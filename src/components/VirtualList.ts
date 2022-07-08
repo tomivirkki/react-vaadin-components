@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type { VirtualList as VirtualListClass } from "@vaadin/virtual-list/vaadin-virtual-list";
@@ -6,11 +7,11 @@ import type { VirtualList as VirtualListClass } from "@vaadin/virtual-list/vaadi
 const VirtualListEvents = {};
 
 const VirtualListProperties = {
-  firstVisibleIndex: "number",
-  lastVisibleIndex: "number",
-  renderer: "VirtualListRenderer<TItem> | undefined",
-  items: "TItem[] | undefined",
-  version: "string",
+  firstVisibleIndex: "",
+  lastVisibleIndex: "",
+  renderer: "",
+  items: "",
+  version: "",
 };
 
 export const VirtualList = createPolymerComponent<

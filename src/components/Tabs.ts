@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type { Tab as TabClass } from "@vaadin/tabs/vaadin-tab";
@@ -8,10 +9,10 @@ import type { Tabs as TabsClass, TabsEventMap } from "@vaadin/tabs/vaadin-tabs";
 const TabEvents = {};
 
 const TabProperties = {
-  version: "string",
-  value: "string",
-  selected: "boolean",
-  disabled: "boolean",
+  version: "",
+  disabled: "",
+  value: "",
+  selected: "",
 };
 
 export const Tab = createPolymerComponent<TabClass, typeof TabEvents>(
@@ -29,10 +30,10 @@ const TabsEvents = {
 };
 
 const TabsProperties = {
-  version: "string",
-  selected: "number | null | undefined",
-  orientation: "TabsOrientation",
-  items: "Element[] | undefined",
+  version: "",
+  selected: "",
+  orientation: "",
+  items: "",
 };
 
 export const Tabs = createPolymerComponent<TabsClass, typeof TabsEvents>(

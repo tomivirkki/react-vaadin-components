@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type {
@@ -12,11 +13,11 @@ const MenuBarEvents = {
 };
 
 const MenuBarProperties = {
-  items: "MenuBarItem[]",
-  i18n: "MenuBarI18n",
-  disabled: "boolean",
-  openOnHover: "boolean",
-  version: "string",
+  items: "",
+  i18n: "",
+  disabled: "",
+  openOnHover: "",
+  version: "",
 };
 
 export const MenuBar = createPolymerComponent<

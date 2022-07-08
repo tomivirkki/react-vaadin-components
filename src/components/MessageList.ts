@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type { MessageList as MessageListClass } from "@vaadin/message-list/vaadin-message-list";
@@ -8,8 +9,8 @@ import type { Message as MessageClass } from "@vaadin/message-list/vaadin-messag
 const MessageListEvents = {};
 
 const MessageListProperties = {
-  items: "!Array<!MessageListItem>",
-  version: "string",
+  items: "",
+  version: "",
 };
 
 export const MessageList = createPolymerComponent<
@@ -26,12 +27,12 @@ export const MessageList = createPolymerComponent<
 const MessageEvents = {};
 
 const MessageProperties = {
-  time: "string | null | undefined",
-  userName: "string | null | undefined",
-  userAbbr: "string | null | undefined",
-  userImg: "string | null | undefined",
-  userColorIndex: "number | null | undefined",
-  version: "string",
+  time: "",
+  userName: "",
+  userAbbr: "",
+  userImg: "",
+  userColorIndex: "",
+  version: "",
 };
 
 export const Message = createPolymerComponent<

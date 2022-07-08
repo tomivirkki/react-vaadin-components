@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type { ProgressBar as ProgressBarClass } from "@vaadin/progress-bar/vaadin-progress-bar";
@@ -6,11 +7,11 @@ import type { ProgressBar as ProgressBarClass } from "@vaadin/progress-bar/vaadi
 const ProgressBarEvents = {};
 
 const ProgressBarProperties = {
-  value: "number | null | undefined",
-  min: "number",
-  max: "number",
-  indeterminate: "boolean",
-  version: "string",
+  value: "",
+  min: "",
+  max: "",
+  indeterminate: "",
+  version: "",
 };
 
 export const ProgressBar = createPolymerComponent<

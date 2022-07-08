@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type {
@@ -14,11 +15,11 @@ const ListBoxEvents = {
 };
 
 const ListBoxProperties = {
-  selected: "number | null | undefined",
-  orientation: '"horizontal" | "vertical"',
-  items: "Element[] | undefined",
-  focused: "Element | null",
-  version: "string",
+  selected: "",
+  orientation: "",
+  items: "",
+  focused: "",
+  version: "",
 };
 
 export const ListBox = createPolymerComponent<

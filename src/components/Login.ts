@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type {
@@ -18,13 +19,13 @@ const LoginFormEvents = {
 };
 
 const LoginFormProperties = {
-  version: "string",
-  action: "string | null",
-  disabled: "boolean",
-  error: "boolean",
-  noForgotPassword: "boolean",
-  noAutofocus: "boolean",
-  i18n: "LoginI18n",
+  version: "",
+  action: "",
+  disabled: "",
+  error: "",
+  noForgotPassword: "",
+  noAutofocus: "",
+  i18n: "",
 };
 
 export const LoginForm = createPolymerComponent<
@@ -45,16 +46,16 @@ const LoginOverlayEvents = {
 };
 
 const LoginOverlayProperties = {
-  description: "string",
-  opened: "boolean",
-  title: "string",
-  version: "string",
-  action: "string | null",
-  disabled: "boolean",
-  error: "boolean",
-  noForgotPassword: "boolean",
-  noAutofocus: "boolean",
-  i18n: "LoginI18n",
+  description: "",
+  opened: "",
+  title: "",
+  version: "",
+  action: "",
+  disabled: "",
+  error: "",
+  noForgotPassword: "",
+  noAutofocus: "",
+  i18n: "",
 };
 
 export const LoginOverlay = createPolymerComponent<

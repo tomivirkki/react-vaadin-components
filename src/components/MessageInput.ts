@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type { MessageInput as MessageInputClass } from "@vaadin/message-input/vaadin-message-input";
@@ -6,10 +7,10 @@ import type { MessageInput as MessageInputClass } from "@vaadin/message-input/va
 const MessageInputEvents = {};
 
 const MessageInputProperties = {
-  value: "string | null | undefined",
-  i18n: "MessageInputI18n",
-  disabled: "boolean",
-  version: "string",
+  value: "",
+  i18n: "",
+  disabled: "",
+  version: "",
 };
 
 export const MessageInput = createPolymerComponent<

@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type {
@@ -12,27 +13,28 @@ const SelectEvents = {
   ...SelectEventMapper("onInvalidChanged", "invalid-changed"),
   ...SelectEventMapper("onOpenedChanged", "opened-changed"),
   ...SelectEventMapper("onValueChanged", "value-changed"),
+  ...SelectEventMapper("onValidated", "validated"),
 };
 
 const SelectProperties = {
-  items: "!Array<!SelectItem>",
-  opened: "boolean",
-  renderer: "SelectRenderer | undefined",
-  value: "string",
-  name: "string | null | undefined",
-  placeholder: "string | null | undefined",
-  readonly: "boolean",
-  autofocus: "boolean",
-  focusElement: "HTMLElement | null | undefined",
-  disabled: "boolean",
-  tabindex: "number | null | undefined",
-  ariaTarget: "HTMLElement",
-  helperText: "string",
-  errorMessage: "string",
-  label: "string | null | undefined",
-  invalid: "boolean",
-  required: "boolean",
-  version: "string",
+  items: "",
+  opened: "",
+  renderer: "",
+  value: "",
+  name: "",
+  placeholder: "",
+  readonly: "",
+  autofocus: "",
+  focusElement: "",
+  disabled: "",
+  tabindex: "",
+  ariaTarget: "",
+  helperText: "",
+  errorMessage: "",
+  label: "",
+  invalid: "",
+  required: "",
+  version: "",
 };
 
 export const Select = createPolymerComponent<SelectClass, typeof SelectEvents>(

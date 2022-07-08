@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type {
@@ -11,30 +12,31 @@ const DateTimePickerEvents = {
   ...DateTimePickerEventMapper("onChange", "change"),
   ...DateTimePickerEventMapper("onInvalidChanged", "invalid-changed"),
   ...DateTimePickerEventMapper("onValueChanged", "value-changed"),
+  ...DateTimePickerEventMapper("onValidated", "validated"),
 };
 
 const DateTimePickerProperties = {
-  name: "string | null | undefined",
-  value: "string",
-  min: "string | undefined",
-  max: "string | undefined",
-  datePlaceholder: "string",
-  timePlaceholder: "string",
-  step: "number | null | undefined",
-  initialPosition: "string",
-  showWeekNumbers: "boolean",
-  autoOpenDisabled: "boolean",
-  readonly: "boolean",
-  autofocus: "boolean",
-  i18n: "DateTimePickerI18n",
-  ariaTarget: "HTMLElement",
-  helperText: "string",
-  errorMessage: "string",
-  label: "string | null | undefined",
-  invalid: "boolean",
-  required: "boolean",
-  disabled: "boolean",
-  version: "string",
+  name: "",
+  value: "",
+  min: "",
+  max: "",
+  datePlaceholder: "",
+  timePlaceholder: "",
+  step: "",
+  initialPosition: "",
+  showWeekNumbers: "",
+  autoOpenDisabled: "",
+  readonly: "",
+  autofocus: "",
+  i18n: "",
+  ariaTarget: "",
+  helperText: "",
+  errorMessage: "",
+  label: "",
+  invalid: "",
+  required: "",
+  disabled: "",
+  version: "",
 };
 
 export const DateTimePicker = createPolymerComponent<

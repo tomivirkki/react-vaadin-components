@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type {
@@ -23,22 +24,22 @@ const UploadEvents = {
 };
 
 const UploadProperties = {
-  nodrop: "boolean",
-  target: "string",
-  method: "UploadMethod",
-  headers: "string | object | null",
-  timeout: "number",
-  files: "UploadFile[]",
-  maxFiles: "number",
-  maxFilesReached: "boolean",
-  accept: "string",
-  maxFileSize: "number",
-  formDataName: "string",
-  noAuto: "boolean",
-  withCredentials: "boolean",
-  capture: "string | null | undefined",
-  i18n: "!UploadI18n",
-  version: "string",
+  nodrop: "",
+  target: "",
+  method: "",
+  headers: "",
+  timeout: "",
+  files: "",
+  maxFiles: "",
+  maxFilesReached: "",
+  accept: "",
+  maxFileSize: "",
+  formDataName: "",
+  noAuto: "",
+  withCredentials: "",
+  capture: "",
+  i18n: "",
+  version: "",
 };
 
 export const Upload = createPolymerComponent<UploadClass, typeof UploadEvents>(

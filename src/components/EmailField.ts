@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type {
@@ -12,37 +13,37 @@ const EmailFieldEvents = {
   ...EmailFieldEventMapper("onChange", "change"),
   ...EmailFieldEventMapper("onInvalidChanged", "invalid-changed"),
   ...EmailFieldEventMapper("onValueChanged", "value-changed"),
+  ...EmailFieldEventMapper("onValidated", "validated"),
 };
 
 const EmailFieldProperties = {
-  maxlength: "number | null | undefined",
-  minlength: "number | null | undefined",
-  pattern: "string",
-  preventInvalidInput: "boolean",
-  autofocus: "boolean",
-  focusElement: "HTMLElement | null | undefined",
-  stateTarget: "HTMLElement | null",
-  disabled: "boolean",
-  ariaTarget: "HTMLElement",
-  helperText: "string",
-  errorMessage: "string",
-  allowedCharPattern: "string",
-  autoselect: "boolean",
-  clearButtonVisible: "boolean",
-  name: "string",
-  placeholder: "string",
-  readonly: "boolean",
-  title: "string",
-  autocomplete: "string | undefined",
-  autocorrect: '"on" | "off" | undefined',
-  autocapitalize:
-    '"on" | "off" | "none" | "characters" | "words" | "sentences" | undefined',
-  inputElement: "HTMLElement",
-  value: "string",
-  label: "string | null | undefined",
-  invalid: "boolean",
-  required: "boolean",
-  version: "string",
+  maxlength: "",
+  minlength: "",
+  pattern: "",
+  preventInvalidInput: "",
+  autofocus: "",
+  focusElement: "",
+  stateTarget: "",
+  disabled: "",
+  ariaTarget: "",
+  helperText: "",
+  errorMessage: "",
+  allowedCharPattern: "",
+  autoselect: "",
+  clearButtonVisible: "",
+  name: "",
+  placeholder: "",
+  readonly: "",
+  title: "",
+  autocomplete: "",
+  autocorrect: "",
+  autocapitalize: "",
+  inputElement: "",
+  value: "",
+  label: "",
+  invalid: "",
+  required: "",
+  version: "",
 };
 
 export const EmailField = createPolymerComponent<

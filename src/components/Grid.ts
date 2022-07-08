@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+type PropType<TObj, TProp extends keyof TObj> = TObj[TProp];
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type { GridColumnGroup as GridColumnGroupClass } from "@vaadin/grid/vaadin-grid-column-group";
@@ -39,85 +40,147 @@ import type { Grid as GridClass, GridEventMap } from "@vaadin/grid/vaadin-grid";
 const GridColumnGroupEvents = {};
 
 const GridColumnGroupProperties = {
-  flexGrow: "number",
-  width: "string | null | undefined",
-  resizable: "boolean | null | undefined",
-  frozen: "boolean",
-  frozenToEnd: "boolean",
-  hidden: "boolean",
-  header: "string | null | undefined",
-  textAlign: "start|center|end",
-  headerRenderer: "GridHeaderFooterRenderer<TItem> | null | undefined",
-  footerRenderer: "GridHeaderFooterRenderer<TItem> | null | undefined",
+  flexGrow: "",
+  width: "",
+  resizable: "",
+  frozen: "",
+  frozenToEnd: "",
+  hidden: "",
+  header: "",
+  textAlign: "",
+  headerRenderer: "",
+  footerRenderer: "",
+  headerComponent: "",
+  footerComponent: "",
+};
+
+type GridColumnGroupClassExtended = Omit<
+  GridColumnGroupClass,
+  "headerRenderer" | "footerRenderer"
+> & {
+  headerComponent: React.ReactNode;
+  footerComponent: React.ReactNode;
 };
 
 export const GridColumnGroup = createPolymerComponent<
-  GridColumnGroupClass,
+  GridColumnGroupClassExtended,
   typeof GridColumnGroupEvents
 >(
   "vaadin-grid-column-group",
   GridColumnGroupProperties,
   GridColumnGroupEvents,
   () => import("@vaadin/grid/vaadin-grid-column-group"),
-  "GridColumnGroup"
+  "GridColumnGroup",
+  {
+    components: {
+      headerComponent: "headerRenderer",
+      footerComponent: "footerRenderer",
+    },
+  }
 );
 
 const GridColumnEvents = {};
 
 const GridColumnProperties = {
-  width: "string | null | undefined",
-  flexGrow: "number",
-  renderer: "GridBodyRenderer<TItem> | null | undefined",
-  path: "string | null | undefined",
-  autoWidth: "boolean",
-  resizable: "boolean | null | undefined",
-  frozen: "boolean",
-  frozenToEnd: "boolean",
-  hidden: "boolean",
-  header: "string | null | undefined",
-  textAlign: "start|center|end",
-  headerRenderer: "GridHeaderFooterRenderer<TItem> | null | undefined",
-  footerRenderer: "GridHeaderFooterRenderer<TItem> | null | undefined",
+  width: "",
+  flexGrow: "",
+  renderer: "",
+  path: "",
+  autoWidth: "",
+  resizable: "",
+  frozen: "",
+  frozenToEnd: "",
+  hidden: "",
+  header: "",
+  textAlign: "",
+  headerRenderer: "",
+  footerRenderer: "",
+  headerComponent: "",
+  footerComponent: "",
+  componentRenderer: "",
+};
+
+type GridColumnClassExtended = Omit<
+  GridColumnClass,
+  "headerRenderer" | "footerRenderer" | "renderer"
+> & {
+  headerComponent: React.ReactNode;
+  footerComponent: React.ReactNode;
+  componentRenderer: (
+    model: Parameters<
+      Exclude<PropType<GridColumnClass, "renderer">, undefined | null>
+    >[2]
+  ) => React.ReactNode;
 };
 
 export const GridColumn = createPolymerComponent<
-  GridColumnClass,
+  GridColumnClassExtended,
   typeof GridColumnEvents
 >(
   "vaadin-grid-column",
   GridColumnProperties,
   GridColumnEvents,
   () => import("@vaadin/grid/vaadin-grid-column"),
-  "GridColumn"
+  "GridColumn",
+  {
+    components: {
+      headerComponent: "headerRenderer",
+      footerComponent: "footerRenderer",
+    },
+    componentRenderers: { componentRenderer: "renderer" },
+  }
 );
 
 const GridFilterColumnEvents = {};
 
 const GridFilterColumnProperties = {
-  width: "string | null | undefined",
-  flexGrow: "number",
-  renderer: "GridBodyRenderer<TItem> | null | undefined",
-  path: "string | null | undefined",
-  autoWidth: "boolean",
-  resizable: "boolean | null | undefined",
-  frozen: "boolean",
-  frozenToEnd: "boolean",
-  hidden: "boolean",
-  header: "string | null | undefined",
-  textAlign: "start|center|end",
-  headerRenderer: "GridHeaderFooterRenderer<TItem> | null | undefined",
-  footerRenderer: "GridHeaderFooterRenderer<TItem> | null | undefined",
+  width: "",
+  flexGrow: "",
+  renderer: "",
+  path: "",
+  autoWidth: "",
+  resizable: "",
+  frozen: "",
+  frozenToEnd: "",
+  hidden: "",
+  header: "",
+  textAlign: "",
+  headerRenderer: "",
+  footerRenderer: "",
+  headerComponent: "",
+  footerComponent: "",
+  componentRenderer: "",
+};
+
+type GridFilterColumnClassExtended = Omit<
+  GridFilterColumnClass,
+  "headerRenderer" | "footerRenderer" | "renderer"
+> & {
+  headerComponent: React.ReactNode;
+  footerComponent: React.ReactNode;
+  componentRenderer: (
+    model: Parameters<
+      Exclude<PropType<GridFilterColumnClass, "renderer">, undefined | null>
+    >[2]
+  ) => React.ReactNode;
 };
 
 export const GridFilterColumn = createPolymerComponent<
-  GridFilterColumnClass,
+  GridFilterColumnClassExtended,
   typeof GridFilterColumnEvents
 >(
   "vaadin-grid-filter-column",
   GridFilterColumnProperties,
   GridFilterColumnEvents,
   () => import("@vaadin/grid/vaadin-grid-filter-column"),
-  "GridFilterColumn"
+  "GridFilterColumn",
+  {
+    components: {
+      headerComponent: "headerRenderer",
+      footerComponent: "footerRenderer",
+    },
+    componentRenderers: { componentRenderer: "renderer" },
+  }
 );
 
 const GridFilterEventMapper = eventMapper<GridFilterEventMap>();
@@ -126,8 +189,8 @@ const GridFilterEvents = {
 };
 
 const GridFilterProperties = {
-  path: "string | null | undefined",
-  value: "string | null | undefined",
+  path: "",
+  value: "",
 };
 
 export const GridFilter = createPolymerComponent<
@@ -148,32 +211,55 @@ const GridSelectionColumnEvents = {
 };
 
 const GridSelectionColumnProperties = {
-  selectAll: "boolean",
-  autoSelect: "boolean",
-  width: "string | null | undefined",
-  flexGrow: "number",
-  renderer: "GridBodyRenderer<TItem> | null | undefined",
-  path: "string | null | undefined",
-  autoWidth: "boolean",
-  resizable: "boolean | null | undefined",
-  frozen: "boolean",
-  frozenToEnd: "boolean",
-  hidden: "boolean",
-  header: "string | null | undefined",
-  textAlign: "start|center|end",
-  headerRenderer: "GridHeaderFooterRenderer<TItem> | null | undefined",
-  footerRenderer: "GridHeaderFooterRenderer<TItem> | null | undefined",
+  selectAll: "",
+  autoSelect: "",
+  width: "",
+  flexGrow: "",
+  renderer: "",
+  path: "",
+  autoWidth: "",
+  resizable: "",
+  frozen: "",
+  frozenToEnd: "",
+  hidden: "",
+  header: "",
+  textAlign: "",
+  headerRenderer: "",
+  footerRenderer: "",
+  headerComponent: "",
+  footerComponent: "",
+  componentRenderer: "",
+};
+
+type GridSelectionColumnClassExtended = Omit<
+  GridSelectionColumnClass,
+  "headerRenderer" | "footerRenderer" | "renderer"
+> & {
+  headerComponent: React.ReactNode;
+  footerComponent: React.ReactNode;
+  componentRenderer: (
+    model: Parameters<
+      Exclude<PropType<GridSelectionColumnClass, "renderer">, undefined | null>
+    >[2]
+  ) => React.ReactNode;
 };
 
 export const GridSelectionColumn = createPolymerComponent<
-  GridSelectionColumnClass,
+  GridSelectionColumnClassExtended,
   typeof GridSelectionColumnEvents
 >(
   "vaadin-grid-selection-column",
   GridSelectionColumnProperties,
   GridSelectionColumnEvents,
   () => import("@vaadin/grid/vaadin-grid-selection-column"),
-  "GridSelectionColumn"
+  "GridSelectionColumn",
+  {
+    components: {
+      headerComponent: "headerRenderer",
+      footerComponent: "footerRenderer",
+    },
+    componentRenderers: { componentRenderer: "renderer" },
+  }
 );
 
 const GridSortColumnEventMapper = eventMapper<GridSortColumnEventMap>();
@@ -182,31 +268,54 @@ const GridSortColumnEvents = {
 };
 
 const GridSortColumnProperties = {
-  direction: "GridSorterDirection | undefined",
-  width: "string | null | undefined",
-  flexGrow: "number",
-  renderer: "GridBodyRenderer<TItem> | null | undefined",
-  path: "string | null | undefined",
-  autoWidth: "boolean",
-  resizable: "boolean | null | undefined",
-  frozen: "boolean",
-  frozenToEnd: "boolean",
-  hidden: "boolean",
-  header: "string | null | undefined",
-  textAlign: "start|center|end",
-  headerRenderer: "GridHeaderFooterRenderer<TItem> | null | undefined",
-  footerRenderer: "GridHeaderFooterRenderer<TItem> | null | undefined",
+  direction: "",
+  width: "",
+  flexGrow: "",
+  renderer: "",
+  path: "",
+  autoWidth: "",
+  resizable: "",
+  frozen: "",
+  frozenToEnd: "",
+  hidden: "",
+  header: "",
+  textAlign: "",
+  headerRenderer: "",
+  footerRenderer: "",
+  headerComponent: "",
+  footerComponent: "",
+  componentRenderer: "",
+};
+
+type GridSortColumnClassExtended = Omit<
+  GridSortColumnClass,
+  "headerRenderer" | "footerRenderer" | "renderer"
+> & {
+  headerComponent: React.ReactNode;
+  footerComponent: React.ReactNode;
+  componentRenderer: (
+    model: Parameters<
+      Exclude<PropType<GridSortColumnClass, "renderer">, undefined | null>
+    >[2]
+  ) => React.ReactNode;
 };
 
 export const GridSortColumn = createPolymerComponent<
-  GridSortColumnClass,
+  GridSortColumnClassExtended,
   typeof GridSortColumnEvents
 >(
   "vaadin-grid-sort-column",
   GridSortColumnProperties,
   GridSortColumnEvents,
   () => import("@vaadin/grid/vaadin-grid-sort-column"),
-  "GridSortColumn"
+  "GridSortColumn",
+  {
+    components: {
+      headerComponent: "headerRenderer",
+      footerComponent: "footerRenderer",
+    },
+    componentRenderers: { componentRenderer: "renderer" },
+  }
 );
 
 const GridSorterEventMapper = eventMapper<GridSorterEventMap>();
@@ -216,8 +325,8 @@ const GridSorterEvents = {
 };
 
 const GridSorterProperties = {
-  path: "string | null | undefined",
-  direction: "GridSorterDirection | undefined",
+  path: "",
+  direction: "",
 };
 
 export const GridSorter = createPolymerComponent<
@@ -234,31 +343,54 @@ export const GridSorter = createPolymerComponent<
 const GridTreeColumnEvents = {};
 
 const GridTreeColumnProperties = {
-  itemHasChildrenPath: "string",
-  width: "string | null | undefined",
-  flexGrow: "number",
-  renderer: "GridBodyRenderer<TItem> | null | undefined",
-  path: "string | null | undefined",
-  autoWidth: "boolean",
-  resizable: "boolean | null | undefined",
-  frozen: "boolean",
-  frozenToEnd: "boolean",
-  hidden: "boolean",
-  header: "string | null | undefined",
-  textAlign: "start|center|end",
-  headerRenderer: "GridHeaderFooterRenderer<TItem> | null | undefined",
-  footerRenderer: "GridHeaderFooterRenderer<TItem> | null | undefined",
+  itemHasChildrenPath: "",
+  width: "",
+  flexGrow: "",
+  renderer: "",
+  path: "",
+  autoWidth: "",
+  resizable: "",
+  frozen: "",
+  frozenToEnd: "",
+  hidden: "",
+  header: "",
+  textAlign: "",
+  headerRenderer: "",
+  footerRenderer: "",
+  headerComponent: "",
+  footerComponent: "",
+  componentRenderer: "",
+};
+
+type GridTreeColumnClassExtended = Omit<
+  GridTreeColumnClass,
+  "headerRenderer" | "footerRenderer" | "renderer"
+> & {
+  headerComponent: React.ReactNode;
+  footerComponent: React.ReactNode;
+  componentRenderer: (
+    model: Parameters<
+      Exclude<PropType<GridTreeColumnClass, "renderer">, undefined | null>
+    >[2]
+  ) => React.ReactNode;
 };
 
 export const GridTreeColumn = createPolymerComponent<
-  GridTreeColumnClass,
+  GridTreeColumnClassExtended,
   typeof GridTreeColumnEvents
 >(
   "vaadin-grid-tree-column",
   GridTreeColumnProperties,
   GridTreeColumnEvents,
   () => import("@vaadin/grid/vaadin-grid-tree-column"),
-  "GridTreeColumn"
+  "GridTreeColumn",
+  {
+    components: {
+      headerComponent: "headerRenderer",
+      footerComponent: "footerRenderer",
+    },
+    componentRenderers: { componentRenderer: "renderer" },
+  }
 );
 
 const GridTreeToggleEventMapper = eventMapper<GridTreeToggleEventMap>();
@@ -267,9 +399,9 @@ const GridTreeToggleEvents = {
 };
 
 const GridTreeToggleProperties = {
-  level: "number",
-  leaf: "boolean",
-  expanded: "boolean",
+  level: "",
+  leaf: "",
+  expanded: "",
 };
 
 export const GridTreeToggle = createPolymerComponent<
@@ -299,29 +431,29 @@ const GridEvents = {
 };
 
 const GridProperties = {
-  allRowsVisible: "boolean",
-  dropMode: "between|on-top|on-top-or-between|on-grid",
-  rowsDraggable: "boolean",
-  dragFilter: "GridDragAndDropFilter<TItem> | null | undefined",
-  dropFilter: "GridDragAndDropFilter<TItem> | null | undefined",
-  cellClassNameGenerator:
-    "GridCellClassNameGenerator<TItem> | null | undefined",
-  columnReorderingAllowed: "boolean",
-  multiSort: "boolean",
-  selectedItems: "TItem[]",
-  detailsOpenedItems: "TItem[]",
-  rowDetailsRenderer: "GridRowDetailsRenderer<TItem> | null | undefined",
-  pageSize: "number",
-  size: "number",
-  dataProvider: "GridDataProvider<TItem> | null | undefined",
-  loading: "boolean | null | undefined",
-  itemHasChildrenPath: "string",
-  itemIdPath: "string",
-  expandedItems: "TItem[]",
-  items: "TItem[] | null | undefined",
-  activeItem: "TItem | null",
-  version: "string",
-  disabled: "boolean",
+  allRowsVisible: "",
+  dropMode: "",
+  rowsDraggable: "",
+  dragFilter: "",
+  dropFilter: "",
+  cellClassNameGenerator: "",
+  columnReorderingAllowed: "",
+  multiSort: "",
+  multiSortPriority: "",
+  selectedItems: "",
+  detailsOpenedItems: "",
+  rowDetailsRenderer: "",
+  pageSize: "",
+  size: "",
+  dataProvider: "",
+  loading: "",
+  itemHasChildrenPath: "",
+  itemIdPath: "",
+  expandedItems: "",
+  items: "",
+  activeItem: "",
+  version: "",
+  disabled: "",
 };
 
 export const Grid = createPolymerComponent<GridClass, typeof GridEvents>(

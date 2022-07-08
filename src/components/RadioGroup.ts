@@ -1,4 +1,5 @@
 // Generated file. Do not edit.
+
 import { createPolymerComponent, eventMapper } from "../create-component";
 
 import type {
@@ -17,17 +18,17 @@ const RadioButtonEvents = {
 };
 
 const RadioButtonProperties = {
-  name: "string",
-  label: "string | null | undefined",
-  checked: "boolean",
-  stateTarget: "HTMLElement | null",
-  inputElement: "HTMLElement",
-  value: "string",
-  autofocus: "boolean",
-  focusElement: "HTMLElement | null | undefined",
-  tabindex: "number | null | undefined",
-  disabled: "boolean",
-  version: "string",
+  name: "",
+  label: "",
+  checked: "",
+  stateTarget: "",
+  inputElement: "",
+  value: "",
+  autofocus: "",
+  focusElement: "",
+  tabindex: "",
+  disabled: "",
+  version: "",
 };
 
 export const RadioButton = createPolymerComponent<
@@ -45,19 +46,20 @@ const RadioGroupEventMapper = eventMapper<RadioGroupEventMap>();
 const RadioGroupEvents = {
   ...RadioGroupEventMapper("onInvalidChanged", "invalid-changed"),
   ...RadioGroupEventMapper("onValueChanged", "value-changed"),
+  ...RadioGroupEventMapper("onValidated", "validated"),
 };
 
 const RadioGroupProperties = {
-  value: "string | null | undefined",
-  readonly: "boolean",
-  ariaTarget: "HTMLElement",
-  helperText: "string",
-  errorMessage: "string",
-  label: "string | null | undefined",
-  invalid: "boolean",
-  required: "boolean",
-  disabled: "boolean",
-  version: "string",
+  value: "",
+  readonly: "",
+  ariaTarget: "",
+  helperText: "",
+  errorMessage: "",
+  label: "",
+  invalid: "",
+  required: "",
+  disabled: "",
+  version: "",
 };
 
 export const RadioGroup = createPolymerComponent<
