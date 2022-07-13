@@ -14,10 +14,12 @@
     "@babel/preset-typescript": "^7.17.12",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
+    "@web/dev-server": "^0.1.32",
     "global-jsdom": "^8.4.0",
     "jest": "^28.1.0",
     "jest-environment-jsdom": "^28.1.0",
     "jsdom": "^19.0.0",
+    "puppeteer": "^15.4.0",
     "web-component-analyzer": "^2.0.0-next.4"
   },
   "files": [
