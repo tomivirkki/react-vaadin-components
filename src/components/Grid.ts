@@ -106,7 +106,7 @@ const GridColumnProperties = {
   footerRenderer: "",
   headerComponent: "",
   footerComponent: "",
-  componentRenderer: "",
+  itemRenderer: "",
 };
 
 type GridColumnClassExtended = Omit<
@@ -115,7 +115,7 @@ type GridColumnClassExtended = Omit<
 > & {
   headerComponent: React.ReactNode;
   footerComponent: React.ReactNode;
-  componentRenderer: (
+  itemRenderer: (
     model: Parameters<
       Exclude<PropType<GridColumnClass, "renderer">, undefined | null>
     >[2]
@@ -144,7 +144,7 @@ export const GridColumn = createPolymerComponent<
       headerComponent: "headerRenderer",
       footerComponent: "footerRenderer",
     },
-    componentRenderers: { componentRenderer: "renderer" },
+    itemRenderers: { itemRenderer: "renderer" },
   },
   getGridColumnPreRenderConfig
 );
@@ -167,7 +167,7 @@ const GridFilterColumnProperties = {
   footerRenderer: "",
   headerComponent: "",
   footerComponent: "",
-  componentRenderer: "",
+  itemRenderer: "",
 };
 
 type GridFilterColumnClassExtended = Omit<
@@ -176,7 +176,7 @@ type GridFilterColumnClassExtended = Omit<
 > & {
   headerComponent: React.ReactNode;
   footerComponent: React.ReactNode;
-  componentRenderer: (
+  itemRenderer: (
     model: Parameters<
       Exclude<PropType<GridFilterColumnClass, "renderer">, undefined | null>
     >[2]
@@ -205,7 +205,7 @@ export const GridFilterColumn = createPolymerComponent<
       headerComponent: "headerRenderer",
       footerComponent: "footerRenderer",
     },
-    componentRenderers: { componentRenderer: "renderer" },
+    itemRenderers: { itemRenderer: "renderer" },
   },
   getGridFilterColumnPreRenderConfig
 );
@@ -265,7 +265,7 @@ const GridSelectionColumnProperties = {
   footerRenderer: "",
   headerComponent: "",
   footerComponent: "",
-  componentRenderer: "",
+  itemRenderer: "",
 };
 
 type GridSelectionColumnClassExtended = Omit<
@@ -274,7 +274,7 @@ type GridSelectionColumnClassExtended = Omit<
 > & {
   headerComponent: React.ReactNode;
   footerComponent: React.ReactNode;
-  componentRenderer: (
+  itemRenderer: (
     model: Parameters<
       Exclude<PropType<GridSelectionColumnClass, "renderer">, undefined | null>
     >[2]
@@ -305,7 +305,7 @@ export const GridSelectionColumn = createPolymerComponent<
       headerComponent: "headerRenderer",
       footerComponent: "footerRenderer",
     },
-    componentRenderers: { componentRenderer: "renderer" },
+    itemRenderers: { itemRenderer: "renderer" },
   },
   getGridSelectionColumnPreRenderConfig
 );
@@ -332,7 +332,7 @@ const GridSortColumnProperties = {
   footerRenderer: "",
   headerComponent: "",
   footerComponent: "",
-  componentRenderer: "",
+  itemRenderer: "",
 };
 
 type GridSortColumnClassExtended = Omit<
@@ -341,7 +341,7 @@ type GridSortColumnClassExtended = Omit<
 > & {
   headerComponent: React.ReactNode;
   footerComponent: React.ReactNode;
-  componentRenderer: (
+  itemRenderer: (
     model: Parameters<
       Exclude<PropType<GridSortColumnClass, "renderer">, undefined | null>
     >[2]
@@ -370,7 +370,7 @@ export const GridSortColumn = createPolymerComponent<
       headerComponent: "headerRenderer",
       footerComponent: "footerRenderer",
     },
-    componentRenderers: { componentRenderer: "renderer" },
+    itemRenderers: { itemRenderer: "renderer" },
   },
   getGridSortColumnPreRenderConfig
 );
@@ -426,7 +426,7 @@ const GridTreeColumnProperties = {
   footerRenderer: "",
   headerComponent: "",
   footerComponent: "",
-  componentRenderer: "",
+  itemRenderer: "",
 };
 
 type GridTreeColumnClassExtended = Omit<
@@ -435,7 +435,7 @@ type GridTreeColumnClassExtended = Omit<
 > & {
   headerComponent: React.ReactNode;
   footerComponent: React.ReactNode;
-  componentRenderer: (
+  itemRenderer: (
     model: Parameters<
       Exclude<PropType<GridTreeColumnClass, "renderer">, undefined | null>
     >[2]
@@ -464,7 +464,7 @@ export const GridTreeColumn = createPolymerComponent<
       headerComponent: "headerRenderer",
       footerComponent: "footerRenderer",
     },
-    componentRenderers: { componentRenderer: "renderer" },
+    itemRenderers: { itemRenderer: "renderer" },
   },
   getGridTreeColumnPreRenderConfig
 );

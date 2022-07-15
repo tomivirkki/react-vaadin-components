@@ -56,7 +56,7 @@ type Constructor<T> = {
 export type RenderersConfig = {
   childRenderer?: string;
   components?: Record<string, string>;
-  componentRenderers?: Record<string, string>;
+  itemRenderers?: Record<string, string>;
 };
 
 type PreRenderConfig = {
@@ -249,13 +249,13 @@ export function createPolymerComponent<I extends HTMLElement, E extends Events>(
         props[renderer] = componentToRendererMap.get(api);
       });
 
-    // Component renderers
-    const componentRendererToRendererMap = React.useMemo(() => new Map(), []);
-    Object.entries(renderers?.componentRenderers || {})
+    // Item renderers
+    const itemRendererToRendererMap = React.useMemo(() => new Map(), []);
+    Object.entries(renderers?.itemRenderers || {})
       .filter(([api]) => api in props)
       .forEach(([api, renderer]) => {
-        if (!componentRendererToRendererMap.has(api)) {
-          componentRendererToRendererMap.set(
+        if (!itemRendererToRendererMap.has(api)) {
+          itemRendererToRendererMap.set(
             api,
             (root: any, _: any, model: any) => {
               if (!root.__reactRoot) {
@@ -266,7 +266,7 @@ export function createPolymerComponent<I extends HTMLElement, E extends Events>(
           );
         }
 
-        props[renderer] = componentRendererToRendererMap.get(api);
+        props[renderer] = itemRendererToRendererMap.get(api);
       });
 
     return originalRenderFunc(props, ...rest);

@@ -6,6 +6,15 @@ const gridColumnRenderers = {
 };
 
 export const renderers = {
+  "test-component": {
+    childRenderer: "overlayRenderer",
+    components: {
+      headerComponent: "headerRenderer",
+    },
+    itemRenderers: {
+      itemRenderer: "renderer",
+    },
+  },
   "vaadin-dialog": {
     childRenderer: "renderer",
     components: {
@@ -15,8 +24,8 @@ export const renderers = {
   },
   "^vaadin-grid-.*column$": {
     ...gridColumnRenderers,
-    componentRenderers: {
-      componentRenderer: "renderer",
+    itemRenderers: {
+      itemRenderer: "renderer",
     },
   },
   "vaadin-grid-column-group": {
