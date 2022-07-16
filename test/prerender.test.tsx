@@ -10,24 +10,55 @@ customElements.define = () => {};
 
 describe("prerender", () => {
   let testComponentElement: TestComponentClass;
-  let rerender: () => Promise<void>;
+  let rerender: () => void;
 
   beforeEach(async () => {
-    const rendereredTestComponent =
+    [testComponentElement, rerender] =
       await renderComponent<TestComponentClass>(() => (
-        <TestComponent>
-          <div>child</div>
+        <TestComponent value="foo">
+          <div>overlay</div>
         </TestComponent>
       ));
-    testComponentElement = rendereredTestComponent.element;
-    rerender = rendereredTestComponent.rerender;
   });
 
-  test("should not define custom element", () => {
+  test("should not define a custom element", () => {
     expect(customElements.get("test-component")).not.toBeDefined();
   });
 
   test("should have a shadow root", () => {
     expect(testComponentElement.shadowRoot).not.toBeNull();
+  });
+
+  test("should include styles", () => {
+    expect(testComponentElement.shadowRoot!.textContent).toContain(
+      "--test-component-style: 1"
+    );
+  });
+
+  test("should include prerender-only styles", () => {
+    expect(testComponentElement.shadowRoot!.textContent).toContain(
+      "--test-component-prerender-style: 1"
+    );
+  });
+
+  test("should not try to recreate the shadow root", () => {
+    expect(() => rerender()).not.toThrow();  
+  });
+
+  test("should have a shadow root on the sub-component", () => {
+    const subComponent = testComponentElement.shadowRoot?.querySelector(
+      "#sub-component"
+    ) as HTMLElement;
+
+    expect(subComponent.shadowRoot).not.toBeNull();
+    expect(subComponent.shadowRoot!.textContent).toContain(
+      "--test-sub-component-style: 1"
+    );
+  });
+
+  test("should include prerender children", () => {
+    const childElement = testComponentElement.querySelector('[slot="foo"]')!;
+    expect(childElement.textContent).toContain("foo");
+    expect(childElement.localName).toBe("div");
   });
 });

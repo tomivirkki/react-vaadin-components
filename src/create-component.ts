@@ -7,7 +7,7 @@ export const context = {
   isBrowser: typeof window !== "undefined",
 };
 
-const definedCustomElements: string[] = [];
+const definedCustomElements = new Set<string>();
 
 const browserSupportsDeclarativeShadowDom =
   context.isBrowser && "getInnerHTML" in HTMLElement.prototype;
@@ -60,13 +60,13 @@ export type RenderersConfig = {
 };
 
 type PreRenderConfig = {
-  hostProperties?: { [key: string]: any };
-  children?: {
+  hostProperties: { [key: string]: any };
+  children: {
     tag: string;
     properties?: { [key: string]: any };
     textContent?: string;
   }[];
-  shadowDomContent?: string;
+  shadowDomContent: string;
 };
 
 // TODO: Rename to createVaadinComponent
@@ -76,7 +76,7 @@ export function createPolymerComponent<I extends HTMLElement, E extends Events>(
   events: E,
   importFunc: Function,
   importName: string,
-  renderers?: RenderersConfig,
+  renderers?: RenderersConfig | undefined,
   getPreRenderConfig?: (props: { [key: string]: any }) => PreRenderConfig
 ) {
   if (context.isBrowser) {
@@ -121,86 +121,18 @@ export function createPolymerComponent<I extends HTMLElement, E extends Events>(
     });
 
     // Once all the custom elements on the active page are defined, add a marker attribute to body
-    if (
-      context.isBrowser &&
-      !document.body.hasAttribute("vaadin-components-defined")
-    ) {
-      definedCustomElements.push(tagName);
+    const DEFINED_ATTRIBUTE = "vaadin-components-defined";
+    if (context.isBrowser && !document.body.hasAttribute(DEFINED_ATTRIBUTE)) {
+      definedCustomElements.add(tagName);
 
       customElements.whenDefined(tagName).then(() => {
-        if (definedCustomElements.every((tag) => customElements.get(tag))) {
-          document.body.toggleAttribute("vaadin-components-defined", true);
+        if (
+          [...definedCustomElements].every((tag) => customElements.get(tag))
+        ) {
+          document.body.toggleAttribute(DEFINED_ATTRIBUTE, true);
         }
       });
     }
-
-    // SSR
-
-    const preRenderConfig = getPreRenderConfig?.(props);
-
-    // SSR - host properties
-    props = { ...props, ...(preRenderConfig?.hostProperties || {}) };
-
-    // SSR - declarative shadow DOM
-    if (
-      preRenderConfig?.shadowDomContent &&
-      (!context.isBrowser || !browserSupportsDeclarativeShadowDom)
-    ) {
-      const shadowRoot = React.createElement("template", {
-        key: -1,
-        shadowroot: "open",
-        dangerouslySetInnerHTML: { __html: preRenderConfig.shadowDomContent },
-      });
-      props = { ...props, children: [...[props.children], shadowRoot] };
-    }
-
-    // SSR - children
-    preRenderConfig?.children?.forEach((child, index) => {
-      props.children = [
-        ...[props.children],
-        React.createElement(child.tag, {
-          key: index,
-          ...(child.properties || {}),
-          ...(child.textContent
-            ? { dangerouslySetInnerHTML: { __html: child.textContent } }
-            : {}),
-        }),
-      ];
-    });
-
-    // SSR - client-side pre-rendering & hydration fixes
-    const ref = React.useRef();
-    React.useEffect(() => {
-      if (context.isBrowser && ref.current) {
-        const element = (ref.current as any)._reactInternals.child.stateNode;
-
-        if (element) {
-          // Remove the `<template shadowroot="open">` element from inside the element if it exists
-          element.querySelector("template[shadowroot]")?.remove();
-
-          if (
-            preRenderConfig?.shadowDomContent &&
-            !customElements.get(tagName)
-          ) {
-            // The element is not defined yet, pre-render shadow DOM on the client
-            applyShadowDOM(element, preRenderConfig?.shadowDomContent);
-          }
-
-          customElements.whenDefined(tagName).then(() => {
-            // Polymer element hydration fix: Replace the pre-rendered shadow DOM content with the effective rendered content
-            if (element.shadowRoot && element.__templateInfo?.nodeList.length) {
-              const effectiveRoot =
-                element.__templateInfo.nodeList[0].getRootNode();
-              if (!effectiveRoot.isConnected) {
-                // TODO: While this fixes multiple components, it breaks combo-box dropdown
-                element.shadowRoot.replaceChildren(...effectiveRoot.children);
-              }
-            }
-          });
-        }
-      }
-    });
-    props = { ...props, ref };
 
     // Run dynamic import for the component
     if (context.isBrowser && !("__called" in importFunc)) {
@@ -268,6 +200,69 @@ export function createPolymerComponent<I extends HTMLElement, E extends Events>(
 
         props[renderer] = itemRendererToRendererMap.get(api);
       });
+
+    // SSR
+
+    const preRenderConfig = getPreRenderConfig?.(props);
+
+    // SSR - host properties
+    props = { ...props, ...(preRenderConfig?.hostProperties || []) };
+
+    // SSR - declarative shadow DOM
+    if (
+      preRenderConfig?.shadowDomContent &&
+      (!context.isBrowser || !browserSupportsDeclarativeShadowDom)
+    ) {
+      const shadowRoot = React.createElement("template", {
+        key: -1,
+        shadowroot: "open",
+        dangerouslySetInnerHTML: { __html: preRenderConfig.shadowDomContent },
+      });
+      props = { ...props, children: [...[props.children], shadowRoot] };
+    }
+
+    // SSR - children
+    props.children = [
+      ...[props.children],
+      preRenderConfig?.children.map((child, index) => {
+        return React.createElement(child.tag, {
+          key: index,
+          ...(child.properties || {}),
+          ...(child.textContent
+            ? { dangerouslySetInnerHTML: { __html: child.textContent } }
+            : {}),
+        });
+      }) || [],
+    ];
+
+    // SSR - client-side pre-rendering & hydration fixes
+    const ref = React.useRef();
+    React.useEffect(() => {
+      if (context.isBrowser && ref.current) {
+        const element = (ref.current as any)._reactInternals.child.stateNode;
+
+        // Remove the `<template shadowroot="open">` element from inside the element if it exists
+        element.querySelector("template[shadowroot]")?.remove();
+
+        if (preRenderConfig?.shadowDomContent && !customElements.get(tagName)) {
+          // The element is not defined yet, pre-render shadow DOM on the client
+          applyShadowDOM(element, preRenderConfig?.shadowDomContent);
+        }
+
+        customElements.whenDefined(tagName).then(() => {
+          // Polymer element hydration fix: Replace the pre-rendered shadow DOM content with the effective rendered content
+          if (element.shadowRoot && element.__templateInfo?.nodeList.length) {
+            const effectiveRoot =
+              element.__templateInfo.nodeList[0].getRootNode();
+            if (!effectiveRoot.isConnected) {
+              // TODO: While this fixes multiple components, it breaks combo-box dropdown
+              element.shadowRoot.replaceChildren(...effectiveRoot.children);
+            }
+          }
+        });
+      }
+    });
+    props = { ...props, ref };
 
     return originalRenderFunc(props, ...rest);
   };

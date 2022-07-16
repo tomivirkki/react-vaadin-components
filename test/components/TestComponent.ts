@@ -5,9 +5,15 @@ import {
   eventMapper,
 } from "../../src/create-component";
 
-import type { TestComponent as TestComponentClass } from "../web-components/test-component/test-component";
+import type {
+  TestComponent as TestComponentClass,
+  TestComponentEventMap,
+} from "../web-components/test-component/test-component";
 
-const TestComponentEvents = {};
+const TestComponentEventMapper = eventMapper<TestComponentEventMap>();
+const TestComponentEvents = {
+  ...TestComponentEventMapper("onValueChanged", "value-changed"),
+};
 
 const TestComponentProperties = {
   value: "",
@@ -15,6 +21,7 @@ const TestComponentProperties = {
   overlayRenderer: "",
   headerRenderer: "",
   renderer: "",
+  opened: "",
   header: "",
   overlay: "",
   itemlist: "",
@@ -36,9 +43,12 @@ type TestComponentClassExtended = Omit<
 
 const getTestComponentPreRenderConfig = (props: { [key: string]: any }) => {
   return {
-    hostProperties: {},
-    children: [],
-    shadowDomContent: `\n        <style>\n            :host {\n                display: block;\n                padding: 10px;\n                border: 1px solid #ccc;\n                background-color: #eee;\n            }\n        </style>\n        \n        <div id="header"></div>\n\n        <div id="overlay"></div>\n\n        <ul id="itemlist">\n            <li></li>\n            <li></li>\n        </ul>  \n    `,
+    hostProperties: { "has-value": props.value ? "" : undefined },
+    children: [
+      { tag: "div", textContent: props.value, properties: { slot: "foo" } },
+      { tag: "div" },
+    ],
+    shadowDomContent: `<style>\n      :host {\n        --test-component-prerender-style: 1;\n      }\n    </style><style>\n      :host {\n          --test-component-style: 1;\n      }\n    </style><div id="header"></div><div id="overlay"></div><ul id="itemlist">\n        <li></li>\n        <li></li>\n    </ul><test-sub-component id="sub-component"><template shadowroot="open"><style>\n      :host {\n          --test-sub-component-style: 1;\n      }\n    </style></template></test-sub-component>`,
   };
 };
 

@@ -6,23 +6,22 @@ import type { TestComponentItemModel } from "./web-components/test-component/tes
 import { jest } from "@jest/globals";
 import { renderComponent } from "./helpers";
 import "@testing-library/jest-dom/extend-expect";
+import { act } from "@testing-library/react";
 
 describe("renderers", () => {
   describe("child renderer", () => {
     let testComponentElement: TestComponentClass;
 
     beforeEach(async () => {
-      const rendereredTestComponent =
-        await renderComponent<TestComponentClass>(() => (
-          <TestComponent>
-            <div>overlay</div>
-          </TestComponent>
-        ));
-      testComponentElement = rendereredTestComponent.element;
+      [testComponentElement] = await renderComponent<TestComponentClass>(() => (
+        <TestComponent>
+          <div id="overlay">overlay</div>
+        </TestComponent>
+      ));
     });
 
-    test("should not have child elements", () => {
-      expect(testComponentElement.children).toHaveLength(0);
+    test("should not have the overlay as direct child element", () => {
+      expect(testComponentElement.querySelector("#overlay")).toBeNull();
     });
 
     test("should render the child element to render root", () => {
@@ -41,14 +40,13 @@ describe("renderers", () => {
 
   describe("components", () => {
     let testComponentElement: TestComponentClass;
+    let rerender: Function;
 
     beforeEach(async () => {
-      const rendereredTestComponent =
+      [testComponentElement, rerender] =
         await renderComponent<TestComponentClass>(() => (
           <TestComponent headerComponent={<div>header</div>}></TestComponent>
         ));
-
-      testComponentElement = rendereredTestComponent.element;
     });
 
     test("should render the component into the root element", async () => {
@@ -56,26 +54,25 @@ describe("renderers", () => {
     });
 
     test("should not redefine the renderer function", async () => {
-      // const rendererFunction =
-      //   testComponentElement[componentRendererFunctionName];
-      // await rerender();
-      // expect(testComponentElement[componentRendererFunctionName]).toBe(
-      //   rendererFunction
-      // );
+      const rendererFunction = testComponentElement.headerRenderer;
+      rerender();
+      expect(testComponentElement.headerRenderer).toBe(rendererFunction);
     });
 
     test("should only create root once", async () => {
-      // const consoleError = jest.spyOn(console, "error");
-      // const root = document.createElement("div");
-      // runComponentRenderer(root);
-      // runComponentRenderer(root);
-      // expect(consoleError).not.toHaveBeenCalled();
-      // consoleError.mockRestore();
+      const consoleError = jest.spyOn(console, "error");
+      act(() => {
+        testComponentElement.requestContentUpdate();
+        testComponentElement.requestContentUpdate();
+      });
+      expect(consoleError).not.toHaveBeenCalled();
+      consoleError.mockRestore();
     });
   });
 
   describe("item renderers", () => {
     let testComponentElement: TestComponentClass;
+    let rerender: Function;
 
     type Item = {
       name: string;
@@ -92,14 +89,13 @@ describe("renderers", () => {
 
       const items: Item[] = [{ name: "foo" }, { name: "bar" }];
 
-      const rendereredTestComponent =
+      [testComponentElement, rerender] =
         await renderComponent<TestComponentClass>(() => (
           <TestComponent
             items={items}
             itemRenderer={itemRenderer}
           ></TestComponent>
         ));
-      testComponentElement = rendereredTestComponent.element;
     });
 
     test("should render the items", async () => {
@@ -112,21 +108,19 @@ describe("renderers", () => {
     });
 
     test("should not redefine the renderer function", async () => {
-      // const rendererFunction =
-      //   testComponentElement[itemRendererFunctionName];
-      // await rerender();
-      // expect(testComponentElement[itemRendererFunctionName]).toBe(
-      //   rendererFunction
-      // );
+      const rendererFunction = testComponentElement.renderer;
+      rerender();
+      expect(testComponentElement.renderer).toBe(rendererFunction);
     });
 
     test("should only create root once", async () => {
-      // const consoleError = jest.spyOn(console, "error");
-      // const root = document.createElement("div");
-      // runItemRenderer(root, { item: "foo" });
-      // runItemRenderer(root, { item: "foo" });
-      // expect(consoleError).not.toHaveBeenCalled();
-      // consoleError.mockRestore();
+      const consoleError = jest.spyOn(console, "error");
+      act(() => {
+        testComponentElement.requestContentUpdate();
+        testComponentElement.requestContentUpdate();
+      });
+      expect(consoleError).not.toHaveBeenCalled();
+      consoleError.mockRestore();
     });
   });
 });

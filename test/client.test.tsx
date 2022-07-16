@@ -7,12 +7,9 @@ describe("client", () => {
   let testComponentElement: TestComponentClass;
 
   beforeEach(async () => {
-    const rendereredTestComponent =
-      await renderComponent<TestComponentClass>(() => (
-        <TestComponent value="foo"></TestComponent>
-      ));
-
-    testComponentElement = rendereredTestComponent.element;
+    [testComponentElement] = await renderComponent<TestComponentClass>(() => (
+      <TestComponent value="foo" opened></TestComponent>
+    ));
   });
 
   test("should have correct tag name", () => {
@@ -22,6 +19,10 @@ describe("client", () => {
   test("should have a value property", () => {
     // TODO: Use screen
     expect(testComponentElement.value).toBe("foo");
+  });
+
+  test("should have opened boolean attribute", () => {
+    expect(testComponentElement.getAttribute("opened")).toBe("");
   });
 
   test("should define custom element", () => {

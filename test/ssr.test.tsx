@@ -13,16 +13,14 @@ describe("SSR", () => {
   let testComponentElement: TestComponentClass;
 
   beforeEach(async () => {
-    const rendereredTestComponent =
-      await renderComponent<TestComponentClass>(() => (
-        <TestComponent>
-          <div>child</div>
-        </TestComponent>
-      ));
-    testComponentElement = rendereredTestComponent.element;
+    [testComponentElement] = await renderComponent<TestComponentClass>(() => (
+      <TestComponent value="foo">
+        <div>overlay</div>
+      </TestComponent>
+    ));
   });
 
-  test("should not define custom element", () => {
+  test("should not define a custom element", () => {
     expect(customElements.get("test-component")).not.toBeDefined();
   });
 
@@ -30,8 +28,12 @@ describe("SSR", () => {
     expect(testComponentElement.hasAttribute("value")).toBeFalsy();
   });
 
+  test("should have has-value attribute", () => {
+    expect(testComponentElement.hasAttribute("has-value")).toBeTruthy();
+  });
+
   test("should render the child component", () => {
-    expect(testComponentElement.firstElementChild?.textContent).toBe("child");
+    expect(testComponentElement.firstElementChild?.textContent).toBe("overlay");
   });
 
   test("should not suppress a lit dev mode warning", () => {

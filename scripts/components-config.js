@@ -5,6 +5,7 @@ const gridColumnRenderers = {
   },
 };
 
+// TODO: Merge renderers and preRenderConfigs under one object mapped by component names
 export const renderers = {
   "test-component": {
     childRenderer: "overlayRenderer",
@@ -61,6 +62,26 @@ const inputFieldConfig = {
 };
 
 export const preRenderConfigs = {
+  "test-component": {
+    styles: `
+      :host {
+        --test-component-prerender-style: 1;
+      }
+    `,
+    // TODO: Test
+    hostProperties: {
+      "'has-value'": "props.value ? '' : undefined",
+    },
+    children: [
+      {
+        tag: "'div'",
+        textContent: "props.value",
+        properties: {
+          "slot": "'foo'",
+        },
+      }
+    ]
+  },
   "vaadin-text-field": inputFieldConfig,
   "vaadin-date-picker": inputFieldConfig,
   "vaadin-combo-box": inputFieldConfig,
