@@ -4,6 +4,15 @@ import path from "path";
 import puppeteer from "puppeteer";
 import { renderers, preRenderConfigs } from "./components-config.js";
 
+const vaadinComponentsPath = process.env.COMPONENTS_PATH;
+
+if (!vaadinComponentsPath) {
+  console.error(
+    "Environment variable COMPONENTS_PATH should point to a local web-components/packages"
+  );
+  process.exit(1);
+}
+
 async function getShadowRootContent(importPath, elementHTML) {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -77,7 +86,10 @@ function getPackages(componentsPath) {
 const importUrl = import.meta.url;
 const currentDir = importUrl.substring(importUrl.indexOf(":") + 1);
 
-const createComponentPath = path.resolve(currentDir, '../../src/create-component');
+const createComponentPath = path.resolve(
+  currentDir,
+  "../../src/create-component"
+);
 
 async function generateComponentForPackage(
   componentsPath,
@@ -88,10 +100,12 @@ async function generateComponentForPackage(
 ) {
   let usesPropType = false;
 
-  const createComponentRelativePath = path.relative(componentsOutPath, createComponentPath);
+  const createComponentRelativePath = path.relative(
+    componentsOutPath,
+    createComponentPath
+  );
 
-  let outFileImports =
-    `import { createVaadinComponent, eventMapper } from "${createComponentRelativePath}";\n`;
+  let outFileImports = `import { createVaadinComponent, eventMapper } from "${createComponentRelativePath}";\n`;
   let outFileComponents = "";
 
   const packagePath = path.resolve(componentsPath, packageName);
@@ -135,7 +149,12 @@ async function generateComponentForPackage(
   for (const component of components) {
     const tag = component.tags[0];
     const elementName = tag.name;
-    const exportName = elementName.split('vaadin-').pop().split("-").map(capitalize).join("");
+    const exportName = elementName
+      .split("vaadin-")
+      .pop()
+      .split("-")
+      .map(capitalize)
+      .join("");
     const hasEvents = !!tag.events;
 
     const eventMapName = `${exportName}EventMap`;
@@ -306,7 +325,11 @@ async function generateComponentForPackage(
   execSync(`npx prettier ${filePath} --write`);
 }
 
-async function generateComponents(componentsPath, componentsOutPath, importPath) {
+async function generateComponents(
+  componentsPath,
+  componentsOutPath,
+  importPath
+) {
   // Start up Web Dev Server
   const server = exec(`npx wds --node-resolve -r ${componentsPath}`);
   process.on("exit", () => server.kill());
@@ -338,6 +361,12 @@ async function generateComponents(componentsPath, componentsOutPath, importPath)
   server.kill();
 }
 
+async function generateStyles() {
+  execSync(
+    "NODE_OPTIONS=--experimental-vm-modules npx jest --rootDir ./scripts --testRegex generate-styles.js --coverage false"
+  );
+}
+
 async function run() {
   // Generate test components
   const testComponentsPath = path.resolve(
@@ -354,24 +383,25 @@ async function run() {
     "test",
     "components"
   );
-  await generateComponents(testComponentsPath, testComponentsOutPath, '../web-components');
+  await generateComponents(
+    testComponentsPath,
+    testComponentsOutPath,
+    "../web-components"
+  );
 
   // Generate Vaadin components
-  const vaadinComponentsPath = process.env.COMPONENTS_PATH;
-
-  if (!vaadinComponentsPath) {
-    console.error(
-      "Environment variable COMPONENTS_PATH should point to a local web-components/packages"
-    );
-    process.exit(1);
-  }
-
   const vaadinComponentsOutPath = path.resolve(
     currentDir,
     "../../src/components"
   );
 
-  await generateComponents(vaadinComponentsPath, vaadinComponentsOutPath, '@vaadin');
+  await generateComponents(
+    vaadinComponentsPath,
+    vaadinComponentsOutPath,
+    "@vaadin"
+  );
+
+  await generateStyles();
 
   process.exit(0);
 }
