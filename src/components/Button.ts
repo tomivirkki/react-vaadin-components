@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type { Button as ButtonClass } from "@vaadin/button/vaadin-button";
 
@@ -20,7 +20,7 @@ const getButtonPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const Button = createPolymerComponent<ButtonClass, typeof ButtonEvents>(
+export const Button = createVaadinComponent<ButtonClass, typeof ButtonEvents>(
   "vaadin-button",
   ButtonProperties,
   ButtonEvents,

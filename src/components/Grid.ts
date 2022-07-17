@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 type PropType<TObj, TProp extends keyof TObj> = TObj[TProp];
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type { GridColumnGroup as GridColumnGroupClass } from "@vaadin/grid/vaadin-grid-column-group";
 
@@ -70,7 +70,7 @@ const getGridColumnGroupPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const GridColumnGroup = createPolymerComponent<
+export const GridColumnGroup = createVaadinComponent<
   GridColumnGroupClassExtended,
   typeof GridColumnGroupEvents
 >(
@@ -130,7 +130,7 @@ const getGridColumnPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const GridColumn = createPolymerComponent<
+export const GridColumn = createVaadinComponent<
   GridColumnClassExtended,
   typeof GridColumnEvents
 >(
@@ -191,7 +191,7 @@ const getGridFilterColumnPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const GridFilterColumn = createPolymerComponent<
+export const GridFilterColumn = createVaadinComponent<
   GridFilterColumnClassExtended,
   typeof GridFilterColumnEvents
 >(
@@ -228,7 +228,7 @@ const getGridFilterPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const GridFilter = createPolymerComponent<
+export const GridFilter = createVaadinComponent<
   GridFilterClass,
   typeof GridFilterEvents
 >(
@@ -291,7 +291,7 @@ const getGridSelectionColumnPreRenderConfig = (props: {
   };
 };
 
-export const GridSelectionColumn = createPolymerComponent<
+export const GridSelectionColumn = createVaadinComponent<
   GridSelectionColumnClassExtended,
   typeof GridSelectionColumnEvents
 >(
@@ -356,7 +356,7 @@ const getGridSortColumnPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const GridSortColumn = createPolymerComponent<
+export const GridSortColumn = createVaadinComponent<
   GridSortColumnClassExtended,
   typeof GridSortColumnEvents
 >(
@@ -394,7 +394,7 @@ const getGridSorterPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const GridSorter = createPolymerComponent<
+export const GridSorter = createVaadinComponent<
   GridSorterClass,
   typeof GridSorterEvents
 >(
@@ -450,7 +450,7 @@ const getGridTreeColumnPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const GridTreeColumn = createPolymerComponent<
+export const GridTreeColumn = createVaadinComponent<
   GridTreeColumnClassExtended,
   typeof GridTreeColumnEvents
 >(
@@ -488,7 +488,7 @@ const getGridTreeTogglePreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const GridTreeToggle = createPolymerComponent<
+export const GridTreeToggle = createVaadinComponent<
   GridTreeToggleClass,
   typeof GridTreeToggleEvents
 >(
@@ -550,7 +550,7 @@ const getGridPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const Grid = createPolymerComponent<GridClass, typeof GridEvents>(
+export const Grid = createVaadinComponent<GridClass, typeof GridEvents>(
   "vaadin-grid",
   GridProperties,
   GridEvents,

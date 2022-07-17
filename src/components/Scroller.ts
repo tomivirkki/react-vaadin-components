@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type { Scroller as ScrollerClass } from "@vaadin/scroller/vaadin-scroller";
 
@@ -20,7 +20,7 @@ const getScrollerPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const Scroller = createPolymerComponent<
+export const Scroller = createVaadinComponent<
   ScrollerClass,
   typeof ScrollerEvents
 >(

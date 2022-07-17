@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type {
   ContextMenu as ContextMenuClass,
@@ -32,7 +32,7 @@ const getContextMenuPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const ContextMenu = createPolymerComponent<
+export const ContextMenu = createVaadinComponent<
   ContextMenuClass,
   typeof ContextMenuEvents
 >(

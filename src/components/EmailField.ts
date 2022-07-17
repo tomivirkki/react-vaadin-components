@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type {
   EmailField as EmailFieldClass,
@@ -61,7 +61,7 @@ const getEmailFieldPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const EmailField = createPolymerComponent<
+export const EmailField = createVaadinComponent<
   EmailFieldClass,
   typeof EmailFieldEvents
 >(

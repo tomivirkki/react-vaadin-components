@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type { Item as ItemClass } from "@vaadin/item/vaadin-item";
 
@@ -20,7 +20,7 @@ const getItemPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const Item = createPolymerComponent<ItemClass, typeof ItemEvents>(
+export const Item = createVaadinComponent<ItemClass, typeof ItemEvents>(
   "vaadin-item",
   ItemProperties,
   ItemEvents,

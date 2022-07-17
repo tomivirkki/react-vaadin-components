@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type { VerticalLayout as VerticalLayoutClass } from "@vaadin/vertical-layout/vaadin-vertical-layout";
 
@@ -18,7 +18,7 @@ const getVerticalLayoutPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const VerticalLayout = createPolymerComponent<
+export const VerticalLayout = createVaadinComponent<
   VerticalLayoutClass,
   typeof VerticalLayoutEvents
 >(

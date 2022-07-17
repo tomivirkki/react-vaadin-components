@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type { VirtualList as VirtualListClass } from "@vaadin/virtual-list/vaadin-virtual-list";
 
@@ -22,7 +22,7 @@ const getVirtualListPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const VirtualList = createPolymerComponent<
+export const VirtualList = createVaadinComponent<
   VirtualListClass,
   typeof VirtualListEvents
 >(

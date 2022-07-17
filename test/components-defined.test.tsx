@@ -2,9 +2,9 @@ import React from "react";
 import type { TestComponent as TestComponentClass } from "./web-components/test-component/test-component.js";
 import { TestComponent } from "./index";
 import { renderComponent } from "./helpers";
-import { createPolymerComponent } from "../src/create-component";
+import { createVaadinComponent } from "../src/create-component";
 
-const AnotherComponent = createPolymerComponent(
+const AnotherComponent = createVaadinComponent(
   "another-component",
   {},
   {},

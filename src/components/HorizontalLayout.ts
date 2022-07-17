@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type { HorizontalLayout as HorizontalLayoutClass } from "@vaadin/horizontal-layout/vaadin-horizontal-layout";
 
@@ -18,7 +18,7 @@ const getHorizontalLayoutPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const HorizontalLayout = createPolymerComponent<
+export const HorizontalLayout = createVaadinComponent<
   HorizontalLayoutClass,
   typeof HorizontalLayoutEvents
 >(

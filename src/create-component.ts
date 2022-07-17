@@ -7,7 +7,8 @@ export const context = {
   isBrowser: typeof window !== "undefined",
 };
 
-const definedCustomElements = new Set<string>();
+// A set of custom element names included in the first render.
+const firstRenderElements = new Set<string>();
 
 const browserSupportsDeclarativeShadowDom =
   context.isBrowser && "getInnerHTML" in HTMLElement.prototype;
@@ -18,6 +19,9 @@ function suppressLitDevModeWarning() {
   ]);
 }
 
+// Properties that the Web Component reflects as attributes (for styling purposes).
+// The component should render them as attributes directly to avoid styling issues
+// with SSR (before hydration).
 const knownBooleanAttributes = [
   "disabled",
   "hidden",
@@ -27,6 +31,10 @@ const knownBooleanAttributes = [
   "opened",
 ];
 
+/**
+ * Recursively creates a shadow DOM for the given element and populates it with the given content.
+ * Recursion needed because the content may include <template shadowroot="open"> elements.
+ */
 function applyShadowDOM(el: HTMLElement, content: string) {
   if (el.shadowRoot) {
     return;
@@ -69,8 +77,8 @@ type PreRenderConfig = {
   shadowDomContent: string;
 };
 
-// TODO: Rename to createVaadinComponent
-export function createPolymerComponent<I extends HTMLElement, E extends Events>(
+// TODO: Still missing some tests
+export function createVaadinComponent<I extends HTMLElement, E extends Events>(
   tagName: string,
   properties: { [key: string]: any },
   events: E,
@@ -83,22 +91,19 @@ export function createPolymerComponent<I extends HTMLElement, E extends Events>(
     suppressLitDevModeWarning();
   }
 
-  if (!globalThis.HTMLElement) {
-    // Avoid an exception in createComponent when running SSR
-    // @ts-ignore
-    globalThis.HTMLElement = class {};
-  }
+  // Avoid an exception in createComponent when running SSR
+  // @ts-ignore
+  globalThis.HTMLElement ||= class {};
 
   // The actual Web Component can't be defined when running SSR, so need to use a mock class instead
   const mock = class {};
-
   const filteredProperties = { ...properties };
   knownBooleanAttributes.forEach(
     (attribute) => delete filteredProperties[attribute]
   );
-
   Object.assign(mock.prototype, filteredProperties);
 
+  // Create the component
   const component = createComponent(
     React,
     tagName,
@@ -107,6 +112,7 @@ export function createPolymerComponent<I extends HTMLElement, E extends Events>(
     importName
   );
 
+  // Override the component's render function to enable render-time features
   const originalRenderFunc = (component as any).render;
   (component as any).render = (props: any, ...rest: any) => {
     props = { ...props };
@@ -123,12 +129,10 @@ export function createPolymerComponent<I extends HTMLElement, E extends Events>(
     // Once all the custom elements on the active page are defined, add a marker attribute to body
     const DEFINED_ATTRIBUTE = "vaadin-components-defined";
     if (context.isBrowser && !document.body.hasAttribute(DEFINED_ATTRIBUTE)) {
-      definedCustomElements.add(tagName);
+      firstRenderElements.add(tagName);
 
       customElements.whenDefined(tagName).then(() => {
-        if (
-          [...definedCustomElements].every((tag) => customElements.get(tag))
-        ) {
+        if ([...firstRenderElements].every((tag) => customElements.get(tag))) {
           document.body.toggleAttribute(DEFINED_ATTRIBUTE, true);
         }
       });
@@ -139,6 +143,8 @@ export function createPolymerComponent<I extends HTMLElement, E extends Events>(
       (importFunc as any).__called = true;
       importFunc();
     }
+
+    // Renderers - childRenderer
 
     // A function which appends the childContainer inside the renderer's root element and the child container.
     const [childrenRendererFunction, childContainer] = React.useMemo(() => {
@@ -164,12 +170,13 @@ export function createPolymerComponent<I extends HTMLElement, E extends Events>(
       };
     }
 
-    // Components
+    // Renderers - Components
+    // TODO: Instead of a component property API, consider a child element API with a marker.
     const componentToRendererMap = React.useMemo(() => new Map(), []);
     Object.entries(renderers?.components || {})
       .filter(([api]) => api in props)
       .forEach(([api, renderer]) => {
-        // TODO: Use portal for compoenents?
+        // TODO: Use portal for components?
         if (!componentToRendererMap.has(api)) {
           componentToRendererMap.set(api, (root: any) => {
             if (!root.__reactRoot) {
@@ -181,7 +188,7 @@ export function createPolymerComponent<I extends HTMLElement, E extends Events>(
         props[renderer] = componentToRendererMap.get(api);
       });
 
-    // Item renderers
+    // Renderers - Item renderers
     const itemRendererToRendererMap = React.useMemo(() => new Map(), []);
     Object.entries(renderers?.itemRenderers || {})
       .filter(([api]) => api in props)
@@ -213,6 +220,7 @@ export function createPolymerComponent<I extends HTMLElement, E extends Events>(
       preRenderConfig?.shadowDomContent &&
       (!context.isBrowser || !browserSupportsDeclarativeShadowDom)
     ) {
+      // Create and add a <template shadowroot="open"> element with the content
       const shadowRoot = React.createElement("template", {
         key: -1,
         shadowroot: "open",
@@ -242,6 +250,7 @@ export function createPolymerComponent<I extends HTMLElement, E extends Events>(
         const element = (ref.current as any)._reactInternals.child.stateNode;
 
         // Remove the `<template shadowroot="open">` element from inside the element if it exists
+        // (some browsers don't support declarative shadow DOM)
         element.querySelector("template[shadowroot]")?.remove();
 
         if (preRenderConfig?.shadowDomContent && !customElements.get(tagName)) {

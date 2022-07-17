@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type {
   Dialog as DialogClass,
@@ -46,7 +46,7 @@ const getDialogPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const Dialog = createPolymerComponent<
+export const Dialog = createVaadinComponent<
   DialogClassExtended,
   typeof DialogEvents
 >(

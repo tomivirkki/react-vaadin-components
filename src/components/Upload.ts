@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type {
   Upload as UploadClass,
@@ -50,7 +50,7 @@ const getUploadPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const Upload = createPolymerComponent<UploadClass, typeof UploadEvents>(
+export const Upload = createVaadinComponent<UploadClass, typeof UploadEvents>(
   "vaadin-upload",
   UploadProperties,
   UploadEvents,

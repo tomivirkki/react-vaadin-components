@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type { Avatar as AvatarClass } from "@vaadin/avatar/vaadin-avatar";
 
@@ -23,7 +23,7 @@ const getAvatarPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const Avatar = createPolymerComponent<AvatarClass, typeof AvatarEvents>(
+export const Avatar = createVaadinComponent<AvatarClass, typeof AvatarEvents>(
   "vaadin-avatar",
   AvatarProperties,
   AvatarEvents,

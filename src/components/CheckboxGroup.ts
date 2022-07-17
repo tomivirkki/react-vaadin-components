@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type {
   CheckboxGroup as CheckboxGroupClass,
@@ -34,7 +34,7 @@ const getCheckboxGroupPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const CheckboxGroup = createPolymerComponent<
+export const CheckboxGroup = createVaadinComponent<
   CheckboxGroupClass,
   typeof CheckboxGroupEvents
 >(

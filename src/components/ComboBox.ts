@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type {
   ComboBoxLight as ComboBoxLightClass,
@@ -57,7 +57,7 @@ const getComboBoxLightPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const ComboBoxLight = createPolymerComponent<
+export const ComboBoxLight = createVaadinComponent<
   ComboBoxLightClass,
   typeof ComboBoxLightEvents
 >(
@@ -137,7 +137,7 @@ const getComboBoxPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const ComboBox = createPolymerComponent<
+export const ComboBox = createVaadinComponent<
   ComboBoxClass,
   typeof ComboBoxEvents
 >(

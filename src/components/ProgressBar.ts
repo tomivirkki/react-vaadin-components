@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type { ProgressBar as ProgressBarClass } from "@vaadin/progress-bar/vaadin-progress-bar";
 
@@ -22,7 +22,7 @@ const getProgressBarPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const ProgressBar = createPolymerComponent<
+export const ProgressBar = createVaadinComponent<
   ProgressBarClass,
   typeof ProgressBarEvents
 >(

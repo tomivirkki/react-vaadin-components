@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type { MessageList as MessageListClass } from "@vaadin/message-list/vaadin-message-list";
 
@@ -21,7 +21,7 @@ const getMessageListPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const MessageList = createPolymerComponent<
+export const MessageList = createVaadinComponent<
   MessageListClass,
   typeof MessageListEvents
 >(
@@ -53,7 +53,7 @@ const getMessagePreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const Message = createPolymerComponent<
+export const Message = createVaadinComponent<
   MessageClass,
   typeof MessageEvents
 >(

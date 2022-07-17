@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type {
   LoginForm as LoginFormClass,
@@ -36,7 +36,7 @@ const getLoginFormPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const LoginForm = createPolymerComponent<
+export const LoginForm = createVaadinComponent<
   LoginFormClass,
   typeof LoginFormEvents
 >(
@@ -76,7 +76,7 @@ const getLoginOverlayPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const LoginOverlay = createPolymerComponent<
+export const LoginOverlay = createVaadinComponent<
   LoginOverlayClass,
   typeof LoginOverlayEvents
 >(

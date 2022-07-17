@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type {
   ListBox as ListBoxClass,
@@ -30,7 +30,7 @@ const getListBoxPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const ListBox = createPolymerComponent<
+export const ListBox = createVaadinComponent<
   ListBoxClass,
   typeof ListBoxEvents
 >(

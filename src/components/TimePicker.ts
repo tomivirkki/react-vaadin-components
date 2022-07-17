@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type {
   TimePicker as TimePickerClass,
@@ -53,7 +53,7 @@ const getTimePickerPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const TimePicker = createPolymerComponent<
+export const TimePicker = createVaadinComponent<
   TimePickerClass,
   typeof TimePickerEvents
 >(

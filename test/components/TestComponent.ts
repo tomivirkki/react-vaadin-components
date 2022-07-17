@@ -1,9 +1,6 @@
 // Generated file. Do not edit.
 type PropType<TObj, TProp extends keyof TObj> = TObj[TProp];
-import {
-  createPolymerComponent,
-  eventMapper,
-} from "../../src/create-component";
+import { createVaadinComponent, eventMapper } from "../../src/create-component";
 
 import type {
   TestComponent as TestComponentClass,
@@ -52,7 +49,7 @@ const getTestComponentPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const TestComponent = createPolymerComponent<
+export const TestComponent = createVaadinComponent<
   TestComponentClassExtended,
   typeof TestComponentEvents
 >(

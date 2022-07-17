@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type {
   MultiSelectComboBox as MultiSelectComboBoxClass,
@@ -68,7 +68,7 @@ const getMultiSelectComboBoxPreRenderConfig = (props: {
   };
 };
 
-export const MultiSelectComboBox = createPolymerComponent<
+export const MultiSelectComboBox = createVaadinComponent<
   MultiSelectComboBoxClass,
   typeof MultiSelectComboBoxEvents
 >(

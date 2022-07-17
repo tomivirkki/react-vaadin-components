@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type {
   CustomField as CustomFieldClass,
@@ -38,7 +38,7 @@ const getCustomFieldPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const CustomField = createPolymerComponent<
+export const CustomField = createVaadinComponent<
   CustomFieldClass,
   typeof CustomFieldEvents
 >(

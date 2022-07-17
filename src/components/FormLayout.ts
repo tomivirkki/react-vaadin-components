@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type { FormItem as FormItemClass } from "@vaadin/form-layout/vaadin-form-item";
 
@@ -18,7 +18,7 @@ const getFormItemPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const FormItem = createPolymerComponent<
+export const FormItem = createVaadinComponent<
   FormItemClass,
   typeof FormItemEvents
 >(
@@ -46,7 +46,7 @@ const getFormLayoutPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const FormLayout = createPolymerComponent<
+export const FormLayout = createVaadinComponent<
   FormLayoutClass,
   typeof FormLayoutEvents
 >(

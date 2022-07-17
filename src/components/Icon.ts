@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type { Icon as IconClass } from "@vaadin/icon/vaadin-icon";
 
@@ -23,7 +23,7 @@ const getIconPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const Icon = createPolymerComponent<IconClass, typeof IconEvents>(
+export const Icon = createVaadinComponent<IconClass, typeof IconEvents>(
   "vaadin-icon",
   IconProperties,
   IconEvents,
@@ -49,7 +49,7 @@ const getIconsetPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const Iconset = createPolymerComponent<
+export const Iconset = createVaadinComponent<
   IconsetClass,
   typeof IconsetEvents
 >(

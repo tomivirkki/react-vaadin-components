@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type {
   MenuBar as MenuBarClass,
@@ -28,7 +28,7 @@ const getMenuBarPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const MenuBar = createPolymerComponent<
+export const MenuBar = createVaadinComponent<
   MenuBarClass,
   typeof MenuBarEvents
 >(

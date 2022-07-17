@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type {
   RadioButton as RadioButtonClass,
@@ -39,7 +39,7 @@ const getRadioButtonPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const RadioButton = createPolymerComponent<
+export const RadioButton = createVaadinComponent<
   RadioButtonClass,
   typeof RadioButtonEvents
 >(
@@ -80,7 +80,7 @@ const getRadioGroupPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const RadioGroup = createPolymerComponent<
+export const RadioGroup = createVaadinComponent<
   RadioGroupClass,
   typeof RadioGroupEvents
 >(

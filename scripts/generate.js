@@ -91,7 +91,7 @@ async function generateComponentForPackage(
   const createComponentRelativePath = path.relative(componentsOutPath, createComponentPath);
 
   let outFileImports =
-    `import { createPolymerComponent, eventMapper } from "${createComponentRelativePath}";\n`;
+    `import { createVaadinComponent, eventMapper } from "${createComponentRelativePath}";\n`;
   let outFileComponents = "";
 
   const packagePath = path.resolve(componentsPath, packageName);
@@ -267,7 +267,7 @@ async function generateComponentForPackage(
           }
         }
 
-        export const ${exportName} = createPolymerComponent<${exportName}Class${
+        export const ${exportName} = createVaadinComponent<${exportName}Class${
       extendedClassType ? "Extended" : ""
     }, typeof ${exportName}Events>(
         "${elementName}",

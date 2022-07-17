@@ -42,17 +42,17 @@ const inputFieldHostProperties = {
 };
 
 const inputFieldLabel = {
-  "tag": "'label'",
-  "textContent": "props.label",
-  "properties": {
-    "slot": "'label'",
+  tag: "'label'",
+  textContent: "props.label",
+  properties: {
+    slot: "'label'",
   },
 };
 
 const inputFieldInput = {
-  "tag": "'input'",
-  "properties": {
-    "slot": "'input'",
+  tag: "'input'",
+  properties: {
+    slot: "'input'",
   },
 };
 
@@ -77,10 +77,13 @@ export const preRenderConfigs = {
         tag: "'div'",
         textContent: "props.value",
         properties: {
-          "slot": "'foo'",
+          slot: "'foo'",
         },
-      }
-    ]
+      },
+      {
+        tag: "'div'",
+      },
+    ],
   },
   "vaadin-text-field": inputFieldConfig,
   "vaadin-date-picker": inputFieldConfig,

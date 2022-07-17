@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type { AvatarGroup as AvatarGroupClass } from "@vaadin/avatar-group/vaadin-avatar-group";
 
@@ -21,7 +21,7 @@ const getAvatarGroupPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const AvatarGroup = createPolymerComponent<
+export const AvatarGroup = createVaadinComponent<
   AvatarGroupClass,
   typeof AvatarGroupEvents
 >(

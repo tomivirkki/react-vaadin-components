@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type {
   SplitLayout as SplitLayoutClass,
@@ -25,7 +25,7 @@ const getSplitLayoutPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const SplitLayout = createPolymerComponent<
+export const SplitLayout = createVaadinComponent<
   SplitLayoutClass,
   typeof SplitLayoutEvents
 >(

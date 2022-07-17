@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type {
   IntegerField as IntegerFieldClass,
@@ -61,7 +61,7 @@ const getIntegerFieldPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const IntegerField = createPolymerComponent<
+export const IntegerField = createVaadinComponent<
   IntegerFieldClass,
   typeof IntegerFieldEvents
 >(

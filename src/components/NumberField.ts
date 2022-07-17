@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type {
   NumberField as NumberFieldClass,
@@ -54,7 +54,7 @@ const getNumberFieldPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const NumberField = createPolymerComponent<
+export const NumberField = createVaadinComponent<
   NumberFieldClass,
   typeof NumberFieldEvents
 >(

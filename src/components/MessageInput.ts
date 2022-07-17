@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type { MessageInput as MessageInputClass } from "@vaadin/message-input/vaadin-message-input";
 
@@ -21,7 +21,7 @@ const getMessageInputPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const MessageInput = createPolymerComponent<
+export const MessageInput = createVaadinComponent<
   MessageInputClass,
   typeof MessageInputEvents
 >(

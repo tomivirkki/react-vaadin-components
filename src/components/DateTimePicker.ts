@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type {
   DateTimePicker as DateTimePickerClass,
@@ -47,7 +47,7 @@ const getDateTimePickerPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const DateTimePicker = createPolymerComponent<
+export const DateTimePicker = createVaadinComponent<
   DateTimePickerClass,
   typeof DateTimePickerEvents
 >(

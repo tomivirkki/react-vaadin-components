@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type {
   Select as SelectClass,
@@ -46,7 +46,7 @@ const getSelectPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const Select = createPolymerComponent<SelectClass, typeof SelectEvents>(
+export const Select = createVaadinComponent<SelectClass, typeof SelectEvents>(
   "vaadin-select",
   SelectProperties,
   SelectEvents,

@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type {
   AppLayout as AppLayoutClass,
@@ -33,7 +33,7 @@ const getAppLayoutPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const AppLayout = createPolymerComponent<
+export const AppLayout = createVaadinComponent<
   AppLayoutClass,
   typeof AppLayoutEvents
 >(
@@ -63,7 +63,7 @@ const getDrawerTogglePreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const DrawerToggle = createPolymerComponent<
+export const DrawerToggle = createVaadinComponent<
   DrawerToggleClass,
   typeof DrawerToggleEvents
 >(

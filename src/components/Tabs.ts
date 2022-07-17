@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type { Tab as TabClass } from "@vaadin/tabs/vaadin-tab";
 
@@ -23,7 +23,7 @@ const getTabPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const Tab = createPolymerComponent<TabClass, typeof TabEvents>(
+export const Tab = createVaadinComponent<TabClass, typeof TabEvents>(
   "vaadin-tab",
   TabProperties,
   TabEvents,
@@ -54,7 +54,7 @@ const getTabsPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const Tabs = createPolymerComponent<TabsClass, typeof TabsEvents>(
+export const Tabs = createVaadinComponent<TabsClass, typeof TabsEvents>(
   "vaadin-tabs",
   TabsProperties,
   TabsEvents,

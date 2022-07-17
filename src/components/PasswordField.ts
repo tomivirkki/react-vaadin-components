@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type {
   PasswordField as PasswordFieldClass,
@@ -57,7 +57,7 @@ const getPasswordFieldPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const PasswordField = createPolymerComponent<
+export const PasswordField = createVaadinComponent<
   PasswordFieldClass,
   typeof PasswordFieldEvents
 >(

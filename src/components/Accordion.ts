@@ -1,6 +1,6 @@
 // Generated file. Do not edit.
 
-import { createPolymerComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component";
 
 import type { AccordionPanel as AccordionPanelClass } from "@vaadin/accordion/vaadin-accordion-panel";
 
@@ -32,7 +32,7 @@ const getAccordionPanelPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const AccordionPanel = createPolymerComponent<
+export const AccordionPanel = createVaadinComponent<
   AccordionPanelClass,
   typeof AccordionPanelEvents
 >(
@@ -65,7 +65,7 @@ const getAccordionPreRenderConfig = (props: { [key: string]: any }) => {
   };
 };
 
-export const Accordion = createPolymerComponent<
+export const Accordion = createVaadinComponent<
   AccordionClass,
   typeof AccordionEvents
 >(
