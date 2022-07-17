@@ -1,5 +1,5 @@
 import React from "react";
-import { TestComponent as TestComponentClass } from "./web-components/test-component/test-component.js";
+import { TestComponent as TestComponentClass } from "./web-components/test-component/test-component";
 import { context } from "../src/create-component";
 import { renderComponent } from "./helpers";
 
@@ -37,7 +37,7 @@ describe("SSR", () => {
   });
 
   test("should not suppress a lit dev mode warning", () => {
-    const litIssuedWarnings = (window as any).litIssuedWarnings;
+    const { litIssuedWarnings } = window as any;
     expect(litIssuedWarnings).not.toBeDefined();
   });
 });

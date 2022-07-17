@@ -1,5 +1,6 @@
+/* eslint-disable no-undef */
 import React from "react";
-import type { TestComponent as TestComponentClass } from "./web-components/test-component/test-component.js";
+import type { TestComponent as TestComponentClass } from "./web-components/test-component/test-component";
 import { TestComponent } from "./index";
 import { nextFrame, renderComponent } from "./helpers";
 
@@ -7,9 +8,10 @@ import { nextFrame, renderComponent } from "./helpers";
 // gets defined as part of a test. Since it's a global side-effect, it reuqires a
 // separate test suite, which can only include one test case.
 const originalDefine = customElements.define;
-let customElementsToDefine: { [key: string]: CustomElementConstructor } = {};
-customElements.define = (name, elementClass) =>
-  (customElementsToDefine[name] = elementClass);
+const customElementsToDefine: { [key: string]: CustomElementConstructor } = {};
+customElements.define = (name, elementClass) => {
+  customElementsToDefine[name] = elementClass;
+};
 
 function flushDefine() {
   customElements.define = originalDefine;
@@ -21,7 +23,7 @@ function flushDefine() {
 describe("prerender - define", () => {
   test("should remove prerender-only styles on define", async () => {
     const [testComponentElement] = await renderComponent<TestComponentClass>(
-      () => <TestComponent></TestComponent>
+      () => <TestComponent />
     );
 
     expect(testComponentElement.shadowRoot!.textContent).toContain(

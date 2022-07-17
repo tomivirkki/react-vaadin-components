@@ -1,1 +1,1 @@
-export * from './src/test-component.js';
+export * from "./src/test-component";

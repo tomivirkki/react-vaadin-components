@@ -1,12 +1,13 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from "react";
-import { TestComponent as TestComponentClass } from "./web-components/test-component/test-component.js";
+import { jest } from "@jest/globals";
+import { act } from "@testing-library/react";
+import { TestComponent as TestComponentClass } from "./web-components/test-component/test-component";
 import { TestComponent } from "./index";
 // TODO: Re-export from the React component
-import type { TestComponentItemModel } from "./web-components/test-component/test-component.js";
-import { jest } from "@jest/globals";
+import type { TestComponentItemModel } from "./web-components/test-component/test-component";
 import { renderComponent } from "./helpers";
 import "@testing-library/jest-dom/extend-expect";
-import { act } from "@testing-library/react";
 
 describe("renderers", () => {
   describe("child renderer", () => {
@@ -45,7 +46,7 @@ describe("renderers", () => {
     beforeEach(async () => {
       [testComponentElement, rerender] =
         await renderComponent<TestComponentClass>(() => (
-          <TestComponent headerComponent={<div>header</div>}></TestComponent>
+          <TestComponent headerComponent={<div>header</div>} />
         ));
     });
 
@@ -79,22 +80,17 @@ describe("renderers", () => {
     };
 
     beforeEach(async () => {
-      const itemRenderer = ({ index, item }: TestComponentItemModel<Item>) => {
-        return (
-          <div>
-            Item {index}: {item.name}
-          </div>
-        );
-      };
+      const itemRenderer = ({ index, item }: TestComponentItemModel<Item>) => (
+        <div>
+          Item {index}: {item.name}
+        </div>
+      );
 
       const items: Item[] = [{ name: "foo" }, { name: "bar" }];
 
       [testComponentElement, rerender] =
         await renderComponent<TestComponentClass>(() => (
-          <TestComponent
-            items={items}
-            itemRenderer={itemRenderer}
-          ></TestComponent>
+          <TestComponent items={items} itemRenderer={itemRenderer} />
         ));
     });
 

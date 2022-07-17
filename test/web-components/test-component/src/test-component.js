@@ -1,3 +1,6 @@
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable max-classes-per-file */
 class AbstractTestComponent extends HTMLElement {
   constructor() {
     super();
@@ -111,6 +114,7 @@ class TestComponent extends AbstractTestComponent {
       [...this.itemlist.children].forEach((li, index) => {
         const item = this.items[index];
 
+        // eslint-disable-next-line no-param-reassign
         li.hidden = item !== undefined;
         this.renderer(li, this, { item, index });
       });

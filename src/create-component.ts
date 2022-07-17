@@ -1,3 +1,6 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable max-classes-per-file */
 import * as React from "react";
 import ReactDOM from "react-dom";
 import { createRoot } from "react-dom/client";
@@ -68,13 +71,13 @@ export type RenderersConfig = {
 };
 
 type PreRenderConfig = {
-  hostProperties: { [key: string]: any };
-  children: {
+  hostProperties?: { [key: string]: any };
+  children?: {
     tag: string;
     properties?: { [key: string]: any };
     textContent?: string;
   }[];
-  shadowDomContent: string;
+  shadowDomContent?: string;
 };
 
 // TODO: Still missing some tests
@@ -230,18 +233,18 @@ export function createVaadinComponent<I extends HTMLElement, E extends Events>(
     }
 
     // SSR - children
-    props.children = [
-      ...[props.children],
-      preRenderConfig?.children.map((child, index) => {
-        return React.createElement(child.tag, {
-          key: index,
+    preRenderConfig?.children?.forEach((child) => {
+      props.children = [
+        ...[props.children],
+        React.createElement(child.tag, {
+          key: props.children?.length || 0,
           ...(child.properties || {}),
           ...(child.textContent
             ? { dangerouslySetInnerHTML: { __html: child.textContent } }
             : {}),
-        });
-      }) || [],
-    ];
+        }),
+      ];
+    });
 
     // SSR - client-side pre-rendering & hydration fixes
     const ref = React.useRef();
@@ -280,12 +283,11 @@ export function createVaadinComponent<I extends HTMLElement, E extends Events>(
 }
 
 export function eventMapper<EventMap extends { [key: string]: any }>() {
-  return function <A extends string, I extends keyof EventMap>(
+  return <A extends string, I extends keyof EventMap>(
     name: A,
     eventName: I
-  ): { [key in A]: EventName<EventMap[I]> } {
-    return {
+  ): { [key in A]: EventName<EventMap[I]> } =>
+    ({
       [name]: eventName,
-    } as any;
-  };
+    } as any);
 }

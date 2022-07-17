@@ -5,11 +5,13 @@
 ## Quick start
 
 Install the component set
+
 ```sh
 npm i react-vaadin-components
 ```
 
 Once installed, import the and use the components in your React app
+
 ```js
 import {
   VerticalLayout,
@@ -34,4 +36,3 @@ import {
   </Button>
 </VerticalLayout>
 ```
-

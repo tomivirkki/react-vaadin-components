@@ -1,3 +1,8 @@
+/* eslint-disable import/extensions */
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-console */
 import { execSync, exec } from "child_process";
 import fs from "fs";
 import path from "path";
@@ -71,16 +76,24 @@ function getPackages(componentsPath) {
     "polymer-legacy-adapter",
   ];
 
-  return fs.readdirSync(componentsPath).filter((packageName) => {
-    return (
+  return fs.readdirSync(componentsPath).filter(
+    (packageName) =>
       // Exclude legacy packages
       !packageName.startsWith("vaadin") &&
       // Explicit excludes
       !excludedPackages.includes(packageName) &&
       // Exclude pro
       (!excludePro || !isPro(packageName))
-    );
-  });
+  );
+}
+
+function writeFile(filePath, content) {
+  // Write the file
+  fs.writeFileSync(filePath, content);
+  // Run eslint
+  execSync(`npx eslint ${filePath} --fix`);
+  // Run prettier
+  execSync(`npx prettier ${filePath} --write`);
 }
 
 const importUrl = import.meta.url;
@@ -134,13 +147,12 @@ async function generateComponentForPackage(
     .map((fileName) => fileName.substring(0, fileName.length - ".d.ts".length));
 
   const components = JSON.parse(result)
-    .filter((component, idx, array) => {
-      // Remove duplicates
-      return (
+    .filter(
+      (component, idx, array) =>
+        // Remove duplicates
         array.findIndex((c) => c.tags[0].name === component.tags[0].name) ===
         idx
-      );
-    })
+    )
     .filter((component) => {
       const elementName = component.tags[0].name;
       return rootLevelComponents.includes(elementName);
@@ -159,7 +171,7 @@ async function generateComponentForPackage(
 
     const eventMapName = `${exportName}EventMap`;
     const useGenricEvents = fs
-      .readFileSync(path.resolve(packageSrcPath, elementName + ".d.ts"), "utf8")
+      .readFileSync(path.resolve(packageSrcPath, `${elementName}.d.ts`), "utf8")
       .includes(`${eventMapName}<`);
     const genericsSuffix = useGenricEvents ? "<unknown>" : "";
 
@@ -167,7 +179,7 @@ async function generateComponentForPackage(
 
     outFileImports += `
             import type { ${exportName} as ${exportName}Class${
-      hasEvents ? ", " + eventMapName : ""
+      hasEvents ? `, ${eventMapName}` : ""
     } } from "${importPath}/${packageName}/${elementName}";
         `;
 
@@ -212,7 +224,7 @@ async function generateComponentForPackage(
       `
       : "";
 
-    let preRenderConfig = { ...(preRenderConfigs[elementName] || {}) };
+    const preRenderConfig = { ...(preRenderConfigs[elementName] || {}) };
     if (!("shadowDomContent" in preRenderConfig)) {
       const shadowDomContent = await getShadowRootContent(
         `./${packageName}/${elementName}.js`,
@@ -239,8 +251,10 @@ async function generateComponentForPackage(
                 ? tag.events
                     .map((event) => {
                       const eventName = event.name;
-                      const apiName =
-                        "on" + eventName.split("-").map(capitalize).join("");
+                      const apiName = `on${eventName
+                        .split("-")
+                        .map(capitalize)
+                        .join("")}`;
                       return `...${exportName}EventMapper("${apiName}", "${eventName}")`;
                     })
                     .join(",")
@@ -258,9 +272,7 @@ async function generateComponentForPackage(
               tag.properties
                 ? tag.properties
                     .concat(rendererAPINames.map((name) => ({ name })))
-                    .map((property) => {
-                      return `${property.name}: ''`;
-                    })
+                    .map((property) => `${property.name}: ''`)
                     .join(",\n")
                 : ""
             }
@@ -281,7 +293,7 @@ async function generateComponentForPackage(
               `\`${preRenderConfig.shadowDomContent
                 .replace(/\\/g, "\\\\")
                 .replace(/\n/g, "\\n")
-                .replace(/\`/g, "\\`")}\`` || '""'
+                .replace(/`/g, "\\`")}\`` || '""'
             },
           }
         }
@@ -309,6 +321,12 @@ async function generateComponentForPackage(
   }
 
   const outFileContent = `// Generated file. Do not edit.
+        /* eslint-disable import/prefer-default-export */
+        /* eslint-disable import/no-extraneous-dependencies */
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+
+        import React from "react";
+
         ${
           usesPropType
             ? "type PropType<TObj, TProp extends keyof TObj> = TObj[TProp];"
@@ -319,10 +337,8 @@ async function generateComponentForPackage(
     `;
 
   const filePath = path.resolve(componentsOutPath, `${outFileName}.ts`);
-  // Write the file
-  fs.writeFileSync(filePath, outFileContent);
-  // Run prettier
-  execSync(`npx prettier ${filePath} --write`);
+
+  writeFile(filePath, outFileContent);
 }
 
 async function generateComponents(
@@ -346,7 +362,6 @@ async function generateComponents(
 
     // Add the export to the index file
     indexContent += `export * from './components/${outFileName}';\n`;
-    fs.writeFileSync(path.resolve(indexOutPath, "index.ts"), indexContent);
 
     // Generate the component
     await generateComponentForPackage(
@@ -357,6 +372,8 @@ async function generateComponents(
       outFileName
     );
   }
+
+  writeFile(path.resolve(indexOutPath, "index.ts"), indexContent);
 
   server.kill();
 }

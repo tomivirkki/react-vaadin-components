@@ -1,21 +1,21 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from "react";
+import { jest } from "@jest/globals";
 import type {
   // TODO: Re-export from the React component
   ValueChangedEvent,
   TestComponent as TestComponentClass,
-} from "./web-components/test-component/test-component.js";
+} from "./web-components/test-component/test-component";
 import { TestComponent } from "./index";
 import { renderComponent } from "./helpers";
-import { jest } from "@jest/globals";
 
 describe("client", () => {
-  let testComponentElement: TestComponentClass;
   let listener: ReturnType<typeof jest.fn>;
 
   beforeEach(async () => {
     listener = jest.fn();
-    [testComponentElement] = await renderComponent<TestComponentClass>(() => (
-      <TestComponent onValueChanged={listener} value="foo"></TestComponent>
+    await renderComponent<TestComponentClass>(() => (
+      <TestComponent onValueChanged={listener} value="foo" />
     ));
   });
 

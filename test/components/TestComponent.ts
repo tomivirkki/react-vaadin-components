@@ -1,11 +1,17 @@
 // Generated file. Do not edit.
-type PropType<TObj, TProp extends keyof TObj> = TObj[TProp];
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+import React from "react";
 import { createVaadinComponent, eventMapper } from "../../src/create-component";
 
 import type {
   TestComponent as TestComponentClass,
   TestComponentEventMap,
 } from "../web-components/test-component/test-component";
+
+type PropType<TObj, TProp extends keyof TObj> = TObj[TProp];
 
 const TestComponentEventMapper = eventMapper<TestComponentEventMap>();
 const TestComponentEvents = {
@@ -38,16 +44,14 @@ type TestComponentClassExtended = Omit<
   ) => React.ReactNode;
 };
 
-const getTestComponentPreRenderConfig = (props: { [key: string]: any }) => {
-  return {
-    hostProperties: { "has-value": props.value ? "" : undefined },
-    children: [
-      { tag: "div", textContent: props.value, properties: { slot: "foo" } },
-      { tag: "div" },
-    ],
-    shadowDomContent: `<style>\n      :host {\n        --test-component-prerender-style: 1;\n      }\n    </style><style>\n      :host {\n          --test-component-style: 1;\n      }\n    </style><div id="header"></div><div id="overlay"></div><ul id="itemlist">\n        <li></li>\n        <li></li>\n    </ul><test-sub-component id="sub-component"><template shadowroot="open"><style>\n      :host {\n          --test-sub-component-style: 1;\n      }\n    </style></template></test-sub-component>`,
-  };
-};
+const getTestComponentPreRenderConfig = (props: { [key: string]: any }) => ({
+  hostProperties: { "has-value": props.value ? "" : undefined },
+  children: [
+    { tag: "div", textContent: props.value, properties: { slot: "foo" } },
+    { tag: "div" },
+  ],
+  shadowDomContent: `<style>\n      :host {\n        --test-component-prerender-style: 1;\n      }\n    </style><style>\n      :host {\n          --test-component-style: 1;\n      }\n    </style><div id="header"></div><div id="overlay"></div><ul id="itemlist">\n        <li></li>\n        <li></li>\n    </ul><test-sub-component id="sub-component"><template shadowroot="open"><style>\n      :host {\n          --test-sub-component-style: 1;\n      }\n    </style></template></test-sub-component>`,
+});
 
 export const TestComponent = createVaadinComponent<
   TestComponentClassExtended,

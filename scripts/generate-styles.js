@@ -1,15 +1,16 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import fs from "fs";
 import path from "path";
 import { execSync } from "child_process";
 
-import { color, colorBase } from "@vaadin/vaadin-lumo-styles/color.js";
-import { spacing } from "@vaadin/vaadin-lumo-styles/spacing.js";
-import { sizing } from "@vaadin/vaadin-lumo-styles/sizing.js";
-import { style } from "@vaadin/vaadin-lumo-styles/style.js";
-import { font, typography } from "@vaadin/vaadin-lumo-styles/typography.js";
-import { userColors } from "@vaadin/vaadin-lumo-styles/user-colors.js";
-import "@vaadin/vaadin-lumo-styles/font-icons.js";
-import "@vaadin/avatar/src/vaadin-avatar-icons.js";
+import { color, colorBase } from "@vaadin/vaadin-lumo-styles/color";
+import { spacing } from "@vaadin/vaadin-lumo-styles/spacing";
+import { sizing } from "@vaadin/vaadin-lumo-styles/sizing";
+import { style } from "@vaadin/vaadin-lumo-styles/style";
+import { font, typography } from "@vaadin/vaadin-lumo-styles/typography";
+import { userColors } from "@vaadin/vaadin-lumo-styles/user-colors";
+import "@vaadin/vaadin-lumo-styles/font-icons";
+import "@vaadin/avatar/src/vaadin-avatar-icons";
 
 const importUrl = import.meta.url;
 const currentFile = importUrl.substring(importUrl.indexOf(":") + 1);
@@ -53,11 +54,13 @@ it("generate styles", () => {
   };
 
   Object.entries(modules).forEach(([moduleName, markerString]) => {
-    const style = [...styles].find((s) => s.textContent.includes(markerString));
-    if (style) {
+    const matchingStyle = [...styles].find((s) =>
+      s.textContent.includes(markerString)
+    );
+    if (matchingStyle) {
       const fileName = `${moduleName}.css`;
       const filePath = path.resolve(cssDir, fileName);
-      let fileContent = style.textContent.replace(/:host/g, "html");
+      let fileContent = matchingStyle.textContent.replace(/:host/g, "html");
 
       if (markerString === modules.avatar) {
         // Exception for https://github.com/vaadin/web-components/pull/4058

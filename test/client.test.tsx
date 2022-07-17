@@ -1,5 +1,5 @@
 import React from "react";
-import type { TestComponent as TestComponentClass } from "./web-components/test-component/test-component.js";
+import type { TestComponent as TestComponentClass } from "./web-components/test-component/test-component";
 import { TestComponent } from "./index";
 import { renderComponent } from "./helpers";
 
@@ -8,7 +8,7 @@ describe("client", () => {
 
   beforeEach(async () => {
     [testComponentElement] = await renderComponent<TestComponentClass>(() => (
-      <TestComponent value="foo" opened></TestComponent>
+      <TestComponent value="foo" opened />
     ));
   });
 
@@ -30,7 +30,7 @@ describe("client", () => {
   });
 
   test("should suppress a lit dev mode warning", () => {
-    const litIssuedWarnings = (globalThis as any).litIssuedWarnings;
+    const { litIssuedWarnings } = globalThis as any;
     const [first] = litIssuedWarnings as Set<string>;
     expect(first).toContain("Lit is in dev mode.");
   });

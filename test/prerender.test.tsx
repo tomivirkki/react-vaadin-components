@@ -1,5 +1,5 @@
 import React from "react";
-import type { TestComponent as TestComponentClass } from "./web-components/test-component/test-component.js";
+import type { TestComponent as TestComponentClass } from "./web-components/test-component/test-component";
 import { TestComponent } from "./index";
 import { renderComponent } from "./helpers";
 
@@ -42,7 +42,7 @@ describe("prerender", () => {
   });
 
   test("should not try to recreate the shadow root", () => {
-    expect(() => rerender()).not.toThrow();  
+    expect(() => rerender()).not.toThrow();
   });
 
   test("should have a shadow root on the sub-component", () => {

@@ -1,4 +1,10 @@
+/* eslint-disable no-use-before-define */
 type TestComponentItem = any;
+
+export type TestComponentItemModel<TItem = TestComponentItem> = {
+  item: TItem;
+  index: number;
+};
 
 /**
  * @fires {CustomEvent} value-changed - Fired when the `value` property changes.
@@ -35,13 +41,9 @@ declare class TestComponent<TItem = TestComponentItem> extends HTMLElement {
   requestContentUpdate(): void;
 }
 
-export type TestComponentItemModel<TItem = TestComponentItem> = {
-  item: TItem;
-  index: number;
-};
-
 export type ValueChangedEvent = CustomEvent<string>;
 
+// eslint-disable-next-line no-undef
 export interface TestComponentEventMap extends HTMLElementEventMap {
   "value-changed": ValueChangedEvent;
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import type { TestComponent as TestComponentClass } from "./web-components/test-component/test-component.js";
+import type { TestComponent as TestComponentClass } from "./web-components/test-component/test-component";
 import { TestComponent } from "./index";
 import { renderComponent } from "./helpers";
 import { createVaadinComponent } from "../src/create-component";
@@ -9,7 +9,15 @@ const AnotherComponent = createVaadinComponent(
   {},
   {},
   () => {},
-  "AnotherComponent"
+  "AnotherComponent",
+  undefined,
+  () => ({
+    children: [
+      {
+        tag: "div",
+      },
+    ],
+  })
 );
 
 describe("components-defined", () => {
@@ -19,8 +27,8 @@ describe("components-defined", () => {
     // Render a view with a '<test-component>' and '<another-component>' custom elements.
     await renderComponent<TestComponentClass>(() => (
       <>
-        <TestComponent></TestComponent>
-        <AnotherComponent></AnotherComponent>
+        <TestComponent />
+        <AnotherComponent />
       </>
     ));
 

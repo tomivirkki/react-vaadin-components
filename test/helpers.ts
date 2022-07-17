@@ -1,7 +1,10 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { render } from "@testing-library/react";
 
 export const nextFrame = () =>
-  new Promise((resolve) => requestAnimationFrame(resolve));
+  new Promise<void>((resolve) => {
+    requestAnimationFrame(() => resolve());
+  });
 
 export async function renderComponent<T extends HTMLElement>(
   component: () => Parameters<typeof render>[0]
