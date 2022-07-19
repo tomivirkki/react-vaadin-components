@@ -1,12 +1,12 @@
 /* Generated file. Do not edit. */
 
-@import url("./color.css");
-@import url("./colorBase.css");
-@import url("./spacing.css");
-@import url("./sizing.css");
-@import url("./style.css");
-@import url("./font.css");
-@import url("./typography.css");
-@import url("./userColors.css");
-@import url("./avatar.css");
-@import url("./lumoIcons.css");
+@import url("./lumo/color.css");
+@import url("./lumo/colorBase.css");
+@import url("./lumo/spacing.css");
+@import url("./lumo/sizing.css");
+@import url("./lumo/style.css");
+@import url("./lumo/font.css");
+@import url("./lumo/typography.css");
+@import url("./lumo/userColors.css");
+@import url("./lumo/avatar.css");
+@import url("./lumo/lumoIcons.css");
