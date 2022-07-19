@@ -183,8 +183,8 @@ async function generateComponentForPackage(
     } } from "${importPath}/${packageName}/${elementName}";
         `;
 
-    const elementRenderers = Object.entries(renderers).find(([key]) =>
-      new RegExp(key).test(elementName)
+    const elementRenderers = Object.entries(renderers).find(
+      ([key]) => key === elementName
     )?.[1];
 
     const rendererAPINames = elementRenderers
@@ -206,7 +206,7 @@ async function generateComponentForPackage(
       usesPropType = true;
     }
 
-    const extendedClassType = elementRenderers
+    let extendedClassType = elementRenderers
       ? `
         type ${exportName}ClassExtended = Omit<${exportName}Class, ${rendererFunctionNames
           .map((name) => `'${name}'`)
@@ -223,6 +223,16 @@ async function generateComponentForPackage(
         };
       `
       : "";
+
+    // Exceptions
+    if (elementName === "vaadin-form-item") {
+      // Form item
+      extendedClassType += `
+        type ${exportName}ClassExtended = ${exportName}Class & {
+          colspan?: string;
+        };
+      `;
+    }
 
     const preRenderConfig = { ...(preRenderConfigs[elementName] || {}) };
     if (!("shadowDomContent" in preRenderConfig)) {

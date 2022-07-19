@@ -25,13 +25,15 @@ function suppressLitDevModeWarning() {
 // Properties that the Web Component reflects as attributes (for styling purposes).
 // The component should render them as attributes directly to avoid styling issues
 // with SSR (before hydration).
-const knownBooleanAttributes = [
+const knownAttributes = [
   "disabled",
   "hidden",
   "readonly",
   "checked",
+  "indeterminate",
   "required",
   "opened",
+  "orientation",
 ];
 
 /**
@@ -101,9 +103,7 @@ export function createVaadinComponent<I extends HTMLElement, E extends Events>(
   // The actual Web Component can't be defined when running SSR, so need to use a mock class instead
   const mock = class {};
   const filteredProperties = { ...properties };
-  knownBooleanAttributes.forEach(
-    (attribute) => delete filteredProperties[attribute]
-  );
+  knownAttributes.forEach((attribute) => delete filteredProperties[attribute]);
   Object.assign(mock.prototype, filteredProperties);
 
   // Create the component
@@ -119,15 +119,6 @@ export function createVaadinComponent<I extends HTMLElement, E extends Events>(
   const originalRenderFunc = (component as any).render;
   (component as any).render = (props: any, ...rest: any) => {
     props = { ...props };
-
-    // Fix boolean property attributes. Workaround https://github.com/facebook/react/issues/9230
-    knownBooleanAttributes.forEach((attribute) => {
-      if (props[attribute]) {
-        props[attribute] = "";
-      } else {
-        delete props[attribute];
-      }
-    });
 
     // Once all the custom elements on the active page are defined, add a marker attribute to body
     const DEFINED_ATTRIBUTE = "vaadin-components-defined";
@@ -275,6 +266,17 @@ export function createVaadinComponent<I extends HTMLElement, E extends Events>(
       }
     });
     props = { ...props, ref };
+
+    knownAttributes.forEach((attribute) => {
+      if (typeof props[attribute] === "boolean") {
+        // Fix boolean property attributes. Workaround https://github.com/facebook/react/issues/9230
+        if (props[attribute]) {
+          props[attribute] = "";
+        } else {
+          delete props[attribute];
+        }
+      }
+    });
 
     return originalRenderFunc(props, ...rest);
   };

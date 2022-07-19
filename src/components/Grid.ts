@@ -528,6 +528,15 @@ const GridProperties = {
   activeItem: "",
   version: "",
   disabled: "",
+  itemDetailsRenderer: "",
+};
+
+type GridClassExtended = Omit<GridClass, "rowDetailsRenderer"> & {
+  itemDetailsRenderer: (
+    model: Parameters<
+      Exclude<PropType<GridClass, "rowDetailsRenderer">, undefined | null>
+    >[2]
+  ) => React.ReactNode;
 };
 
 const getGridPreRenderConfig = (props: { [key: string]: any }) => ({
@@ -536,12 +545,12 @@ const getGridPreRenderConfig = (props: { [key: string]: any }) => ({
   shadowDomContent: `<style>\n    \n\n    :host {\n        display: block;\n        height: 400px;\n        flex: 1 1 auto;\n        align-self: stretch;\n        position: relative;\n    }\n\n    :host([hidden]) {\n        display: none !important;\n    }\n\n    :host([disabled]) {\n        pointer-events: none;\n    }\n\n    :host {\n        font-family: var(--lumo-font-family);\n        font-size: var(--lumo-font-size-m);\n        line-height: var(--lumo-line-height-s);\n        color: var(--lumo-body-text-color);\n        background-color: var(--lumo-base-color);\n        box-sizing: border-box;\n        -webkit-text-size-adjust: 100%;\n        -webkit-tap-highlight-color: transparent;\n        -webkit-font-smoothing: antialiased;\n        -moz-osx-font-smoothing: grayscale;\n  \n        /* For internal use only */\n      --_lumo-grid-border-color: var(--lumo-contrast-20pct);\n      --_lumo-grid-secondary-border-color: var(--lumo-contrast-10pct);\n      --_lumo-grid-border-width: 1px;\n      --_lumo-grid-selected-row-color: var(--lumo-primary-color-10pct);\n    }\n\n    /* No (outer) border */\n\n    :host(:not([theme~='no-border'])) {\n        border: var(--_lumo-grid-border-width) solid var(--_lumo-grid-border-color);\n    }\n\n    :host([disabled]) {\n        opacity: 0.7;\n    }\n  </style>`,
 });
 
-export const Grid = createVaadinComponent<GridClass, typeof GridEvents>(
+export const Grid = createVaadinComponent<GridClassExtended, typeof GridEvents>(
   "vaadin-grid",
   GridProperties,
   GridEvents,
   () => import("@vaadin/grid/vaadin-grid"),
   "Grid",
-  undefined,
+  { itemRenderers: { itemDetailsRenderer: "rowDetailsRenderer" } },
   getGridPreRenderConfig
 );

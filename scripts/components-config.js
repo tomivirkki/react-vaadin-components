@@ -3,6 +3,9 @@ const gridColumnRenderers = {
     headerComponent: "headerRenderer",
     footerComponent: "footerRenderer",
   },
+  itemRenderers: {
+    itemRenderer: "renderer",
+  },
 };
 
 // TODO: Merge renderers and preRenderConfigs under one object mapped by component names
@@ -23,14 +26,18 @@ export const renderers = {
       footerComponent: "footerRenderer",
     },
   },
-  "^vaadin-grid-.*column$": {
-    ...gridColumnRenderers,
-    itemRenderers: {
-      itemRenderer: "renderer",
-    },
-  },
+  "vaadin-grid-column": gridColumnRenderers,
+  "vaadin-grid-tree-column": gridColumnRenderers,
+  "vaadin-grid-filter-column": gridColumnRenderers,
+  "vaadin-grid-sort-column": gridColumnRenderers,
+  "vaadin-grid-selection-column": gridColumnRenderers,
   "vaadin-grid-column-group": {
-    ...gridColumnRenderers,
+    components: gridColumnRenderers.components,
+  },
+  "vaadin-grid": {
+    itemRenderers: {
+      itemDetailsRenderer: "rowDetailsRenderer",
+    },
   },
 };
 
@@ -38,6 +45,7 @@ export const renderers = {
 const inputFieldHostProperties = {
   "'has-label'": "props.label ? '' : undefined",
   "'has-value'": "props.value ? '' : undefined",
+  "'has-helper'": "props.helperText ? '' : undefined",
   "'clear-button-visible'": "props.clearButtonVisible ? '' : undefined",
 };
 
@@ -53,12 +61,21 @@ const inputFieldInput = {
   tag: "'input'",
   properties: {
     slot: "'input'",
+    placeholder: "props.placeholder",
+  },
+};
+
+const inputFieldHelper = {
+  tag: "'div'",
+  textContent: "props.helperText",
+  properties: {
+    slot: "'helper'",
   },
 };
 
 const inputFieldConfig = {
   hostProperties: inputFieldHostProperties,
-  children: [inputFieldLabel, inputFieldInput],
+  children: [inputFieldLabel, inputFieldInput, inputFieldHelper],
 };
 
 export const preRenderConfigs = {
@@ -85,11 +102,57 @@ export const preRenderConfigs = {
       },
     ],
   },
+  "vaadin-checkbox": {
+    hostProperties: {
+      "'has-label'": "props.label ? '' : undefined",
+      "'has-value'": "props.value ? '' : undefined",
+    },
+    children: [
+      inputFieldLabel,
+      {
+        tag: "'input'",
+        properties: {
+          slot: "'input'",
+          type: "'checkbox'",
+        },
+      },
+    ],
+  },
+  "vaadin-checkbox-group": {
+    hostProperties: {
+      "'has-label'": "props.label ? '' : undefined",
+    },
+    children: [inputFieldLabel],
+  },
   "vaadin-text-field": inputFieldConfig,
   "vaadin-date-picker": inputFieldConfig,
+  "vaadin-password-field": inputFieldConfig,
   "vaadin-combo-box": inputFieldConfig,
+  "vaadin-multi-select-combo-box": {
+    hostProperties: {
+      ...inputFieldHostProperties,
+      "'has-value'": "props.selectedItems?.length ? '' : undefined",
+    },
+    children: [inputFieldLabel, inputFieldInput],
+  },
   "vaadin-integer-field": inputFieldConfig,
   "vaadin-email-field": inputFieldConfig,
+  "vaadin-number-field": inputFieldConfig,
+  "vaadin-select": {
+    hostProperties: {
+      "'has-label'": "props.label ? '' : undefined",
+      "'has-value'": "props.value ? '' : undefined",
+    },
+    children: [
+      inputFieldLabel,
+      {
+        tag: "'vaadin-select-value-button'",
+        properties: {
+          slot: "'value'",
+        },
+      },
+    ],
+  },
   "vaadin-text-area": {
     hostProperties: inputFieldHostProperties,
     children: [
@@ -98,9 +161,54 @@ export const preRenderConfigs = {
         tag: "'textarea'",
         properties: {
           slot: "'textarea'",
+          placeholder: "props.placeholder",
         },
       },
     ],
+  },
+  "vaadin-radio-button": {
+    hostProperties: {
+      "'has-label'": "props.label ? '' : undefined",
+      "'has-value'": "props.value ? '' : undefined",
+    },
+    children: [
+      inputFieldLabel,
+      {
+        tag: "'input'",
+        properties: {
+          slot: "'input'",
+          type: "'radio'",
+        },
+      },
+    ],
+  },
+  "vaadin-radio-group": {
+    hostProperties: {
+      "'has-label'": "props.label ? '' : undefined",
+      "'has-value'": "props.value ? '' : undefined",
+    },
+    children: [inputFieldLabel],
+  },
+  "vaadin-tabs": {
+    hostProperties: {
+      "'orientation'": "props.orientation || 'horizontal'",
+    },
+    styles: `
+      :host([orientation="vertical"]) ::slotted(vaadin-tab) {
+        transform-origin: 0% 50%;
+        padding: 0.25rem 1rem;
+        min-height: var(--lumo-size-m);
+        min-width: 0;
+        --_slotted-anchor-justify-content: normal;
+      }
+    `,
+  },
+  "vaadin-tab": {
+    styles: `
+      :host(:not([orientation])) ::slotted(a[href]) {
+        justify-content: var(--_slotted-anchor-justify-content, center) !important;
+      }
+    `,
   },
   "vaadin-progress-bar": {
     styles: `
@@ -116,11 +224,19 @@ export const preRenderConfigs = {
       }
     `,
   },
+  "vaadin-accordion-panel": {
+    styles: `
+      :host([opened]) [part="content"] {
+        max-height: none !important;
+      }
+    `,
+  },
+
   // TODO: There's still a brief layout shift when the drawer is open, even with javascript disabled (without hydration)
   "vaadin-app-layout": {
     styles: `
       :host {
-        --_vaadin-app-layout-drawer-offset-size: 16em;
+        --_vaadin-app-layout-drawer-offset-size: 16em !important;
         --vaadin-app-layout-transition: 0 !important;
       }
 
@@ -128,9 +244,13 @@ export const preRenderConfigs = {
         display: block !important;
       }
 
+      :host [part="navbar"] {
+        display: flex !important;
+      }
+
       @media (max-width: 800px), (max-height: 600px) {
         :host {
-          --_vaadin-app-layout-drawer-offset-size: 0;
+          --_vaadin-app-layout-drawer-offset-size: 0 !important;
         }
 
         :host [part="drawer"] {

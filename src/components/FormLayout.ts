@@ -14,6 +14,10 @@ const FormItemEvents = {};
 
 const FormItemProperties = {};
 
+type FormItemClassExtended = FormItemClass & {
+  colspan?: string;
+};
+
 const getFormItemPreRenderConfig = (props: { [key: string]: any }) => ({
   hostProperties: {},
   children: [],
@@ -21,7 +25,7 @@ const getFormItemPreRenderConfig = (props: { [key: string]: any }) => ({
 });
 
 export const FormItem = createVaadinComponent<
-  FormItemClass,
+  FormItemClassExtended,
   typeof FormItemEvents
 >(
   "vaadin-form-item",
