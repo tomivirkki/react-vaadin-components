@@ -231,13 +231,26 @@ export const preRenderConfigs = {
       }
     `,
   },
-
-  // TODO: There's still a brief layout shift when the drawer is open, even with javascript disabled (without hydration)
   "vaadin-app-layout": {
+    hostProperties: {
+      "'style'": `{
+            /* A hack to avoid a declarative shadow related FOUC (happens even with JS disabled) */
+            opacity: 'var(--_vaadin-app-layout-opacity, 0)',
+            
+            /* Add some preliminary height for the app-layout navbar in case it has children */
+            '--_vaadin-app-layout-navbar-offset-size': ([...props.children].some(child => child.props.slot === 'navbar') ? '44px' : '0px'),
+
+            /* Finally add any existing styles */
+            ...(props.style || {})
+      }`.replace(/\n/g, ""),
+    },
     styles: `
       :host {
         --_vaadin-app-layout-drawer-offset-size: 16em !important;
         --vaadin-app-layout-transition: 0 !important;
+
+        /* A hack to avoid a declarative shadow related FOUC (happens even with JS disabled) */
+        --_vaadin-app-layout-opacity: 1;
       }
 
       :host [part="drawer"] {

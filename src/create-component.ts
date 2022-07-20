@@ -243,6 +243,11 @@ export function createVaadinComponent<I extends HTMLElement, E extends Events>(
       if (context.isBrowser && ref.current) {
         const element = (ref.current as any)._reactInternals.child.stateNode;
 
+        if (tagName === "vaadin-app-layout") {
+          /* A hack to avoid a declarative shadow related FOUC (happens even with JS disabled) */
+          element.style.setProperty("--_vaadin-app-layout-opacity", 1);
+        }
+
         // Remove the `<template shadowroot="open">` element from inside the element if it exists
         // (some browsers don't support declarative shadow DOM)
         element.querySelector("template[shadowroot]")?.remove();
