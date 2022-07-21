@@ -1,5 +1,5 @@
-// Generated file. Do not edit.
-
+/* eslint-disable import/prefer-default-export */
+export const NotificationTemplate = `
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -59,3 +59,4 @@ export const Notification = {
     };
   },
 };
+`;

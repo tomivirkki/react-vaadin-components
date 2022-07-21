@@ -8,6 +8,7 @@ import fs from "fs";
 import path from "path";
 import puppeteer from "puppeteer";
 import { renderers, preRenderConfigs } from "./components-config.js";
+import { NotificationTemplate } from "./Notification-template.js";
 
 const vaadinComponentsPath = process.env.COMPONENTS_PATH;
 
@@ -330,7 +331,7 @@ async function generateComponentForPackage(
     }
   }
 
-  const outFileContent = `// Generated file. Do not edit.
+  let outFileContent = `// Generated file. Do not edit.
         /* eslint-disable import/prefer-default-export */
         /* eslint-disable import/no-extraneous-dependencies */
         /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -345,6 +346,10 @@ async function generateComponentForPackage(
         ${outFileImports}
         ${outFileComponents}
     `;
+
+  if (packageName === "notification") {
+    outFileContent = `// Generated file. Do not edit.\n${NotificationTemplate}`;
+  }
 
   const filePath = path.resolve(componentsOutPath, `${outFileName}.ts`);
 
