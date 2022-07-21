@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+import "./web-components/test-component/src/mock-polymer-element";
 import React from "react";
 import type { TestComponent as TestComponentClass } from "./web-components/test-component/test-component";
 import { TestComponent } from "./index";

@@ -1,24 +1,16 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable max-classes-per-file */
-class AbstractTestComponent extends HTMLElement {
+
+import { MockPolymerElement } from "./mock-polymer-element";
+
+class AbstractTestComponent extends MockPolymerElement {
   constructor() {
     super();
 
-    // Mimic Polymer element behavior
-    const fragment = document.createDocumentFragment();
-    const template = document.createElement("template");
-    template.innerHTML = this.constructor.template;
-
-    const nodeList = [...template.content.children];
-    this.__templateInfo = { nodeList };
-    fragment.append(...nodeList);
-
-    if (!this.shadowRoot) {
-      this.attachShadow({ mode: "open" });
-
-      this.shadowRoot.appendChild(fragment);
-    }
+    this._attachDom(
+      document.createRange().createContextualFragment(this.constructor.template)
+    );
 
     if (this.value) {
       this.dispatchValueChangedEvent();

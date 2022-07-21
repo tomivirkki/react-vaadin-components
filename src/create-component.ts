@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable max-classes-per-file */
@@ -20,6 +21,39 @@ function suppressLitDevModeWarning() {
   (globalThis as any).litIssuedWarnings ||= new Set([
     "Lit is in dev mode. Not recommended for production! See https://lit.dev/msg/dev-mode for more information.",
   ]);
+}
+
+if (context.isBrowser) {
+  (
+    (globalThis as any).MockPolymerImport ||
+    /* istanbul ignore next */
+    import("@polymer/polymer/polymer-element")
+  ).then(({ PolymerElement }: { PolymerElement: any }) => {
+    // Override _attachDom from Polymer's element-mixin.js to support hydrating better.
+    PolymerElement.prototype._attachDom = function _attachDom(dom: any) {
+      if (dom) {
+        // If the element doesn't have a shadow root, create one.
+        if (!this.shadowRoot) {
+          this.attachShadow({ mode: "open" });
+        }
+
+        // Empty the shadow root of any existing content.
+        this.shadowRoot!.textContent = "";
+
+        // Append the new DOM to the shadow root.
+        this.shadowRoot!.appendChild(dom);
+
+        // When `adoptedStyleSheets` is supported a stylesheet is made
+        // available on the element constructor.
+        if (this.constructor._styleSheet) {
+          /* istanbul ignore next */
+          this.shadowRoot.adoptedStyleSheets = [this.constructor._styleSheet];
+        }
+      }
+
+      return this.shadowRoot;
+    };
+  });
 }
 
 // Properties that the Web Component reflects as attributes (for styling purposes).
@@ -243,6 +277,7 @@ export function createVaadinComponent<I extends HTMLElement, E extends Events>(
       if (context.isBrowser && ref.current) {
         const element = (ref.current as any)._reactInternals.child.stateNode;
 
+        // TODO: Move this to a ssrConfig hook
         if (tagName === "vaadin-app-layout") {
           /* A hack to avoid a declarative shadow related FOUC (happens even with JS disabled) */
           element.style.setProperty("--_vaadin-app-layout-opacity", 1);
@@ -256,18 +291,6 @@ export function createVaadinComponent<I extends HTMLElement, E extends Events>(
           // The element is not defined yet, pre-render shadow DOM on the client
           applyShadowDOM(element, preRenderConfig?.shadowDomContent);
         }
-
-        customElements.whenDefined(tagName).then(() => {
-          // Polymer element hydration fix: Replace the pre-rendered shadow DOM content with the effective rendered content
-          if (element.shadowRoot && element.__templateInfo?.nodeList.length) {
-            const effectiveRoot =
-              element.__templateInfo.nodeList[0].getRootNode();
-            if (!effectiveRoot.isConnected) {
-              // TODO: While this fixes multiple components, it breaks combo-box dropdown
-              element.shadowRoot.replaceChildren(...effectiveRoot.children);
-            }
-          }
-        });
       }
     });
     props = { ...props, ref };
