@@ -68,7 +68,11 @@ const getMultiSelectComboBoxPreRenderConfig = (props: {
   hostProperties: {
     "has-label": props.label ? "" : undefined,
     "has-value": props.selectedItems?.length ? "" : undefined,
-    "has-helper": props.helperText ? "" : undefined,
+    "has-helper":
+      props.helperText ||
+      [props.children].flat().some((child) => child?.props.slot === "helper")
+        ? ""
+        : undefined,
     "clear-button-visible": props.clearButtonVisible ? "" : undefined,
   },
   children: [

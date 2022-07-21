@@ -430,6 +430,8 @@ async function run() {
 
   await generateStyles();
 
+  // TODO: Fix vaadin-core dependency to the version in the provided web-components
+
   process.exit(0);
 }
 

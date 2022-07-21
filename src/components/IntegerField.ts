@@ -54,7 +54,11 @@ const getIntegerFieldPreRenderConfig = (props: { [key: string]: any }) => ({
   hostProperties: {
     "has-label": props.label ? "" : undefined,
     "has-value": props.value ? "" : undefined,
-    "has-helper": props.helperText ? "" : undefined,
+    "has-helper":
+      props.helperText ||
+      [props.children].flat().some((child) => child?.props.slot === "helper")
+        ? ""
+        : undefined,
     "clear-button-visible": props.clearButtonVisible ? "" : undefined,
   },
   children: [

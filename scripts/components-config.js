@@ -42,11 +42,21 @@ export const renderers = {
 };
 
 // TODO: Would be safer to just use (conditional) styles since props will be in effect even after hydration
-const inputFieldHostProperties = {
-  "'has-label'": "props.label ? '' : undefined",
-  "'has-value'": "props.value ? '' : undefined",
-  "'has-helper'": "props.helperText ? '' : undefined",
+const hostPropertyHasLabel = { "'has-label'": "props.label ? '' : undefined" };
+const hostPropertyHasValue = { "'has-value'": "props.value ? '' : undefined" };
+const hostPropertyHasHelper = {
+  "'has-helper'":
+    "props.helperText || [props.children].flat().some((child) => child?.props.slot === 'helper') ? '' : undefined",
+};
+const hostPropertyClearButtonVisible = {
   "'clear-button-visible'": "props.clearButtonVisible ? '' : undefined",
+};
+
+const inputFieldHostProperties = {
+  ...hostPropertyHasLabel,
+  ...hostPropertyHasValue,
+  ...hostPropertyHasHelper,
+  ...hostPropertyClearButtonVisible,
 };
 
 const inputFieldLabel = {
@@ -87,7 +97,7 @@ export const preRenderConfigs = {
     `,
     // TODO: Test
     hostProperties: {
-      "'has-value'": "props.value ? '' : undefined",
+      ...hostPropertyHasValue,
     },
     children: [
       {
@@ -102,10 +112,17 @@ export const preRenderConfigs = {
       },
     ],
   },
+  "vaadin-custom-field": {
+    children: [inputFieldLabel, inputFieldHelper],
+    hostProperties: {
+      ...hostPropertyHasLabel,
+      ...hostPropertyHasHelper,
+    },
+  },
   "vaadin-checkbox": {
     hostProperties: {
-      "'has-label'": "props.label ? '' : undefined",
-      "'has-value'": "props.value ? '' : undefined",
+      ...hostPropertyHasLabel,
+      ...hostPropertyHasValue,
     },
     children: [
       inputFieldLabel,
@@ -120,7 +137,7 @@ export const preRenderConfigs = {
   },
   "vaadin-checkbox-group": {
     hostProperties: {
-      "'has-label'": "props.label ? '' : undefined",
+      ...hostPropertyHasLabel,
     },
     children: [inputFieldLabel],
   },
@@ -140,8 +157,8 @@ export const preRenderConfigs = {
   "vaadin-number-field": inputFieldConfig,
   "vaadin-select": {
     hostProperties: {
-      "'has-label'": "props.label ? '' : undefined",
-      "'has-value'": "props.value ? '' : undefined",
+      ...hostPropertyHasLabel,
+      ...hostPropertyHasValue,
     },
     children: [
       inputFieldLabel,
@@ -168,8 +185,8 @@ export const preRenderConfigs = {
   },
   "vaadin-radio-button": {
     hostProperties: {
-      "'has-label'": "props.label ? '' : undefined",
-      "'has-value'": "props.value ? '' : undefined",
+      ...hostPropertyHasLabel,
+      ...hostPropertyHasValue,
     },
     children: [
       inputFieldLabel,
@@ -184,8 +201,8 @@ export const preRenderConfigs = {
   },
   "vaadin-radio-group": {
     hostProperties: {
-      "'has-label'": "props.label ? '' : undefined",
-      "'has-value'": "props.value ? '' : undefined",
+      ...hostPropertyHasLabel,
+      ...hostPropertyHasValue,
     },
     children: [inputFieldLabel],
   },
