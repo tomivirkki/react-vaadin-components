@@ -139,3 +139,33 @@ it("generate utility", () => {
   const utilityFilePath = path.resolve(cssDir, `utility.css`);
   writeFile(utilityFilePath, GENERATED + utility);
 });
+
+it("generate prevent fouc file", () => {
+  const GENERATED = "/* Generated file. Do not edit. */\n\n";
+
+  const fileContent = `
+    @media not all and (min-resolution: 0.001dpcm) {
+      @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+        body:not([vaadin-components-defined]) {
+          opacity: 0;
+        }
+      }
+    }
+  `;
+
+  const filePath = path.resolve(cssDir, `prevent-fouc.css`);
+  writeFile(filePath, GENERATED + fileContent);
+});
+
+it("generate single import file", () => {
+  const GENERATED = "/* Generated file. Do not edit. */\n\n";
+
+  const fileContent = `
+    @import url("./lumo.css");
+    @import url("./utility.css");
+    @import url("./prevent-fouc.css");
+  `;
+
+  const filePath = path.resolve(cssDir, `core.css`);
+  writeFile(filePath, GENERATED + fileContent);
+});

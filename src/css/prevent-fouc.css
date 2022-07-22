@@ -1,0 +1,9 @@
+/* Generated file. Do not edit. */
+
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+    body:not([vaadin-components-defined]) {
+      opacity: 0;
+    }
+  }
+}

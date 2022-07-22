@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 const gridColumnRenderers = {
   components: {
     headerComponent: "headerRenderer",
@@ -5,39 +6,6 @@ const gridColumnRenderers = {
   },
   itemRenderers: {
     itemRenderer: "renderer",
-  },
-};
-
-// TODO: Merge renderers and preRenderConfigs under one object mapped by component names
-export const renderers = {
-  "test-component": {
-    childRenderer: "overlayRenderer",
-    components: {
-      headerComponent: "headerRenderer",
-    },
-    itemRenderers: {
-      itemRenderer: "renderer",
-    },
-  },
-  "vaadin-dialog": {
-    childRenderer: "renderer",
-    components: {
-      headerComponent: "headerRenderer",
-      footerComponent: "footerRenderer",
-    },
-  },
-  "vaadin-grid-column": gridColumnRenderers,
-  "vaadin-grid-tree-column": gridColumnRenderers,
-  "vaadin-grid-filter-column": gridColumnRenderers,
-  "vaadin-grid-sort-column": gridColumnRenderers,
-  "vaadin-grid-selection-column": gridColumnRenderers,
-  "vaadin-grid-column-group": {
-    components: gridColumnRenderers.components,
-  },
-  "vaadin-grid": {
-    itemRenderers: {
-      itemDetailsRenderer: "rowDetailsRenderer",
-    },
   },
 };
 
@@ -83,134 +51,224 @@ const inputFieldHelper = {
   },
 };
 
-const inputFieldConfig = {
+const inputFieldPreRenderConfig = {
   hostProperties: inputFieldHostProperties,
   children: [inputFieldLabel, inputFieldInput, inputFieldHelper],
+  styles: `
+    :host([disabled]) vaadin-input-container {
+      background-color: var(--lumo-contrast-5pct);
+    }
+  `,
 };
 
-export const preRenderConfigs = {
+export const componentsConfig = {
   "test-component": {
-    styles: `
+    renderers: {
+      childRenderer: "overlayRenderer",
+      components: {
+        headerComponent: "headerRenderer",
+      },
+      itemRenderers: {
+        itemRenderer: "renderer",
+      },
+    },
+    preRenderConfig: {
+      styles: `
       :host {
         --test-component-prerender-style: 1;
       }
     `,
-    // TODO: Test
-    hostProperties: {
-      ...hostPropertyHasValue,
-    },
-    children: [
-      {
-        tag: "'div'",
-        textContent: "props.value",
-        properties: {
-          slot: "'foo'",
+      // TODO: Test
+      hostProperties: {
+        ...hostPropertyHasValue,
+      },
+      children: [
+        {
+          tag: "'div'",
+          textContent: "props.value",
+          properties: {
+            slot: "'foo'",
+          },
         },
+        {
+          tag: "'div'",
+        },
+      ],
+    },
+  },
+  "vaadin-dialog": {
+    renderers: {
+      childRenderer: "renderer",
+      components: {
+        headerComponent: "headerRenderer",
+        footerComponent: "footerRenderer",
       },
-      {
-        tag: "'div'",
+    },
+  },
+  "vaadin-grid-column": {
+    renderers: gridColumnRenderers,
+  },
+  "vaadin-grid-tree-column": {
+    renderers: gridColumnRenderers,
+  },
+  "vaadin-grid-filter-column": {
+    renderers: gridColumnRenderers,
+  },
+  "vaadin-grid-sort-column": {
+    renderers: gridColumnRenderers,
+  },
+  "vaadin-grid-selection-column": {
+    renderers: gridColumnRenderers,
+  },
+  "vaadin-grid-column-group": {
+    renderers: {
+      components: gridColumnRenderers.components,
+    },
+  },
+  "vaadin-grid": {
+    preRenderConfig: {
+      // With other components the shadow DOM content is mostly static.
+      // In grid's case, the content is dynamic so it can't be SSR'd the same way (would require dynamically rendering the component server-side)
+      // Only include the styles affecting the host element for now.
+      shadowDomContent: `<style>\n    \n\n    :host {\n        display: block;\n        height: 400px;\n        flex: 1 1 auto;\n        align-self: stretch;\n        position: relative;\n    }\n\n    :host([hidden]) {\n        display: none !important;\n    }\n\n    :host([disabled]) {\n        pointer-events: none;\n    }\n\n    :host {\n        font-family: var(--lumo-font-family);\n        font-size: var(--lumo-font-size-m);\n        line-height: var(--lumo-line-height-s);\n        color: var(--lumo-body-text-color);\n        background-color: var(--lumo-base-color);\n        box-sizing: border-box;\n        -webkit-text-size-adjust: 100%;\n        -webkit-tap-highlight-color: transparent;\n        -webkit-font-smoothing: antialiased;\n        -moz-osx-font-smoothing: grayscale;\n  \n        /* For internal use only */\n      --_lumo-grid-border-color: var(--lumo-contrast-20pct);\n      --_lumo-grid-secondary-border-color: var(--lumo-contrast-10pct);\n      --_lumo-grid-border-width: 1px;\n      --_lumo-grid-selected-row-color: var(--lumo-primary-color-10pct);\n    }\n\n    /* No (outer) border */\n\n    :host(:not([theme~='no-border'])) {\n        border: var(--_lumo-grid-border-width) solid var(--_lumo-grid-border-color);\n    }\n\n    :host([disabled]) {\n        opacity: 0.7;\n    }\n  </style>`,
+    },
+    renderers: {
+      itemRenderers: {
+        itemDetailsRenderer: "rowDetailsRenderer",
       },
-    ],
+    },
   },
   "vaadin-custom-field": {
-    children: [inputFieldLabel, inputFieldHelper],
-    hostProperties: {
-      ...hostPropertyHasLabel,
-      ...hostPropertyHasHelper,
+    preRenderConfig: {
+      children: [inputFieldLabel, inputFieldHelper],
+      hostProperties: {
+        ...hostPropertyHasLabel,
+        ...hostPropertyHasHelper,
+      },
     },
   },
   "vaadin-checkbox": {
-    hostProperties: {
-      ...hostPropertyHasLabel,
-      ...hostPropertyHasValue,
-    },
-    children: [
-      inputFieldLabel,
-      {
-        tag: "'input'",
-        properties: {
-          slot: "'input'",
-          type: "'checkbox'",
-        },
+    preRenderConfig: {
+      hostProperties: {
+        ...hostPropertyHasLabel,
+        ...hostPropertyHasValue,
       },
-    ],
+      children: [
+        inputFieldLabel,
+        {
+          tag: "'input'",
+          properties: {
+            slot: "'input'",
+            type: "'checkbox'",
+          },
+        },
+      ],
+    },
   },
   "vaadin-checkbox-group": {
-    hostProperties: {
-      ...hostPropertyHasLabel,
-    },
-    children: [inputFieldLabel],
-  },
-  "vaadin-text-field": inputFieldConfig,
-  "vaadin-date-picker": inputFieldConfig,
-  "vaadin-password-field": inputFieldConfig,
-  "vaadin-combo-box": inputFieldConfig,
-  "vaadin-multi-select-combo-box": {
-    hostProperties: {
-      ...inputFieldHostProperties,
-      "'has-value'": "props.selectedItems?.length ? '' : undefined",
-    },
-    children: [inputFieldLabel, inputFieldInput],
-  },
-  "vaadin-integer-field": inputFieldConfig,
-  "vaadin-email-field": inputFieldConfig,
-  "vaadin-number-field": inputFieldConfig,
-  "vaadin-select": {
-    hostProperties: {
-      ...hostPropertyHasLabel,
-      ...hostPropertyHasValue,
-    },
-    children: [
-      inputFieldLabel,
-      {
-        tag: "'vaadin-select-value-button'",
-        properties: {
-          slot: "'value'",
-        },
+    preRenderConfig: {
+      hostProperties: {
+        ...hostPropertyHasLabel,
       },
-    ],
+      children: [inputFieldLabel],
+    },
+  },
+
+  "vaadin-text-field": {
+    preRenderConfig: inputFieldPreRenderConfig,
+  },
+  "vaadin-date-picker": {
+    preRenderConfig: inputFieldPreRenderConfig,
+  },
+  "vaadin-password-field": {
+    preRenderConfig: inputFieldPreRenderConfig,
+  },
+  "vaadin-combo-box": {
+    preRenderConfig: inputFieldPreRenderConfig,
+  },
+  "vaadin-integer-field": {
+    preRenderConfig: inputFieldPreRenderConfig,
+  },
+  "vaadin-email-field": {
+    preRenderConfig: inputFieldPreRenderConfig,
+  },
+  "vaadin-number-field": {
+    preRenderConfig: inputFieldPreRenderConfig,
+  },
+  "vaadin-multi-select-combo-box": {
+    preRenderConfig: {
+      hostProperties: {
+        ...inputFieldHostProperties,
+        "'has-value'": "props.selectedItems?.length ? '' : undefined",
+      },
+      children: [inputFieldLabel, inputFieldInput],
+    },
+  },
+  "vaadin-select": {
+    preRenderConfig: {
+      hostProperties: {
+        ...hostPropertyHasLabel,
+        ...hostPropertyHasValue,
+      },
+      children: [
+        inputFieldLabel,
+        {
+          tag: "'vaadin-select-value-button'",
+          properties: {
+            slot: "'value'",
+          },
+        },
+      ],
+    },
   },
   "vaadin-text-area": {
-    hostProperties: inputFieldHostProperties,
-    children: [
-      inputFieldLabel,
-      {
-        tag: "'textarea'",
-        properties: {
-          slot: "'textarea'",
-          placeholder: "props.placeholder",
+    preRenderConfig: {
+      hostProperties: inputFieldHostProperties,
+      children: [
+        inputFieldLabel,
+        {
+          tag: "'textarea'",
+          properties: {
+            slot: "'textarea'",
+            placeholder: "props.placeholder",
+          },
         },
-      },
-    ],
+      ],
+    },
   },
   "vaadin-radio-button": {
-    hostProperties: {
-      ...hostPropertyHasLabel,
-      ...hostPropertyHasValue,
-    },
-    children: [
-      inputFieldLabel,
-      {
-        tag: "'input'",
-        properties: {
-          slot: "'input'",
-          type: "'radio'",
-        },
+    preRenderConfig: {
+      hostProperties: {
+        ...hostPropertyHasLabel,
+        ...hostPropertyHasValue,
       },
-    ],
+      children: [
+        inputFieldLabel,
+        {
+          tag: "'input'",
+          properties: {
+            slot: "'input'",
+            type: "'radio'",
+          },
+        },
+      ],
+    },
   },
   "vaadin-radio-group": {
-    hostProperties: {
-      ...hostPropertyHasLabel,
-      ...hostPropertyHasValue,
+    preRenderConfig: {
+      hostProperties: {
+        ...hostPropertyHasLabel,
+        ...hostPropertyHasValue,
+      },
+      children: [inputFieldLabel],
     },
-    children: [inputFieldLabel],
   },
   "vaadin-tabs": {
-    hostProperties: {
-      "'orientation'": "props.orientation || 'horizontal'",
-    },
-    styles: `
+    preRenderConfig: {
+      hostProperties: {
+        "'orientation'": "props.orientation || 'horizontal'",
+      },
+      styles: `
       :host([orientation="vertical"]) ::slotted(vaadin-tab) {
         transform-origin: 0% 50%;
         padding: 0.25rem 1rem;
@@ -219,38 +277,48 @@ export const preRenderConfigs = {
         --_slotted-anchor-justify-content: normal;
       }
     `,
+    },
   },
   "vaadin-tab": {
-    styles: `
+    preRenderConfig: {
+      styles: `
       :host(:not([orientation])) ::slotted(a[href]) {
         justify-content: var(--_slotted-anchor-justify-content, center) !important;
       }
     `,
+    },
   },
   "vaadin-progress-bar": {
-    styles: `
+    preRenderConfig: {
+      styles: `
       :host {
         --vaadin-progress-value: 0;
       }
     `,
+    },
   },
   "vaadin-details": {
-    styles: `
+    preRenderConfig: {
+      styles: `
       :host([opened]) [part="content"] {
         max-height: none !important;
       }
     `,
+    },
   },
   "vaadin-accordion-panel": {
-    styles: `
+    preRenderConfig: {
+      styles: `
       :host([opened]) [part="content"] {
         max-height: none !important;
       }
     `,
+    },
   },
   "vaadin-app-layout": {
-    hostProperties: {
-      "'style'": `{
+    preRenderConfig: {
+      hostProperties: {
+        "'style'": `{
             /* A hack to avoid a declarative shadow related FOUC (happens even with JS disabled) */
             opacity: 'var(--_vaadin-app-layout-opacity, 0)',
             
@@ -260,8 +328,8 @@ export const preRenderConfigs = {
             /* Finally add any existing styles */
             ...(props.style || {})
       }`.replace(/\n/g, ""),
-    },
-    styles: `
+      },
+      styles: `
       :host {
         --_vaadin-app-layout-drawer-offset-size: 16em !important;
         --vaadin-app-layout-transition: 0 !important;
@@ -317,11 +385,6 @@ export const preRenderConfigs = {
         padding-right: var(--vaadin-app-layout-drawer-offset-left);
       }
     `,
-  },
-  // With other components the shadow DOM content is mostly static.
-  // In grid's case, the content is dynamic so it can't be SSR'd the same way (would require dynamically rendering the component server-side)
-  // Only include the styles affecting the host element for now.
-  "vaadin-grid": {
-    shadowDomContent: `<style>\n    \n\n    :host {\n        display: block;\n        height: 400px;\n        flex: 1 1 auto;\n        align-self: stretch;\n        position: relative;\n    }\n\n    :host([hidden]) {\n        display: none !important;\n    }\n\n    :host([disabled]) {\n        pointer-events: none;\n    }\n\n    :host {\n        font-family: var(--lumo-font-family);\n        font-size: var(--lumo-font-size-m);\n        line-height: var(--lumo-line-height-s);\n        color: var(--lumo-body-text-color);\n        background-color: var(--lumo-base-color);\n        box-sizing: border-box;\n        -webkit-text-size-adjust: 100%;\n        -webkit-tap-highlight-color: transparent;\n        -webkit-font-smoothing: antialiased;\n        -moz-osx-font-smoothing: grayscale;\n  \n        /* For internal use only */\n      --_lumo-grid-border-color: var(--lumo-contrast-20pct);\n      --_lumo-grid-secondary-border-color: var(--lumo-contrast-10pct);\n      --_lumo-grid-border-width: 1px;\n      --_lumo-grid-selected-row-color: var(--lumo-primary-color-10pct);\n    }\n\n    /* No (outer) border */\n\n    :host(:not([theme~='no-border'])) {\n        border: var(--_lumo-grid-border-width) solid var(--_lumo-grid-border-color);\n    }\n\n    :host([disabled]) {\n        opacity: 0.7;\n    }\n  </style>`,
+    },
   },
 };

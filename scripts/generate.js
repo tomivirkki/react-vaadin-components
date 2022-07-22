@@ -7,7 +7,7 @@ import { execSync, exec } from "child_process";
 import fs from "fs";
 import path from "path";
 import puppeteer from "puppeteer";
-import { renderers, preRenderConfigs } from "./components-config.js";
+import { componentsConfig } from "./components-config.js";
 import { NotificationTemplate } from "./Notification-template.js";
 
 const vaadinComponentsPath = process.env.COMPONENTS_PATH;
@@ -184,9 +184,7 @@ async function generateComponentForPackage(
     } } from "${importPath}/${packageName}/${elementName}";
         `;
 
-    const elementRenderers = Object.entries(renderers).find(
-      ([key]) => key === elementName
-    )?.[1];
+    const elementRenderers = componentsConfig[elementName]?.renderers;
 
     const rendererAPINames = elementRenderers
       ? [
@@ -235,7 +233,10 @@ async function generateComponentForPackage(
       `;
     }
 
-    const preRenderConfig = { ...(preRenderConfigs[elementName] || {}) };
+    const preRenderConfig = {
+      ...(componentsConfig[elementName]?.preRenderConfig || {}),
+    };
+
     if (!("shadowDomContent" in preRenderConfig)) {
       const shadowDomContent = await getShadowRootContent(
         `./${packageName}/${elementName}.js`,
