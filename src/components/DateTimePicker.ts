@@ -16,6 +16,7 @@ const DateTimePickerEvents = {
   ...DateTimePickerEventMapper("onChange", "change"),
   ...DateTimePickerEventMapper("onInvalidChanged", "invalid-changed"),
   ...DateTimePickerEventMapper("onValueChanged", "value-changed"),
+  ...DateTimePickerEventMapper("onValidated", "validated"),
 };
 
 const DateTimePickerProperties = {

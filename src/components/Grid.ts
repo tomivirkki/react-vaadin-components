@@ -513,6 +513,7 @@ const GridProperties = {
   cellClassNameGenerator: "",
   columnReorderingAllowed: "",
   multiSort: "",
+  multiSortPriority: "",
   selectedItems: "",
   detailsOpenedItems: "",
   rowDetailsRenderer: "",

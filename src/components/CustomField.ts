@@ -17,6 +17,7 @@ const CustomFieldEvents = {
   ...CustomFieldEventMapper("onInternalTab", "internal-tab"),
   ...CustomFieldEventMapper("onInvalidChanged", "invalid-changed"),
   ...CustomFieldEventMapper("onValueChanged", "value-changed"),
+  ...CustomFieldEventMapper("onValidated", "validated"),
 };
 
 const CustomFieldProperties = {

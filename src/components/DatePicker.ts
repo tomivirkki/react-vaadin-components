@@ -21,6 +21,7 @@ const DatePickerLightEvents = {
   ...DatePickerLightEventMapper("onChange", "change"),
   ...DatePickerLightEventMapper("onOpenedChanged", "opened-changed"),
   ...DatePickerLightEventMapper("onValueChanged", "value-changed"),
+  ...DatePickerLightEventMapper("onValidated", "validated"),
 };
 
 const DatePickerLightProperties = {
@@ -37,6 +38,8 @@ const DatePickerLightProperties = {
   disabled: "",
   inputElement: "",
   value: "",
+  invalid: "",
+  required: "",
 };
 
 const getDatePickerLightPreRenderConfig = (props: { [key: string]: any }) => ({
@@ -64,6 +67,7 @@ const DatePickerEvents = {
   ...DatePickerEventMapper("onInvalidChanged", "invalid-changed"),
   ...DatePickerEventMapper("onOpenedChanged", "opened-changed"),
   ...DatePickerEventMapper("onValueChanged", "value-changed"),
+  ...DatePickerEventMapper("onValidated", "validated"),
 };
 
 const DatePickerProperties = {

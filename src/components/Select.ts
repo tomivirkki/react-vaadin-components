@@ -17,6 +17,7 @@ const SelectEvents = {
   ...SelectEventMapper("onInvalidChanged", "invalid-changed"),
   ...SelectEventMapper("onOpenedChanged", "opened-changed"),
   ...SelectEventMapper("onValueChanged", "value-changed"),
+  ...SelectEventMapper("onValidated", "validated"),
 };
 
 const SelectProperties = {

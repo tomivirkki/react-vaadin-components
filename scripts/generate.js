@@ -66,7 +66,8 @@ function getPackages(componentsPath) {
     "input-container",
     "lit-renderer",
     "polymer-legacy-adapter",
-    // "multi-select-combo-box",
+    // TODO: Remove once mscb is in vaadin-core
+    "multi-select-combo-box",
   ];
 
   return fs.readdirSync(componentsPath).filter(
@@ -436,16 +437,18 @@ async function run() {
     currentDir,
     "./tmp/web-components/packages"
   );
+  const vaadinComponentsParentPath = path.resolve(
+    vaadinComponentsPath,
+    "../.."
+  );
+
   const cloneWebComponents = !fs.existsSync(vaadinComponentsPath);
 
   if (cloneWebComponents) {
     console.log(
       `Cloning @vaadin/web-components@v${vaadinComponentsVersion} to a temporary directory...`
     );
-    const vaadinComponentsParentPath = path.resolve(
-      vaadinComponentsPath,
-      "../.."
-    );
+
     fs.mkdirSync(vaadinComponentsParentPath, { recursive: true });
 
     execSync(

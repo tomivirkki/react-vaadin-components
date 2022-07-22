@@ -17,6 +17,7 @@ const TextFieldEvents = {
   ...TextFieldEventMapper("onChange", "change"),
   ...TextFieldEventMapper("onInvalidChanged", "invalid-changed"),
   ...TextFieldEventMapper("onValueChanged", "value-changed"),
+  ...TextFieldEventMapper("onValidated", "validated"),
 };
 
 const TextFieldProperties = {

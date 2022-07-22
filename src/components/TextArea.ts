@@ -17,6 +17,7 @@ const TextAreaEvents = {
   ...TextAreaEventMapper("onChange", "change"),
   ...TextAreaEventMapper("onInvalidChanged", "invalid-changed"),
   ...TextAreaEventMapper("onValueChanged", "value-changed"),
+  ...TextAreaEventMapper("onValidated", "validated"),
 };
 
 const TextAreaProperties = {

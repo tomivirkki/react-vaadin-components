@@ -11,9 +11,9 @@ import { createVaadinComponent, eventMapper } from "../create-component";
 const ItemEvents = {};
 
 const ItemProperties = {
-  disabled: "",
   value: "",
   selected: "",
+  disabled: "",
 };
 
 const getItemPreRenderConfig = (props: { [key: string]: any }) => ({

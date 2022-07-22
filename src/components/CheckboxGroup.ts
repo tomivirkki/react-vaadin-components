@@ -15,6 +15,7 @@ const CheckboxGroupEventMapper = eventMapper<CheckboxGroupEventMap>();
 const CheckboxGroupEvents = {
   ...CheckboxGroupEventMapper("onInvalidChanged", "invalid-changed"),
   ...CheckboxGroupEventMapper("onValueChanged", "value-changed"),
+  ...CheckboxGroupEventMapper("onValidated", "validated"),
 };
 
 const CheckboxGroupProperties = {

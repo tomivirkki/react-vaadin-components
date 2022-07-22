@@ -64,6 +64,7 @@ const RadioGroupEventMapper = eventMapper<RadioGroupEventMap>();
 const RadioGroupEvents = {
   ...RadioGroupEventMapper("onInvalidChanged", "invalid-changed"),
   ...RadioGroupEventMapper("onValueChanged", "value-changed"),
+  ...RadioGroupEventMapper("onValidated", "validated"),
 };
 
 const RadioGroupProperties = {
