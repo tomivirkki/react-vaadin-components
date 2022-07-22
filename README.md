@@ -1,6 +1,8 @@
 # React Vaadin Components
 
-[Vaadin components](https://vaadin.com/components) are a free, open source, high quality set of UI components. They ship with configurable built-in themes, have responsive mobile-first UI controls, they're accessible and well tested.
+React Vaadin Components is a set of React compatible wrappers for [Vaadin components](https://vaadin.com/docs/latest/components).
+
+The components support server side rendering and can be used with frameworks such as Next.js and Gatsby.
 
 ## Quick start
 
@@ -12,12 +14,21 @@ npm i react-vaadin-components
 
 Once installed, import the and use the components in your React app
 
-```js
+```jsx
+import 'react-vaadin-components/dist/css/core.css'
+
+...
+
 import {
   VerticalLayout,
   TextField,
-  Button
+  Button,
+  Notificaation
 } from 'react-vaadin-components';
+
+...
+
+const [name, setName] = useState("");
 
 ...
 
@@ -25,13 +36,13 @@ import {
   <TextField
     label="Name"
     clearButtonVisible
-    onValueChanged={e => this.setState({name: e.detail.value})}>
+    onValueChanged={e => setName(e.detail.value)}>
   </TextField>
 
   <Button
     theme="primary"
-    disabled={!this.state.name}
-    onClick={e => alert('Hello ' + this.state.name)}>
+    disabled={!name}
+    onClick={e => Notification.show(`Hello ${name}`)}>
     Say Hello
   </Button>
 </VerticalLayout>
