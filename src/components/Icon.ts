@@ -61,3 +61,19 @@ export const Iconset = createVaadinComponent<
   undefined,
   getIconsetPreRenderConfig
 );
+
+export function LumoIconset() {
+  if (typeof window !== "undefined") {
+    // @ts-ignore
+    import("@vaadin/vaadin-lumo-styles/vaadin-iconset");
+  }
+  return null;
+}
+
+export function VaadinIconset() {
+  if (typeof window !== "undefined") {
+    // @ts-ignore
+    import("@vaadin/icons/vaadin-iconset");
+  }
+  return null;
+}

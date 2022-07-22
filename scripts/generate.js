@@ -347,8 +347,29 @@ async function generateComponentForPackage(
         ${outFileComponents}
     `;
 
+  // TODO: Move component-specifics to components-config
   if (packageName === "notification") {
     outFileContent = `// Generated file. Do not edit.\n${NotificationTemplate}`;
+  }
+
+  if (packageName === "icon") {
+    outFileContent += `
+      export function LumoIconset() {
+        if (typeof window !== "undefined") {
+          // @ts-ignore
+          import("@vaadin/vaadin-lumo-styles/vaadin-iconset");
+        }
+        return null;
+      }
+
+      export function VaadinIconset() {
+        if (typeof window !== "undefined") {
+          // @ts-ignore
+          import("@vaadin/icons/vaadin-iconset");
+        }
+        return null;
+      }
+    `;
   }
 
   const filePath = path.resolve(componentsOutPath, `${outFileName}.ts`);
