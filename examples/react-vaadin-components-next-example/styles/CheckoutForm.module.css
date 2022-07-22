@@ -1,0 +1,9 @@
+@media (min-width: 1024px) {
+    .main {
+        grid-template-columns: auto 324px;
+    }
+}
+
+.aside {
+    top: calc(var(--lumo-space-xl) + var(--_vaadin-app-layout-navbar-offset-size));
+}

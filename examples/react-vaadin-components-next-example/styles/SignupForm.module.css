@@ -1,0 +1,9 @@
+.form {
+    max-width: 500px;
+}
+
+@media (max-width: 450px) {
+    .grid {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+}

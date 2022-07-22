@@ -73,5 +73,9 @@
       "eslint --fix",
       "prettier --write --ignore-unknown"
     ]
-  }
+  },
+  "workspaces": [
+    ".",
+    "examples/*"
+  ]
 }
