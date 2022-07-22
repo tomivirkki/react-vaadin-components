@@ -10,15 +10,6 @@ import puppeteer from "puppeteer";
 import { componentsConfig } from "./components-config.js";
 import { NotificationTemplate } from "./Notification-template.js";
 
-const vaadinComponentsPath = process.env.COMPONENTS_PATH;
-
-if (!vaadinComponentsPath) {
-  console.error(
-    "Environment variable COMPONENTS_PATH should point to a local web-components/packages"
-  );
-  process.exit(1);
-}
-
 async function getShadowRootContent(importPath, elementHTML) {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -75,6 +66,7 @@ function getPackages(componentsPath) {
     "input-container",
     "lit-renderer",
     "polymer-legacy-adapter",
+    // "multi-select-combo-box",
   ];
 
   return fs.readdirSync(componentsPath).filter(
@@ -98,12 +90,12 @@ function writeFile(filePath, content) {
 }
 
 const importUrl = import.meta.url;
-const currentDir = importUrl.substring(importUrl.indexOf(":") + 1);
-
-const createComponentPath = path.resolve(
-  currentDir,
-  "../../src/create-component"
+const currentDir = path.resolve(
+  importUrl.substring(importUrl.indexOf(":") + 1),
+  ".."
 );
+
+const createComponentPath = path.resolve(currentDir, "../src/create-component");
 
 async function generateComponentForPackage(
   componentsPath,
@@ -423,20 +415,9 @@ async function generateStyles() {
 
 async function run() {
   // Generate test components
-  const testComponentsPath = path.resolve(
-    currentDir,
-    "..",
-    "..",
-    "test",
-    "web-components"
-  );
-  const testComponentsOutPath = path.resolve(
-    currentDir,
-    "..",
-    "..",
-    "test",
-    "components"
-  );
+  const testComponentsPath = path.resolve(currentDir, "../test/web-components");
+  const testComponentsOutPath = path.resolve(currentDir, "../test/components");
+
   await generateComponents(
     testComponentsPath,
     testComponentsOutPath,
@@ -444,10 +425,34 @@ async function run() {
   );
 
   // Generate Vaadin components
-  const vaadinComponentsOutPath = path.resolve(
+  const vaadinComponentsOutPath = path.resolve(currentDir, "../src/components");
+
+  // Read the version of @vaadin/vaadin-core from package.json
+  const vaadinComponentsVersion = JSON.parse(
+    fs.readFileSync(path.resolve(currentDir, "../package.json"))
+  ).dependencies["@vaadin/vaadin-core"];
+
+  const vaadinComponentsPath = path.resolve(
     currentDir,
-    "../../src/components"
+    "./tmp/web-components/packages"
   );
+  const cloneWebComponents = !fs.existsSync(vaadinComponentsPath);
+
+  if (cloneWebComponents) {
+    console.log(
+      `Cloning @vaadin/web-components@v${vaadinComponentsVersion} to a temporary directory...`
+    );
+    const vaadinComponentsParentPath = path.resolve(
+      vaadinComponentsPath,
+      "../.."
+    );
+    fs.mkdirSync(vaadinComponentsParentPath, { recursive: true });
+
+    execSync(
+      `git clone --depth 1 --branch v${vaadinComponentsVersion} https://github.com/vaadin/web-components.git`,
+      { cwd: vaadinComponentsParentPath }
+    );
+  }
 
   await generateComponents(
     vaadinComponentsPath,
@@ -457,7 +462,10 @@ async function run() {
 
   await generateStyles();
 
-  // TODO: Fix vaadin-core dependency to the version in the provided web-components
+  if (cloneWebComponents) {
+    // Remove the temporary web-compoenents directory
+    fs.rmdirSync(vaadinComponentsParentPath, { recursive: true });
+  }
 
   process.exit(0);
 }

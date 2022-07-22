@@ -24,7 +24,6 @@ export * from "./components/Login";
 export * from "./components/MenuBar";
 export * from "./components/MessageInput";
 export * from "./components/MessageList";
-export * from "./components/MultiSelectComboBox";
 export * from "./components/Notification";
 export * from "./components/NumberField";
 export * from "./components/PasswordField";

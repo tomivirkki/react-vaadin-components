@@ -17,7 +17,6 @@ const NumberFieldEvents = {
   ...NumberFieldEventMapper("onChange", "change"),
   ...NumberFieldEventMapper("onInvalidChanged", "invalid-changed"),
   ...NumberFieldEventMapper("onValueChanged", "value-changed"),
-  ...NumberFieldEventMapper("onValidated", "validated"),
 };
 
 const NumberFieldProperties = {
