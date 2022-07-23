@@ -5,11 +5,12 @@
 
 import React from "react";
 
-import type {
-  NumberField as NumberFieldClass,
-  NumberFieldEventMap,
-} from "@vaadin/number-field/vaadin-number-field";
+import type * as NumberFieldElement from "@vaadin/number-field/vaadin-number-field";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type NumberFieldClass = NumberFieldElement.NumberField;
+
+type NumberFieldEventMap = NumberFieldElement.NumberFieldEventMap;
 
 const NumberFieldEventMapper = eventMapper<NumberFieldEventMap>();
 const NumberFieldEvents = {
@@ -88,3 +89,5 @@ export const NumberField = createVaadinComponent<
   undefined,
   getNumberFieldPreRenderConfig
 );
+
+export { NumberFieldElement };

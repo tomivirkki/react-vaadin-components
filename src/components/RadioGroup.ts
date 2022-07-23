@@ -5,16 +5,13 @@
 
 import React from "react";
 
-import type {
-  RadioButton as RadioButtonClass,
-  RadioButtonEventMap,
-} from "@vaadin/radio-group/vaadin-radio-button";
-
-import type {
-  RadioGroup as RadioGroupClass,
-  RadioGroupEventMap,
-} from "@vaadin/radio-group/vaadin-radio-group";
+import type * as RadioButtonElement from "@vaadin/radio-group/vaadin-radio-button";
+import type * as RadioGroupElement from "@vaadin/radio-group/vaadin-radio-group";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type RadioButtonClass = RadioButtonElement.RadioButton;
+
+type RadioButtonEventMap = RadioButtonElement.RadioButtonEventMap;
 
 const RadioButtonEventMapper = eventMapper<RadioButtonEventMap>();
 const RadioButtonEvents = {
@@ -60,6 +57,12 @@ export const RadioButton = createVaadinComponent<
   getRadioButtonPreRenderConfig
 );
 
+export { RadioButtonElement };
+
+type RadioGroupClass = RadioGroupElement.RadioGroup;
+
+type RadioGroupEventMap = RadioGroupElement.RadioGroupEventMap;
+
 const RadioGroupEventMapper = eventMapper<RadioGroupEventMap>();
 const RadioGroupEvents = {
   ...RadioGroupEventMapper("onInvalidChanged", "invalid-changed"),
@@ -103,3 +106,5 @@ export const RadioGroup = createVaadinComponent<
   undefined,
   getRadioGroupPreRenderConfig
 );
+
+export { RadioGroupElement };

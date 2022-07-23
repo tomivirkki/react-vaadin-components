@@ -5,8 +5,10 @@
 
 import React from "react";
 
-import type { ProgressBar as ProgressBarClass } from "@vaadin/progress-bar/vaadin-progress-bar";
+import type * as ProgressBarElement from "@vaadin/progress-bar/vaadin-progress-bar";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type ProgressBarClass = ProgressBarElement.ProgressBar;
 
 const ProgressBarEvents = {};
 
@@ -36,3 +38,5 @@ export const ProgressBar = createVaadinComponent<
   undefined,
   getProgressBarPreRenderConfig
 );
+
+export { ProgressBarElement };

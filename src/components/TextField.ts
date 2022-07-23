@@ -5,11 +5,12 @@
 
 import React from "react";
 
-import type {
-  TextField as TextFieldClass,
-  TextFieldEventMap,
-} from "@vaadin/text-field/vaadin-text-field";
+import type * as TextFieldElement from "@vaadin/text-field/vaadin-text-field";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type TextFieldClass = TextFieldElement.TextField;
+
+type TextFieldEventMap = TextFieldElement.TextFieldEventMap;
 
 const TextFieldEventMapper = eventMapper<TextFieldEventMap>();
 const TextFieldEvents = {
@@ -88,3 +89,5 @@ export const TextField = createVaadinComponent<
   undefined,
   getTextFieldPreRenderConfig
 );
+
+export { TextFieldElement };

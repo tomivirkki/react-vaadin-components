@@ -5,10 +5,11 @@
 
 import React from "react";
 
-import type { FormItem as FormItemClass } from "@vaadin/form-layout/vaadin-form-item";
-
-import type { FormLayout as FormLayoutClass } from "@vaadin/form-layout/vaadin-form-layout";
+import type * as FormItemElement from "@vaadin/form-layout/vaadin-form-item";
+import type * as FormLayoutElement from "@vaadin/form-layout/vaadin-form-layout";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type FormItemClass = FormItemElement.FormItem;
 
 const FormItemEvents = {};
 
@@ -37,6 +38,10 @@ export const FormItem = createVaadinComponent<
   getFormItemPreRenderConfig
 );
 
+export { FormItemElement };
+
+type FormLayoutClass = FormLayoutElement.FormLayout;
+
 const FormLayoutEvents = {};
 
 const FormLayoutProperties = {
@@ -62,3 +67,5 @@ export const FormLayout = createVaadinComponent<
   undefined,
   getFormLayoutPreRenderConfig
 );
+
+export { FormLayoutElement };

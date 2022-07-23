@@ -5,11 +5,12 @@
 
 import React from "react";
 
-import type {
-  CustomField as CustomFieldClass,
-  CustomFieldEventMap,
-} from "@vaadin/custom-field/vaadin-custom-field";
+import type * as CustomFieldElement from "@vaadin/custom-field/vaadin-custom-field";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type CustomFieldClass = CustomFieldElement.CustomField;
+
+type CustomFieldEventMap = CustomFieldElement.CustomFieldEventMap;
 
 const CustomFieldEventMapper = eventMapper<CustomFieldEventMap>();
 const CustomFieldEvents = {
@@ -66,3 +67,5 @@ export const CustomField = createVaadinComponent<
   undefined,
   getCustomFieldPreRenderConfig
 );
+
+export { CustomFieldElement };

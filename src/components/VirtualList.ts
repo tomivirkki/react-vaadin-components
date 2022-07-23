@@ -5,8 +5,10 @@
 
 import React from "react";
 
-import type { VirtualList as VirtualListClass } from "@vaadin/virtual-list/vaadin-virtual-list";
+import type * as VirtualListElement from "@vaadin/virtual-list/vaadin-virtual-list";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type VirtualListClass = VirtualListElement.VirtualList;
 
 const VirtualListEvents = {};
 
@@ -36,3 +38,5 @@ export const VirtualList = createVaadinComponent<
   undefined,
   getVirtualListPreRenderConfig
 );
+
+export { VirtualListElement };

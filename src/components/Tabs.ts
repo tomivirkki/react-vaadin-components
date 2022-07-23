@@ -5,10 +5,11 @@
 
 import React from "react";
 
-import type { Tab as TabClass } from "@vaadin/tabs/vaadin-tab";
-
-import type { Tabs as TabsClass, TabsEventMap } from "@vaadin/tabs/vaadin-tabs";
+import type * as TabElement from "@vaadin/tabs/vaadin-tab";
+import type * as TabsElement from "@vaadin/tabs/vaadin-tabs";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type TabClass = TabElement.Tab;
 
 const TabEvents = {};
 
@@ -34,6 +35,12 @@ export const Tab = createVaadinComponent<TabClass, typeof TabEvents>(
   undefined,
   getTabPreRenderConfig
 );
+
+export { TabElement };
+
+type TabsClass = TabsElement.Tabs;
+
+type TabsEventMap = TabsElement.TabsEventMap;
 
 const TabsEventMapper = eventMapper<TabsEventMap>();
 const TabsEvents = {
@@ -63,3 +70,5 @@ export const Tabs = createVaadinComponent<TabsClass, typeof TabsEvents>(
   undefined,
   getTabsPreRenderConfig
 );
+
+export { TabsElement };

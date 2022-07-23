@@ -5,8 +5,10 @@
 
 import React from "react";
 
-import type { VerticalLayout as VerticalLayoutClass } from "@vaadin/vertical-layout/vaadin-vertical-layout";
+import type * as VerticalLayoutElement from "@vaadin/vertical-layout/vaadin-vertical-layout";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type VerticalLayoutClass = VerticalLayoutElement.VerticalLayout;
 
 const VerticalLayoutEvents = {};
 
@@ -32,3 +34,5 @@ export const VerticalLayout = createVaadinComponent<
   undefined,
   getVerticalLayoutPreRenderConfig
 );
+
+export { VerticalLayoutElement };

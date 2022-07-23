@@ -5,11 +5,12 @@
 
 import React from "react";
 
-import type {
-  EmailField as EmailFieldClass,
-  EmailFieldEventMap,
-} from "@vaadin/email-field/vaadin-email-field";
+import type * as EmailFieldElement from "@vaadin/email-field/vaadin-email-field";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type EmailFieldClass = EmailFieldElement.EmailField;
+
+type EmailFieldEventMap = EmailFieldElement.EmailFieldEventMap;
 
 const EmailFieldEventMapper = eventMapper<EmailFieldEventMap>();
 const EmailFieldEvents = {
@@ -88,3 +89,5 @@ export const EmailField = createVaadinComponent<
   undefined,
   getEmailFieldPreRenderConfig
 );
+
+export { EmailFieldElement };

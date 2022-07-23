@@ -5,8 +5,10 @@
 
 import React from "react";
 
-import type { Scroller as ScrollerClass } from "@vaadin/scroller/vaadin-scroller";
+import type * as ScrollerElement from "@vaadin/scroller/vaadin-scroller";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type ScrollerClass = ScrollerElement.Scroller;
 
 const ScrollerEvents = {};
 
@@ -34,3 +36,5 @@ export const Scroller = createVaadinComponent<
   undefined,
   getScrollerPreRenderConfig
 );
+
+export { ScrollerElement };

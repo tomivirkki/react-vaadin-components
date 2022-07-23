@@ -5,11 +5,12 @@
 
 import React from "react";
 
-import type {
-  MenuBar as MenuBarClass,
-  MenuBarEventMap,
-} from "@vaadin/menu-bar/vaadin-menu-bar";
+import type * as MenuBarElement from "@vaadin/menu-bar/vaadin-menu-bar";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type MenuBarClass = MenuBarElement.MenuBar;
+
+type MenuBarEventMap = MenuBarElement.MenuBarEventMap;
 
 const MenuBarEventMapper = eventMapper<MenuBarEventMap>();
 const MenuBarEvents = {
@@ -42,3 +43,5 @@ export const MenuBar = createVaadinComponent<
   undefined,
   getMenuBarPreRenderConfig
 );
+
+export { MenuBarElement };

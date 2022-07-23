@@ -182,11 +182,9 @@ async function generateComponentForPackage(
 
     console.log(`Processing ${packageName}: ${exportName}`);
 
-    outFileImports += `
-            import type { ${exportName} as ${exportName}Class${
-      hasEvents ? `, ${eventMapName}` : ""
-    } } from "${importPath}/${packageName}/${elementName}";
-        `;
+    const elementExportName = `${exportName}Element`;
+
+    outFileImports += `import type * as ${elementExportName} from "${importPath}/${packageName}/${elementName}";`;
 
     const elementConfig = componentsConfig[elementName];
     const elementRenderers = elementConfig?.renderers;
@@ -256,12 +254,16 @@ async function generateComponentForPackage(
     }
 
     outFileComponents += `
+
+      type ${exportName}Class = ${elementExportName}.${exportName};
+
         ${
           hasEvents
             ? `
-        const ${exportName}EventMapper = eventMapper<${
-                eventMapName + genericsSuffix
-              }>();
+
+            type ${eventMapName} = ${elementExportName}.${eventMapName}${genericsSuffix};
+
+        const ${exportName}EventMapper = eventMapper<${eventMapName}>();
         const ${exportName}Events = {
             ${
               tag.events
@@ -331,14 +333,20 @@ async function generateComponentForPackage(
         ${elementRenderers ? JSON.stringify(elementRenderers) : "undefined"},
         get${exportName}PreRenderConfig
         );
+
+        export { ${elementExportName} };
         `;
 
     // Exceptions
     if (elementName === "vaadin-accordion-panel") {
       // Accordion panel
-      outFileImports = outFileImports.split("AccordionPanelEventMap").join("");
       outFileImports +=
-        '\nimport type { DetailsEventMap as AccordionPanelEventMap} from "@vaadin/details";';
+        '\nimport type * as DetailsElement from "@vaadin/details";';
+
+      outFileComponents = outFileComponents.replace(
+        "AccordionPanelElement.AccordionPanelEventMap",
+        "DetailsElement.DetailsEventMap"
+      );
     }
   }
 
@@ -446,9 +454,7 @@ async function run() {
     "../.."
   );
 
-  const cloneWebComponents = !fs.existsSync(vaadinComponentsPath);
-
-  if (cloneWebComponents) {
+  if (!fs.existsSync(vaadinComponentsPath)) {
     // Clone the @vaadin/web-components repo to a temporary directory
     console.log(
       `Cloning @vaadin/web-components@v${vaadinComponentsVersion} to a temporary directory...`
@@ -468,7 +474,7 @@ async function run() {
     "@vaadin"
   );
 
-  if (cloneWebComponents) {
+  if (fs.existsSync(vaadinComponentsPath)) {
     // Remove the temporary web-compoenents directory
     fs.rmdirSync(vaadinComponentsParentPath, { recursive: true });
   }

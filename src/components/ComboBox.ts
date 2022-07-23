@@ -5,18 +5,16 @@
 
 import React from "react";
 
-import type {
-  ComboBoxLight as ComboBoxLightClass,
-  ComboBoxLightEventMap,
-} from "@vaadin/combo-box/vaadin-combo-box-light";
-
-import type {
-  ComboBox as ComboBoxClass,
-  ComboBoxEventMap,
-} from "@vaadin/combo-box/vaadin-combo-box";
+import type * as ComboBoxLightElement from "@vaadin/combo-box/vaadin-combo-box-light";
+import type * as ComboBoxElement from "@vaadin/combo-box/vaadin-combo-box";
 import { createVaadinComponent, eventMapper } from "../create-component";
 
-const ComboBoxLightEventMapper = eventMapper<ComboBoxLightEventMap<unknown>>();
+type ComboBoxLightClass = ComboBoxLightElement.ComboBoxLight;
+
+type ComboBoxLightEventMap =
+  ComboBoxLightElement.ComboBoxLightEventMap<unknown>;
+
+const ComboBoxLightEventMapper = eventMapper<ComboBoxLightEventMap>();
 const ComboBoxLightEvents = {
   ...ComboBoxLightEventMapper("onChange", "change"),
   ...ComboBoxLightEventMapper("onCustomValueSet", "custom-value-set"),
@@ -72,7 +70,13 @@ export const ComboBoxLight = createVaadinComponent<
   getComboBoxLightPreRenderConfig
 );
 
-const ComboBoxEventMapper = eventMapper<ComboBoxEventMap<unknown>>();
+export { ComboBoxLightElement };
+
+type ComboBoxClass = ComboBoxElement.ComboBox;
+
+type ComboBoxEventMap = ComboBoxElement.ComboBoxEventMap<unknown>;
+
+const ComboBoxEventMapper = eventMapper<ComboBoxEventMap>();
 const ComboBoxEvents = {
   ...ComboBoxEventMapper("onChange", "change"),
   ...ComboBoxEventMapper("onCustomValueSet", "custom-value-set"),
@@ -162,3 +166,5 @@ export const ComboBox = createVaadinComponent<
   undefined,
   getComboBoxPreRenderConfig
 );
+
+export { ComboBoxElement };

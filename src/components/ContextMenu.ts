@@ -5,11 +5,12 @@
 
 import React from "react";
 
-import type {
-  ContextMenu as ContextMenuClass,
-  ContextMenuEventMap,
-} from "@vaadin/context-menu/vaadin-context-menu";
+import type * as ContextMenuElement from "@vaadin/context-menu/vaadin-context-menu";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type ContextMenuClass = ContextMenuElement.ContextMenu;
+
+type ContextMenuEventMap = ContextMenuElement.ContextMenuEventMap;
 
 const ContextMenuEventMapper = eventMapper<ContextMenuEventMap>();
 const ContextMenuEvents = {
@@ -46,3 +47,5 @@ export const ContextMenu = createVaadinComponent<
   undefined,
   getContextMenuPreRenderConfig
 );
+
+export { ContextMenuElement };

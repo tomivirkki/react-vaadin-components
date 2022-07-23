@@ -5,11 +5,12 @@
 
 import React from "react";
 
-import type {
-  Dialog as DialogClass,
-  DialogEventMap,
-} from "@vaadin/dialog/vaadin-dialog";
+import type * as DialogElement from "@vaadin/dialog/vaadin-dialog";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type DialogClass = DialogElement.Dialog;
+
+type DialogEventMap = DialogElement.DialogEventMap;
 
 const DialogEventMapper = eventMapper<DialogEventMap>();
 const DialogEvents = {
@@ -66,3 +67,5 @@ export const Dialog = createVaadinComponent<
   },
   getDialogPreRenderConfig
 );
+
+export { DialogElement };

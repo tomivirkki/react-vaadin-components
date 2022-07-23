@@ -5,8 +5,10 @@
 
 import React from "react";
 
-import type { MessageInput as MessageInputClass } from "@vaadin/message-input/vaadin-message-input";
+import type * as MessageInputElement from "@vaadin/message-input/vaadin-message-input";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type MessageInputClass = MessageInputElement.MessageInput;
 
 const MessageInputEvents = {};
 
@@ -35,3 +37,5 @@ export const MessageInput = createVaadinComponent<
   undefined,
   getMessageInputPreRenderConfig
 );
+
+export { MessageInputElement };

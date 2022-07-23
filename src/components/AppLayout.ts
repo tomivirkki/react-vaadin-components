@@ -5,13 +5,13 @@
 
 import React from "react";
 
-import type {
-  AppLayout as AppLayoutClass,
-  AppLayoutEventMap,
-} from "@vaadin/app-layout/vaadin-app-layout";
-
-import type { DrawerToggle as DrawerToggleClass } from "@vaadin/app-layout/vaadin-drawer-toggle";
+import type * as AppLayoutElement from "@vaadin/app-layout/vaadin-app-layout";
+import type * as DrawerToggleElement from "@vaadin/app-layout/vaadin-drawer-toggle";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type AppLayoutClass = AppLayoutElement.AppLayout;
+
+type AppLayoutEventMap = AppLayoutElement.AppLayoutEventMap;
 
 const AppLayoutEventMapper = eventMapper<AppLayoutEventMap>();
 const AppLayoutEvents = {
@@ -62,6 +62,10 @@ export const AppLayout = createVaadinComponent<
   getAppLayoutPreRenderConfig
 );
 
+export { AppLayoutElement };
+
+type DrawerToggleClass = DrawerToggleElement.DrawerToggle;
+
 const DrawerToggleEvents = {};
 
 const DrawerToggleProperties = {
@@ -89,3 +93,5 @@ export const DrawerToggle = createVaadinComponent<
   undefined,
   getDrawerTogglePreRenderConfig
 );
+
+export { DrawerToggleElement };

@@ -5,11 +5,12 @@
 
 import React from "react";
 
-import type {
-  Details as DetailsClass,
-  DetailsEventMap,
-} from "@vaadin/details/vaadin-details";
+import type * as DetailsElement from "@vaadin/details/vaadin-details";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type DetailsClass = DetailsElement.Details;
+
+type DetailsEventMap = DetailsElement.DetailsEventMap;
 
 const DetailsEventMapper = eventMapper<DetailsEventMap>();
 const DetailsEvents = {
@@ -43,3 +44,5 @@ export const Details = createVaadinComponent<
   undefined,
   getDetailsPreRenderConfig
 );
+
+export { DetailsElement };

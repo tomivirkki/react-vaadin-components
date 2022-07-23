@@ -5,11 +5,12 @@
 
 import React from "react";
 
-import type {
-  TextArea as TextAreaClass,
-  TextAreaEventMap,
-} from "@vaadin/text-area/vaadin-text-area";
+import type * as TextAreaElement from "@vaadin/text-area/vaadin-text-area";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type TextAreaClass = TextAreaElement.TextArea;
+
+type TextAreaEventMap = TextAreaElement.TextAreaEventMap;
 
 const TextAreaEventMapper = eventMapper<TextAreaEventMap>();
 const TextAreaEvents = {
@@ -83,3 +84,5 @@ export const TextArea = createVaadinComponent<
   undefined,
   getTextAreaPreRenderConfig
 );
+
+export { TextAreaElement };

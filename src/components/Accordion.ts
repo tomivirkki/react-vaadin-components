@@ -5,14 +5,14 @@
 
 import React from "react";
 
-import type { AccordionPanel as AccordionPanelClass } from "@vaadin/accordion/vaadin-accordion-panel";
-
-import type { DetailsEventMap as AccordionPanelEventMap } from "@vaadin/details";
-import type {
-  Accordion as AccordionClass,
-  AccordionEventMap,
-} from "@vaadin/accordion/vaadin-accordion";
+import type * as AccordionPanelElement from "@vaadin/accordion/vaadin-accordion-panel";
+import type * as DetailsElement from "@vaadin/details";
+import type * as AccordionElement from "@vaadin/accordion/vaadin-accordion";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type AccordionPanelClass = AccordionPanelElement.AccordionPanel;
+
+type AccordionPanelEventMap = DetailsElement.DetailsEventMap;
 
 const AccordionPanelEventMapper = eventMapper<AccordionPanelEventMap>();
 const AccordionPanelEvents = {
@@ -47,6 +47,12 @@ export const AccordionPanel = createVaadinComponent<
   getAccordionPanelPreRenderConfig
 );
 
+export { AccordionPanelElement };
+
+type AccordionClass = AccordionElement.Accordion;
+
+type AccordionEventMap = AccordionElement.AccordionEventMap;
+
 const AccordionEventMapper = eventMapper<AccordionEventMap>();
 const AccordionEvents = {
   ...AccordionEventMapper("onItemsChanged", "items-changed"),
@@ -77,3 +83,5 @@ export const Accordion = createVaadinComponent<
   undefined,
   getAccordionPreRenderConfig
 );
+
+export { AccordionElement };

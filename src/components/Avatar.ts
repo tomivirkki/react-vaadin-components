@@ -5,8 +5,10 @@
 
 import React from "react";
 
-import type { Avatar as AvatarClass } from "@vaadin/avatar/vaadin-avatar";
+import type * as AvatarElement from "@vaadin/avatar/vaadin-avatar";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type AvatarClass = AvatarElement.Avatar;
 
 const AvatarEvents = {};
 
@@ -34,3 +36,5 @@ export const Avatar = createVaadinComponent<AvatarClass, typeof AvatarEvents>(
   undefined,
   getAvatarPreRenderConfig
 );
+
+export { AvatarElement };

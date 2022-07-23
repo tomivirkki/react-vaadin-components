@@ -2,12 +2,7 @@
 import "./web-components/test-component/src/mock-polymer-element";
 import React from "react";
 import { jest } from "@jest/globals";
-import type {
-  // TODO: Re-export from the React component
-  ValueChangedEvent,
-  TestComponent as TestComponentClass,
-} from "./web-components/test-component/test-component";
-import { TestComponent } from "./index";
+import { TestComponent, TestComponentElement } from "./index";
 import { renderComponent } from "./helpers";
 
 describe("client", () => {
@@ -15,7 +10,7 @@ describe("client", () => {
 
   beforeEach(async () => {
     listener = jest.fn();
-    await renderComponent<TestComponentClass>(() => (
+    await renderComponent<TestComponentElement.TestComponent>(() => (
       <TestComponent onValueChanged={listener} value="foo" />
     ));
   });
@@ -23,7 +18,8 @@ describe("client", () => {
   test("should have dispatched an event", () => {
     expect(listener).toHaveBeenCalledTimes(1);
 
-    const event: ValueChangedEvent = listener.mock.calls[0][0];
+    const event: TestComponentElement.ValueChangedEvent =
+      listener.mock.calls[0][0];
     expect(event.type).toBe("value-changed");
     expect(event.detail).toBe("foo");
   });

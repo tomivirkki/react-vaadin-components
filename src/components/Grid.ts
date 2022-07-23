@@ -4,44 +4,21 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import React from "react";
-
-import type { GridColumnGroup as GridColumnGroupClass } from "@vaadin/grid/vaadin-grid-column-group";
-
-import type { GridColumn as GridColumnClass } from "@vaadin/grid/vaadin-grid-column";
-
-import type { GridFilterColumn as GridFilterColumnClass } from "@vaadin/grid/vaadin-grid-filter-column";
-
-import type {
-  GridFilter as GridFilterClass,
-  GridFilterEventMap,
-} from "@vaadin/grid/vaadin-grid-filter";
-
-import type {
-  GridSelectionColumn as GridSelectionColumnClass,
-  GridSelectionColumnEventMap,
-} from "@vaadin/grid/vaadin-grid-selection-column";
-
-import type {
-  GridSortColumn as GridSortColumnClass,
-  GridSortColumnEventMap,
-} from "@vaadin/grid/vaadin-grid-sort-column";
-
-import type {
-  GridSorter as GridSorterClass,
-  GridSorterEventMap,
-} from "@vaadin/grid/vaadin-grid-sorter";
-
-import type { GridTreeColumn as GridTreeColumnClass } from "@vaadin/grid/vaadin-grid-tree-column";
-
-import type {
-  GridTreeToggle as GridTreeToggleClass,
-  GridTreeToggleEventMap,
-} from "@vaadin/grid/vaadin-grid-tree-toggle";
-
-import type { Grid as GridClass, GridEventMap } from "@vaadin/grid/vaadin-grid";
+import type * as GridColumnGroupElement from "@vaadin/grid/vaadin-grid-column-group";
+import type * as GridColumnElement from "@vaadin/grid/vaadin-grid-column";
+import type * as GridFilterColumnElement from "@vaadin/grid/vaadin-grid-filter-column";
+import type * as GridFilterElement from "@vaadin/grid/vaadin-grid-filter";
+import type * as GridSelectionColumnElement from "@vaadin/grid/vaadin-grid-selection-column";
+import type * as GridSortColumnElement from "@vaadin/grid/vaadin-grid-sort-column";
+import type * as GridSorterElement from "@vaadin/grid/vaadin-grid-sorter";
+import type * as GridTreeColumnElement from "@vaadin/grid/vaadin-grid-tree-column";
+import type * as GridTreeToggleElement from "@vaadin/grid/vaadin-grid-tree-toggle";
+import type * as GridElement from "@vaadin/grid/vaadin-grid";
 import { createVaadinComponent, eventMapper } from "../create-component";
 
 type PropType<TObj, TProp extends keyof TObj> = TObj[TProp];
+
+type GridColumnGroupClass = GridColumnGroupElement.GridColumnGroup;
 
 const GridColumnGroupEvents = {};
 
@@ -91,6 +68,10 @@ export const GridColumnGroup = createVaadinComponent<
   },
   getGridColumnGroupPreRenderConfig
 );
+
+export { GridColumnGroupElement };
+
+type GridColumnClass = GridColumnElement.GridColumn;
 
 const GridColumnEvents = {};
 
@@ -151,6 +132,10 @@ export const GridColumn = createVaadinComponent<
   getGridColumnPreRenderConfig
 );
 
+export { GridColumnElement };
+
+type GridFilterColumnClass = GridFilterColumnElement.GridFilterColumn;
+
 const GridFilterColumnEvents = {};
 
 const GridFilterColumnProperties = {
@@ -210,6 +195,12 @@ export const GridFilterColumn = createVaadinComponent<
   getGridFilterColumnPreRenderConfig
 );
 
+export { GridFilterColumnElement };
+
+type GridFilterClass = GridFilterElement.GridFilter;
+
+type GridFilterEventMap = GridFilterElement.GridFilterEventMap;
+
 const GridFilterEventMapper = eventMapper<GridFilterEventMap>();
 const GridFilterEvents = {
   ...GridFilterEventMapper("onValueChanged", "value-changed"),
@@ -238,6 +229,13 @@ export const GridFilter = createVaadinComponent<
   undefined,
   getGridFilterPreRenderConfig
 );
+
+export { GridFilterElement };
+
+type GridSelectionColumnClass = GridSelectionColumnElement.GridSelectionColumn;
+
+type GridSelectionColumnEventMap =
+  GridSelectionColumnElement.GridSelectionColumnEventMap;
 
 const GridSelectionColumnEventMapper =
   eventMapper<GridSelectionColumnEventMap>();
@@ -306,6 +304,12 @@ export const GridSelectionColumn = createVaadinComponent<
   getGridSelectionColumnPreRenderConfig
 );
 
+export { GridSelectionColumnElement };
+
+type GridSortColumnClass = GridSortColumnElement.GridSortColumn;
+
+type GridSortColumnEventMap = GridSortColumnElement.GridSortColumnEventMap;
+
 const GridSortColumnEventMapper = eventMapper<GridSortColumnEventMap>();
 const GridSortColumnEvents = {
   ...GridSortColumnEventMapper("onDirectionChanged", "direction-changed"),
@@ -369,6 +373,12 @@ export const GridSortColumn = createVaadinComponent<
   getGridSortColumnPreRenderConfig
 );
 
+export { GridSortColumnElement };
+
+type GridSorterClass = GridSorterElement.GridSorter;
+
+type GridSorterEventMap = GridSorterElement.GridSorterEventMap;
+
 const GridSorterEventMapper = eventMapper<GridSorterEventMap>();
 const GridSorterEvents = {
   ...GridSorterEventMapper("onDirectionChanged", "direction-changed"),
@@ -398,6 +408,10 @@ export const GridSorter = createVaadinComponent<
   undefined,
   getGridSorterPreRenderConfig
 );
+
+export { GridSorterElement };
+
+type GridTreeColumnClass = GridTreeColumnElement.GridTreeColumn;
 
 const GridTreeColumnEvents = {};
 
@@ -459,6 +473,12 @@ export const GridTreeColumn = createVaadinComponent<
   getGridTreeColumnPreRenderConfig
 );
 
+export { GridTreeColumnElement };
+
+type GridTreeToggleClass = GridTreeToggleElement.GridTreeToggle;
+
+type GridTreeToggleEventMap = GridTreeToggleElement.GridTreeToggleEventMap;
+
 const GridTreeToggleEventMapper = eventMapper<GridTreeToggleEventMap>();
 const GridTreeToggleEvents = {
   ...GridTreeToggleEventMapper("onExpandedChanged", "expanded-changed"),
@@ -489,7 +509,13 @@ export const GridTreeToggle = createVaadinComponent<
   getGridTreeTogglePreRenderConfig
 );
 
-const GridEventMapper = eventMapper<GridEventMap<unknown>>();
+export { GridTreeToggleElement };
+
+type GridClass = GridElement.Grid;
+
+type GridEventMap = GridElement.GridEventMap<unknown>;
+
+const GridEventMapper = eventMapper<GridEventMap>();
 const GridEvents = {
   ...GridEventMapper("onActiveItemChanged", "active-item-changed"),
   ...GridEventMapper("onCellActivate", "cell-activate"),
@@ -554,3 +580,5 @@ export const Grid = createVaadinComponent<GridClassExtended, typeof GridEvents>(
   { itemRenderers: { itemDetailsRenderer: "rowDetailsRenderer" } },
   getGridPreRenderConfig
 );
+
+export { GridElement };

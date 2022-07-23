@@ -5,10 +5,11 @@
 
 import React from "react";
 
-import type { Icon as IconClass } from "@vaadin/icon/vaadin-icon";
-
-import type { Iconset as IconsetClass } from "@vaadin/icon/vaadin-iconset";
+import type * as IconElement from "@vaadin/icon/vaadin-icon";
+import type * as IconsetElement from "@vaadin/icon/vaadin-iconset";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type IconClass = IconElement.Icon;
 
 const IconEvents = {};
 
@@ -34,6 +35,10 @@ export const Icon = createVaadinComponent<IconClass, typeof IconEvents>(
   undefined,
   getIconPreRenderConfig
 );
+
+export { IconElement };
+
+type IconsetClass = IconsetElement.Iconset;
 
 const IconsetEvents = {};
 
@@ -61,6 +66,8 @@ export const Iconset = createVaadinComponent<
   undefined,
   getIconsetPreRenderConfig
 );
+
+export { IconsetElement };
 
 export function LumoIconset() {
   if (typeof window !== "undefined") {

@@ -5,11 +5,12 @@
 
 import React from "react";
 
-import type {
-  DateTimePicker as DateTimePickerClass,
-  DateTimePickerEventMap,
-} from "@vaadin/date-time-picker/vaadin-date-time-picker";
+import type * as DateTimePickerElement from "@vaadin/date-time-picker/vaadin-date-time-picker";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type DateTimePickerClass = DateTimePickerElement.DateTimePicker;
+
+type DateTimePickerEventMap = DateTimePickerElement.DateTimePickerEventMap;
 
 const DateTimePickerEventMapper = eventMapper<DateTimePickerEventMap>();
 const DateTimePickerEvents = {
@@ -61,3 +62,5 @@ export const DateTimePicker = createVaadinComponent<
   undefined,
   getDateTimePickerPreRenderConfig
 );
+
+export { DateTimePickerElement };

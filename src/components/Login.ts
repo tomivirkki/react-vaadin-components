@@ -5,16 +5,13 @@
 
 import React from "react";
 
-import type {
-  LoginForm as LoginFormClass,
-  LoginFormEventMap,
-} from "@vaadin/login/vaadin-login-form";
-
-import type {
-  LoginOverlay as LoginOverlayClass,
-  LoginOverlayEventMap,
-} from "@vaadin/login/vaadin-login-overlay";
+import type * as LoginFormElement from "@vaadin/login/vaadin-login-form";
+import type * as LoginOverlayElement from "@vaadin/login/vaadin-login-overlay";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type LoginFormClass = LoginFormElement.LoginForm;
+
+type LoginFormEventMap = LoginFormElement.LoginFormEventMap;
 
 const LoginFormEventMapper = eventMapper<LoginFormEventMap>();
 const LoginFormEvents = {
@@ -50,6 +47,12 @@ export const LoginForm = createVaadinComponent<
   undefined,
   getLoginFormPreRenderConfig
 );
+
+export { LoginFormElement };
+
+type LoginOverlayClass = LoginOverlayElement.LoginOverlay;
+
+type LoginOverlayEventMap = LoginOverlayElement.LoginOverlayEventMap;
 
 const LoginOverlayEventMapper = eventMapper<LoginOverlayEventMap>();
 const LoginOverlayEvents = {
@@ -88,3 +91,5 @@ export const LoginOverlay = createVaadinComponent<
   undefined,
   getLoginOverlayPreRenderConfig
 );
+
+export { LoginOverlayElement };

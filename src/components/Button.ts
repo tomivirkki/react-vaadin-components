@@ -5,8 +5,10 @@
 
 import React from "react";
 
-import type { Button as ButtonClass } from "@vaadin/button/vaadin-button";
+import type * as ButtonElement from "@vaadin/button/vaadin-button";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type ButtonClass = ButtonElement.Button;
 
 const ButtonEvents = {};
 
@@ -31,3 +33,5 @@ export const Button = createVaadinComponent<ButtonClass, typeof ButtonEvents>(
   undefined,
   getButtonPreRenderConfig
 );
+
+export { ButtonElement };

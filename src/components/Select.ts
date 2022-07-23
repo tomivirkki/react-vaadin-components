@@ -5,11 +5,12 @@
 
 import React from "react";
 
-import type {
-  Select as SelectClass,
-  SelectEventMap,
-} from "@vaadin/select/vaadin-select";
+import type * as SelectElement from "@vaadin/select/vaadin-select";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type SelectClass = SelectElement.Select;
+
+type SelectEventMap = SelectElement.SelectEventMap;
 
 const SelectEventMapper = eventMapper<SelectEventMap>();
 const SelectEvents = {
@@ -62,3 +63,5 @@ export const Select = createVaadinComponent<SelectClass, typeof SelectEvents>(
   undefined,
   getSelectPreRenderConfig
 );
+
+export { SelectElement };

@@ -5,11 +5,12 @@
 
 import React from "react";
 
-import type {
-  IntegerField as IntegerFieldClass,
-  IntegerFieldEventMap,
-} from "@vaadin/integer-field/vaadin-integer-field";
+import type * as IntegerFieldElement from "@vaadin/integer-field/vaadin-integer-field";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type IntegerFieldClass = IntegerFieldElement.IntegerField;
+
+type IntegerFieldEventMap = IntegerFieldElement.IntegerFieldEventMap;
 
 const IntegerFieldEventMapper = eventMapper<IntegerFieldEventMap>();
 const IntegerFieldEvents = {
@@ -88,3 +89,5 @@ export const IntegerField = createVaadinComponent<
   undefined,
   getIntegerFieldPreRenderConfig
 );
+
+export { IntegerFieldElement };

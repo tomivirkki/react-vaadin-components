@@ -5,11 +5,12 @@
 
 import React from "react";
 
-import type {
-  SplitLayout as SplitLayoutClass,
-  SplitLayoutEventMap,
-} from "@vaadin/split-layout/vaadin-split-layout";
+import type * as SplitLayoutElement from "@vaadin/split-layout/vaadin-split-layout";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type SplitLayoutClass = SplitLayoutElement.SplitLayout;
+
+type SplitLayoutEventMap = SplitLayoutElement.SplitLayoutEventMap;
 
 const SplitLayoutEventMapper = eventMapper<SplitLayoutEventMap>();
 const SplitLayoutEvents = {
@@ -39,3 +40,5 @@ export const SplitLayout = createVaadinComponent<
   undefined,
   getSplitLayoutPreRenderConfig
 );
+
+export { SplitLayoutElement };

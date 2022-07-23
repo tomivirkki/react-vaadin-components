@@ -5,13 +5,13 @@
 
 import React from "react";
 import { createVaadinComponent, eventMapper } from "../../src/create-component";
-
-import type {
-  TestComponent as TestComponentClass,
-  TestComponentEventMap,
-} from "../web-components/test-component/test-component";
+import type * as TestComponentElement from "../web-components/test-component/test-component";
 
 type PropType<TObj, TProp extends keyof TObj> = TObj[TProp];
+
+type TestComponentClass = TestComponentElement.TestComponent;
+
+type TestComponentEventMap = TestComponentElement.TestComponentEventMap;
 
 const TestComponentEventMapper = eventMapper<TestComponentEventMap>();
 const TestComponentEvents = {
@@ -72,3 +72,5 @@ export const TestComponent = createVaadinComponent<
   },
   getTestComponentPreRenderConfig
 );
+
+export { TestComponentElement };

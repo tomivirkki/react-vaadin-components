@@ -5,10 +5,11 @@
 
 import React from "react";
 
-import type { MessageList as MessageListClass } from "@vaadin/message-list/vaadin-message-list";
-
-import type { Message as MessageClass } from "@vaadin/message-list/vaadin-message";
+import type * as MessageListElement from "@vaadin/message-list/vaadin-message-list";
+import type * as MessageElement from "@vaadin/message-list/vaadin-message";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type MessageListClass = MessageListElement.MessageList;
 
 const MessageListEvents = {};
 
@@ -35,6 +36,10 @@ export const MessageList = createVaadinComponent<
   undefined,
   getMessageListPreRenderConfig
 );
+
+export { MessageListElement };
+
+type MessageClass = MessageElement.Message;
 
 const MessageEvents = {};
 
@@ -65,3 +70,5 @@ export const Message = createVaadinComponent<
   undefined,
   getMessagePreRenderConfig
 );
+
+export { MessageElement };

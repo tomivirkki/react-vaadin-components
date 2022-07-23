@@ -5,8 +5,10 @@
 
 import React from "react";
 
-import type { AvatarGroup as AvatarGroupClass } from "@vaadin/avatar-group/vaadin-avatar-group";
+import type * as AvatarGroupElement from "@vaadin/avatar-group/vaadin-avatar-group";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type AvatarGroupClass = AvatarGroupElement.AvatarGroup;
 
 const AvatarGroupEvents = {};
 
@@ -35,3 +37,5 @@ export const AvatarGroup = createVaadinComponent<
   undefined,
   getAvatarGroupPreRenderConfig
 );
+
+export { AvatarGroupElement };

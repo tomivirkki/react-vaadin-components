@@ -5,11 +5,12 @@
 
 import React from "react";
 
-import type {
-  ListBox as ListBoxClass,
-  ListBoxEventMap,
-} from "@vaadin/list-box/vaadin-list-box";
+import type * as ListBoxElement from "@vaadin/list-box/vaadin-list-box";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type ListBoxClass = ListBoxElement.ListBox;
+
+type ListBoxEventMap = ListBoxElement.ListBoxEventMap;
 
 const ListBoxEventMapper = eventMapper<ListBoxEventMap>();
 const ListBoxEvents = {
@@ -44,3 +45,5 @@ export const ListBox = createVaadinComponent<
   undefined,
   getListBoxPreRenderConfig
 );
+
+export { ListBoxElement };

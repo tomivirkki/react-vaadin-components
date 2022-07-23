@@ -5,8 +5,10 @@
 
 import React from "react";
 
-import type { HorizontalLayout as HorizontalLayoutClass } from "@vaadin/horizontal-layout/vaadin-horizontal-layout";
+import type * as HorizontalLayoutElement from "@vaadin/horizontal-layout/vaadin-horizontal-layout";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type HorizontalLayoutClass = HorizontalLayoutElement.HorizontalLayout;
 
 const HorizontalLayoutEvents = {};
 
@@ -32,3 +34,5 @@ export const HorizontalLayout = createVaadinComponent<
   undefined,
   getHorizontalLayoutPreRenderConfig
 );
+
+export { HorizontalLayoutElement };

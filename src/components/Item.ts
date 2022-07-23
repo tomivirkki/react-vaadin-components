@@ -5,8 +5,10 @@
 
 import React from "react";
 
-import type { Item as ItemClass } from "@vaadin/item/vaadin-item";
+import type * as ItemElement from "@vaadin/item/vaadin-item";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type ItemClass = ItemElement.Item;
 
 const ItemEvents = {};
 
@@ -31,3 +33,5 @@ export const Item = createVaadinComponent<ItemClass, typeof ItemEvents>(
   undefined,
   getItemPreRenderConfig
 );
+
+export { ItemElement };

@@ -5,11 +5,12 @@
 
 import React from "react";
 
-import type {
-  PasswordField as PasswordFieldClass,
-  PasswordFieldEventMap,
-} from "@vaadin/password-field/vaadin-password-field";
+import type * as PasswordFieldElement from "@vaadin/password-field/vaadin-password-field";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type PasswordFieldClass = PasswordFieldElement.PasswordField;
+
+type PasswordFieldEventMap = PasswordFieldElement.PasswordFieldEventMap;
 
 const PasswordFieldEventMapper = eventMapper<PasswordFieldEventMap>();
 const PasswordFieldEvents = {
@@ -91,3 +92,5 @@ export const PasswordField = createVaadinComponent<
   undefined,
   getPasswordFieldPreRenderConfig
 );
+
+export { PasswordFieldElement };

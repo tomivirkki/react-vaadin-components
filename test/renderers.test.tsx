@@ -4,9 +4,7 @@ import React from "react";
 import { jest } from "@jest/globals";
 import { act } from "@testing-library/react";
 import { TestComponent as TestComponentClass } from "./web-components/test-component/test-component";
-import { TestComponent } from "./index";
-// TODO: Re-export from the React component
-import type { TestComponentItemModel } from "./web-components/test-component/test-component";
+import { TestComponent, TestComponentElement } from "./index";
 import { renderComponent } from "./helpers";
 import "@testing-library/jest-dom/extend-expect";
 
@@ -81,7 +79,10 @@ describe("renderers", () => {
     };
 
     beforeEach(async () => {
-      const itemRenderer = ({ index, item }: TestComponentItemModel<Item>) => (
+      const itemRenderer = ({
+        index,
+        item,
+      }: TestComponentElement.TestComponentItemModel<Item>) => (
         <div>
           Item {index}: {item.name}
         </div>

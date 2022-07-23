@@ -5,11 +5,12 @@
 
 import React from "react";
 
-import type {
-  TimePicker as TimePickerClass,
-  TimePickerEventMap,
-} from "@vaadin/time-picker/vaadin-time-picker";
+import type * as TimePickerElement from "@vaadin/time-picker/vaadin-time-picker";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type TimePickerClass = TimePickerElement.TimePicker;
+
+type TimePickerEventMap = TimePickerElement.TimePickerEventMap;
 
 const TimePickerEventMapper = eventMapper<TimePickerEventMap>();
 const TimePickerEvents = {
@@ -67,3 +68,5 @@ export const TimePicker = createVaadinComponent<
   undefined,
   getTimePickerPreRenderConfig
 );
+
+export { TimePickerElement };

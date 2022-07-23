@@ -5,11 +5,12 @@
 
 import React from "react";
 
-import type {
-  CheckboxGroup as CheckboxGroupClass,
-  CheckboxGroupEventMap,
-} from "@vaadin/checkbox-group/vaadin-checkbox-group";
+import type * as CheckboxGroupElement from "@vaadin/checkbox-group/vaadin-checkbox-group";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type CheckboxGroupClass = CheckboxGroupElement.CheckboxGroup;
+
+type CheckboxGroupEventMap = CheckboxGroupElement.CheckboxGroupEventMap;
 
 const CheckboxGroupEventMapper = eventMapper<CheckboxGroupEventMap>();
 const CheckboxGroupEvents = {
@@ -50,3 +51,5 @@ export const CheckboxGroup = createVaadinComponent<
   undefined,
   getCheckboxGroupPreRenderConfig
 );
+
+export { CheckboxGroupElement };

@@ -5,16 +5,13 @@
 
 import React from "react";
 
-import type {
-  DatePickerLight as DatePickerLightClass,
-  DatePickerLightEventMap,
-} from "@vaadin/date-picker/vaadin-date-picker-light";
-
-import type {
-  DatePicker as DatePickerClass,
-  DatePickerEventMap,
-} from "@vaadin/date-picker/vaadin-date-picker";
+import type * as DatePickerLightElement from "@vaadin/date-picker/vaadin-date-picker-light";
+import type * as DatePickerElement from "@vaadin/date-picker/vaadin-date-picker";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type DatePickerLightClass = DatePickerLightElement.DatePickerLight;
+
+type DatePickerLightEventMap = DatePickerLightElement.DatePickerLightEventMap;
 
 const DatePickerLightEventMapper = eventMapper<DatePickerLightEventMap>();
 const DatePickerLightEvents = {
@@ -60,6 +57,12 @@ export const DatePickerLight = createVaadinComponent<
   undefined,
   getDatePickerLightPreRenderConfig
 );
+
+export { DatePickerLightElement };
+
+type DatePickerClass = DatePickerElement.DatePicker;
+
+type DatePickerEventMap = DatePickerElement.DatePickerEventMap;
 
 const DatePickerEventMapper = eventMapper<DatePickerEventMap>();
 const DatePickerEvents = {
@@ -138,3 +141,5 @@ export const DatePicker = createVaadinComponent<
   undefined,
   getDatePickerPreRenderConfig
 );
+
+export { DatePickerElement };

@@ -5,11 +5,12 @@
 
 import React from "react";
 
-import type {
-  Upload as UploadClass,
-  UploadEventMap,
-} from "@vaadin/upload/vaadin-upload";
+import type * as UploadElement from "@vaadin/upload/vaadin-upload";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type UploadClass = UploadElement.Upload;
+
+type UploadEventMap = UploadElement.UploadEventMap;
 
 const UploadEventMapper = eventMapper<UploadEventMap>();
 const UploadEvents = {
@@ -61,3 +62,5 @@ export const Upload = createVaadinComponent<UploadClass, typeof UploadEvents>(
   undefined,
   getUploadPreRenderConfig
 );
+
+export { UploadElement };

@@ -5,11 +5,12 @@
 
 import React from "react";
 
-import type {
-  Checkbox as CheckboxClass,
-  CheckboxEventMap,
-} from "@vaadin/checkbox/vaadin-checkbox";
+import type * as CheckboxElement from "@vaadin/checkbox/vaadin-checkbox";
 import { createVaadinComponent, eventMapper } from "../create-component";
+
+type CheckboxClass = CheckboxElement.Checkbox;
+
+type CheckboxEventMap = CheckboxElement.CheckboxEventMap;
 
 const CheckboxEventMapper = eventMapper<CheckboxEventMap>();
 const CheckboxEvents = {
@@ -56,3 +57,5 @@ export const Checkbox = createVaadinComponent<
   undefined,
   getCheckboxPreRenderConfig
 );
+
+export { CheckboxElement };
