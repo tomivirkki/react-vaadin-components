@@ -7,8 +7,9 @@ import { execSync, exec } from "child_process";
 import fs from "fs";
 import path from "path";
 import puppeteer from "puppeteer";
-import { componentsConfig } from "./components-config.js";
-import { NotificationTemplate } from "./Notification-template.js";
+import { componentsConfig, packagesConfig } from "./components-config.js";
+
+const GENERATED_FILE_HEADER = "// Generated file. Do not edit.";
 
 async function getShadowRootContent(importPath, elementHTML) {
   const browser = await puppeteer.launch();
@@ -81,6 +82,48 @@ function getPackages(componentsPath) {
   );
 }
 
+function getComponentsFromPackage(packagePath) {
+  // Run the wca CLI and get the output as a string
+  const output = execSync(`npx web-component-analyzer --dry --format json`, {
+    cwd: packagePath,
+  }).toString();
+
+  // Marker for the start of the JSON
+  const startIndicator = output.includes("files...") ? "files..." : "file...";
+
+  // Get the JSON from the output
+  const componentsJSON = `[${output
+    .split(startIndicator)[1]
+    .trim()
+    // Make sure the components are separated by a comma in the JSON
+    .split(/{\n.*"version": "experimental"/)
+    .join(`,{"version": "experimental"`)
+    // If the content starts with a comma, remove it
+    .replace(/^,/, "")}]`;
+
+  // The analysis may include components that are meant for private use.
+  // Get a list of root level / public components.
+  const rootLevelComponents = fs
+    .readdirSync(packagePath)
+    .filter((fileName) => fileName.endsWith(".d.ts"))
+    .map((fileName) => fileName.substring(0, fileName.length - ".d.ts".length));
+
+  return (
+    JSON.parse(componentsJSON)
+      // Filter out duplicates
+      .filter(
+        (component, idx, array) =>
+          array.findIndex((c) => c.tags[0].name === component.tags[0].name) ===
+          idx
+      )
+      // Filter out non-root level components
+      .filter((component) => {
+        const elementName = component.tags[0].name;
+        return rootLevelComponents.includes(elementName);
+      })
+  );
+}
+
 function writeFile(filePath, content) {
   // Write the file
   fs.writeFileSync(filePath, content);
@@ -118,39 +161,7 @@ async function generateComponentForPackage(
   const packagePath = path.resolve(componentsPath, packageName);
   const packageSrcPath = path.resolve(packagePath, "src");
 
-  // TODO: Cleanup!
-  let result = execSync(`npx web-component-analyzer --format json`, {
-    cwd: packageSrcPath,
-  }).toString();
-  const startIndicator = result.includes("files...") ? "files..." : "file...";
-  result = result.substring(
-    result.indexOf(startIndicator) + startIndicator.length
-  );
-  result = result
-    .trim()
-    .split(/{\n.*"version": "experimental"/)
-    .join(`,{"version": "experimental"`);
-  if (result.startsWith(",")) {
-    result = result.substring(1);
-  }
-  result = `[${result}]`;
-
-  const rootLevelComponents = fs
-    .readdirSync(packagePath)
-    .filter((fileName) => fileName.endsWith(".d.ts"))
-    .map((fileName) => fileName.substring(0, fileName.length - ".d.ts".length));
-
-  const components = JSON.parse(result)
-    .filter(
-      (component, idx, array) =>
-        // Remove duplicates
-        array.findIndex((c) => c.tags[0].name === component.tags[0].name) ===
-        idx
-    )
-    .filter((component) => {
-      const elementName = component.tags[0].name;
-      return rootLevelComponents.includes(elementName);
-    });
+  const components = getComponentsFromPackage(packagePath);
 
   for (const component of components) {
     const tag = component.tags[0];
@@ -177,7 +188,8 @@ async function generateComponentForPackage(
     } } from "${importPath}/${packageName}/${elementName}";
         `;
 
-    const elementRenderers = componentsConfig[elementName]?.renderers;
+    const elementConfig = componentsConfig[elementName];
+    const elementRenderers = elementConfig?.renderers;
 
     const rendererAPINames = elementRenderers
       ? [
@@ -219,7 +231,7 @@ async function generateComponentForPackage(
     // Exceptions
     if (elementName === "vaadin-form-item") {
       // Form item
-      extendedClassType += `
+      extendedClassType = `
         type ${exportName}ClassExtended = ${exportName}Class & {
           colspan?: string;
         };
@@ -227,7 +239,7 @@ async function generateComponentForPackage(
     }
 
     const preRenderConfig = {
-      ...(componentsConfig[elementName]?.preRenderConfig || {}),
+      ...(elementConfig?.preRenderConfig || {}),
     };
 
     if (!("shadowDomContent" in preRenderConfig)) {
@@ -300,6 +312,11 @@ async function generateComponentForPackage(
                 .replace(/\n/g, "\\n")
                 .replace(/`/g, "\\`")}\`` || '""'
             },
+            ${
+              preRenderConfig.postRender
+                ? `postRender: ${preRenderConfig.postRender},`
+                : ""
+            }
           }
         }
 
@@ -325,7 +342,7 @@ async function generateComponentForPackage(
     }
   }
 
-  let outFileContent = `// Generated file. Do not edit.
+  let outFileContent = `${GENERATED_FILE_HEADER}
         /* eslint-disable import/prefer-default-export */
         /* eslint-disable import/no-extraneous-dependencies */
         /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -341,29 +358,16 @@ async function generateComponentForPackage(
         ${outFileComponents}
     `;
 
-  // TODO: Move component-specifics to components-config
-  if (packageName === "notification") {
-    outFileContent = `// Generated file. Do not edit.\n${NotificationTemplate}`;
+  const packageConfig = packagesConfig[packageName];
+
+  if (packageConfig?.componentFileContent) {
+    // The package's output file is already defined in the config. Use it for the final output.
+    outFileContent = `${GENERATED_FILE_HEADER}\n${packageConfig.componentFileContent}`;
   }
 
-  if (packageName === "icon") {
-    outFileContent += `
-      export function LumoIconset() {
-        if (typeof window !== "undefined") {
-          // @ts-ignore
-          import("@vaadin/vaadin-lumo-styles/vaadin-iconset");
-        }
-        return null;
-      }
-
-      export function VaadinIconset() {
-        if (typeof window !== "undefined") {
-          // @ts-ignore
-          import("@vaadin/icons/vaadin-iconset");
-        }
-        return null;
-      }
-    `;
+  if (packageConfig?.componentFileAdditionalContent) {
+    // The config has additional content to be added to the output file.
+    outFileContent += packageConfig.componentFileAdditionalContent;
   }
 
   const filePath = path.resolve(componentsOutPath, `${outFileName}.ts`);
@@ -445,6 +449,7 @@ async function run() {
   const cloneWebComponents = !fs.existsSync(vaadinComponentsPath);
 
   if (cloneWebComponents) {
+    // Clone the @vaadin/web-components repo to a temporary directory
     console.log(
       `Cloning @vaadin/web-components@v${vaadinComponentsVersion} to a temporary directory...`
     );
@@ -453,7 +458,7 @@ async function run() {
 
     execSync(
       `git clone --depth 1 --branch v${vaadinComponentsVersion} https://github.com/vaadin/web-components.git`,
-      { cwd: vaadinComponentsParentPath }
+      { cwd: vaadinComponentsParentPath, stdio: "ignore" }
     );
   }
 
@@ -463,12 +468,12 @@ async function run() {
     "@vaadin"
   );
 
-  await generateStyles();
-
   if (cloneWebComponents) {
     // Remove the temporary web-compoenents directory
     fs.rmdirSync(vaadinComponentsParentPath, { recursive: true });
   }
+
+  await generateStyles();
 
   process.exit(0);
 }

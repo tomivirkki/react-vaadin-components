@@ -1,3 +1,6 @@
+/* eslint-disable import/extensions */
+import { NotificationTemplate } from "./Notification-template.js";
+
 /* eslint-disable import/prefer-default-export */
 const gridColumnRenderers = {
   components: {
@@ -9,7 +12,6 @@ const gridColumnRenderers = {
   },
 };
 
-// TODO: Would be safer to just use (conditional) styles since props will be in effect even after hydration
 const hostPropertyHasLabel = { "'has-label'": "props.label ? '' : undefined" };
 const hostPropertyHasValue = { "'has-value'": "props.value ? '' : undefined" };
 const hostPropertyHasHelper = {
@@ -78,7 +80,6 @@ export const componentsConfig = {
         --test-component-prerender-style: 1;
       }
     `,
-      // TODO: Test
       hostProperties: {
         ...hostPropertyHasValue,
       },
@@ -329,6 +330,10 @@ export const componentsConfig = {
             ...(props.style || {})
       }`.replace(/\n/g, ""),
       },
+      postRender: `(element: HTMLElement) => {
+        /* A hack to avoid a declarative shadow related FOUC (happens even with JS disabled) */
+        element.style.setProperty("--_vaadin-app-layout-opacity", "1");
+      }`,
       styles: `
       :host {
         --_vaadin-app-layout-drawer-offset-size: 16em !important;
@@ -386,5 +391,30 @@ export const componentsConfig = {
       }
     `,
     },
+  },
+};
+
+export const packagesConfig = {
+  notification: {
+    componentFileContent: NotificationTemplate,
+  },
+  icon: {
+    componentFileAdditionalContent: `
+      export function LumoIconset() {
+        if (typeof window !== "undefined") {
+          // @ts-ignore
+          import("@vaadin/vaadin-lumo-styles/vaadin-iconset");
+        }
+        return null;
+      }
+
+      export function VaadinIconset() {
+        if (typeof window !== "undefined") {
+          // @ts-ignore
+          import("@vaadin/icons/vaadin-iconset");
+        }
+        return null;
+      }
+    `,
   },
 };

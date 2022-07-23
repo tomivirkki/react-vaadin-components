@@ -28,6 +28,8 @@ const currentFile = importUrl.substring(importUrl.indexOf(":") + 1);
 const currentDir = path.dirname(currentFile);
 const cssDir = path.resolve(currentDir, "../src/css");
 
+const GENERATED_FILE_HEADER = "/* Generated file. Do not edit. */\n\n";
+
 if (fs.existsSync(cssDir)) {
   fs.rmdirSync(cssDir, { recursive: true });
 }
@@ -53,8 +55,6 @@ it("generate lumo", () => {
     userColors,
   };
 
-  const GENERATED = "/* Generated file. Do not edit. */\n\n";
-
   let lumo = "";
 
   fs.mkdirSync(path.resolve(cssDir, "lumo"));
@@ -64,7 +64,7 @@ it("generate lumo", () => {
     const fileName = `${moduleName}.css`;
     const filePath = path.resolve(cssDir, "lumo", fileName);
     const fileContent = module.cssText.replace(/:host/g, "html");
-    writeFile(filePath, GENERATED + fileContent);
+    writeFile(filePath, GENERATED_FILE_HEADER + fileContent);
 
     lumo += `@import url("./lumo/${fileName}");\n`;
   });
@@ -96,14 +96,14 @@ it("generate lumo", () => {
         `;
       }
 
-      writeFile(filePath, GENERATED + fileContent);
+      writeFile(filePath, GENERATED_FILE_HEADER + fileContent);
 
       lumo += `@import url("./lumo/${fileName}");\n`;
     }
   });
 
   const lumoFilePath = path.resolve(cssDir, `lumo.css`);
-  fs.writeFileSync(lumoFilePath, GENERATED + lumo);
+  fs.writeFileSync(lumoFilePath, GENERATED_FILE_HEADER + lumo);
 });
 
 it("generate utility", () => {
@@ -119,8 +119,6 @@ it("generate utility", () => {
     typography: utilityTypography,
   };
 
-  const GENERATED = "/* Generated file. Do not edit. */\n\n";
-
   let utility = "";
 
   fs.mkdirSync(path.resolve(cssDir, "utility"));
@@ -131,18 +129,16 @@ it("generate utility", () => {
     const filePath = path.resolve(cssDir, "utility", fileName);
     const fileContent = module.cssText.replace(/:host/g, "html");
 
-    writeFile(filePath, GENERATED + fileContent);
+    writeFile(filePath, GENERATED_FILE_HEADER + fileContent);
 
     utility += `@import url("./utility/${fileName}");\n`;
   });
 
   const utilityFilePath = path.resolve(cssDir, `utility.css`);
-  writeFile(utilityFilePath, GENERATED + utility);
+  writeFile(utilityFilePath, GENERATED_FILE_HEADER + utility);
 });
 
 it("generate prevent fouc file", () => {
-  const GENERATED = "/* Generated file. Do not edit. */\n\n";
-
   const fileContent = `
     @media not all and (min-resolution: 0.001dpcm) {
       @supports (-webkit-appearance: none) and (stroke-color: transparent) {
@@ -154,12 +150,10 @@ it("generate prevent fouc file", () => {
   `;
 
   const filePath = path.resolve(cssDir, `prevent-fouc.css`);
-  writeFile(filePath, GENERATED + fileContent);
+  writeFile(filePath, GENERATED_FILE_HEADER + fileContent);
 });
 
 it("generate single import file", () => {
-  const GENERATED = "/* Generated file. Do not edit. */\n\n";
-
   const fileContent = `
     @import url("./lumo.css");
     @import url("./utility.css");
@@ -167,5 +161,5 @@ it("generate single import file", () => {
   `;
 
   const filePath = path.resolve(cssDir, `core.css`);
-  writeFile(filePath, GENERATED + fileContent);
+  writeFile(filePath, GENERATED_FILE_HEADER + fileContent);
 });

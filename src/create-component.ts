@@ -114,6 +114,7 @@ type PreRenderConfig = {
     textContent?: string;
   }[];
   shadowDomContent?: string;
+  postRender?: (el: HTMLElement) => void;
 };
 
 // TODO: Still missing some tests
@@ -277,12 +278,6 @@ export function createVaadinComponent<I extends HTMLElement, E extends Events>(
       if (context.isBrowser && ref.current) {
         const element = (ref.current as any)._reactInternals.child.stateNode;
 
-        // TODO: Move this to a ssrConfig hook
-        if (tagName === "vaadin-app-layout") {
-          /* A hack to avoid a declarative shadow related FOUC (happens even with JS disabled) */
-          element.style.setProperty("--_vaadin-app-layout-opacity", 1);
-        }
-
         // Remove the `<template shadowroot="open">` element from inside the element if it exists
         // (some browsers don't support declarative shadow DOM)
         element.querySelector("template[shadowroot]")?.remove();
@@ -291,6 +286,9 @@ export function createVaadinComponent<I extends HTMLElement, E extends Events>(
           // The element is not defined yet, pre-render shadow DOM on the client
           applyShadowDOM(element, preRenderConfig?.shadowDomContent);
         }
+
+        // If the element has a post-render hook, run it
+        preRenderConfig?.postRender?.(element);
       }
     });
     props = { ...props, ref };
