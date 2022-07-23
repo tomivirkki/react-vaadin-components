@@ -51,6 +51,9 @@ const getTestComponentPreRenderConfig = (props: { [key: string]: any }) => ({
     { tag: "div" },
   ],
   shadowDomContent: `<style>\n      :host {\n        --test-component-prerender-style: 1;\n      }\n    </style>\n    <style>\n      :host {\n          --test-component-style: 1;\n      }\n    </style>\n    \n    <div id="header"></div>\n\n    <div id="overlay"></div>\n\n    <ul id="itemlist">\n        <li></li>\n        <li></li>\n    </ul>\n\n    <test-sub-component id="sub-component"><template shadowroot="open">\n    <style>\n      :host {\n          --test-sub-component-style: 1;\n      }\n    </style>\n  </template></test-sub-component>\n  `,
+  postRender: (element: HTMLElement) => {
+    element.style.setProperty("--test-component-background", "red");
+  },
 });
 
 export const TestComponent = createVaadinComponent<

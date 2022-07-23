@@ -95,6 +95,9 @@ export const componentsConfig = {
           tag: "'div'",
         },
       ],
+      postRender: `(element: HTMLElement) => {
+        element.style.setProperty("--test-component-background", "red");
+      }`,
     },
   },
   "vaadin-dialog": {

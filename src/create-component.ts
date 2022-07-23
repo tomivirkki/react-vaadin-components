@@ -23,6 +23,7 @@ function suppressLitDevModeWarning() {
   ]);
 }
 
+/* istanbul ignore else */
 if (context.isBrowser) {
   (
     (globalThis as any).MockPolymerImport ||
@@ -37,16 +38,12 @@ if (context.isBrowser) {
           this.attachShadow({ mode: "open" });
         }
 
-        // Empty the shadow root of any existing content.
-        this.shadowRoot!.textContent = "";
-
-        // Append the new DOM to the shadow root.
-        this.shadowRoot!.appendChild(dom);
+        // Replace prerendered shadow root content with the given dom.
+        this.shadowRoot!.replaceChildren(dom);
 
         // When `adoptedStyleSheets` is supported a stylesheet is made
         // available on the element constructor.
         if (this.constructor._styleSheet) {
-          /* istanbul ignore next */
           this.shadowRoot.adoptedStyleSheets = [this.constructor._styleSheet];
         }
       }
@@ -83,13 +80,12 @@ function applyShadowDOM(el: HTMLElement, content: string) {
   const template = document.createElement("template");
   template.innerHTML = content;
 
-  while (template.content.querySelector("template[shadowroot]")) {
-    const shadowRootTemplate = template.content.querySelector(
-      "template[shadowroot]"
-    )!;
-    const shadowRootHost = shadowRootTemplate.parentElement;
-    shadowRootTemplate.remove();
-    applyShadowDOM(shadowRootHost!, shadowRootTemplate.innerHTML);
+  let shadow;
+  // eslint-disable-next-line no-cond-assign
+  while ((shadow = template.content.querySelector("template[shadowroot]"))) {
+    const shadowRootHost = shadow.parentElement;
+    shadow.remove();
+    applyShadowDOM(shadowRootHost!, shadow.innerHTML);
   }
 
   el.shadowRoot!.append(...Array.from(template.content.children));
@@ -117,7 +113,6 @@ type PreRenderConfig = {
   postRender?: (el: HTMLElement) => void;
 };
 
-// TODO: Still missing some tests
 export function createVaadinComponent<I extends HTMLElement, E extends Events>(
   tagName: string,
   properties: { [key: string]: any },

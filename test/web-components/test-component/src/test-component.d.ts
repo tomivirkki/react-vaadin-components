@@ -1,4 +1,5 @@
 /* eslint-disable no-use-before-define */
+/* eslint-disable max-classes-per-file */
 type TestComponentItem = any;
 
 export type TestComponentItemModel<TItem = TestComponentItem> = {
@@ -6,10 +7,14 @@ export type TestComponentItemModel<TItem = TestComponentItem> = {
   index: number;
 };
 
+declare class AbstractTestComponent extends HTMLElement {}
+
 /**
  * @fires {CustomEvent} value-changed - Fired when the `value` property changes.
  */
-declare class TestComponent<TItem = TestComponentItem> extends HTMLElement {
+declare class TestComponent<
+  TItem = TestComponentItem
+> extends AbstractTestComponent {
   value: string;
 
   items: TItem[];
@@ -54,4 +59,4 @@ declare global {
   }
 }
 
-export { TestComponent };
+export { TestComponent, AbstractTestComponent };

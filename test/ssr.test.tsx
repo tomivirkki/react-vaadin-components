@@ -41,4 +41,12 @@ describe("SSR", () => {
     const { litIssuedWarnings } = window as any;
     expect(litIssuedWarnings).not.toBeDefined();
   });
+
+  test("should have a declarative shadow root template", () => {
+    const template = testComponentElement.querySelector(
+      "template[shadowroot='open']"
+    );
+    expect(template).toBeInstanceOf(HTMLTemplateElement);
+    expect(template!.innerHTML).toContain("--test-component-prerender-style");
+  });
 });

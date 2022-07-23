@@ -8,8 +8,10 @@ class AbstractTestComponent extends MockPolymerElement {
   constructor() {
     super();
 
+    const { template } = this.constructor;
+
     this._attachDom(
-      document.createRange().createContextualFragment(this.constructor.template)
+      template && document.createRange().createContextualFragment(template)
     );
 
     if (this.value) {
@@ -37,6 +39,10 @@ class TestComponent extends AbstractTestComponent {
 
     <test-sub-component id="sub-component"></test-sub-component>
   `;
+
+  static get _styleSheet() {
+    return new CSSStyleSheet();
+  }
 
   get overlay() {
     return this.shadowRoot.querySelector("#overlay");
@@ -120,7 +126,7 @@ class TestComponent extends AbstractTestComponent {
 
 customElements.define("test-component", TestComponent);
 
-export { TestComponent };
+export { TestComponent, AbstractTestComponent };
 
 class TestSubComponent extends AbstractTestComponent {
   static template = `

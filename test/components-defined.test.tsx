@@ -1,6 +1,9 @@
 import "./web-components/test-component/src/mock-polymer-element";
 import React from "react";
-import type { TestComponent as TestComponentClass } from "./web-components/test-component/test-component";
+import {
+  TestComponent as TestComponentClass,
+  AbstractTestComponent,
+} from "./web-components/test-component/test-component";
 import { TestComponent } from "./index";
 import { renderComponent } from "./helpers";
 import { createVaadinComponent } from "../src/create-component";
@@ -10,15 +13,7 @@ const AnotherComponent = createVaadinComponent(
   {},
   {},
   () => {},
-  "AnotherComponent",
-  undefined,
-  () => ({
-    children: [
-      {
-        tag: "div",
-      },
-    ],
-  })
+  "AnotherComponent"
 );
 
 describe("components-defined", () => {
@@ -39,7 +34,7 @@ describe("components-defined", () => {
     // Manually define '<another-component>'
     await customElements.define(
       "another-component",
-      class extends HTMLElement {}
+      class extends AbstractTestComponent {}
     );
 
     // '<test-component>' and '<another-component>' are both defined. The defined attribute should be added.
