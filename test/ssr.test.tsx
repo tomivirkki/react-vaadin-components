@@ -1,6 +1,6 @@
 import "./web-components/test-component/src/mock-polymer-element";
 import React from "react";
-import { TestComponent as TestComponentClass } from "./web-components/test-component/test-component";
+import type { TestComponentElement } from "./index";
 import { context } from "../src/create-component";
 import { renderComponent } from "./helpers";
 
@@ -11,14 +11,15 @@ context.isBrowser = false;
 const { TestComponent } = await import("./index");
 
 describe("SSR", () => {
-  let testComponentElement: TestComponentClass;
+  let testComponentElement: TestComponentElement.TestComponent;
 
   beforeEach(async () => {
-    [testComponentElement] = await renderComponent<TestComponentClass>(() => (
-      <TestComponent value="foo">
-        <div>overlay</div>
-      </TestComponent>
-    ));
+    [testComponentElement] =
+      await renderComponent<TestComponentElement.TestComponent>(() => (
+        <TestComponent value="foo">
+          <div>overlay</div>
+        </TestComponent>
+      ));
   });
 
   test("should not define a custom element", () => {

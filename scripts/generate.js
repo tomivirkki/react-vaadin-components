@@ -190,15 +190,11 @@ async function generateComponentForPackage(
     const elementRenderers = elementConfig?.renderers;
 
     const rendererAPINames = elementRenderers
-      ? [
-          ...Object.keys(elementRenderers.components || {}),
-          ...Object.keys(elementRenderers.itemRenderers || {}),
-        ]
+      ? [...Object.keys(elementRenderers.itemRenderers || {})]
       : [];
 
     const rendererFunctionNames = elementRenderers
       ? [
-          elementRenderers.childRenderer,
           ...Object.values(elementRenderers.components || {}),
           ...Object.values(elementRenderers.itemRenderers || {}),
         ].filter((n) => n)
@@ -213,9 +209,6 @@ async function generateComponentForPackage(
         type ${exportName}ClassExtended = Omit<${exportName}Class, ${rendererFunctionNames
           .map((name) => `'${name}'`)
           .join("|")}> & {
-          ${Object.keys(elementRenderers?.components || {})
-            .map((api) => `${api}: React.ReactNode;`)
-            .join("\n")}
           ${Object.keys(elementRenderers?.itemRenderers || {})
             .map(
               (api) =>

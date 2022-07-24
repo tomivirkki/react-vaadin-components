@@ -4,8 +4,8 @@ import { NotificationTemplate } from "./Notification-template.js";
 /* eslint-disable import/prefer-default-export */
 const gridColumnRenderers = {
   components: {
-    headerComponent: "headerRenderer",
-    footerComponent: "footerRenderer",
+    header: "headerRenderer",
+    footer: "footerRenderer",
   },
   itemRenderers: {
     itemRenderer: "renderer",
@@ -16,7 +16,7 @@ const hostPropertyHasLabel = { "'has-label'": "props.label ? '' : undefined" };
 const hostPropertyHasValue = { "'has-value'": "props.value ? '' : undefined" };
 const hostPropertyHasHelper = {
   "'has-helper'":
-    "props.helperText || [props.children].flat().some((child) => child?.props.slot === 'helper') ? '' : undefined",
+    "props.helperText || [props.children].flat(Infinity).some((child) => child?.props.slot === 'helper') ? '' : undefined",
 };
 const hostPropertyClearButtonVisible = {
   "'clear-button-visible'": "props.clearButtonVisible ? '' : undefined",
@@ -66,9 +66,9 @@ const inputFieldPreRenderConfig = {
 export const componentsConfig = {
   "test-component": {
     renderers: {
-      childRenderer: "overlayRenderer",
       components: {
-        headerComponent: "headerRenderer",
+        "": "overlayRenderer",
+        header: "headerRenderer",
       },
       itemRenderers: {
         itemRenderer: "renderer",
@@ -102,10 +102,10 @@ export const componentsConfig = {
   },
   "vaadin-dialog": {
     renderers: {
-      childRenderer: "renderer",
       components: {
-        headerComponent: "headerRenderer",
-        footerComponent: "footerRenderer",
+        "": "renderer",
+        header: "headerRenderer",
+        footer: "footerRenderer",
       },
     },
   },

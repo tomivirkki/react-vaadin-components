@@ -97,7 +97,6 @@ type Constructor<T> = {
 };
 
 export type RenderersConfig = {
-  childRenderer?: string;
   components?: Record<string, string>;
   itemRenderers?: Record<string, string>;
 };
@@ -168,49 +167,69 @@ export function createVaadinComponent<I extends HTMLElement, E extends Events>(
       importFunc();
     }
 
-    // Renderers - childRenderer
+    // Renderers - Component renderers
 
-    // A function which appends the childContainer inside the renderer's root element and the child container.
-    const [childrenRendererFunction, childContainer] = React.useMemo(() => {
-      const container = context.isBrowser
-        ? document.createElement("div")
-        : null;
+    // Create renderers for each rendered component
+    const componentRenderers = React.useMemo(
+      () =>
+        Object.entries(renderers?.components || {}).map(
+          ([componentName, functionName]) => {
+            const container = context.isBrowser
+              ? document.createElement("div")
+              : null;
 
-      const rendererFunction = (root: HTMLElement) => {
-        if (container && container.parentElement !== root) {
-          root.appendChild(container);
+            return {
+              componentName,
+              functionName,
+              container,
+              rendererFunction: (root: HTMLElement) => {
+                if (container && container.parentElement !== root) {
+                  root.appendChild(container);
+                }
+              },
+            };
+          }
+        ),
+      []
+    );
+
+    // Need to disable portals for the first render to avoid hydration mismatch :/
+    const [portalsEnabled, setPortalsEnabled] = React.useState(false);
+    React.useEffect(() => setPortalsEnabled(componentRenderers.length > 0), []);
+
+    componentRenderers.forEach((renderer) => {
+      const currentChildren = [props.children || []].flat(Infinity);
+
+      const targetChildren = currentChildren.filter((child) => {
+        if (child.children) {
+          // Filter out portals
+          return false;
         }
-      };
-
-      return [rendererFunction, container];
-    }, []);
-
-    // Create a Portal for the component's children if they're being rendered into a separate element.
-    if (renderers?.childRenderer && childContainer) {
-      props = {
-        ...props,
-        children: ReactDOM.createPortal(props.children, childContainer),
-        [renderers.childRenderer]: childrenRendererFunction,
-      };
-    }
-
-    // Renderers - Components
-    // TODO: Instead of a component property API, consider a child element API with a marker.
-    const componentToRendererMap = React.useMemo(() => new Map(), []);
-    Object.entries(renderers?.components || {})
-      .filter(([api]) => api in props)
-      .forEach(([api, renderer]) => {
-        // TODO: Use portal for components?
-        if (!componentToRendererMap.has(api)) {
-          componentToRendererMap.set(api, (root: any) => {
-            if (!root.__reactRoot) {
-              root.__reactRoot = createRoot(root);
-            }
-            root.__reactRoot.render(props[api]);
-          });
+        // The unnamed component renderer targets all children without a slot name
+        if (renderer.componentName === "") {
+          return !child.props.slot;
         }
-        props[renderer] = componentToRendererMap.get(api);
+        // Include children that have a matching slot name
+        return child.props.slot === renderer.componentName;
       });
+
+      if (portalsEnabled && targetChildren.length && renderer.container) {
+        props = {
+          ...props,
+          children: [
+            // Exclude the children that get added to the portal
+            ...currentChildren.filter(
+              (child) => !targetChildren.includes(child)
+            ),
+            // Include the portal
+            ReactDOM.createPortal(targetChildren, renderer.container),
+          ].filter((n) => n),
+
+          // Set the Web Component renderer function
+          [renderer.functionName]: renderer.rendererFunction,
+        };
+      }
+    });
 
     // Renderers - Item renderers
     const itemRendererToRendererMap = React.useMemo(() => new Map(), []);

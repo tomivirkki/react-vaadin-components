@@ -33,17 +33,12 @@ const GridColumnGroupProperties = {
   textAlign: "",
   headerRenderer: "",
   footerRenderer: "",
-  headerComponent: "",
-  footerComponent: "",
 };
 
 type GridColumnGroupClassExtended = Omit<
   GridColumnGroupClass,
   "headerRenderer" | "footerRenderer"
-> & {
-  headerComponent: React.ReactNode;
-  footerComponent: React.ReactNode;
-};
+> & {};
 
 const getGridColumnGroupPreRenderConfig = (props: { [key: string]: any }) => ({
   hostProperties: {},
@@ -60,12 +55,7 @@ export const GridColumnGroup = createVaadinComponent<
   GridColumnGroupEvents,
   () => import("@vaadin/grid/vaadin-grid-column-group"),
   "GridColumnGroup",
-  {
-    components: {
-      headerComponent: "headerRenderer",
-      footerComponent: "footerRenderer",
-    },
-  },
+  { components: { header: "headerRenderer", footer: "footerRenderer" } },
   getGridColumnGroupPreRenderConfig
 );
 
@@ -89,8 +79,6 @@ const GridColumnProperties = {
   textAlign: "",
   headerRenderer: "",
   footerRenderer: "",
-  headerComponent: "",
-  footerComponent: "",
   itemRenderer: "",
 };
 
@@ -98,8 +86,6 @@ type GridColumnClassExtended = Omit<
   GridColumnClass,
   "headerRenderer" | "footerRenderer" | "renderer"
 > & {
-  headerComponent: React.ReactNode;
-  footerComponent: React.ReactNode;
   itemRenderer: (
     model: Parameters<
       Exclude<PropType<GridColumnClass, "renderer">, undefined | null>
@@ -123,10 +109,7 @@ export const GridColumn = createVaadinComponent<
   () => import("@vaadin/grid/vaadin-grid-column"),
   "GridColumn",
   {
-    components: {
-      headerComponent: "headerRenderer",
-      footerComponent: "footerRenderer",
-    },
+    components: { header: "headerRenderer", footer: "footerRenderer" },
     itemRenderers: { itemRenderer: "renderer" },
   },
   getGridColumnPreRenderConfig
@@ -152,8 +135,6 @@ const GridFilterColumnProperties = {
   textAlign: "",
   headerRenderer: "",
   footerRenderer: "",
-  headerComponent: "",
-  footerComponent: "",
   itemRenderer: "",
 };
 
@@ -161,8 +142,6 @@ type GridFilterColumnClassExtended = Omit<
   GridFilterColumnClass,
   "headerRenderer" | "footerRenderer" | "renderer"
 > & {
-  headerComponent: React.ReactNode;
-  footerComponent: React.ReactNode;
   itemRenderer: (
     model: Parameters<
       Exclude<PropType<GridFilterColumnClass, "renderer">, undefined | null>
@@ -186,10 +165,7 @@ export const GridFilterColumn = createVaadinComponent<
   () => import("@vaadin/grid/vaadin-grid-filter-column"),
   "GridFilterColumn",
   {
-    components: {
-      headerComponent: "headerRenderer",
-      footerComponent: "footerRenderer",
-    },
+    components: { header: "headerRenderer", footer: "footerRenderer" },
     itemRenderers: { itemRenderer: "renderer" },
   },
   getGridFilterColumnPreRenderConfig
@@ -259,8 +235,6 @@ const GridSelectionColumnProperties = {
   textAlign: "",
   headerRenderer: "",
   footerRenderer: "",
-  headerComponent: "",
-  footerComponent: "",
   itemRenderer: "",
 };
 
@@ -268,8 +242,6 @@ type GridSelectionColumnClassExtended = Omit<
   GridSelectionColumnClass,
   "headerRenderer" | "footerRenderer" | "renderer"
 > & {
-  headerComponent: React.ReactNode;
-  footerComponent: React.ReactNode;
   itemRenderer: (
     model: Parameters<
       Exclude<PropType<GridSelectionColumnClass, "renderer">, undefined | null>
@@ -295,10 +267,7 @@ export const GridSelectionColumn = createVaadinComponent<
   () => import("@vaadin/grid/vaadin-grid-selection-column"),
   "GridSelectionColumn",
   {
-    components: {
-      headerComponent: "headerRenderer",
-      footerComponent: "footerRenderer",
-    },
+    components: { header: "headerRenderer", footer: "footerRenderer" },
     itemRenderers: { itemRenderer: "renderer" },
   },
   getGridSelectionColumnPreRenderConfig
@@ -330,8 +299,6 @@ const GridSortColumnProperties = {
   textAlign: "",
   headerRenderer: "",
   footerRenderer: "",
-  headerComponent: "",
-  footerComponent: "",
   itemRenderer: "",
 };
 
@@ -339,8 +306,6 @@ type GridSortColumnClassExtended = Omit<
   GridSortColumnClass,
   "headerRenderer" | "footerRenderer" | "renderer"
 > & {
-  headerComponent: React.ReactNode;
-  footerComponent: React.ReactNode;
   itemRenderer: (
     model: Parameters<
       Exclude<PropType<GridSortColumnClass, "renderer">, undefined | null>
@@ -364,10 +329,7 @@ export const GridSortColumn = createVaadinComponent<
   () => import("@vaadin/grid/vaadin-grid-sort-column"),
   "GridSortColumn",
   {
-    components: {
-      headerComponent: "headerRenderer",
-      footerComponent: "footerRenderer",
-    },
+    components: { header: "headerRenderer", footer: "footerRenderer" },
     itemRenderers: { itemRenderer: "renderer" },
   },
   getGridSortColumnPreRenderConfig
@@ -430,8 +392,6 @@ const GridTreeColumnProperties = {
   textAlign: "",
   headerRenderer: "",
   footerRenderer: "",
-  headerComponent: "",
-  footerComponent: "",
   itemRenderer: "",
 };
 
@@ -439,8 +399,6 @@ type GridTreeColumnClassExtended = Omit<
   GridTreeColumnClass,
   "headerRenderer" | "footerRenderer" | "renderer"
 > & {
-  headerComponent: React.ReactNode;
-  footerComponent: React.ReactNode;
   itemRenderer: (
     model: Parameters<
       Exclude<PropType<GridTreeColumnClass, "renderer">, undefined | null>
@@ -464,10 +422,7 @@ export const GridTreeColumn = createVaadinComponent<
   () => import("@vaadin/grid/vaadin-grid-tree-column"),
   "GridTreeColumn",
   {
-    components: {
-      headerComponent: "headerRenderer",
-      footerComponent: "footerRenderer",
-    },
+    components: { header: "headerRenderer", footer: "footerRenderer" },
     itemRenderers: { itemRenderer: "renderer" },
   },
   getGridTreeColumnPreRenderConfig

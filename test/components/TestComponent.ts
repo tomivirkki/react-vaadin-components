@@ -28,7 +28,6 @@ const TestComponentProperties = {
   header: "",
   overlay: "",
   itemlist: "",
-  headerComponent: "",
   itemRenderer: "",
 };
 
@@ -36,7 +35,6 @@ type TestComponentClassExtended = Omit<
   TestComponentClass,
   "overlayRenderer" | "headerRenderer" | "renderer"
 > & {
-  headerComponent: React.ReactNode;
   itemRenderer: (
     model: Parameters<
       Exclude<PropType<TestComponentClass, "renderer">, undefined | null>
@@ -66,8 +64,7 @@ export const TestComponent = createVaadinComponent<
   () => import("../web-components/test-component/test-component"),
   "TestComponent",
   {
-    childRenderer: "overlayRenderer",
-    components: { headerComponent: "headerRenderer" },
+    components: { "": "overlayRenderer", header: "headerRenderer" },
     itemRenderers: { itemRenderer: "renderer" },
   },
   getTestComponentPreRenderConfig

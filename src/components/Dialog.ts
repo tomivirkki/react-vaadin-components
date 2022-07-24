@@ -31,17 +31,12 @@ const DialogProperties = {
   version: "",
   draggable: "",
   resizable: "",
-  headerComponent: "",
-  footerComponent: "",
 };
 
 type DialogClassExtended = Omit<
   DialogClass,
   "renderer" | "headerRenderer" | "footerRenderer"
-> & {
-  headerComponent: React.ReactNode;
-  footerComponent: React.ReactNode;
-};
+> & {};
 
 const getDialogPreRenderConfig = (props: { [key: string]: any }) => ({
   hostProperties: {},
@@ -59,10 +54,10 @@ export const Dialog = createVaadinComponent<
   () => import("@vaadin/dialog/vaadin-dialog"),
   "Dialog",
   {
-    childRenderer: "renderer",
     components: {
-      headerComponent: "headerRenderer",
-      footerComponent: "footerRenderer",
+      "": "renderer",
+      header: "headerRenderer",
+      footer: "footerRenderer",
     },
   },
   getDialogPreRenderConfig

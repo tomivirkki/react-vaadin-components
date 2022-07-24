@@ -57,7 +57,9 @@ const getNumberFieldPreRenderConfig = (props: { [key: string]: any }) => ({
     "has-value": props.value ? "" : undefined,
     "has-helper":
       props.helperText ||
-      [props.children].flat().some((child) => child?.props.slot === "helper")
+      [props.children]
+        .flat(Infinity)
+        .some((child) => child?.props.slot === "helper")
         ? ""
         : undefined,
     "clear-button-visible": props.clearButtonVisible ? "" : undefined,
