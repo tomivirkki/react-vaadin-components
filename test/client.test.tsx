@@ -89,4 +89,10 @@ describe("client", () => {
     );
     expect(template).toBeNull();
   });
+
+  test("should add a dummy template renderer callback", () => {
+    expect(() =>
+      (window as any).Vaadin.templateRendererCallback()
+    ).not.toThrow();
+  });
 });

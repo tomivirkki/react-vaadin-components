@@ -49,5 +49,6 @@ describe("SSR", () => {
     );
     expect(template).toBeInstanceOf(HTMLTemplateElement);
     expect(template!.innerHTML).toContain("--test-component-prerender-style");
+    expect(template?.getAttribute("slot")).toBe("ignore");
   });
 });

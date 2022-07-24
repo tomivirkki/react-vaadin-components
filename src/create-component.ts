@@ -25,6 +25,10 @@ function suppressLitDevModeWarning() {
 
 /* istanbul ignore else */
 if (context.isBrowser) {
+  window.Vaadin ||= {};
+  // Avoid a template inside components warning.
+  (window.Vaadin as any).templateRendererCallback = () => {};
+
   (
     (globalThis as any).MockPolymerImport ||
     /* istanbul ignore next */
@@ -256,7 +260,7 @@ export function createVaadinComponent<I extends HTMLElement, E extends Events>(
     const preRenderConfig = getPreRenderConfig?.(props);
 
     // SSR - host properties
-    props = { ...props, ...(preRenderConfig?.hostProperties || []) };
+    props = { ...props, ...(preRenderConfig?.hostProperties || {}) };
 
     // SSR - declarative shadow DOM
     if (
@@ -267,6 +271,8 @@ export function createVaadinComponent<I extends HTMLElement, E extends Events>(
       const shadowRoot = React.createElement("template", {
         key: -1,
         shadowroot: "open",
+        // Without the slot name, for example vaadin-checkbox would consider this an unwrapped slotted label
+        slot: "ignore",
         dangerouslySetInnerHTML: { __html: preRenderConfig.shadowDomContent },
       });
       props = { ...props, children: [...[props.children], shadowRoot] };
