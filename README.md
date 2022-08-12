@@ -22,7 +22,7 @@ import 'react-vaadin-components/dist/css/core.css'
 import {
   TextField,
   Button,
-  Notificaation
+  Notification
 } from 'react-vaadin-components';
 
 ...
