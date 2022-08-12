@@ -2,7 +2,7 @@
 
 React Vaadin Components is a set of React compatible wrappers for [Vaadin components](https://vaadin.com/docs/latest/components).
 
-The components support server side rendering and can be used with frameworks such as Next.js and Gatsby.
+The wrappers are server side renderable and can be used with frameworks such as Next.js and Gatsby.
 
 ## Quick start
 
@@ -20,7 +20,6 @@ import 'react-vaadin-components/dist/css/core.css'
 ...
 
 import {
-  VerticalLayout,
   TextField,
   Button,
   Notificaation
@@ -31,19 +30,16 @@ import {
 const [name, setName] = useState("");
 
 ...
+<TextField
+  label="Name"
+  clearButtonVisible
+  onValueChanged={e => setName(e.detail.value)}>
+</TextField>
 
-<VerticalLayout>
-  <TextField
-    label="Name"
-    clearButtonVisible
-    onValueChanged={e => setName(e.detail.value)}>
-  </TextField>
-
-  <Button
-    theme="primary"
-    disabled={!name}
-    onClick={e => Notification.show(`Hello ${name}`)}>
-    Say Hello
-  </Button>
-</VerticalLayout>
+<Button
+  theme="primary"
+  disabled={!name}
+  onClick={e => Notification.show(`Hello ${name}`)}>
+  Say Hello
+</Button>
 ```

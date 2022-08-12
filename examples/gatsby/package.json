@@ -1,0 +1,30 @@
+{
+  "name": "react-vaadin-components-gatsby-example",
+  "version": "1.0.0",
+  "private": true,
+  "description": "react-vaadin-components-gatsby-example",
+  "author": "Tomi Virkki",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "gatsby": "^4.20.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-vaadin-components": "1.0.0-alpha.1"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.45",
+    "@types/react": "^18.0.16",
+    "@types/react-dom": "^18.0.6",
+    "typescript": "^4.7.4"
+  }
+}
