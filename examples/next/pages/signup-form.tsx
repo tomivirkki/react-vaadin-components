@@ -75,7 +75,7 @@ function Page() {
           />
 
           <CustomField label="Avatar image" className="w-full">
-            <Upload maxFiles={1} />
+            <Upload maxFiles={1} accept="image/*" />
           </CustomField>
 
           <CustomField
