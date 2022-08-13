@@ -30,8 +30,6 @@ export default function Layout(props: { children: React.ReactNode }) {
     (route) => route.path === router.pathname
   );
 
-  // const [drawerOpened, setDrawerOpened] = React.useState(false);
-
   return (
     <AppLayout
       style={{ "--_vaadin-app-layout-navbar-offset-size": "60px" } as any}
@@ -46,7 +44,9 @@ export default function Layout(props: { children: React.ReactNode }) {
         <Tabs
           orientation="vertical"
           selected={currentIndex}
-          // onSelectedChanged={() => setDrawerOpened(false)}
+          onSelectedChanged={() =>
+            window.dispatchEvent(new CustomEvent("close-overlay-drawer"))
+          }
         >
           <h2 className="text-m">Example views:</h2>
 
