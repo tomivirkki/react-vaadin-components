@@ -7,3 +7,9 @@
     }
   }
 }
+
+@-moz-document url-prefix() {
+  body:not([vaadin-components-defined]) {
+    opacity: 0;
+  }
+}

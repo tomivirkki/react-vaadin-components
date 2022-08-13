@@ -147,6 +147,12 @@ it("generate prevent fouc file", () => {
         }
       }
     }
+
+    @-moz-document url-prefix() {
+      body:not([vaadin-components-defined]) {
+        opacity: 0;
+      }
+    }
   `;
 
   const filePath = path.resolve(cssDir, `prevent-fouc.css`);
