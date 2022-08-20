@@ -7,6 +7,7 @@ export * from "./components/Button.js";
 export * from "./components/Checkbox.js";
 export * from "./components/CheckboxGroup.js";
 export * from "./components/ComboBox.js";
+export * from "./components/ConfirmDialog.js";
 export * from "./components/ContextMenu.js";
 export * from "./components/CustomField.js";
 export * from "./components/DatePicker.js";

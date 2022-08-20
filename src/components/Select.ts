@@ -34,6 +34,7 @@ const SelectProperties = {
   focusElement: "",
   disabled: "",
   tabindex: "",
+  stateTarget: "",
   ariaTarget: "",
   helperText: "",
   errorMessage: "",

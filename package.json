@@ -21,7 +21,7 @@
   ],
   "dependencies": {
     "@lit-labs/react": "^1.0.6",
-    "@vaadin/vaadin-core": "23.2.0-alpha3",
+    "@vaadin/vaadin-core": "23.2.0-beta2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0"
   },

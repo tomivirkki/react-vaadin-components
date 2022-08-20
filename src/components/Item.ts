@@ -14,9 +14,9 @@ type ItemClass = ItemElement.Item;
 const ItemEvents = {};
 
 const ItemProperties = {
+  disabled: "",
   value: "",
   selected: "",
-  disabled: "",
 };
 
 const getItemPreRenderConfig = (props: { [key: string]: any }) => ({
