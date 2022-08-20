@@ -2,12 +2,13 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
 import type * as RadioButtonElement from "@vaadin/radio-group/vaadin-radio-button";
 import type * as RadioGroupElement from "@vaadin/radio-group/vaadin-radio-group";
-import { createVaadinComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component.js";
 
 type RadioButtonClass = RadioButtonElement.RadioButton;
 

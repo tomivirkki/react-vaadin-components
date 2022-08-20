@@ -2,12 +2,13 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
 import type * as AppLayoutElement from "@vaadin/app-layout/vaadin-app-layout";
 import type * as DrawerToggleElement from "@vaadin/app-layout/vaadin-drawer-toggle";
-import { createVaadinComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component.js";
 
 type AppLayoutClass = AppLayoutElement.AppLayout;
 

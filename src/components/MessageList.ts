@@ -2,12 +2,13 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
 import type * as MessageListElement from "@vaadin/message-list/vaadin-message-list";
 import type * as MessageElement from "@vaadin/message-list/vaadin-message";
-import { createVaadinComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component.js";
 
 type MessageListClass = MessageListElement.MessageList;
 

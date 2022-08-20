@@ -2,12 +2,13 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
 import type * as IconElement from "@vaadin/icon/vaadin-icon";
 import type * as IconsetElement from "@vaadin/icon/vaadin-iconset";
-import { createVaadinComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component.js";
 
 type IconClass = IconElement.Icon;
 

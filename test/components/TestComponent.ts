@@ -2,9 +2,13 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable import/no-unresolved */
 
 import React from "react";
-import { createVaadinComponent, eventMapper } from "../../src/create-component";
+import {
+  createVaadinComponent,
+  eventMapper,
+} from "../../src/create-component.js";
 import type * as TestComponentElement from "../web-components/test-component/test-component";
 
 type PropType<TObj, TProp extends keyof TObj> = TObj[TProp];

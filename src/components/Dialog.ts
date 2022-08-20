@@ -2,11 +2,12 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
 import type * as DialogElement from "@vaadin/dialog/vaadin-dialog";
-import { createVaadinComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component.js";
 
 type DialogClass = DialogElement.Dialog;
 

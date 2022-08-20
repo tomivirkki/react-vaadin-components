@@ -2,12 +2,13 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
 import type * as DatePickerLightElement from "@vaadin/date-picker/vaadin-date-picker-light";
 import type * as DatePickerElement from "@vaadin/date-picker/vaadin-date-picker";
-import { createVaadinComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component.js";
 
 type DatePickerLightClass = DatePickerLightElement.DatePickerLight;
 

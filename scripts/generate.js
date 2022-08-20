@@ -155,7 +155,7 @@ async function generateComponentForPackage(
     createComponentPath
   );
 
-  let outFileImports = `import { createVaadinComponent, eventMapper } from "${createComponentRelativePath}";\n`;
+  let outFileImports = `import { createVaadinComponent, eventMapper } from "${createComponentRelativePath}.js";\n`;
   let outFileComponents = "";
 
   const packagePath = path.resolve(componentsPath, packageName);
@@ -347,6 +347,7 @@ async function generateComponentForPackage(
         /* eslint-disable import/prefer-default-export */
         /* eslint-disable import/no-extraneous-dependencies */
         /* eslint-disable @typescript-eslint/no-unused-vars */
+        /* eslint-disable import/no-unresolved */
 
         import React from "react";
 
@@ -390,13 +391,13 @@ async function generateComponents(
   }
 
   const indexOutPath = path.resolve(componentsOutPath, "..");
-  let indexContent = "";
+  let indexContent = "/* eslint-disable import/no-unresolved */\n";
 
   for (const packageName of getPackages(componentsPath)) {
     const outFileName = packageName.split("-").map(capitalize).join("");
 
     // Add the export to the index file
-    indexContent += `export * from './components/${outFileName}';\n`;
+    indexContent += `export * from './components/${outFileName}.js';\n`;
 
     // Generate the component
     await generateComponentForPackage(

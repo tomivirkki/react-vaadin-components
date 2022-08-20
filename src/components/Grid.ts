@@ -2,6 +2,7 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable import/no-unresolved */
 
 import React from "react";
 import type * as GridColumnGroupElement from "@vaadin/grid/vaadin-grid-column-group";
@@ -14,7 +15,7 @@ import type * as GridSorterElement from "@vaadin/grid/vaadin-grid-sorter";
 import type * as GridTreeColumnElement from "@vaadin/grid/vaadin-grid-tree-column";
 import type * as GridTreeToggleElement from "@vaadin/grid/vaadin-grid-tree-toggle";
 import type * as GridElement from "@vaadin/grid/vaadin-grid";
-import { createVaadinComponent, eventMapper } from "../create-component";
+import { createVaadinComponent, eventMapper } from "../create-component.js";
 
 type PropType<TObj, TProp extends keyof TObj> = TObj[TProp];
 

@@ -1,1 +1,2 @@
-export * from "./components/TestComponent";
+/* eslint-disable import/no-unresolved */
+export * from "./components/TestComponent.js";
