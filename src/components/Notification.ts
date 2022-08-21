@@ -1,19 +1,16 @@
 // Generated file. Do not edit.
 
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-param-reassign */
 
 import React from "react";
 
-import { ShowOptions } from "@vaadin/notification/vaadin-notification";
+import { ShowOptions } from "@vaadin/notification/vaadin-notification.js";
 import { createRoot } from "react-dom/client";
 
 export const Notification = {
   show: (content: string | React.ReactNode, options?: ShowOptions) => {
-    import("@vaadin/notification/vaadin-notification");
+    import("@vaadin/notification/vaadin-notification.js");
 
     const notification = document.createElement("vaadin-notification");
     if (

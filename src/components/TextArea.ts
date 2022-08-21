@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
@@ -82,7 +78,7 @@ export const TextArea = createVaadinComponent<
   "vaadin-text-area",
   TextAreaProperties,
   TextAreaEvents,
-  () => import("@vaadin/text-area/vaadin-text-area"),
+  () => import("@vaadin/text-area/vaadin-text-area.js"),
   "TextArea",
   undefined,
   getTextAreaPreRenderConfig

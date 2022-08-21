@@ -1,8 +1,5 @@
-/* eslint-disable import/extensions */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-console */
 import { execSync, exec } from "child_process";
 import fs from "fs";
 import path from "path";
@@ -321,7 +318,7 @@ async function generateComponentForPackage(
         "${elementName}",
         ${exportName}Properties,
         ${exportName}Events,
-        () => import("${importPath}/${packageName}/${elementName}"),
+        () => import("${importPath}/${packageName}/${elementName}.js"),
         "${exportName}",
         ${elementRenderers ? JSON.stringify(elementRenderers) : "undefined"},
         get${exportName}PreRenderConfig
@@ -344,10 +341,6 @@ async function generateComponentForPackage(
   }
 
   let outFileContent = `${GENERATED_FILE_HEADER}
-        /* eslint-disable import/prefer-default-export */
-        /* eslint-disable import/no-extraneous-dependencies */
-        /* eslint-disable @typescript-eslint/no-unused-vars */
-        /* eslint-disable import/no-unresolved */
 
         import React from "react";
 
@@ -391,7 +384,7 @@ async function generateComponents(
   }
 
   const indexOutPath = path.resolve(componentsOutPath, "..");
-  let indexContent = "/* eslint-disable import/no-unresolved */\n";
+  let indexContent = "";
 
   for (const packageName of getPackages(componentsPath)) {
     const outFileName = packageName.split("-").map(capitalize).join("");

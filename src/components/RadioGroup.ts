@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
@@ -52,7 +48,7 @@ export const RadioButton = createVaadinComponent<
   "vaadin-radio-button",
   RadioButtonProperties,
   RadioButtonEvents,
-  () => import("@vaadin/radio-group/vaadin-radio-button"),
+  () => import("@vaadin/radio-group/vaadin-radio-button.js"),
   "RadioButton",
   undefined,
   getRadioButtonPreRenderConfig
@@ -102,7 +98,7 @@ export const RadioGroup = createVaadinComponent<
   "vaadin-radio-group",
   RadioGroupProperties,
   RadioGroupEvents,
-  () => import("@vaadin/radio-group/vaadin-radio-group"),
+  () => import("@vaadin/radio-group/vaadin-radio-group.js"),
   "RadioGroup",
   undefined,
   getRadioGroupPreRenderConfig

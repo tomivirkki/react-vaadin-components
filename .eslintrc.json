@@ -5,7 +5,13 @@
     "node": true,
     "jest": true
   },
-  "extends": ["plugin:react/recommended", "airbnb", "prettier"],
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "prettier",
+    "plugin:import/recommended",
+    "plugin:import/typescript"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -18,17 +24,17 @@
   "rules": {
     "react/jsx-filename-extension": [2, { "extensions": [".jsx", ".tsx"] }],
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": "error",
+    "max-classes-per-file": "off",
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": "off",
+    "@typescript-eslint/no-unused-vars": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
-      {
-        "js": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never"
-      }
-   ]
+      { "ts": "never", "tsx": "never", "jsx": "never" }
+    ],
+    "import/no-unresolved": "off",
+    "no-console": "off"
   },
   "settings": {
     "import/resolver": {

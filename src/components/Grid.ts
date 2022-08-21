@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 import type * as GridColumnGroupElement from "@vaadin/grid/vaadin-grid-column-group";
@@ -54,7 +50,7 @@ export const GridColumnGroup = createVaadinComponent<
   "vaadin-grid-column-group",
   GridColumnGroupProperties,
   GridColumnGroupEvents,
-  () => import("@vaadin/grid/vaadin-grid-column-group"),
+  () => import("@vaadin/grid/vaadin-grid-column-group.js"),
   "GridColumnGroup",
   { components: { header: "headerRenderer", footer: "footerRenderer" } },
   getGridColumnGroupPreRenderConfig
@@ -107,7 +103,7 @@ export const GridColumn = createVaadinComponent<
   "vaadin-grid-column",
   GridColumnProperties,
   GridColumnEvents,
-  () => import("@vaadin/grid/vaadin-grid-column"),
+  () => import("@vaadin/grid/vaadin-grid-column.js"),
   "GridColumn",
   {
     components: { header: "headerRenderer", footer: "footerRenderer" },
@@ -163,7 +159,7 @@ export const GridFilterColumn = createVaadinComponent<
   "vaadin-grid-filter-column",
   GridFilterColumnProperties,
   GridFilterColumnEvents,
-  () => import("@vaadin/grid/vaadin-grid-filter-column"),
+  () => import("@vaadin/grid/vaadin-grid-filter-column.js"),
   "GridFilterColumn",
   {
     components: { header: "headerRenderer", footer: "footerRenderer" },
@@ -201,7 +197,7 @@ export const GridFilter = createVaadinComponent<
   "vaadin-grid-filter",
   GridFilterProperties,
   GridFilterEvents,
-  () => import("@vaadin/grid/vaadin-grid-filter"),
+  () => import("@vaadin/grid/vaadin-grid-filter.js"),
   "GridFilter",
   undefined,
   getGridFilterPreRenderConfig
@@ -265,7 +261,7 @@ export const GridSelectionColumn = createVaadinComponent<
   "vaadin-grid-selection-column",
   GridSelectionColumnProperties,
   GridSelectionColumnEvents,
-  () => import("@vaadin/grid/vaadin-grid-selection-column"),
+  () => import("@vaadin/grid/vaadin-grid-selection-column.js"),
   "GridSelectionColumn",
   {
     components: { header: "headerRenderer", footer: "footerRenderer" },
@@ -327,7 +323,7 @@ export const GridSortColumn = createVaadinComponent<
   "vaadin-grid-sort-column",
   GridSortColumnProperties,
   GridSortColumnEvents,
-  () => import("@vaadin/grid/vaadin-grid-sort-column"),
+  () => import("@vaadin/grid/vaadin-grid-sort-column.js"),
   "GridSortColumn",
   {
     components: { header: "headerRenderer", footer: "footerRenderer" },
@@ -366,7 +362,7 @@ export const GridSorter = createVaadinComponent<
   "vaadin-grid-sorter",
   GridSorterProperties,
   GridSorterEvents,
-  () => import("@vaadin/grid/vaadin-grid-sorter"),
+  () => import("@vaadin/grid/vaadin-grid-sorter.js"),
   "GridSorter",
   undefined,
   getGridSorterPreRenderConfig
@@ -420,7 +416,7 @@ export const GridTreeColumn = createVaadinComponent<
   "vaadin-grid-tree-column",
   GridTreeColumnProperties,
   GridTreeColumnEvents,
-  () => import("@vaadin/grid/vaadin-grid-tree-column"),
+  () => import("@vaadin/grid/vaadin-grid-tree-column.js"),
   "GridTreeColumn",
   {
     components: { header: "headerRenderer", footer: "footerRenderer" },
@@ -459,7 +455,7 @@ export const GridTreeToggle = createVaadinComponent<
   "vaadin-grid-tree-toggle",
   GridTreeToggleProperties,
   GridTreeToggleEvents,
-  () => import("@vaadin/grid/vaadin-grid-tree-toggle"),
+  () => import("@vaadin/grid/vaadin-grid-tree-toggle.js"),
   "GridTreeToggle",
   undefined,
   getGridTreeTogglePreRenderConfig
@@ -531,7 +527,7 @@ export const Grid = createVaadinComponent<GridClassExtended, typeof GridEvents>(
   "vaadin-grid",
   GridProperties,
   GridEvents,
-  () => import("@vaadin/grid/vaadin-grid"),
+  () => import("@vaadin/grid/vaadin-grid.js"),
   "Grid",
   { itemRenderers: { itemDetailsRenderer: "rowDetailsRenderer" } },
   getGridPreRenderConfig

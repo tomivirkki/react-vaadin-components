@@ -1,8 +1,6 @@
-/* eslint-disable import/prefer-default-export */
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable max-classes-per-file */
 
-import { MockPolymerElement } from "./mock-polymer-element";
+import { MockPolymerElement } from "./mock-polymer-element.js";
 
 class AbstractTestComponent extends MockPolymerElement {
   constructor() {

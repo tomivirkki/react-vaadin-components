@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
@@ -29,7 +25,7 @@ export const Item = createVaadinComponent<ItemClass, typeof ItemEvents>(
   "vaadin-item",
   ItemProperties,
   ItemEvents,
-  () => import("@vaadin/item/vaadin-item"),
+  () => import("@vaadin/item/vaadin-item.js"),
   "Item",
   undefined,
   getItemPreRenderConfig

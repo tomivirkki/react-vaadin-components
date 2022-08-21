@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
@@ -87,7 +83,7 @@ export const EmailField = createVaadinComponent<
   "vaadin-email-field",
   EmailFieldProperties,
   EmailFieldEvents,
-  () => import("@vaadin/email-field/vaadin-email-field"),
+  () => import("@vaadin/email-field/vaadin-email-field.js"),
   "EmailField",
   undefined,
   getEmailFieldPreRenderConfig

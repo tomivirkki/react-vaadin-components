@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
@@ -57,7 +53,7 @@ export const AppLayout = createVaadinComponent<
   "vaadin-app-layout",
   AppLayoutProperties,
   AppLayoutEvents,
-  () => import("@vaadin/app-layout/vaadin-app-layout"),
+  () => import("@vaadin/app-layout/vaadin-app-layout.js"),
   "AppLayout",
   undefined,
   getAppLayoutPreRenderConfig
@@ -89,7 +85,7 @@ export const DrawerToggle = createVaadinComponent<
   "vaadin-drawer-toggle",
   DrawerToggleProperties,
   DrawerToggleEvents,
-  () => import("@vaadin/app-layout/vaadin-drawer-toggle"),
+  () => import("@vaadin/app-layout/vaadin-drawer-toggle.js"),
   "DrawerToggle",
   undefined,
   getDrawerTogglePreRenderConfig

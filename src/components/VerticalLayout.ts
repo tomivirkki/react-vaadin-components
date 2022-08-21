@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
@@ -30,7 +26,7 @@ export const VerticalLayout = createVaadinComponent<
   "vaadin-vertical-layout",
   VerticalLayoutProperties,
   VerticalLayoutEvents,
-  () => import("@vaadin/vertical-layout/vaadin-vertical-layout"),
+  () => import("@vaadin/vertical-layout/vaadin-vertical-layout.js"),
   "VerticalLayout",
   undefined,
   getVerticalLayoutPreRenderConfig

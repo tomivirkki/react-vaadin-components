@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
@@ -33,7 +29,7 @@ export const FormItem = createVaadinComponent<
   "vaadin-form-item",
   FormItemProperties,
   FormItemEvents,
-  () => import("@vaadin/form-layout/vaadin-form-item"),
+  () => import("@vaadin/form-layout/vaadin-form-item.js"),
   "FormItem",
   undefined,
   getFormItemPreRenderConfig
@@ -63,7 +59,7 @@ export const FormLayout = createVaadinComponent<
   "vaadin-form-layout",
   FormLayoutProperties,
   FormLayoutEvents,
-  () => import("@vaadin/form-layout/vaadin-form-layout"),
+  () => import("@vaadin/form-layout/vaadin-form-layout.js"),
   "FormLayout",
   undefined,
   getFormLayoutPreRenderConfig

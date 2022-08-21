@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
@@ -31,7 +27,7 @@ export const Icon = createVaadinComponent<IconClass, typeof IconEvents>(
   "vaadin-icon",
   IconProperties,
   IconEvents,
-  () => import("@vaadin/icon/vaadin-icon"),
+  () => import("@vaadin/icon/vaadin-icon.js"),
   "Icon",
   undefined,
   getIconPreRenderConfig
@@ -62,7 +58,7 @@ export const Iconset = createVaadinComponent<
   "vaadin-iconset",
   IconsetProperties,
   IconsetEvents,
-  () => import("@vaadin/icon/vaadin-iconset"),
+  () => import("@vaadin/icon/vaadin-iconset.js"),
   "Iconset",
   undefined,
   getIconsetPreRenderConfig

@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
@@ -31,7 +27,7 @@ export const Tab = createVaadinComponent<TabClass, typeof TabEvents>(
   "vaadin-tab",
   TabProperties,
   TabEvents,
-  () => import("@vaadin/tabs/vaadin-tab"),
+  () => import("@vaadin/tabs/vaadin-tab.js"),
   "Tab",
   undefined,
   getTabPreRenderConfig
@@ -66,7 +62,7 @@ export const Tabs = createVaadinComponent<TabsClass, typeof TabsEvents>(
   "vaadin-tabs",
   TabsProperties,
   TabsEvents,
-  () => import("@vaadin/tabs/vaadin-tabs"),
+  () => import("@vaadin/tabs/vaadin-tabs.js"),
   "Tabs",
   undefined,
   getTabsPreRenderConfig

@@ -1,6 +1,4 @@
-/* eslint-disable class-methods-use-this */
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable import/prefer-default-export */
 /* istanbul ignore file */
 export class MockPolymerElement extends HTMLElement {
   _attachDom(dom) {

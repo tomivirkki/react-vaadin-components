@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
@@ -87,7 +83,7 @@ export const NumberField = createVaadinComponent<
   "vaadin-number-field",
   NumberFieldProperties,
   NumberFieldEvents,
-  () => import("@vaadin/number-field/vaadin-number-field"),
+  () => import("@vaadin/number-field/vaadin-number-field.js"),
   "NumberField",
   undefined,
   getNumberFieldPreRenderConfig

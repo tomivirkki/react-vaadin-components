@@ -66,6 +66,9 @@
         "lines": 100,
         "statements": 100
       }
+    },
+    "moduleNameMapper": {
+      "(.+)\\.js": "$1"
     }
   },
   "lint-staged": {

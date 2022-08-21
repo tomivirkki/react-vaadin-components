@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
@@ -58,7 +54,7 @@ export const DateTimePicker = createVaadinComponent<
   "vaadin-date-time-picker",
   DateTimePickerProperties,
   DateTimePickerEvents,
-  () => import("@vaadin/date-time-picker/vaadin-date-time-picker"),
+  () => import("@vaadin/date-time-picker/vaadin-date-time-picker.js"),
   "DateTimePicker",
   undefined,
   getDateTimePickerPreRenderConfig

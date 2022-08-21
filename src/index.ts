@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 export * from "./components/Accordion.js";
 export * from "./components/AppLayout.js";
 export * from "./components/Avatar.js";

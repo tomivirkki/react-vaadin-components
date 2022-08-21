@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
@@ -50,7 +46,7 @@ export const ConfirmDialog = createVaadinComponent<
   "vaadin-confirm-dialog",
   ConfirmDialogProperties,
   ConfirmDialogEvents,
-  () => import("@vaadin/confirm-dialog/vaadin-confirm-dialog"),
+  () => import("@vaadin/confirm-dialog/vaadin-confirm-dialog.js"),
   "ConfirmDialog",
   undefined,
   getConfirmDialogPreRenderConfig

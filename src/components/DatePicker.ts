@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
@@ -53,7 +49,7 @@ export const DatePickerLight = createVaadinComponent<
   "vaadin-date-picker-light",
   DatePickerLightProperties,
   DatePickerLightEvents,
-  () => import("@vaadin/date-picker/vaadin-date-picker-light"),
+  () => import("@vaadin/date-picker/vaadin-date-picker-light.js"),
   "DatePickerLight",
   undefined,
   getDatePickerLightPreRenderConfig
@@ -139,7 +135,7 @@ export const DatePicker = createVaadinComponent<
   "vaadin-date-picker",
   DatePickerProperties,
   DatePickerEvents,
-  () => import("@vaadin/date-picker/vaadin-date-picker"),
+  () => import("@vaadin/date-picker/vaadin-date-picker.js"),
   "DatePicker",
   undefined,
   getDatePickerPreRenderConfig

@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
@@ -39,7 +35,7 @@ export const MenuBar = createVaadinComponent<
   "vaadin-menu-bar",
   MenuBarProperties,
   MenuBarEvents,
-  () => import("@vaadin/menu-bar/vaadin-menu-bar"),
+  () => import("@vaadin/menu-bar/vaadin-menu-bar.js"),
   "MenuBar",
   undefined,
   getMenuBarPreRenderConfig

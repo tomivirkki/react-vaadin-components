@@ -46,5 +46,6 @@ function NotFoundPage() {
 
 export default NotFoundPage;
 
-// eslint-disable-next-line react/function-component-definition
-export const Head: HeadFC = () => <title>Not found</title>;
+export const Head: HeadFC = function Head() {
+  return <title>Not found</title>;
+};

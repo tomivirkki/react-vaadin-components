@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
@@ -90,7 +86,7 @@ export const PasswordField = createVaadinComponent<
   "vaadin-password-field",
   PasswordFieldProperties,
   PasswordFieldEvents,
-  () => import("@vaadin/password-field/vaadin-password-field"),
+  () => import("@vaadin/password-field/vaadin-password-field.js"),
   "PasswordField",
   undefined,
   getPasswordFieldPreRenderConfig

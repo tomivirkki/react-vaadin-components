@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
@@ -41,7 +37,7 @@ export const ListBox = createVaadinComponent<
   "vaadin-list-box",
   ListBoxProperties,
   ListBoxEvents,
-  () => import("@vaadin/list-box/vaadin-list-box"),
+  () => import("@vaadin/list-box/vaadin-list-box.js"),
   "ListBox",
   undefined,
   getListBoxPreRenderConfig

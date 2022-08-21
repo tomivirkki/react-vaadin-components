@@ -1,4 +1,4 @@
-import "./web-components/test-component/src/mock-polymer-element";
+import "./web-components/test-component/src/mock-polymer-element.js";
 import React from "react";
 import type { TestComponentElement } from "./index";
 import { context } from "../src/create-component";

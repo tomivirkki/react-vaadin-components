@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
@@ -52,7 +48,7 @@ export const Dialog = createVaadinComponent<
   "vaadin-dialog",
   DialogProperties,
   DialogEvents,
-  () => import("@vaadin/dialog/vaadin-dialog"),
+  () => import("@vaadin/dialog/vaadin-dialog.js"),
   "Dialog",
   {
     components: {

@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
@@ -32,7 +28,7 @@ export const MessageList = createVaadinComponent<
   "vaadin-message-list",
   MessageListProperties,
   MessageListEvents,
-  () => import("@vaadin/message-list/vaadin-message-list"),
+  () => import("@vaadin/message-list/vaadin-message-list.js"),
   "MessageList",
   undefined,
   getMessageListPreRenderConfig
@@ -66,7 +62,7 @@ export const Message = createVaadinComponent<
   "vaadin-message",
   MessageProperties,
   MessageEvents,
-  () => import("@vaadin/message-list/vaadin-message"),
+  () => import("@vaadin/message-list/vaadin-message.js"),
   "Message",
   undefined,
   getMessagePreRenderConfig

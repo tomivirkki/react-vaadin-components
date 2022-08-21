@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
@@ -29,7 +25,7 @@ export const Button = createVaadinComponent<ButtonClass, typeof ButtonEvents>(
   "vaadin-button",
   ButtonProperties,
   ButtonEvents,
-  () => import("@vaadin/button/vaadin-button"),
+  () => import("@vaadin/button/vaadin-button.js"),
   "Button",
   undefined,
   getButtonPreRenderConfig

@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
@@ -43,7 +39,7 @@ export const ContextMenu = createVaadinComponent<
   "vaadin-context-menu",
   ContextMenuProperties,
   ContextMenuEvents,
-  () => import("@vaadin/context-menu/vaadin-context-menu"),
+  () => import("@vaadin/context-menu/vaadin-context-menu.js"),
   "ContextMenu",
   undefined,
   getContextMenuPreRenderConfig

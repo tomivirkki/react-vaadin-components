@@ -1,7 +1,5 @@
-/* eslint-disable import/extensions */
 import { NotificationTemplate } from "./Notification-template.js";
 
-/* eslint-disable import/prefer-default-export */
 const gridColumnRenderers = {
   components: {
     header: "headerRenderer",

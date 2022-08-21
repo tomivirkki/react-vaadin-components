@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
@@ -42,7 +38,7 @@ export const AccordionPanel = createVaadinComponent<
   "vaadin-accordion-panel",
   AccordionPanelProperties,
   AccordionPanelEvents,
-  () => import("@vaadin/accordion/vaadin-accordion-panel"),
+  () => import("@vaadin/accordion/vaadin-accordion-panel.js"),
   "AccordionPanel",
   undefined,
   getAccordionPanelPreRenderConfig
@@ -79,7 +75,7 @@ export const Accordion = createVaadinComponent<
   "vaadin-accordion",
   AccordionProperties,
   AccordionEvents,
-  () => import("@vaadin/accordion/vaadin-accordion"),
+  () => import("@vaadin/accordion/vaadin-accordion.js"),
   "Accordion",
   undefined,
   getAccordionPreRenderConfig

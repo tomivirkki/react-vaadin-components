@@ -1,5 +1,4 @@
 /* eslint-disable no-use-before-define */
-/* eslint-disable max-classes-per-file */
 type TestComponentItem = any;
 
 export type TestComponentItemModel<TItem = TestComponentItem> = {

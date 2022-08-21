@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
@@ -43,7 +39,7 @@ export const LoginForm = createVaadinComponent<
   "vaadin-login-form",
   LoginFormProperties,
   LoginFormEvents,
-  () => import("@vaadin/login/vaadin-login-form"),
+  () => import("@vaadin/login/vaadin-login-form.js"),
   "LoginForm",
   undefined,
   getLoginFormPreRenderConfig
@@ -87,7 +83,7 @@ export const LoginOverlay = createVaadinComponent<
   "vaadin-login-overlay",
   LoginOverlayProperties,
   LoginOverlayEvents,
-  () => import("@vaadin/login/vaadin-login-overlay"),
+  () => import("@vaadin/login/vaadin-login-overlay.js"),
   "LoginOverlay",
   undefined,
   getLoginOverlayPreRenderConfig

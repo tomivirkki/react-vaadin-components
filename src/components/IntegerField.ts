@@ -1,8 +1,4 @@
 // Generated file. Do not edit.
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/no-unresolved */
 
 import React from "react";
 
@@ -87,7 +83,7 @@ export const IntegerField = createVaadinComponent<
   "vaadin-integer-field",
   IntegerFieldProperties,
   IntegerFieldEvents,
-  () => import("@vaadin/integer-field/vaadin-integer-field"),
+  () => import("@vaadin/integer-field/vaadin-integer-field.js"),
   "IntegerField",
   undefined,
   getIntegerFieldPreRenderConfig

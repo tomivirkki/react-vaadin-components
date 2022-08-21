@@ -116,7 +116,6 @@ function Page() {
           if (form.current?.reportValidity()) {
             // The form is valid, manually check if the passwords are equal
             if (passwordsEqual) {
-              /* eslint-disable no-console */
               console.log("Registration data", {
                 firstName,
                 lastName,

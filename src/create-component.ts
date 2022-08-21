@@ -1,7 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable max-classes-per-file */
 import * as React from "react";
 import ReactDOM from "react-dom";
 import { createRoot } from "react-dom/client";

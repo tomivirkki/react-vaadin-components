@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import { AppLayout, DrawerToggle, Tab, Tabs } from "react-vaadin-components";
 import * as React from "react";
 import { Link } from "gatsby";

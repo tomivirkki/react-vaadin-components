@@ -1,5 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import "./web-components/test-component/src/mock-polymer-element";
+import "./web-components/test-component/src/mock-polymer-element.js";
 import React from "react";
 import { jest } from "@jest/globals";
 import { TestComponent, TestComponentElement } from "./index";

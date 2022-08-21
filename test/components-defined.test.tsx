@@ -1,9 +1,9 @@
-import "./web-components/test-component/src/mock-polymer-element";
+import "./web-components/test-component/src/mock-polymer-element.js";
 import React from "react";
 import {
   TestComponent as TestComponentClass,
   AbstractTestComponent,
-} from "./web-components/test-component/test-component";
+} from "./web-components/test-component/test-component.js";
 import { TestComponent } from "./index";
 import { renderComponent } from "./helpers";
 import { createVaadinComponent } from "../src/create-component";
