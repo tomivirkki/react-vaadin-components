@@ -11,11 +11,12 @@ type PropType<TObj, TProp extends keyof TObj> = TObj[TProp];
 
 type TestComponentClass = TestComponentElement.TestComponent;
 
-type TestComponentEventMap = TestComponentElement.TestComponentEventMap;
+type TestComponentEventMap = TestComponentElement.TestComponentEventMap<any>;
 
 const TestComponentEventMapper = eventMapper<TestComponentEventMap>();
 const TestComponentEvents = {
   ...TestComponentEventMapper("onValueChanged", "value-changed"),
+  ...TestComponentEventMapper("onItemsChanged", "items-changed"),
 };
 
 const TestComponentProperties = {

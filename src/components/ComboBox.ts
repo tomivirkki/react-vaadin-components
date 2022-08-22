@@ -8,8 +8,7 @@ import { createVaadinComponent, eventMapper } from "../create-component.js";
 
 type ComboBoxLightClass = ComboBoxLightElement.ComboBoxLight;
 
-type ComboBoxLightEventMap =
-  ComboBoxLightElement.ComboBoxLightEventMap<unknown>;
+type ComboBoxLightEventMap = ComboBoxLightElement.ComboBoxLightEventMap<any>;
 
 const ComboBoxLightEventMapper = eventMapper<ComboBoxLightEventMap>();
 const ComboBoxLightEvents = {
@@ -71,7 +70,7 @@ export { ComboBoxLightElement };
 
 type ComboBoxClass = ComboBoxElement.ComboBox;
 
-type ComboBoxEventMap = ComboBoxElement.ComboBoxEventMap<unknown>;
+type ComboBoxEventMap = ComboBoxElement.ComboBoxEventMap<any>;
 
 const ComboBoxEventMapper = eventMapper<ComboBoxEventMap>();
 const ComboBoxEvents = {

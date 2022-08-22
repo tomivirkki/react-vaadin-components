@@ -9,6 +9,7 @@ import {
   Grid,
   GridSortColumn,
   DatePicker,
+  GridElement,
 } from "react-vaadin-components";
 import Layout from "../components/Layout";
 import { users, User } from "../data/users";
@@ -22,6 +23,12 @@ function Page() {
 
   const [editedItem, setEditedItem] = React.useState<User | null>(null);
 
+  const activeItemChangedListener = ({
+    detail,
+  }: GridElement.GridActiveItemChangedEvent<User>) => {
+    setEditedItem(detail.value ? clone(detail.value) : null);
+  };
+
   return (
     <SplitLayout className="h-full">
       <div
@@ -34,9 +41,7 @@ function Page() {
           items={items}
           itemIdPath="id"
           selectedItems={[editedItem]}
-          onActiveItemChanged={({ detail }) => {
-            setEditedItem(detail.value ? clone(detail.value as User) : null);
-          }}
+          onActiveItemChanged={activeItemChangedListener}
         >
           <GridSortColumn path="name.first" header="First name" width="140px" />
 

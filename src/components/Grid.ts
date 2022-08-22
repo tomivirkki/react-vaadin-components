@@ -465,7 +465,7 @@ export { GridTreeToggleElement };
 
 type GridClass = GridElement.Grid;
 
-type GridEventMap = GridElement.GridEventMap<unknown>;
+type GridEventMap = GridElement.GridEventMap<any>;
 
 const GridEventMapper = eventMapper<GridEventMap>();
 const GridEvents = {

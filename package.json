@@ -68,7 +68,8 @@
       }
     },
     "moduleNameMapper": {
-      "(.+)\\.js": "$1"
+      "(.+TestComponent)\\.js": "$1",
+      "(.+create-component)\\.js": "$1"
     }
   },
   "lint-staged": {

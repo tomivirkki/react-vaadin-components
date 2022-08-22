@@ -175,7 +175,7 @@ async function generateComponentForPackage(
     const useGenricEvents = fs
       .readFileSync(path.resolve(packageSrcPath, `${elementName}.d.ts`), "utf8")
       .includes(`${eventMapName}<`);
-    const genericsSuffix = useGenricEvents ? "<unknown>" : "";
+    const genericsSuffix = useGenricEvents ? "<any>" : "";
 
     console.log(`Processing ${packageName}: ${exportName}`);
 
@@ -462,6 +462,7 @@ async function run() {
   );
 
   if (fs.existsSync(vaadinComponentsPath)) {
+    console.log(`Removing the temporary directory...`);
     // Remove the temporary web-compoenents directory
     fs.rmdirSync(vaadinComponentsParentPath, { recursive: true });
   }

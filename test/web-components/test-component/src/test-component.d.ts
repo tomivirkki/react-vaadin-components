@@ -10,6 +10,7 @@ declare class AbstractTestComponent extends HTMLElement {}
 
 /**
  * @fires {CustomEvent} value-changed - Fired when the `value` property changes.
+ * @fires {CustomEvent} items-changed - Fired when the `items` property changes.
  */
 declare class TestComponent<
   TItem = TestComponentItem
@@ -47,9 +48,13 @@ declare class TestComponent<
 
 export type ValueChangedEvent = CustomEvent<string>;
 
+export type ItemsChangedEvent<T> = CustomEvent<T[]>;
+
 // eslint-disable-next-line no-undef
-export interface TestComponentEventMap extends HTMLElementEventMap {
+export interface TestComponentEventMap<T> extends HTMLElementEventMap {
   "value-changed": ValueChangedEvent;
+
+  "items-changed": ItemsChangedEvent<T>;
 }
 
 declare global {

@@ -90,9 +90,24 @@ class TestComponent extends AbstractTestComponent {
     this.dispatchValueChangedEvent();
   }
 
+  get items() {
+    return this._items;
+  }
+
+  set items(items) {
+    this._items = items;
+    this.dispatchItemsChangedEvent();
+  }
+
   dispatchValueChangedEvent() {
     this.dispatchEvent(
       new CustomEvent("value-changed", { detail: this.value })
+    );
+  }
+
+  dispatchItemsChangedEvent() {
+    this.dispatchEvent(
+      new CustomEvent("items-changed", { detail: this.items })
     );
   }
 
