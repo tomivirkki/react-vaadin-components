@@ -58,6 +58,7 @@ if (context.isBrowser) {
 // Properties that the Web Component reflects as attributes (for styling purposes).
 // The component should render them as attributes directly to avoid styling issues
 // with SSR (before hydration).
+// TODO: Move to components config
 const knownAttributes = [
   "disabled",
   "hidden",
@@ -203,6 +204,7 @@ export function createVaadinComponent<I extends HTMLElement, E extends Events>(
       const currentChildren = [props.children || []].flat(Infinity);
 
       const targetChildren = currentChildren.filter((child) => {
+        // TODO: This is not a good way to identify a portal
         if (child.children) {
           // Filter out portals
           return false;
@@ -295,10 +297,6 @@ export function createVaadinComponent<I extends HTMLElement, E extends Events>(
     React.useEffect(() => {
       if (context.isBrowser && ref.current) {
         const element = (ref.current as any)._reactInternals.child.stateNode;
-
-        // Remove the `<template shadowroot="open">` element from inside the element if it exists
-        // (some browsers don't support declarative shadow DOM)
-        element.querySelector("template[shadowroot]")?.remove();
 
         if (preRenderConfig?.shadowDomContent && !customElements.get(tagName)) {
           // The element is not defined yet, pre-render shadow DOM on the client

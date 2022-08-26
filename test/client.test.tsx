@@ -82,13 +82,6 @@ describe("client", () => {
     ).toBe("red");
   });
 
-  test("should remove the declarative shadow root template", () => {
-    const template = testComponentElement.querySelector(
-      "template[shadowroot='open']"
-    );
-    expect(template).toBeNull();
-  });
-
   test("should add a dummy template renderer callback", () => {
     expect(() =>
       (window as any).Vaadin.templateRendererCallback()
