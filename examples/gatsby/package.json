@@ -19,7 +19,7 @@
     "gatsby": "^4.20.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "react-vaadin-components": "1.0.0-alpha.2"
+    "react-vaadin-components": "1.0.0-alpha.3"
   },
   "devDependencies": {
     "@types/node": "^17.0.45",
