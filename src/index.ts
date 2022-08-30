@@ -25,6 +25,7 @@ export * from "./components/Login.js";
 export * from "./components/MenuBar.js";
 export * from "./components/MessageInput.js";
 export * from "./components/MessageList.js";
+export * from "./components/MultiSelectComboBox.js";
 export * from "./components/Notification.js";
 export * from "./components/NumberField.js";
 export * from "./components/PasswordField.js";

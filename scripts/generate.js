@@ -64,8 +64,6 @@ function getPackages(componentsPath) {
     "input-container",
     "lit-renderer",
     "polymer-legacy-adapter",
-    // TODO: Remove once mscb is in vaadin-core
-    "multi-select-combo-box",
   ];
 
   return fs.readdirSync(componentsPath).filter(
@@ -427,11 +425,6 @@ async function run() {
   // Generate Vaadin components
   const vaadinComponentsOutPath = path.resolve(currentDir, "../src/components");
 
-  // Read the version of @vaadin/vaadin-core from package.json
-  const vaadinComponentsVersion = JSON.parse(
-    fs.readFileSync(path.resolve(currentDir, "../package.json"))
-  ).dependencies["@vaadin/vaadin-core"];
-
   const vaadinComponentsPath = path.resolve(
     currentDir,
     "./tmp/web-components/packages"
@@ -442,6 +435,13 @@ async function run() {
   );
 
   if (!fs.existsSync(vaadinComponentsPath)) {
+    // Get the @vaadin/web-components version
+    const packageLock = JSON.parse(
+      fs.readFileSync(path.resolve(currentDir, "../package-lock.json"))
+    );
+    const vaadinComponentsVersion =
+      packageLock.dependencies["@vaadin/component-base"].version;
+
     // Clone the @vaadin/web-components repo to a temporary directory
     console.log(
       `Cloning @vaadin/web-components@v${vaadinComponentsVersion} to a temporary directory...`
