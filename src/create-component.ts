@@ -204,8 +204,7 @@ export function createVaadinComponent<I extends HTMLElement, E extends Events>(
       const currentChildren = [props.children || []].flat(Infinity);
 
       const targetChildren = currentChildren.filter((child) => {
-        // TODO: This is not a good way to identify a portal
-        if (child.children) {
+        if ("__isPortal" in child) {
           // Filter out portals
           return false;
         }
@@ -226,7 +225,10 @@ export function createVaadinComponent<I extends HTMLElement, E extends Events>(
               (child) => !targetChildren.includes(child)
             ),
             // Include the portal
-            ReactDOM.createPortal(targetChildren, renderer.container),
+            Object.assign(
+              ReactDOM.createPortal(targetChildren, renderer.container),
+              { __isPortal: true }
+            ),
           ].filter((n) => n),
 
           // Set the Web Component renderer function
