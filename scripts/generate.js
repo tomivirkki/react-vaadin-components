@@ -27,6 +27,16 @@ async function getShadowRootContent(importPath, elementHTML) {
 
   const result = await page.evaluate(() => {
     const element = document.querySelector("#host");
+
+    if (element.shadowRoot) {
+      // Remove overlay elements (unnecessary payload)
+      [...element.shadowRoot.querySelectorAll("*")].forEach((node) => {
+        if (node.localName.endsWith("-overlay")) {
+          node.remove();
+        }
+      });
+    }
+
     return element.shadowRoot?.getInnerHTML() || "";
   });
 
