@@ -283,7 +283,6 @@ export function createVaadinComponent<I extends HTMLElement, E extends Events>(
     // SSR - children
     preRenderConfig?.children?.forEach((child) => {
       props.children = [
-        ...[props.children],
         React.createElement(child.tag, {
           key: props.children?.length || 0,
           ...(child.properties || {}),
@@ -291,6 +290,7 @@ export function createVaadinComponent<I extends HTMLElement, E extends Events>(
             ? { dangerouslySetInnerHTML: { __html: child.textContent } }
             : {}),
         }),
+        ...[props.children],
       ];
     });
 

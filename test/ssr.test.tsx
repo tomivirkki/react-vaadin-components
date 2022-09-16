@@ -35,7 +35,11 @@ describe("SSR", () => {
   });
 
   test("should render the child component", () => {
-    expect(testComponentElement.firstElementChild?.textContent).toBe("overlay");
+    expect(
+      [...testComponentElement.children].some(
+        (child) => child.textContent === "overlay"
+      )
+    ).toBeTruthy();
   });
 
   test("should not suppress a lit dev mode warning", () => {
