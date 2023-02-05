@@ -1,3 +1,37 @@
+> **Warning**
+> **This project is deprecated** in favor of [vaadin/react-components](https://github.com/vaadin/react-components)
+> 
+> The React wrappers imported from `@hilla/react-components` don't (at least yet) support server-side rendering, but they can still be used in a Next.js project as a dynamic import with [SSR disabled](https://nextjs.org/docs/advanced-features/dynamic-import#with-no-ssr):
+> ```js
+> import dynamic from "next/dynamic";
+>
+> export const Button = dynamic(
+>   () => import("@hilla/react-components/Button.js").then((mod) => mod.Button),
+>   {
+>     ssr: false,
+>   }
+> );
+> ```
+> 
+> To enable Lumo theme in the app:
+>
+> ```js
+> if (typeof window !== "undefined") {
+>   (async () => {
+>     const allImports = await import(
+>       "@vaadin/vaadin-lumo-styles/all-imports.js"
+>     );
+>
+>     const style = document.createElement("style");
+>     Object.values(allImports).forEach((css) => {
+>       style.append(document.createTextNode(css.toString()));
+>     });
+>     document.head.append(style);
+>   })();
+> }
+> ```
+
+
 # React Vaadin Components
 
 React Vaadin Components is a set of React compatible wrappers for [Vaadin components](https://vaadin.com/docs/latest/components).
