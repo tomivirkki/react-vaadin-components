@@ -5,12 +5,11 @@
 > ```js
 > import dynamic from "next/dynamic";
 >
-> export const Button = dynamic(
->   () => import("@hilla/react-components/Button.js").then((mod) => mod.Button),
->   {
->     ssr: false,
->   }
-> );
+> export const Button = dynamic<
+>   import("@hilla/react-components/Button.js").ButtonProps
+> >(() => import("@hilla/react-components/Button.js").then((mod) => mod.Button), {
+>   ssr: false,
+> });
 > ```
 > 
 > To enable Lumo theme in the app:
